@@ -43,13 +43,11 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
   public abstract void initToolBar();
 
-
   public void loadData() {}
 
   public void showProgressBar() {}
 
   public void hideProgressBar() {}
-
 
   public void initRefreshLayout() {}
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Common dimen -->
+    <dimen name="activity_horizontal_margin">12dp</dimen>
+    <dimen name="activity_vertical_margin">12dp</dimen>
+    <dimen name="_1dp">1dp</dimen>
+    <dimen name="_4dp">4dp</dimen>
+    <dimen name="_6dp">6dp</dimen>
+    <dimen name="_8dp">8dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
+    <dimen name="_24dp">24dp</dimen>
+    <dimen name="_32dp">32dp</dimen>
+    <dimen name="_36dp">36dp</dimen>
+    <dimen name="_48dp">48dp</dimen>
+    <dimen name="_180dp">180dp</dimen>
+
+    <dimen name="textsize10sp">10sp</dimen>
+    <dimen name="textsize12sp">12sp</dimen>
+    <dimen name="textsize14sp">14sp</dimen>
+    <dimen name="textsize16sp">16sp</dimen>
+    <dimen name="textsize18sp">18sp</dimen>
+</resources>

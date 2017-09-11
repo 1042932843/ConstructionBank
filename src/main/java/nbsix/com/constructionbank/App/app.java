@@ -42,7 +42,7 @@ public class app extends Application{
                 .centerCrop()
                 //.error(R.drawable.zhanweitu)
                 .priority(Priority.HIGH)
-                .transform(new RoundedCorners(this,5))
+                .transform(new RoundedCorners(this,4))
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
         //头像圆形配置
         optionsRoundedCircle  = new RequestOptions()

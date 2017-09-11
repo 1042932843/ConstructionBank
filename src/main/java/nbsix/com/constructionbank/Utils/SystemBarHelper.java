@@ -20,7 +20,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
-import nbsix.com.duskycvre.R;
+import nbsix.com.constructionbank.R;
 
 /**
  * 状态栏工具类
