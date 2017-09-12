@@ -11,8 +11,8 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <!--窗口的颜色-->
         <item name="android:windowBackground">@android:color/white</item>
-        <!--窗口的切换动画-->
-        <item name="android:windowAnimationStyle">@style/fade</item>
+        <!--窗口的切换动画<item name="android:windowAnimationStyle">@style/fade</item>-->
+
     </style>
 
     <style name="fade" parent="@android:style/Animation.Activity">

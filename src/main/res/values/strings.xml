@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">天府购</string>
+    <string name="shou">收</string>
+    <string name="qr_shoukuan">二维码收款</string>
+    <string name="jilu_shoukuan">收款记录</string>
+    <string name="generaljournal">流水明细</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

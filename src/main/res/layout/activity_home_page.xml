@@ -4,8 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nbsix.com.constructionbank.Module.Homepage.HomePage"
+    tools:context="nbsix.com.constructionbank.Module.Homepage.HomePageActivity"
     >
+
+
+
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -36,7 +40,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/notice"
         android:layout_below="@id/toolbar"
-        android:padding="@dimen/_8dp"
+        android:padding="@dimen/_6dp"
         android:background="@color/gray_80_alpha_30">
         <TextView
             android:layout_width="match_parent"
@@ -44,17 +48,18 @@
             android:text="@string/app_name"/>
 
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
+
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/notice"
-        android:id="@+id/recyclerView"
         android:layout_above="@+id/bottom_navigation_bar"
-        android:overScrollMode="never"
         android:layout_marginLeft="@dimen/_6dp"
         android:layout_marginRight="@dimen/_6dp"
         android:layout_marginTop="@dimen/_1dp"
         android:layout_marginBottom="@dimen/_1dp"/>
+
 
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/bottom_navigation_bar"
