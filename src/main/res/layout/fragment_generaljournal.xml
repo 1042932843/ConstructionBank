@@ -23,8 +23,9 @@
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/back_gray"
-                android:paddingLeft="@dimen/_4dp"/>
+                android:src="@mipmap/back_gray"
+                android:padding="@dimen/_12dp"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,4 +36,101 @@
                 android:textColor="@color/colorPrimary"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/total"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100dp"
+        android:layout_below="@+id/toolbar"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="2017年"
+                android:textColor="@color/black_80"
+                android:textSize="@dimen/textsize14sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView2"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_below="@+id/textView2"
+                android:layout_margin="@dimen/_4dp"
+                android:gravity="bottom"
+                android:text="09"
+                android:textColor="@color/black_80"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView3"
+                android:layout_alignEnd="@+id/textView2"
+                android:layout_alignRight="@+id/textView2"
+                android:layout_alignTop="@+id/textView3"
+                android:gravity="bottom"
+                android:text="月"
+                android:layout_marginBottom="@dimen/_4dp"
+                android:textColor="@color/black_80"
+                android:textSize="@dimen/textsize14sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="@dimen/_1dp"
+            android:layout_height="@dimen/_48dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/gray_20">
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:id="@+id/shouru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="收入（元）"
+                android:textColor="@color/black_80"
+                android:textSize="@dimen/textsize14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimary"
+                android:text="23400.00"
+                android:layout_margin="@dimen/_4dp"
+                android:layout_below="@+id/shouru"
+                android:layout_alignLeft="@+id/shouru"
+                android:layout_alignStart="@+id/shouru" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/total"
+        android:overScrollMode="never"
+        android:groupIndicator="@null"
+        >
+
+    </ExpandableListView>
 </RelativeLayout>

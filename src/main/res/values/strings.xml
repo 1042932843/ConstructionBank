@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">天府购</string>
+    <string name="app_msg">消息中心</string>
+    <string name="app_ucenter">个人中心</string>
+    <string name="type_shou">收款</string>
+    <string name="type_pay">付款</string>
     <string name="shou">收</string>
     <string name="qr_shoukuan">二维码收款</string>
     <string name="jilu_shoukuan">收款记录</string>
     <string name="generaljournal">流水明细</string>
+    <string name="qr_tip_1">扫描二维码向我付款</string>
+    <string name="qr_save">保存二维码图片</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

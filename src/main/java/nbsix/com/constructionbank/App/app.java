@@ -22,7 +22,7 @@ import nbsix.com.constructionbank.R;
 
 public class app extends Application{
     public static app mInstance;
-    public static RequestOptions optionsRoundedCorners,optionsRoundedCircle;
+    public static RequestOptions optionsRoundedCorners,optionsRoundedCircle,optionsNormal,optionsNormalCrop;
     public static app getInstance() {
         return mInstance;
     }
@@ -36,7 +36,16 @@ public class app extends Application{
     }
 
     private void init() {
-
+        optionsNormal=new RequestOptions()
+                .centerInside()
+                //.error(R.drawable.zhanweitu)
+                .priority(Priority.HIGH)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
+        optionsNormalCrop=new RequestOptions()
+                .centerCrop()
+                //.error(R.drawable.zhanweitu)
+                .priority(Priority.HIGH)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
         //配置glide圆角
         optionsRoundedCorners  = new RequestOptions()
                 .centerCrop()
