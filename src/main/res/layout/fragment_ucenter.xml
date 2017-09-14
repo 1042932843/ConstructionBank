@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:DoubleWaveView="http://schemas.android.com/tools"
+    android:background="@color/blue">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,7 +17,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/blue">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -23,28 +26,63 @@
                 android:layout_centerInParent="true"
                 android:text="@string/app_ucenter"
                 android:textSize="@dimen/textsize18sp"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@android:color/white"/>
+
+            <ImageView
+                android:layout_width="@dimen/_36dp"
+                android:layout_height="@dimen/_36dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/set"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_12dp"
+                android:padding="@dimen/_4dp"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
+        android:id="@+id/userinfo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/notice"
-        android:layout_below="@id/toolbar"
-        android:padding="@dimen/_6dp"
-        android:background="@color/gray_80_alpha_30">
-        <TextView
-            android:layout_width="match_parent"
+        android:layout_height="@dimen/_120dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:layout_width="@dimen/_72dp"
+            android:layout_height="@dimen/_72dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_16dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/touxiang"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_16dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/next_bai"/>
+
+        <nbsix.com.constructionbank.Design.WaveView.WaveView
+
+            android:id="@+id/waveview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroudColor="@color/white"
+            app:progressColor="@color/black"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            />
+
 
     </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/notice"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"
-        android:overScrollMode="never" />
+        android:background="@color/white"
+        android:layout_below="@id/userinfo"
+        >
 
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
