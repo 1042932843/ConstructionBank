@@ -21,7 +21,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
   private Unbinder bind;
 
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -64,5 +63,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     bind.unbind();
+
   }
 }

@@ -1,6 +1,7 @@
 package nbsix.com.constructionbank.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nbsix.com.constructionbank.App.app;
-import nbsix.com.constructionbank.Entity.HomePage.homePageItem;
+import nbsix.com.constructionbank.Entity.HomePage.homeItem;
+import nbsix.com.constructionbank.Module.QRGathering.QRgatheringActivity;
 import nbsix.com.constructionbank.R;
 
 
@@ -27,10 +29,11 @@ import nbsix.com.constructionbank.R;
  */
 
 public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyViewHolder> {
-    List<homePageItem> mDatas=new ArrayList<>();
+    List<homeItem> mDatas=new ArrayList<>();
     Context context;
+    Intent it=new Intent();
 
-    public HomePageAdapter(Context context, List<homePageItem> list) {
+    public HomePageAdapter(Context context, List<homeItem> list) {
         this.context=context;
         this.mDatas.clear();
         this.mDatas.addAll(list);
@@ -47,8 +50,20 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position)
     {
-        holder.name.setText(mDatas.get(position).getName());
-        Glide.with(context).load(mDatas.get(position).getImg()).apply(app.optionsRoundedCorners).into(holder.img);
+        String name =mDatas.get(position).getName();
+        holder.name.setText(name);
+        Glide.with(context).load(mDatas.get(position).getImg()).apply(app.optionsNormalCrop).into(holder.img);
+        holder.img.setOnClickListener(v -> {
+            switch (name){
+                case "二维码收款":
+                    it.setClass(context, QRgatheringActivity.class);
+                    context.startActivity(it);
+                    break;
+                case "建行贷款":
+                    break;
+            }
+
+        });
     }
 
     @Override

@@ -1,14 +1,14 @@
 package nbsix.com.constructionbank.Entity.HomePage;
 
 /**
- * Name: homePageItem
+ * Name: homeItem
  * Author: Dusky
  * QQ: 1042932843
  * Comment: //TODO
  * Date: 2017-09-11 16:42
  */
 
-public class homePageItem {
+public class homeItem {
     public String getName() {
         return name;
     }
