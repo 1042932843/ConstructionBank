@@ -1,12 +1,18 @@
 package nbsix.com.constructionbank.Module.Homepage.Fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
+import nbsix.com.constructionbank.Adapter.ucenterAdapter;
 import nbsix.com.constructionbank.Design.WaveView.WaveView;
+import nbsix.com.constructionbank.Entity.UCenter.ucItem;
 import nbsix.com.constructionbank.Module.Base.BaseFragment;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
@@ -32,6 +38,21 @@ public class userFragment extends BaseFragment {
     }
     @Override
     public void initRecyclerView(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        List<ucItem> ucItemList =new ArrayList<>();
+        ucItem item=new ucItem();
+        item.setType("认证信息");
+        item.setImg(R.drawable.renzheng);
+
+        ucItem item2=new ucItem();
+        item2.setType("我的账户");
+        item2.setImg(R.drawable.zhanghu);
+        ucItemList.add(item);
+        ucItemList.add(item2);
+
+        ucenterAdapter adapter=new ucenterAdapter(getContext(),ucItemList);
+        recyclerView.setAdapter(adapter);
+
 
     }
     @Override

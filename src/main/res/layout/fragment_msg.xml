@@ -29,22 +29,51 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/notice"
-        android:layout_below="@id/toolbar"
-        android:padding="@dimen/_6dp"
-        android:background="@color/gray_80_alpha_30">
-        <TextView
+        android:layout_height="@dimen/_48dp"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/relativeLayout">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_16dp"
+            android:layout_marginRight="@dimen/_16dp"
+            android:weightSum="2">
+            <TextView
+                android:id="@+id/weidu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="未读消息"
+                android:textSize="@dimen/textsize16sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/shape_corner_left_blue"/>
+            <LinearLayout
+                android:layout_width="@dimen/_1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+            </LinearLayout>
+            <TextView
+                android:id="@+id/yidu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="已读消息"
+                android:textSize="@dimen/textsize16sp"
+                android:textColor="@color/black_alpha_45"
+                android:gravity="center"
+                android:background="@drawable/shape_corner_right_gray"
+                />
+
+        </LinearLayout>
 
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/notice"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView"
-        android:overScrollMode="never" />
+        android:overScrollMode="never"
+        android:layout_below="@+id/relativeLayout" />
 
 </RelativeLayout>

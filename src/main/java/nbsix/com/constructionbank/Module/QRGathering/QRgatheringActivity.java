@@ -27,13 +27,13 @@ public class QRgatheringActivity extends BaseActivity {
         SystemBarHelper.immersiveStatusBar(this);
     }
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
     }
 
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
@@ -57,6 +57,12 @@ public class QRgatheringActivity extends BaseActivity {
                 .add(R.id.qrcontainer, qrFragment)
                 .show(qrFragment).commit();
 
+    }
+
+    //protected复写，属于eventBus的bug? -->https://github.com/greenrobot/EventBus/issues/156  倒数第三行
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override

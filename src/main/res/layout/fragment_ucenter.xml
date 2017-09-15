@@ -18,7 +18,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blue">
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,8 +52,18 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_16dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/touxiang"/>
+            android:src="@drawable/touxiang"
+            android:id="@+id/imageView" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4dp"
+            android:text="@string/unauthorized"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView"
+            android:textColor="@android:color/white"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

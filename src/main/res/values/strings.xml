@@ -2,6 +2,7 @@
     <string name="app_name">天府购</string>
     <string name="app_msg">消息中心</string>
     <string name="app_ucenter">个人中心</string>
+    <string name="unauthorized">未认证用户</string>
     <string name="type_shou">收款</string>
     <string name="type_pay">付款</string>
     <string name="shou">收</string>

@@ -53,13 +53,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
 
   @Override
-  public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-    super.onPostCreate(savedInstanceState);
-
-  }
-
-
-  @Override
   protected void onDestroy() {
     super.onDestroy();
     bind.unbind();
