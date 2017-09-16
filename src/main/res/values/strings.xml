@@ -9,6 +9,7 @@
     <string name="qr_shoukuan">二维码收款</string>
     <string name="jilu_shoukuan">收款记录</string>
     <string name="generaljournal">流水明细</string>
+    <string name="ac_info">用户中心</string>
     <string name="qr_tip_1">扫描二维码向我付款</string>
     <string name="qr_save">保存二维码图片</string>
 
