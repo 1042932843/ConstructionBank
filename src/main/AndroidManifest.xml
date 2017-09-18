@@ -29,7 +29,15 @@
         <activity
             android:name=".Module.QRGathering.QRgatheringActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Module.Homepage.AccountInfo.AccountInfoActivity"></activity>
+        <activity android:name=".Module.Homepage.AccountInfo.AccountInfoActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".Module.Homepage.Credentials.CredentialsActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Module.Homepage.Credit.MyCreditActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Module.Homepage.Set.SetActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

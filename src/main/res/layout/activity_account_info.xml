@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_centerInParent="true"
-                android:text="@string/ac_info"
+                android:text="@string/my_ac"
                 android:textSize="@dimen/textsize18sp"
                 android:textColor="@color/white"/>
         </RelativeLayout>
@@ -43,7 +43,7 @@
     <RelativeLayout
         android:id="@+id/userinfo"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_120dp"
+        android:layout_height="@dimen/_96dp"
         android:layout_below="@+id/toolbar"
         android:background="@color/colorPrimary">
 
@@ -74,7 +74,7 @@
         android:id="@+id/sesame_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout
         android:layout_below="@+id/sesame_view"
@@ -82,4 +82,75 @@
         android:layout_height="1dp"
         android:background="@color/white"></RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/largeLabel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_64dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/sesame_view"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32dp"
+                android:text="320,000"
+                android:textColor="@color/white"
+                android:gravity="center|bottom"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32dp"
+                android:text="可贷金额（元）"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/_1dp"
+            android:layout_height="@dimen/_28dp"
+            android:background="@color/white"
+            android:layout_gravity="center">
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32dp"
+                android:text="320,000"
+                android:textColor="@color/white"
+                android:gravity="center|bottom"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32dp"
+                android:text="已贷金额（元）"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/daikuan"
+        android:layout_marginTop="@dimen/_6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/largeLabel"
+        android:layout_centerHorizontal="true"
+        android:text="@string/credit_inm"
+        android:paddingTop="@dimen/_12dp"
+        android:paddingBottom="@dimen/_12dp"
+        android:paddingLeft="@dimen/_16dp"
+        android:paddingRight="@dimen/_16dp"
+        android:textColor="@color/white"
+        android:background="@drawable/text_background_but"
+        />
 </RelativeLayout>

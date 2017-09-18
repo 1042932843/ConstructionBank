@@ -317,11 +317,11 @@ public class CreditSesameView extends View {
 
     //绘制信用级别
     mTextPaint.setTextSize(80);
-    canvas.drawText(sesameLevel, radius, radius + 175, mTextPaint);
+    canvas.drawText(sesameLevel, radius, radius + 185, mTextPaint);
 
     //绘制评估时间
-    mTextPaint.setTextSize(30);
-    canvas.drawText(evaluationTime, radius, radius + 220, mTextPaint);
+    mTextPaint.setTextSize(40);
+    canvas.drawText(evaluationTime, radius, radius + 245, mTextPaint);
   }
 
 

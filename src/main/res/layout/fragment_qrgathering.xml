@@ -112,7 +112,7 @@
                         android:textSize="@dimen/textsize16sp"
                         android:textColor="@color/colorPrimary"
                         android:layout_below="@+id/paycustomView"
-                        android:layout_margin="@dimen/_6dp"
+                        android:layout_margin="@dimen/_12dp"
                         android:layout_centerHorizontal="true"
                         />
                     <TextView

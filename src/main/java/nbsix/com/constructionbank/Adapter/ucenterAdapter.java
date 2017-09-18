@@ -18,6 +18,8 @@ import java.util.List;
 import nbsix.com.constructionbank.App.app;
 import nbsix.com.constructionbank.Entity.UCenter.ucItem;
 import nbsix.com.constructionbank.Module.Homepage.AccountInfo.AccountInfoActivity;
+import nbsix.com.constructionbank.Module.Homepage.Credentials.CredentialsActivity;
+import nbsix.com.constructionbank.Module.Homepage.Credit.MyCreditActivity;
 import nbsix.com.constructionbank.Module.QRGathering.QRgatheringActivity;
 import nbsix.com.constructionbank.R;
 
@@ -69,6 +71,14 @@ public class ucenterAdapter extends RecyclerView.Adapter<ucenterAdapter.MyViewHo
                 switch (type){
                     case "我的账户":
                         it.setClass(context, AccountInfoActivity.class);
+                        context.startActivity(it);
+                        break;
+                    case "认证信息":
+                        it.setClass(context, CredentialsActivity.class);
+                        context.startActivity(it);
+                        break;
+                    case "我的贷款":
+                        it.setClass(context, MyCreditActivity.class);
                         context.startActivity(it);
                         break;
                 }
