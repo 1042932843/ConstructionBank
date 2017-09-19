@@ -16,8 +16,10 @@ import java.util.List;
 
 import nbsix.com.constructionbank.App.app;
 import nbsix.com.constructionbank.Entity.HomePage.homeItem;
+import nbsix.com.constructionbank.Module.LoginRegister.LRpageActivity;
 import nbsix.com.constructionbank.Module.QRGathering.QRgatheringActivity;
 import nbsix.com.constructionbank.R;
+import nbsix.com.constructionbank.Utils.UserState;
 
 
 /**
@@ -54,13 +56,20 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
         holder.name.setText(name);
         Glide.with(context).load(mDatas.get(position).getImg()).apply(app.optionsNormalCrop).into(holder.img);
         holder.img.setOnClickListener(v -> {
-            switch (name){
-                case "二维码收款":
-                    it.setClass(context, QRgatheringActivity.class);
-                    context.startActivity(it);
-                    break;
-                case "建行贷款":
-                    break;
+            if(UserState.isLogin()){
+                switch (name){
+                    case "二维码收款":
+                        it.setClass(context, QRgatheringActivity.class);
+                        context.startActivity(it);
+                        break;
+                    case "建行贷款":
+                        break;
+                    case "":
+                }
+
+            }else{
+                it.setClass(context, LRpageActivity.class);
+                context.startActivity(it);
             }
 
         });

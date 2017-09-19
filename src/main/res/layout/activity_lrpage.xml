@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nbsix.com.constructionbank.Module.LoginRegister.LRpageActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+
+        >
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleEnabled="false"
+            app:contentScrim="@color/colorPrimary"
+            app:statusBarScrim="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_180dp"
+                android:src="@drawable/zhuce_bg"
+                android:scaleType="centerCrop"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/back"
+                        android:padding="@dimen/_12dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_centerInParent="true"
+                        android:text="@string/user_login"
+                        android:textSize="@dimen/textsize18sp"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/buttonPanel"
+            android:layout_width="@dimen/_160dp"
+            android:layout_height="@dimen/_48dp"
+            android:layout_margin="@dimen/_6dp"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:focusableInTouchMode="true"
+            android:weightSum="2">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:id="@+id/type_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/login"
+                    android:textSize="@dimen/textsize16sp"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/type_login_line"
+                    android:layout_width="@dimen/_24dp"
+                    android:layout_height="@dimen/_1dp"
+                    android:background="@color/colorPrimary"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/_1dp"
+                android:layout_height="@dimen/_16dp"
+                android:background="@color/gray_80_alpha_60"
+                android:layout_gravity="center_vertical"/>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/type_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/register"
+                    android:textSize="@dimen/textsize16sp"/>
+
+                <RelativeLayout
+                    android:id="@+id/type_register_line"
+                    android:layout_width="@dimen/_24dp"
+                    android:layout_height="@dimen/_1dp"
+                    android:background="@color/colorPrimary"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/login_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="16dp"
+            android:layout_below="@+id/buttonPanel"
+            android:layout_centerHorizontal="true">
+
+            <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_background_edit"
+                android:drawableLeft="@drawable/ic_person_outline_white_24dp"
+                android:drawablePadding="@dimen/padding_half"
+                android:hint="@string/username"
+                android:textColorHint="@color/gray_20"
+                android:textColor="@color/colorPrimary"
+                android:maxLines="1"
+                android:padding="@dimen/padding_half"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textSize="14sp"
+                app:drawableLeftTint="@color/selector_focus"/>
+
+            <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/text_background_edit"
+                android:drawableLeft="@drawable/ic_lock_outline_white_24dp"
+                android:drawablePadding="@dimen/padding_half"
+                android:hint="@string/pw"
+                android:textColorHint="@color/gray_20"
+                android:textColor="@color/colorPrimary"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="@dimen/padding_half"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:textSize="14sp"
+                app:drawableLeftTint="@color/selector_focus" />
+
+            <com.bilibili.magicasakura.widgets.TintButton
+                android:id="@+id/login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/selector_login"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_large" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8dp">
+
+            <TextView
+                android:layout_width="@dimen/_96dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_4dp"
+                android:text="忘记密码"
+                android:textSize="@dimen/textsize14sp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/selector_text"
+                android:gravity="center"
+                />
+            </RelativeLayout>
+        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/register_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_margin="16dp"
+                android:layout_below="@+id/buttonPanel"
+                android:layout_centerHorizontal="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_background_edit"
+                        android:drawableLeft="@drawable/ic_person_outline_white_24dp"
+                        android:drawablePadding="@dimen/padding_half"
+                        android:hint="@string/phone_number"
+                        android:textColorHint="@color/gray_20"
+                        android:textColor="@color/colorPrimary"
+                        android:maxLines="1"
+                        android:padding="@dimen/padding_half"
+                        android:textCursorDrawable="@drawable/edittext_cursor"
+                        android:textSize="14sp"
+                        android:layout_toLeftOf="@+id/identifying_code_but"
+                        android:layout_toStartOf="@+id/identifying_code_but"
+                        app:drawableLeftTint="@color/selector_focus"/>
+                    <com.bilibili.magicasakura.widgets.TintButton
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/identifying_code_but"
+                        android:layout_width="@dimen/_96dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_login"
+                        android:gravity="center"
+                        android:text="@string/get_id_code"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize14sp"
+                        android:layout_marginLeft="@dimen/_4dp"/>
+                </RelativeLayout>
+
+
+                <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+                    android:id="@+id/identifying_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/text_background_edit"
+                    android:drawableLeft="@drawable/ic_lock_outline_white_24dp"
+                    android:drawablePadding="@dimen/padding_half"
+                    android:hint="@string/id_code"
+                    android:textColorHint="@color/gray_20"
+                    android:textColor="@color/colorPrimary"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding_half"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="14sp"
+                    app:drawableLeftTint="@color/selector_focus"
+                     />
+
+                <com.bilibili.magicasakura.widgets.TintButton
+                    android:id="@+id/next_step"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/selector_login"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:text="@string/next_step"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_large" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8dp">
+
+                    <TextView
+                        android:id="@+id/user_agreement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_4dp"
+                        android:text="进行注册，即表示您同意本应用相关用户协议"
+                        android:textSize="@dimen/textsize12sp"
+                        android:textColor="@color/selector_text"
+                        android:gravity="center"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

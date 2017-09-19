@@ -30,7 +30,7 @@ public class AccountInfoActivity extends BaseActivity {
     @OnClick(R.id.daikuan)
     public void daikuan(){
 
-        textToSpeech.Speech("草泥马");
+        textToSpeech.Speech("哈哈哈");
 
     }
 

@@ -22,7 +22,8 @@ public class TextToSpeechUtil implements TextToSpeech.OnInitListener{
     Context context;
 
     public TextToSpeechUtil(Context context){
-        textToSpeech = new TextToSpeech(context, this);
+        this.context=context;
+        textToSpeech = new TextToSpeech(this.context, this);
     }
 
     public void Speech(String s){

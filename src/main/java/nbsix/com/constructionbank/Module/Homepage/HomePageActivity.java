@@ -169,6 +169,13 @@ public class HomePageActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * 检查更新
+     */
+    private void CheakUpdate(){
+
+    }
+
     private long exitTime=0;
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

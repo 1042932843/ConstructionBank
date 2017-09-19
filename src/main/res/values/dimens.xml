@@ -30,4 +30,17 @@
     <dimen name="textsize14sp">14sp</dimen>
     <dimen name="textsize16sp">16sp</dimen>
     <dimen name="textsize18sp">18sp</dimen>
+
+    <!-- activity_login -->
+    <dimen name="activity_login_avatar_size"> 100dp</dimen>
+
+    <dimen name="padding">16dp</dimen>
+    <dimen name="padding_half">8dp</dimen>
+
+    <dimen name="textsize_large">18sp</dimen>
+    <dimen name="textsize_normal">16sp</dimen>
+    <dimen name="textsize_small">14sp</dimen>
+
+    <dimen name="app_bar_default_elevation">0dp</dimen>
+
 </resources>
