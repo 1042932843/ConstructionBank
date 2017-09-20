@@ -1,4 +1,4 @@
-package nbsix.com.constructionbank.Module.Homepage.AccountInfo;
+package nbsix.com.constructionbank.Module.Major.AccountInfo;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;

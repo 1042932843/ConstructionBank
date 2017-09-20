@@ -1,20 +1,12 @@
-package nbsix.com.constructionbank.Module.Homepage.Fragment;
+package nbsix.com.constructionbank.Module.Major.Home.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import nbsix.com.constructionbank.Adapter.HomePageAdapter;
-import nbsix.com.constructionbank.Adapter.helper.SpacesItemDecoration;
-import nbsix.com.constructionbank.Entity.HomePage.homeItem;
 import nbsix.com.constructionbank.Module.Base.BaseFragment;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;

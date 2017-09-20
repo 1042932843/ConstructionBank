@@ -1,7 +1,5 @@
-package nbsix.com.constructionbank.Module.Homepage.Credentials;
+package nbsix.com.constructionbank.Module.Major.Authentication;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,13 +15,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import nbsix.com.constructionbank.Adapter.CredentialsAdapter;
 import nbsix.com.constructionbank.App.app;
-import nbsix.com.constructionbank.Design.CreditSesame.CreditSesameView;
 import nbsix.com.constructionbank.Entity.Credentials.CredentialsItem;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 
-public class CredentialsActivity extends BaseActivity {
+public class AuthenticationInfoActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -51,7 +48,7 @@ public class CredentialsActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_credentials;
+        return R.layout.activity_authentication;
     }
 
     @Override

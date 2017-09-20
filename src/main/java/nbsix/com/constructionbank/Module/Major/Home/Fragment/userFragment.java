@@ -1,4 +1,4 @@
-package nbsix.com.constructionbank.Module.Homepage.Fragment;
+package nbsix.com.constructionbank.Module.Major.Home.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import nbsix.com.constructionbank.Adapter.ucenterAdapter;
 import nbsix.com.constructionbank.Design.WaveView.WaveView;
 import nbsix.com.constructionbank.Entity.UCenter.ucItem;
 import nbsix.com.constructionbank.Module.Base.BaseFragment;
-import nbsix.com.constructionbank.Module.Homepage.Set.SetActivity;
+import nbsix.com.constructionbank.Module.Major.Set.SetActivity;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 

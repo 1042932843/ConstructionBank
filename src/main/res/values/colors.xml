@@ -55,4 +55,7 @@
     <color name="white_alpha_30">#48FFFFFF</color>
     <color name="black">#000000</color>
     <color name="transparent">@android:color/transparent</color>
+
+    <color name="uncompleted_color">#A3E0D9</color>
+    <color name="uncompleted_text_color">#F8F8F8</color>
 </resources>

@@ -1,11 +1,10 @@
-package nbsix.com.constructionbank.Module.Homepage;
+package nbsix.com.constructionbank.Module.Major.Home;
 
 import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
@@ -18,9 +17,9 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
-import nbsix.com.constructionbank.Module.Homepage.Fragment.homeFragment;
-import nbsix.com.constructionbank.Module.Homepage.Fragment.msgFragment;
-import nbsix.com.constructionbank.Module.Homepage.Fragment.userFragment;
+import nbsix.com.constructionbank.Module.Major.Home.Fragment.homeFragment;
+import nbsix.com.constructionbank.Module.Major.Home.Fragment.msgFragment;
+import nbsix.com.constructionbank.Module.Major.Home.Fragment.userFragment;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 

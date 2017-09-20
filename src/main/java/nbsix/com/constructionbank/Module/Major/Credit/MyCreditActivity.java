@@ -1,4 +1,4 @@
-package nbsix.com.constructionbank.Module.Homepage.Credit;
+package nbsix.com.constructionbank.Module.Major.Credit;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;

@@ -17,11 +17,12 @@ import java.util.List;
 
 import nbsix.com.constructionbank.App.app;
 import nbsix.com.constructionbank.Entity.UCenter.ucItem;
-import nbsix.com.constructionbank.Module.Homepage.AccountInfo.AccountInfoActivity;
-import nbsix.com.constructionbank.Module.Homepage.Credentials.CredentialsActivity;
-import nbsix.com.constructionbank.Module.Homepage.Credit.MyCreditActivity;
-import nbsix.com.constructionbank.Module.QRGathering.QRgatheringActivity;
+import nbsix.com.constructionbank.Module.Major.AccountInfo.AccountInfoActivity;
+import nbsix.com.constructionbank.Module.Major.Authentication.AuthenticationInfoActivity;
+import nbsix.com.constructionbank.Module.Major.Authentication.StartAuthenticationActivity;
+import nbsix.com.constructionbank.Module.Major.Credit.MyCreditActivity;
 import nbsix.com.constructionbank.R;
+import nbsix.com.constructionbank.Utils.UserState;
 
 /**
  * Name: ucenterAdapter
@@ -74,8 +75,14 @@ public class ucenterAdapter extends RecyclerView.Adapter<ucenterAdapter.MyViewHo
                         context.startActivity(it);
                         break;
                     case "认证信息":
-                        it.setClass(context, CredentialsActivity.class);
-                        context.startActivity(it);
+                        if(UserState.isAuthentication()){
+                            it.setClass(context, AuthenticationInfoActivity.class);
+                            context.startActivity(it);
+                        }else{
+                            it.setClass(context, StartAuthenticationActivity.class);
+                            context.startActivity(it);
+                        }
+
                         break;
                     case "我的贷款":
                         it.setClass(context, MyCreditActivity.class);

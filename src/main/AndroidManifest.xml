@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
         <activity
-            android:name=".Module.Homepage.HomePageActivity"
+            android:name=".Module.Major.Home.HomePageActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,20 +30,22 @@
             android:name=".Module.QRGathering.QRgatheringActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Module.Homepage.AccountInfo.AccountInfoActivity"
+            android:name=".Module.Major.AccountInfo.AccountInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Module.Homepage.Credentials.CredentialsActivity"
+            android:name=".Module.Major.Authentication.AuthenticationInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Module.Homepage.Credit.MyCreditActivity"
+            android:name=".Module.Major.Authentication.StartAuthenticationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Module.Homepage.Set.SetActivity"
+            android:name=".Module.Major.Credit.MyCreditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Module.Major.Set.SetActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Module.LoginRegister.LRpageActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".Module.LoginRegister.LoginActivity"></activity>
     </application>
 
 </manifest>

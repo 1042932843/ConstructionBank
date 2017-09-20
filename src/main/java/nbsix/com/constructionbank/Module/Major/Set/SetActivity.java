@@ -1,4 +1,4 @@
-package nbsix.com.constructionbank.Module.Homepage.Set;
+package nbsix.com.constructionbank.Module.Major.Set;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;

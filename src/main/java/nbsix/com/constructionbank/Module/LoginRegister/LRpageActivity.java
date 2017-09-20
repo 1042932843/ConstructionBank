@@ -178,5 +178,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         app_bar.setExpanded(true);
         username.clearFocus();
         password.clearFocus();
+        phone.clearFocus();
+        identifying_code.clearFocus();
     }
 }
