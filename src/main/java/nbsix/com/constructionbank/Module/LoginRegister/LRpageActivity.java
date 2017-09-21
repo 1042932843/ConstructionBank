@@ -1,5 +1,6 @@
 package nbsix.com.constructionbank.Module.LoginRegister;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -16,6 +17,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,9 +26,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import nbsix.com.constructionbank.Design.keyEditText.KeyEditText;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
+import nbsix.com.constructionbank.Module.Major.Authentication.StartAuthenticationActivity;
+import nbsix.com.constructionbank.Module.Major.Home.HomePageActivity;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 import nbsix.com.constructionbank.Utils.TextToSpeechUtil;
+import nbsix.com.constructionbank.Utils.UserState;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
     @BindView(R.id.toolbar)
@@ -87,7 +92,10 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     @OnClick(R.id.login_btn)
     public void do_login(){
 
+        afterlogin(1);
     }
+    @BindView(R.id.back)
+    ImageView back;
     @OnClick(R.id.back)
     public void back(){
         finish();
@@ -111,7 +119,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
-
+        back.setVisibility(View.GONE);
     }
 
     @Override
@@ -121,7 +129,6 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-
         username.setKeyPreImeListener(this);
         password.setKeyPreImeListener(this);
         phone.setKeyPreImeListener(this);
@@ -138,6 +145,11 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         ForegroundColorSpan Span = new ForegroundColorSpan(ContextCompat.getColor(this,R.color.colorPrimary));
         builder.setSpan(Span, 16,20, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         user_agreement.setText(builder);
+
+
+        if(UserState.isLogin()){
+            afterlogin(1);
+        }
     }
 
     private View.OnFocusChangeListener onFocusChangeListener=new View.OnFocusChangeListener() {
@@ -167,6 +179,30 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             next_step.setEnabled(phone.getText().length() != 0 && identifying_code.getText().length() != 0);
         }
     };
+
+
+
+    /**
+     * 根据用户状态处理页面跳转
+     * @param state
+     */
+    public void afterlogin(int state){
+        Intent it=new Intent();
+        switch (state){
+            //未登录
+            case 0:
+                break;
+            //登录了未认证
+            case 1:
+                it.setClass(this,StartAuthenticationActivity.class);
+                break;
+            //登录了已认证
+            case 2:
+                it.setClass(this,HomePageActivity.class);
+                break;
+        }
+        startActivity(it);
+    }
 
     @Override
     public void initToolBar() {

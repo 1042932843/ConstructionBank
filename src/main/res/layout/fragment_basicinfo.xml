@@ -1,6 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_12dp"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_36dp"
+
+     >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/title1"
+            android:gravity="center"
+            android:id="@+id/name"
+            android:layout_marginRight="@dimen/_4dp"/>
+
+        <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+            android:id="@+id/name_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/padding_half"
+            android:hint="@string/hint1"
+            android:textColorHint="@color/gray_20"
+            android:textColor="@color/colorPrimary"
+            android:maxLines="1"
+            android:padding="@dimen/padding_half"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"
+            android:layout_toRightOf="@+id/name"
+            android:layout_toEndOf="@+id/name"
+            android:layout_marginLeft="@dimen/_4dp"
+            android:background="@drawable/text_background_edit2"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_36dp"
+        android:layout_marginTop="@dimen/_8dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/title2"
+            android:gravity="center"
+            android:id="@+id/ID"
+            android:layout_marginRight="@dimen/_4dp"/>
+
+        <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+            android:id="@+id/ID_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/padding_half"
+            android:hint="@string/hint2"
+            android:textColorHint="@color/gray_20"
+            android:textColor="@color/colorPrimary"
+            android:maxLines="1"
+            android:padding="@dimen/padding_half"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"
+            android:layout_toRightOf="@+id/ID"
+            android:layout_toEndOf="@+id/ID"
+            android:layout_marginLeft="@dimen/_4dp"
+            android:background="@drawable/text_background_edit2"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_36dp"
+        android:layout_marginTop="@dimen/_8dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/title3"
+            android:gravity="center"
+            android:id="@+id/phonenum"
+            android:layout_marginRight="@dimen/_4dp"/>
+
+        <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+            android:id="@+id/phonenum_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/padding_half"
+            android:hint="@string/hint3"
+            android:textColorHint="@color/gray_20"
+            android:textColor="@color/colorPrimary"
+            android:maxLines="1"
+            android:padding="@dimen/padding_half"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"
+            android:layout_toRightOf="@+id/phonenum"
+            android:layout_toEndOf="@+id/phonenum"
+            android:layout_marginLeft="@dimen/_4dp"
+            android:background="@drawable/text_background_edit2"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_36dp"
+        android:layout_marginTop="@dimen/_8dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/title4"
+            android:gravity="center"
+            android:id="@+id/com"
+            android:layout_marginRight="@dimen/_4dp"/>
+
+        <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+            android:id="@+id/com_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/padding_half"
+            android:hint="@string/hint4"
+            android:textColorHint="@color/gray_20"
+            android:textColor="@color/colorPrimary"
+            android:maxLines="1"
+            android:padding="@dimen/padding_half"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"
+            android:layout_toRightOf="@+id/com"
+            android:layout_toEndOf="@+id/com"
+            android:layout_marginLeft="@dimen/_4dp"
+            android:background="@drawable/text_background_edit2"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_48dp"
+        android:layout_marginTop="@dimen/_8dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/title5"
+            android:gravity="center"
+            android:id="@+id/account"
+            android:layout_marginRight="@dimen/_8dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/account"
+            android:layout_toEndOf="@+id/account"
+            android:padding="@dimen/_6dp"
+            android:background="@drawable/text_background_edit2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hint5"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text"
+                android:text="@string/hint6"
+                android:textSize="@dimen/textsize12sp"/>
+            </RelativeLayout>
+
+            <com.bilibili.magicasakura.widgets.TintCheckBox
+                android:id="@+id/checkbox_1"
+                style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                app:compoundButtonTint="@color/selector_compound"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+    <com.bilibili.magicasakura.widgets.TintButton
+        android:id="@+id/next_step"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16dp"
+        android:background="@drawable/selector_login"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="@string/next_step"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_large" />
 </LinearLayout>

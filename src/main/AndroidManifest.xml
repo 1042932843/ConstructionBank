@@ -20,11 +20,7 @@
         <activity
             android:name=".Module.Major.Home.HomePageActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Module.QRGathering.QRgatheringActivity"
@@ -45,7 +41,13 @@
             android:name=".Module.Major.Set.SetActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Module.LoginRegister.LRpageActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

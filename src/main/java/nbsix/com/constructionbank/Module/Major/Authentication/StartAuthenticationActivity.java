@@ -14,6 +14,9 @@ import butterknife.OnClick;
 import nbsix.com.constructionbank.Design.stepsView.HorizontalStepView;
 import nbsix.com.constructionbank.Design.stepsView.StepBean;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
+import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.BasicInfoFragment;
+import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.CertificateInfoFragment;
+import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.ResultFragment;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 
@@ -69,6 +72,20 @@ public class StartAuthenticationActivity extends BaseActivity {
                 .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))//设置StepsViewIndicator DefaultIcon
                 .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
 
+        BasicInfoFragment BasicInfo= BasicInfoFragment.newInstance();
+        CertificateInfoFragment CertificateInfo= CertificateInfoFragment.newInstance();
+        ResultFragment Result= ResultFragment.newInstance();
+        fragments = new Fragment[] {
+                BasicInfo,
+                CertificateInfo,
+                Result
+        };
+
+        // 添加显示第一个fragment
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.container, BasicInfo)
+                .show(BasicInfo).commit();
     }
 
     @Override
@@ -88,7 +105,6 @@ public class StartAuthenticationActivity extends BaseActivity {
      * Fragment切换
      */
     private void switchFragment() {
-
         FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
         trx.hide(fragments[currentTabIndex]);
         trx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

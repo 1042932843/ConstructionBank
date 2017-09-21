@@ -1,6 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:id="@+id/stu_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/renzheng_tijiao"
+            android:layout_centerHorizontal="true"
+          />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/stu_img">
+
+            <RelativeLayout
+                android:id="@+id/status_tijiao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+                <TextView
+                    android:layout_margin="@dimen/_1dp"
+                    android:id="@+id/textView"
+                    android:textSize="@dimen/textsize16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="资料提交成功，请耐心等待..."/>
+
+                <TextView
+                    android:layout_margin="@dimen/_4dp"
+                    android:layout_below="@id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="审核结果将在近期发送至消息中心，请注意查看"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/status_shenhe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_margin="@dimen/_1dp"
+                    android:id="@+id/textView4"
+                    android:textSize="@dimen/textsize16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="正在审核您的资料..."/>
+                <TextView
+                    android:layout_margin="@dimen/_1dp"
+                    android:id="@+id/shenhezhong"
+                    android:layout_below="@id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="审核结果我们会发送到消息中心，请注意查看\n由于高峰期,预计审核时间3天"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/status_shenheshibai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_margin="@dimen/_1dp"
+                    android:id="@id/textView2"
+                    android:textSize="@dimen/textsize16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="审核失败的原因:"/>
+                <TextView
+                    android:layout_margin="@dimen/_1dp"
+                    android:id="@+id/yuanyin"
+                    android:layout_below="@id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="1.姓名和身份证不一致\n2.照片与本人不符"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/status_shenhetongguo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_margin="@dimen/_1dp"
+                    android:id="@id/textView3"
+                    android:textSize="@dimen/textsize16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="审核通过:"/>
+                <TextView
+                    android:layout_margin="@dimen/_1dp"
+                    android:id="@+id/tongguo"
+                    android:layout_below="@id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="请准备好以下相关材料:\n1.营业执照正本原件及复印件两份（加盖公章）\n2.法人身份证原件及复印件两份（加盖公章）\n3.公司章程一份,所有股东签字,加盖骑缝章（个体工商户不需提供）\n4.开户许可证原件及复印件两份（加盖公章）（此项初次开户客户不提供）"
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
 
 </LinearLayout>
