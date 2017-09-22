@@ -5,6 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.WindowManager;
+import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +25,7 @@ import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.BasicInfo
 import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.CertificateInfoFragment;
 import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.ResultFragment;
 import nbsix.com.constructionbank.R;
+import nbsix.com.constructionbank.Utils.EventUtil;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 
 public class StartAuthenticationActivity extends BaseActivity {
@@ -34,7 +42,13 @@ public class StartAuthenticationActivity extends BaseActivity {
 
     @OnClick(R.id.back)
     public void back(){
-        finish();
+        if(index!=0){
+            changeFragmentIndex(index-1);
+        }else{
+            finish();
+        }
+
+
     }
 
 
@@ -53,25 +67,6 @@ public class StartAuthenticationActivity extends BaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
 
-        List<StepBean> stepsBeanList = new ArrayList<>();
-        StepBean stepBean0 = new StepBean("基本资料",StepBean.STEP_CURRENT);
-        StepBean stepBean1 = new StepBean("证照上传",StepBean.STEP_UNDO);
-        StepBean stepBean2 = new StepBean("提交完成",StepBean.STEP_UNDO);
-
-        stepsBeanList.add(stepBean0);
-        stepsBeanList.add(stepBean1);
-        stepsBeanList.add(stepBean2);
-        stepView.setStepViewTexts(stepsBeanList)
-                .setTextSize(12)//set textSize
-                .setLinePaddingProportion(3f)//设置indicator线与线间距的比例系数
-                .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator完成线的颜色
-                .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
-                .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
-                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.uncompleted_text_color))//设置StepsView text未完成线的颜色
-                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.complted))//设置StepsViewIndicator CompleteIcon
-                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon))//设置StepsViewIndicator DefaultIcon
-                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
-
         BasicInfoFragment BasicInfo= BasicInfoFragment.newInstance();
         CertificateInfoFragment CertificateInfo= CertificateInfoFragment.newInstance();
         ResultFragment Result= ResultFragment.newInstance();
@@ -81,11 +76,70 @@ public class StartAuthenticationActivity extends BaseActivity {
                 Result
         };
 
-        // 添加显示第一个fragment
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.container, BasicInfo)
-                .show(BasicInfo).commit();
+        changeFragmentIndex(0);
+    }
+
+
+    public void setStepView(){
+        switch (index){
+            case 0:
+                List<StepBean> stepsBeanList = new ArrayList<>();
+                StepBean stepBean0 = new StepBean("基本资料",StepBean.STEP_UNDO);
+                StepBean stepBean1 = new StepBean("证照上传",StepBean.STEP_UNDO);
+                StepBean stepBean2 = new StepBean("提交完成",StepBean.STEP_UNDO);
+                stepsBeanList.add(stepBean0);
+                stepsBeanList.add(stepBean1);
+                stepsBeanList.add(stepBean2);
+                stepView.setStepViewTexts(stepsBeanList)
+                        .setTextSize(14)//set textSize
+                        .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
+                        .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator完成线的颜色
+                        .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
+                        .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
+                        .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
+                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_online))//设置StepsViewIndicator CompleteIcon
+                        .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_offline))//设置StepsViewIndicator DefaultIcon
+                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
+                break;
+            case 1:
+                List<StepBean> stepsBeanList2 = new ArrayList<>();
+                StepBean stepBean01 = new StepBean("基本资料",StepBean.STEP_COMPLETED);
+                StepBean stepBean11= new StepBean("证照上传",StepBean.STEP_UNDO);
+                StepBean stepBean21 = new StepBean("提交完成",StepBean.STEP_UNDO);
+                stepsBeanList2.add(stepBean01);
+                stepsBeanList2.add(stepBean11);
+                stepsBeanList2.add(stepBean21);
+                stepView.setStepViewTexts(stepsBeanList2)
+                        .setTextSize(12)//set textSize
+                        .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
+                        .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator完成线的颜色
+                        .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
+                        .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
+                        .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
+                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_online))//设置StepsViewIndicator CompleteIcon
+                        .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_offline))//设置StepsViewIndicator DefaultIcon
+                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
+                break;
+            case 2:
+                List<StepBean> stepsBeanList3 = new ArrayList<>();
+                StepBean stepBean02 = new StepBean("基本资料",StepBean.STEP_COMPLETED);
+                StepBean stepBean12= new StepBean("证照上传",StepBean.STEP_COMPLETED);
+                StepBean stepBean22 = new StepBean("提交完成",StepBean.STEP_CURRENT);
+                stepsBeanList3.add(stepBean02);
+                stepsBeanList3.add(stepBean12);
+                stepsBeanList3.add(stepBean22);
+                stepView.setStepViewTexts(stepsBeanList3)
+                        .setTextSize(14)//set textSize
+                        .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
+                        .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator完成线的颜色
+                        .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
+                        .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
+                        .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
+                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_online))//设置StepsViewIndicator CompleteIcon
+                        .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_offline))//设置StepsViewIndicator DefaultIcon
+                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.default_icon));//设置StepsViewIndicator AttentionIcon
+                break;
+        }
     }
 
     @Override
@@ -105,9 +159,10 @@ public class StartAuthenticationActivity extends BaseActivity {
      * Fragment切换
      */
     private void switchFragment() {
+        setStepView();
         FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
+        trx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         trx.hide(fragments[currentTabIndex]);
-        trx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         if (!fragments[index].isAdded()) {
             trx.add(R.id.container, fragments[index]);
         }
@@ -115,4 +170,47 @@ public class StartAuthenticationActivity extends BaseActivity {
         currentTabIndex = index;
     }
 
+    //protected覆写，属于eventBus的bug? -->https://github.com/greenrobot/EventBus/issues/156  倒数第三行
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(EventUtil event){
+        String msglog = event.getMsg();
+        switch (msglog){
+            case "证件上传":
+                changeFragmentIndex(1);
+                break;
+        }
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if(index!=0){
+                changeFragmentIndex(index-1);
+            }else {
+                this.finish();
+            }
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
 }

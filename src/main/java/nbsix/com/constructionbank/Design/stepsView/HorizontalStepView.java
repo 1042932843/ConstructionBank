@@ -181,14 +181,15 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
         return this;
     }
 
+    boolean ok=false;
     @Override
     public void ondrawIndicator()
     {
         if(mTextContainer != null)
         {
-            mTextContainer.removeAllViews();
+           // mTextContainer.removeAllViews();加这个是SB？每次进来都清一次，闪个不停
             List<Float> complectedXPosition = mStepsViewIndicator.getCircleCenterPointPositionList();
-            if(mStepBeanList != null && complectedXPosition != null && complectedXPosition.size() > 0)
+            if(mStepBeanList != null && complectedXPosition != null && complectedXPosition.size() > 0&&!ok)
             {
                 for(int i = 0; i < mStepBeanList.size(); i++)
                 {
@@ -204,14 +205,15 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
 
                     if(i <= mComplectingPosition)
                     {
-                        mTextView.setTypeface(null, Typeface.BOLD);
                         mTextView.setTextColor(mComplectedTextColor);
-                    } else
+                    }
+                    else
                     {
                         mTextView.setTextColor(mUnComplectedTextColor);
                     }
 
                     mTextContainer.addView(mTextView);
+                    ok=true;
                 }
             }
         }

@@ -195,13 +195,15 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             //登录了未认证
             case 1:
                 it.setClass(this,StartAuthenticationActivity.class);
+                startActivity(it);
                 break;
             //登录了已认证
             case 2:
                 it.setClass(this,HomePageActivity.class);
+                startActivity(it);
                 break;
         }
-        startActivity(it);
+
     }
 
     @Override

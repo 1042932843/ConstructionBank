@@ -12,11 +12,14 @@ import android.widget.TextView;
 import com.bilibili.magicasakura.widgets.TintButton;
 import com.bilibili.magicasakura.widgets.TintCheckBox;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import nbsix.com.constructionbank.Design.keyEditText.KeyEditText;
 import nbsix.com.constructionbank.Module.Base.BaseFragment;
 import nbsix.com.constructionbank.R;
+import nbsix.com.constructionbank.Utils.EventUtil;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 
 
@@ -36,7 +39,7 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     Button next_step;
     @OnClick(R.id.next_step)
     public void next(){
-
+        EventBus.getDefault().post(new EventUtil("证件上传"));
     }
 
     public static BasicInfoFragment newInstance() {
@@ -60,6 +63,10 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     public void finishCreateView(Bundle state) {
         initRecyclerView();
 
+        name_edit.setKeyPreImeListener(this);
+        ID_edit.setKeyPreImeListener(this);
+        com_edit.setKeyPreImeListener(this);
+        phonenum_edit.setKeyPreImeListener(this);
         name_edit.addTextChangedListener(textWatcher);
         ID_edit.addTextChangedListener(textWatcher);
         com_edit.addTextChangedListener(textWatcher);

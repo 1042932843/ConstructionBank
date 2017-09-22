@@ -33,6 +33,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Module.Major.Authentication.StartAuthenticationActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Module.Major.Credit.MyCreditActivity"
