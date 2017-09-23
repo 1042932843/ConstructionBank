@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import nbsix.com.constructionbank.Design.TimeButton.TimeButton;
 import nbsix.com.constructionbank.Design.keyEditText.KeyEditText;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
 import nbsix.com.constructionbank.Module.Major.Authentication.StartAuthenticationActivity;
@@ -31,6 +32,7 @@ import nbsix.com.constructionbank.Module.Major.Home.HomePageActivity;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 import nbsix.com.constructionbank.Utils.TextToSpeechUtil;
+import nbsix.com.constructionbank.Utils.ToastUtil;
 import nbsix.com.constructionbank.Utils.UserState;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
@@ -46,10 +48,10 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     @BindView(R.id.identifying_code)
     KeyEditText identifying_code;
     @BindView(R.id.identifying_code_but)
-    Button identifying_code_but;
+    TimeButton identifying_code_but;
     @OnClick (R.id.identifying_code_but)
     public void getIdentifying_code(){
-
+        ToastUtil.ShortToast("获取验证码");
     }
     @BindView(R.id.next_step)
     Button next_step;
@@ -119,7 +121,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
-        back.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -129,6 +131,8 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        identifying_code_but.setTextAfter("秒重新获取").setTextBefore("获取验证码").setLength(60 * 1000);
+        back.setVisibility(View.GONE);
         username.setKeyPreImeListener(this);
         password.setKeyPreImeListener(this);
         phone.setKeyPreImeListener(this);
@@ -147,8 +151,11 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         user_agreement.setText(builder);
 
 
-        if(UserState.isLogin()){
+        if(UserState.isLogin()&&!UserState.isAuthentication()){
             afterlogin(1);
+        }
+        if(UserState.isLogin()&&UserState.isAuthentication()){
+            afterlogin(2);
         }
     }
 
@@ -201,6 +208,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             case 2:
                 it.setClass(this,HomePageActivity.class);
                 startActivity(it);
+                finish();
                 break;
         }
 

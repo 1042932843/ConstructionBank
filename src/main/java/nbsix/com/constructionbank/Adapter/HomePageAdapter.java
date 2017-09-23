@@ -26,7 +26,7 @@ import nbsix.com.constructionbank.Utils.UserState;
  * Name: HomePageAdapter
  * Author: Dusky
  * QQ: 1042932843
- * Comment: //TODO
+ * Comment: //首页功能选择的adapter
  * Date: 2017-09-11 17:14
  */
 

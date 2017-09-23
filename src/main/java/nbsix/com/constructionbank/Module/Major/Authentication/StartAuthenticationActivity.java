@@ -1,5 +1,6 @@
 package nbsix.com.constructionbank.Module.Major.Authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -24,9 +25,11 @@ import nbsix.com.constructionbank.Module.Base.BaseActivity;
 import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.BasicInfoFragment;
 import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.CertificateInfoFragment;
 import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.ResultFragment;
+import nbsix.com.constructionbank.Module.Major.Home.HomePageActivity;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.EventUtil;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
+import nbsix.com.constructionbank.Utils.UserState;
 
 public class StartAuthenticationActivity extends BaseActivity {
 
@@ -77,6 +80,11 @@ public class StartAuthenticationActivity extends BaseActivity {
         };
 
         changeFragmentIndex(0);
+        if(UserState.isLogin()&&!UserState.isAuthentication())
+        {
+            changeFragmentIndex(0);
+        }
+
     }
 
 
@@ -195,6 +203,8 @@ public class StartAuthenticationActivity extends BaseActivity {
             case "证件上传":
                 changeFragmentIndex(1);
                 break;
+            case "提交完成":
+                changeFragmentIndex(2);
         }
     }
 
@@ -205,7 +215,14 @@ public class StartAuthenticationActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if(index!=0){
                 changeFragmentIndex(index-1);
-            }else {
+            }
+            //登录了并且是在审核状态
+            if(UserState.isLogin()&&index==2&&UserState.isAuditing()){
+                    Intent it=new Intent(this, HomePageActivity.class);
+                    startActivity(it);
+                    this.finish();
+            }
+            else {
                 this.finish();
             }
             return true;

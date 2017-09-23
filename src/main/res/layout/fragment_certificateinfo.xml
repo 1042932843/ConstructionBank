@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:overScrollMode="never"
+    android:scrollbars="none"
     android:layout_margin="@dimen/_16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
 <RelativeLayout
     android:layout_width="wrap_content"
@@ -92,6 +104,89 @@
     </RelativeLayout>
 
     </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12dp"
+            android:id="@+id/relativeLayout3">
+            <TextView
+                android:id="@+id/textx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="身份证照"
+                android:gravity="center"
+                android:layout_alignRight="@+id/textView0"
+                android:layout_alignEnd="@+id/textView0"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textx"
+                android:text="（法人身份证）"
+                android:textSize="@dimen/textsize12sp"
+                android:id="@+id/textView0" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/relativeLayout3"
+            android:layout_toEndOf="@+id/relativeLayout3">
+
+            <RelativeLayout
+                android:id="@+id/frame_3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120dp"
+                android:layout_marginLeft="@dimen/_12dp"
+                android:layout_marginRight="@dimen/_12dp"
+                android:layout_marginTop="@dimen/_12dp"
+                android:layout_marginBottom="@dimen/_12dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加身份证人像面照片"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_16dp"
+                    android:textSize="@dimen/textsize14sp"
+                    android:textColor="@color/gray_20"/>
+                <ImageView
+                    android:id="@+id/yingye"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@android:drawable/ic_menu_add"
+                    android:background="@drawable/list_imagepicker_bg"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <com.bilibili.magicasakura.widgets.TintButton
+        android:id="@+id/next_step"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16dp"
+        android:background="@drawable/selector_login"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="@string/next_step"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_large" />
     <android.support.v7.widget.RecyclerView
         android:visibility="gone"
         android:id="@+id/recyclerView"
@@ -108,5 +203,5 @@
         tools:listitem="@layout/list_imagepicker_bg"
         android:layout_toRightOf="@+id/relativeLayout2"
         android:layout_toEndOf="@+id/relativeLayout2" />
-
-</RelativeLayout>
+    </LinearLayout>
+</ScrollView>

@@ -13,6 +13,8 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,7 @@ import nbsix.com.constructionbank.Adapter.ImagePickerAdapter;
 import nbsix.com.constructionbank.Design.Dialog.SelectDialog;
 import nbsix.com.constructionbank.Module.Base.BaseFragment;
 import nbsix.com.constructionbank.R;
+import nbsix.com.constructionbank.Utils.EventUtil;
 import nbsix.com.constructionbank.Utils.LogUtil;
 
 
@@ -54,7 +57,10 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
         onItemClick(null,IMAGE_ITEM_ADD);
     }
 
-
+    @OnClick(R.id.next_step)
+    public void next(){
+        EventBus.getDefault().post(new EventUtil("提交完成"));
+    }
 
     public static CertificateInfoFragment newInstance() {
 

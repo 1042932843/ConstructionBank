@@ -19,7 +19,7 @@ import nbsix.com.constructionbank.Utils.ToastUtil;
  * Name: dsyExpandableListViewAdapter
  * Author: Dusky
  * QQ: 1042932843
- * Comment: //TODO
+ * Comment: //多层展开adapter
  * Date: 2017-09-13 14:51
  */
 

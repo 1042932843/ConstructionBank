@@ -22,7 +22,7 @@ import nbsix.com.constructionbank.R;
 
 
 /**
- * Name: HomePageAdapter
+ * Name: CredentialsAdapter
  * Author: Dusky
  * QQ: 1042932843
  * Comment: //TODO

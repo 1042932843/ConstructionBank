@@ -12,6 +12,8 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
 import com.squareup.leakcanary.LeakCanary;
 
+import java.util.Map;
+
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.imageloader.GlideImageLoader;
 
@@ -30,6 +32,9 @@ public class app extends Application{
         return mInstance;
     }
 
+    // 用于存放倒计时时间（验证码按钮）
+    public static Map<String, Long> map;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -39,6 +44,7 @@ public class app extends Application{
         initImagePicker();
     }
 
+    //初始化glide配置
     private void init() {
         optionsNormal=new RequestOptions()
                 .centerInside()
@@ -67,6 +73,7 @@ public class app extends Application{
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
     }
 
+    //初始化内存检测工具
     private void initLeakCanary(){
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
@@ -77,6 +84,7 @@ public class app extends Application{
         // Normal app init code...
     }
 
+    //初始化图片选择器
     private void initImagePicker() {
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideImageLoader());   //设置图片加载器

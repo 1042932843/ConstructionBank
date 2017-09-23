@@ -20,7 +20,7 @@ import nbsix.com.constructionbank.R;
  * Name: ImagePickerAdapter
  * Author: Dusky
  * QQ: 1042932843
- * Comment: //TODO
+ * Comment: //多选图片时使用
  * Date: 2017-09-22 13:14
  */
 

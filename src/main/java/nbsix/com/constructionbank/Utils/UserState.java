@@ -13,6 +13,9 @@ public class UserState {
     public static boolean isLogin(){
         return false;
     }
+    public static boolean isAuditing(){
+        return false;
+    }
     public static boolean isAuthentication(){
         return false;
     }
