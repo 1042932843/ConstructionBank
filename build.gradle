@@ -66,4 +66,5 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     compile 'com.bilibili:magicasakura:0.1.7@aar'
     compile project(path: ':imagepicker')
+    compile project(path: ':update')
 }

@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import nbsix.com.VersionUpdate.entity.VersionUpdateConfig;
 import nbsix.com.constructionbank.Design.TimeButton.TimeButton;
 import nbsix.com.constructionbank.Design.keyEditText.KeyEditText;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
@@ -157,6 +158,20 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         if(UserState.isLogin()&&UserState.isAuthentication()){
             afterlogin(2);
         }
+
+        update();
+
+    }
+
+    private String url = "http://link.moobplayer.com/download2/m001.apk";
+    public void update(){
+        VersionUpdateConfig.getInstance()//获取配置实例
+                .setContext(this)//设置上下文
+                .setDownLoadURL(url)//设置文件下载链接
+                .setNotificationIconRes(R.mipmap.launcher)//设置通知大图标
+                .setNotificationSmallIconRes(R.mipmap.launcher)//设置通知小图标
+                .setNotificationTitle("版本升级")//设置通知标题
+                .startDownLoad();//开始下载
     }
 
     private View.OnFocusChangeListener onFocusChangeListener=new View.OnFocusChangeListener() {

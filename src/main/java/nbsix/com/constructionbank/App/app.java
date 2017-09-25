@@ -2,6 +2,7 @@ package nbsix.com.constructionbank.App;
 
 import android.app.Application;
 import android.content.Context;
+import android.view.View;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -13,7 +14,6 @@ import com.lzy.imagepicker.view.CropImageView;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.util.Map;
-
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.imageloader.GlideImageLoader;
 
