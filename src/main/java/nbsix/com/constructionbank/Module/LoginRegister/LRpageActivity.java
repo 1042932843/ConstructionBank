@@ -1,10 +1,12 @@
 package nbsix.com.constructionbank.Module.LoginRegister;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +39,8 @@ import nbsix.com.constructionbank.Utils.ToastUtil;
 import nbsix.com.constructionbank.Utils.UserState;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
+    boolean isNext=false;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -44,6 +48,12 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     KeyEditText username;
     @BindView(R.id.password)
     KeyEditText password;
+
+    @BindView(R.id.nickname)
+    KeyEditText nickname;
+    @BindView(R.id.my_password)
+    KeyEditText my_password;
+
     @BindView(R.id.phone)
     KeyEditText phone;
     @BindView(R.id.identifying_code)
@@ -56,7 +66,8 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     }
     @BindView(R.id.next_step)
     Button next_step;
-
+    @BindView(R.id.register)
+    Button register;
 
     @BindView(R.id.login_btn)
     Button login_btn;
@@ -76,6 +87,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         login_line.setVisibility(View.VISIBLE);
         type_register.setTextColor(ContextCompat.getColor(this,R.color.gray_80_alpha_60));
         register_line.setVisibility(View.GONE);
+        register_next_layout.setVisibility(View.GONE);
     }
 
     @BindView(R.id.type_register)
@@ -85,16 +97,39 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     @OnClick(R.id.type_register)
     public void setType_register(){
         login_layout.setVisibility(View.GONE);
-        register_layout.setVisibility(View.VISIBLE);
         type_login.setTextColor(ContextCompat.getColor(this,R.color.gray_80_alpha_60));
         login_line.setVisibility(View.GONE);
         type_register.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
         register_line.setVisibility(View.VISIBLE);
+        if(isNext){
+            next();
+        }else{
+            previous();
+        }
+    }
+
+    @OnClick(R.id.next_step)
+    public void next(){
+        register_layout.setVisibility(View.GONE);
+        register_next_layout.setVisibility(View.VISIBLE);
+        isNext=true;
+    }
+
+
+    @OnClick(R.id.previous)
+    public void previous(){
+        register_layout.setVisibility(View.VISIBLE);
+        register_next_layout.setVisibility(View.GONE);
+        isNext=false;
+    }
+
+    @OnClick(R.id.register)
+    public void do_register(){
+
     }
 
     @OnClick(R.id.login_btn)
     public void do_login(){
-
         afterlogin(1);
     }
     @BindView(R.id.back)
@@ -109,6 +144,9 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     LinearLayout login_layout;
     @BindView(R.id.register_layout)
     LinearLayout register_layout;
+
+    @BindView(R.id.register_next_layout)
+    LinearLayout register_next_layout;
 
     @BindView(R.id.user_agreement)
     TextView user_agreement;
@@ -136,14 +174,20 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         back.setVisibility(View.GONE);
         username.setKeyPreImeListener(this);
         password.setKeyPreImeListener(this);
+        nickname.setKeyPreImeListener(this);
+        my_password.setKeyPreImeListener(this);
         phone.setKeyPreImeListener(this);
         identifying_code.setKeyPreImeListener(this);
         phone.addTextChangedListener(textWatcher);
         identifying_code.addTextChangedListener(textWatcher);
         phone.setOnFocusChangeListener(onFocusChangeListener);
         identifying_code.setOnFocusChangeListener(onFocusChangeListener);
+        nickname.setOnFocusChangeListener(onFocusChangeListener);
+        my_password.setOnFocusChangeListener(onFocusChangeListener);
         username.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
+        nickname.addTextChangedListener(textWatcher);
+        my_password.addTextChangedListener(textWatcher);
         username.setOnFocusChangeListener(onFocusChangeListener);
         password.setOnFocusChangeListener(onFocusChangeListener);
         SpannableStringBuilder builder = new SpannableStringBuilder(user_agreement.getText().toString());
@@ -159,8 +203,38 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             afterlogin(2);
         }
 
-        update();
+        showNormalDialog();
 
+    }
+
+
+    private void showNormalDialog(){
+        /* @setIcon 设置对话框图标
+         * @setTitle 设置对话框标题
+         * @setMessage 设置对话框消息提示
+         * setXXX方法返回Dialog对象，因此可以链式设置属性
+         */
+        final AlertDialog.Builder normalDialog =
+                new AlertDialog.Builder(this);
+        //normalDialog.setIcon(R.mipmap.launcher);
+        normalDialog.setTitle("版本升级");
+        normalDialog.setMessage("检查到更新,是否进行升级？");
+        normalDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        update();
+                    }
+                });
+        normalDialog.setNegativeButton("关闭",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //...To-do
+                    }
+                });
+        // 显示
+        normalDialog.show();
     }
 
     private String url = "http://link.moobplayer.com/download2/m001.apk";
@@ -199,6 +273,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         public void afterTextChanged(Editable s) {
             login_btn.setEnabled(username.getText().length() != 0 && password.getText().length() != 0);
             next_step.setEnabled(phone.getText().length() != 0 && identifying_code.getText().length() != 0);
+            register.setEnabled(nickname.getText().length() != 0 && my_password.getText().length() != 0);
         }
     };
 
@@ -241,5 +316,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         password.clearFocus();
         phone.clearFocus();
         identifying_code.clearFocus();
+        nickname.clearFocus();
+        my_password.clearFocus();
     }
 }

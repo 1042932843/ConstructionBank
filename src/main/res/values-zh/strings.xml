@@ -11,13 +11,16 @@
     <string name="authentication">资料认证</string>
     <string name="set">设置</string>
     <string name="login">登录</string>
+    <string name="nickname">昵称</string>
     <string name="next_step">下一步</string>
     <string name="get_id_code">获取验证码</string>
     <string name="register">注册</string>
     <string name="username">用户名/帐号/手机号</string>
     <string name="phone_number">手机号</string>
     <string name="pw">密码</string>
+    <string name="set_pw">设置密码</string>
     <string name="id_code">验证码</string>
+    <string name="previous">上一步</string>
     <string name="shou">收</string>
     <string name="qr_shoukuan">二维码收款</string>
     <string name="jilu_shoukuan">收款记录</string>
