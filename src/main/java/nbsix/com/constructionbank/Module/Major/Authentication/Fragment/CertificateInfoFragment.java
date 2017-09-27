@@ -1,7 +1,9 @@
 package nbsix.com.constructionbank.Module.Major.Authentication.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +26,18 @@ import butterknife.OnClick;
 import nbsix.com.constructionbank.Adapter.ImagePickerAdapter;
 import nbsix.com.constructionbank.Design.Dialog.SelectDialog;
 import nbsix.com.constructionbank.Module.Base.BaseFragment;
+import nbsix.com.constructionbank.Network.RetrofitHelper;
+import nbsix.com.constructionbank.Network.api.UploadService;
+import nbsix.com.constructionbank.Network.api.response.Result;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.EventUtil;
 import nbsix.com.constructionbank.Utils.LogUtil;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CertificateInfoFragment extends BaseFragment implements ImagePickerAdapter.OnRecyclerViewItemClickListener{
@@ -174,4 +186,51 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
             }
         }
     }
+
+
+    /**
+     * Upload Image Client Code
+
+    private void uploadImage() {
+
+
+        //Create Upload Server Client
+        UploadService service = RetrofitHelper.getUploadAPI();
+
+        //File creating from selected URL
+        File file = new File(imagePath);
+
+        // create RequestBody instance from file
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("uploaded_file", file.getName(), requestFile);
+
+        Call<Result> resultCall = service.uploadImage(body);
+
+        // finally, execute the request
+        resultCall.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+
+                // Response Success or Fail
+                if (response.isSuccessful()) {
+                    if (response.body().getResult().equals("success")){
+
+                    }
+
+
+                } else {
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+
+            }
+        });
+    } */
 }

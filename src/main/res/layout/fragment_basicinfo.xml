@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,7 +34,7 @@
             android:textColorHint="@color/gray_20"
             android:textColor="@color/colorPrimary"
             android:maxLines="1"
-            android:padding="@dimen/padding_half"
+            android:paddingLeft="@dimen/padding_half"
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:textSize="14sp"
             android:layout_toRightOf="@+id/name"
@@ -65,7 +67,7 @@
             android:textColorHint="@color/gray_20"
             android:textColor="@color/colorPrimary"
             android:maxLines="1"
-            android:padding="@dimen/padding_half"
+            android:paddingLeft="@dimen/padding_half"
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:textSize="14sp"
             android:layout_toRightOf="@+id/ID"
@@ -98,7 +100,7 @@
             android:textColorHint="@color/gray_20"
             android:textColor="@color/colorPrimary"
             android:maxLines="1"
-            android:padding="@dimen/padding_half"
+            android:paddingLeft="@dimen/padding_half"
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:textSize="14sp"
             android:layout_toRightOf="@+id/phonenum"
@@ -131,7 +133,7 @@
             android:textColorHint="@color/gray_20"
             android:textColor="@color/colorPrimary"
             android:maxLines="1"
-            android:padding="@dimen/padding_half"
+            android:paddingLeft="@dimen/padding_half"
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:textSize="14sp"
             android:layout_toRightOf="@+id/com"

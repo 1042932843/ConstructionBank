@@ -216,8 +216,8 @@ public class StartAuthenticationActivity extends BaseActivity {
             if(index!=0){
                 changeFragmentIndex(index-1);
             }
-            //登录了并且是在审核状态
-            if(UserState.isLogin()&&index==2&&UserState.isAuditing()){
+            //登录了并且是在审核状态UserState.isLogin()&&UserState.isAuditing()
+            if(index==2){
                     Intent it=new Intent(this, HomePageActivity.class);
                     startActivity(it);
                     this.finish();

@@ -121,7 +121,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/register"
-                    android:textSize="@dimen/textsize16sp"/>
+                    android:textSize="@dimen/textsize16sp"
+                    android:textColor="@color/gray_80_alpha_60"/>
 
                 <RelativeLayout
                     android:id="@+id/type_register_line"
