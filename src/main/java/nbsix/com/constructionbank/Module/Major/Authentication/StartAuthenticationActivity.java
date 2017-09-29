@@ -181,7 +181,7 @@ public class StartAuthenticationActivity extends BaseActivity {
     //protected覆写，属于eventBus的bug? -->https://github.com/greenrobot/EventBus/issues/156  倒数第三行
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        //super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -213,15 +213,17 @@ public class StartAuthenticationActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if(index!=0){
-                changeFragmentIndex(index-1);
-            }
             //登录了并且是在审核状态UserState.isLogin()&&UserState.isAuditing()
             if(index==2){
-                    Intent it=new Intent(this, HomePageActivity.class);
-                    startActivity(it);
-                    this.finish();
+                Intent it=new Intent(this, HomePageActivity.class);
+                startActivity(it);
+                this.finish();
             }
+
+            if(index!=0&&index!=2){
+                changeFragmentIndex(index-1);
+            }
+
             else {
                 this.finish();
             }

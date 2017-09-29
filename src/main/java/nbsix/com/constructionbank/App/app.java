@@ -14,7 +14,6 @@ import com.lzy.imagepicker.view.CropImageView;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.util.Map;
-import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.imageloader.GlideImageLoader;
 
 /**

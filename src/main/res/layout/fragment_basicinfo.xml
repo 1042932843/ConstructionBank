@@ -161,7 +161,6 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/account"
             android:layout_toEndOf="@+id/account"
-            android:padding="@dimen/_6dp"
             android:background="@drawable/text_background_edit2">
 
             <RelativeLayout
@@ -172,13 +171,15 @@
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/hint5"/>
+                android:text="@string/hint5"
+                android:layout_marginLeft="@dimen/_6dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text"
                 android:text="@string/hint6"
-                android:textSize="@dimen/textsize12sp"/>
+                android:textSize="@dimen/textsize12sp"
+                android:layout_marginLeft="@dimen/_6dp"/>
             </RelativeLayout>
 
             <com.bilibili.magicasakura.widgets.TintCheckBox
