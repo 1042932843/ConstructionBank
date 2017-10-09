@@ -9,5 +9,5 @@ package nbsix.com.constructionbank.Network.api;
  */
 
 public class ApiConstants {
-    public static final String Base_Update_URL = "http://api.fir.im/";
+    public static final String Base_URL = "http://pay.nide8.com/v1/";
 }

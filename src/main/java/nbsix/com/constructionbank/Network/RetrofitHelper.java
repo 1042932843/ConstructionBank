@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import nbsix.com.constructionbank.App.app;
 import nbsix.com.constructionbank.Network.api.ApiConstants;
 import nbsix.com.constructionbank.Network.api.HomePageService;
+import nbsix.com.constructionbank.Network.api.LoginRegisterService;
 import nbsix.com.constructionbank.Network.api.UploadService;
 import nbsix.com.constructionbank.Utils.CommonUtil;
 import okhttp3.Cache;
@@ -37,11 +38,15 @@ public class RetrofitHelper {
 
 
   public static HomePageService getAPI() {
-    return createApi(HomePageService.class, ApiConstants.Base_Update_URL);
+    return createApi(HomePageService.class, ApiConstants.Base_URL);
   }
 
   public static UploadService getUploadAPI(){
-    return createApi(UploadService.class, ApiConstants.Base_Update_URL);
+    return createApi(UploadService.class, ApiConstants.Base_URL);
+  }
+
+  public static LoginRegisterService getCaptchaAPI(){
+    return createApi(LoginRegisterService.class, ApiConstants.Base_URL);
   }
 
 

@@ -24,14 +24,19 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import nbsix.com.VersionUpdate.entity.VersionUpdateConfig;
 import nbsix.com.constructionbank.Design.TimeButton.TimeButton;
 import nbsix.com.constructionbank.Design.keyEditText.KeyEditText;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
 import nbsix.com.constructionbank.Module.Major.Authentication.StartAuthenticationActivity;
 import nbsix.com.constructionbank.Module.Major.Home.HomePageActivity;
+import nbsix.com.constructionbank.Network.RetrofitHelper;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 import nbsix.com.constructionbank.Utils.TextToSpeechUtil;
@@ -62,7 +67,20 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     TimeButton identifying_code_but;
     @OnClick (R.id.identifying_code_but)
     public void getIdentifying_code(){
+        JsonObject obj = new JsonObject();
+        obj.addProperty("phone","18725663275");
         ToastUtil.ShortToast("获取验证码");
+        RetrofitHelper.getCaptchaAPI()
+                .getCaptcha(obj)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    String a=bean.string();
+                }, throwable -> {
+                    ToastUtil.ShortToast("数据错误");
+                });
+
     }
     @BindView(R.id.next_step)
     Button next_step;
