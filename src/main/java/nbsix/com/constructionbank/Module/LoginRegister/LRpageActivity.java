@@ -44,7 +44,6 @@ import nbsix.com.constructionbank.Utils.ToastUtil;
 import nbsix.com.constructionbank.Utils.UserState;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
-    boolean isNext=false;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -53,9 +52,6 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     KeyEditText username;
     @BindView(R.id.password)
     KeyEditText password;
-
-    @BindView(R.id.nickname)
-    KeyEditText nickname;
     @BindView(R.id.my_password)
     KeyEditText my_password;
 
@@ -82,8 +78,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 });
 
     }
-    @BindView(R.id.next_step)
-    Button next_step;
+
     @BindView(R.id.register)
     Button register;
 
@@ -105,7 +100,6 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         login_line.setVisibility(View.VISIBLE);
         type_register.setTextColor(ContextCompat.getColor(this,R.color.gray_80_alpha_60));
         register_line.setVisibility(View.GONE);
-        register_next_layout.setVisibility(View.GONE);
     }
 
     @BindView(R.id.type_register)
@@ -119,27 +113,12 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         login_line.setVisibility(View.GONE);
         type_register.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
         register_line.setVisibility(View.VISIBLE);
-        if(isNext){
-            next();
-        }else{
-            previous();
-        }
-    }
-
-    @OnClick(R.id.next_step)
-    public void next(){
-        register_layout.setVisibility(View.GONE);
-        register_next_layout.setVisibility(View.VISIBLE);
-        isNext=true;
-    }
-
-
-    @OnClick(R.id.previous)
-    public void previous(){
         register_layout.setVisibility(View.VISIBLE);
-        register_next_layout.setVisibility(View.GONE);
-        isNext=false;
     }
+
+
+
+
 
     @OnClick(R.id.register)
     public void do_register(){
@@ -162,9 +141,6 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     LinearLayout login_layout;
     @BindView(R.id.register_layout)
     LinearLayout register_layout;
-
-    @BindView(R.id.register_next_layout)
-    LinearLayout register_next_layout;
 
     @BindView(R.id.user_agreement)
     TextView user_agreement;
@@ -192,7 +168,6 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         back.setVisibility(View.GONE);
         username.setKeyPreImeListener(this);
         password.setKeyPreImeListener(this);
-        nickname.setKeyPreImeListener(this);
         my_password.setKeyPreImeListener(this);
         phone.setKeyPreImeListener(this);
         identifying_code.setKeyPreImeListener(this);
@@ -200,11 +175,9 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         identifying_code.addTextChangedListener(textWatcher);
         phone.setOnFocusChangeListener(onFocusChangeListener);
         identifying_code.setOnFocusChangeListener(onFocusChangeListener);
-        nickname.setOnFocusChangeListener(onFocusChangeListener);
         my_password.setOnFocusChangeListener(onFocusChangeListener);
         username.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
-        nickname.addTextChangedListener(textWatcher);
         my_password.addTextChangedListener(textWatcher);
         username.setOnFocusChangeListener(onFocusChangeListener);
         password.setOnFocusChangeListener(onFocusChangeListener);
@@ -290,8 +263,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         @Override
         public void afterTextChanged(Editable s) {
             login_btn.setEnabled(username.getText().length() != 0 && password.getText().length() != 0);
-            next_step.setEnabled(phone.getText().length() != 0 && identifying_code.getText().length() != 0);
-            register.setEnabled(nickname.getText().length() != 0 && my_password.getText().length() != 0);
+            register.setEnabled(phone.getText().length() != 0 && my_password.getText().length() != 0&& identifying_code.getText().length() != 0);
         }
     };
 
@@ -334,7 +306,6 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         password.clearFocus();
         phone.clearFocus();
         identifying_code.clearFocus();
-        nickname.clearFocus();
         my_password.clearFocus();
     }
 }

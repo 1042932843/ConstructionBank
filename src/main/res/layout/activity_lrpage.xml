@@ -272,52 +272,6 @@
                     app:drawableLeftTint="@color/selector_focus"
                      />
 
-                <com.bilibili.magicasakura.widgets.TintButton
-                    android:id="@+id/next_step"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/selector_login"
-                    android:enabled="false"
-                    android:gravity="center"
-                    android:text="@string/next_step"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textsize_large" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/register_next_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:layout_margin="16dp"
-                android:layout_below="@+id/buttonPanel"
-                android:layout_centerHorizontal="true">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
-                        android:id="@+id/nickname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/text_background_edit"
-                        android:drawableLeft="@drawable/ic_person_outline_white_24dp"
-                        android:drawablePadding="@dimen/padding_half"
-                        android:hint="@string/nickname"
-                        android:textColorHint="@color/gray_20"
-                        android:textColor="@color/colorPrimary"
-                        android:maxLines="1"
-                        android:padding="@dimen/padding_half"
-                        android:textCursorDrawable="@drawable/edittext_cursor"
-                        android:textSize="14sp"
-                        app:drawableLeftTint="@color/selector_focus"/>
-
-                </RelativeLayout>
-
-
                 <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
                     android:id="@+id/my_password"
                     android:layout_width="match_parent"
@@ -336,37 +290,17 @@
                     android:textSize="14sp"
                     app:drawableLeftTint="@color/selector_focus"
                     />
-
-                <RelativeLayout
+                <com.bilibili.magicasakura.widgets.TintButton
+                    android:id="@+id/register"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.bilibili.magicasakura.widgets.TintButton
-                        android:id="@+id/previous"
-                        android:layout_width="@dimen/_120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/selector_login"
-                        android:gravity="center"
-                        android:layout_alignParentLeft="true"
-                        android:text="@string/previous"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textsize_large" />
-
-                    <com.bilibili.magicasakura.widgets.TintButton
-                        android:id="@+id/register"
-                        android:layout_width="@dimen/_120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/selector_login"
-                        android:enabled="false"
-                        android:gravity="center"
-                        android:layout_alignParentRight="true"
-                        android:text="@string/register"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textsize_large" />
-                </RelativeLayout>
-
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/selector_login"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:text="@string/register"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_large" />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -388,3 +322,4 @@
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
+
