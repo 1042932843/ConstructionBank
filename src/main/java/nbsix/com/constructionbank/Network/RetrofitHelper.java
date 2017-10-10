@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import nbsix.com.constructionbank.App.app;
+import nbsix.com.constructionbank.Network.Intercepter.StatusInterceptor;
 import nbsix.com.constructionbank.Network.api.ApiConstants;
 import nbsix.com.constructionbank.Network.api.HomePageService;
 import nbsix.com.constructionbank.Network.api.LoginRegisterService;
+import nbsix.com.constructionbank.Network.api.UpdateService;
 import nbsix.com.constructionbank.Network.api.UploadService;
 import nbsix.com.constructionbank.Utils.CommonUtil;
 import okhttp3.Cache;
@@ -41,14 +43,21 @@ public class RetrofitHelper {
     return createApi(HomePageService.class, ApiConstants.Base_URL);
   }
 
+  public static UpdateService getUpdateAPI(){
+    return createApi(UpdateService.class, ApiConstants.Base_URL);
+  }
+
   public static UploadService getUploadAPI(){
     return createApi(UploadService.class, ApiConstants.Base_URL);
   }
 
-  public static LoginRegisterService getCaptchaAPI(){
+  public static LoginRegisterService getLoginRegisterAPI(){
     return createApi(LoginRegisterService.class, ApiConstants.Base_URL);
   }
 
+  public static LoginRegisterService getLoginAPI(){
+    return createApi(LoginRegisterService.class, ApiConstants.Base_URL);
+  }
 
   /**
    * 根据传入的baseUrl，和api创建retrofit
@@ -71,6 +80,7 @@ public class RetrofitHelper {
   private static void initOkHttpClient() {
 
     HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    StatusInterceptor statusInterceptor=new StatusInterceptor();
     interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
     if (mOkHttpClient == null) {
       synchronized (RetrofitHelper.class) {
@@ -81,7 +91,7 @@ public class RetrofitHelper {
 
           mOkHttpClient = new OkHttpClient.Builder()
               .cache(cache)
-              .addInterceptor(interceptor)
+              .addInterceptor(interceptor).addInterceptor(statusInterceptor)
               .addNetworkInterceptor(new CacheInterceptor())
               .retryOnConnectionFailure(true)
               .connectTimeout(30, TimeUnit.SECONDS)

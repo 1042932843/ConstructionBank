@@ -60,6 +60,7 @@ public class StartAuthenticationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
+
     }
 
     @Override

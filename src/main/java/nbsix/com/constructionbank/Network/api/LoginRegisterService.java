@@ -22,4 +22,6 @@ public interface LoginRegisterService {
     @POST("user/register")
     Observable<ResponseBody> register(@Body JsonObject bean);
 
+    @POST("user/login")
+    Observable<ResponseBody> login(@Body JsonObject bean);
 }

@@ -11,8 +11,19 @@ package nbsix.com.constructionbank.Utils;
 public class EventUtil {
     private String msg;
 
-    public EventUtil(String msg) {
+    public String getType() {
+        return type;
+    }
+
+    private String type;
+
+    public EventUtil(String type) {
+        this.type = type;
+    }
+
+    public EventUtil(String type,String msg) {
         this.msg = msg;
+        this.type = type;
     }
 
     public String getMsg(){

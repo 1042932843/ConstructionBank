@@ -31,19 +31,23 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import nbsix.com.VersionUpdate.entity.VersionUpdateConfig;
+import nbsix.com.constructionbank.App.appConfig;
 import nbsix.com.constructionbank.Design.TimeButton.TimeButton;
 import nbsix.com.constructionbank.Design.keyEditText.KeyEditText;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
 import nbsix.com.constructionbank.Module.Major.Authentication.StartAuthenticationActivity;
 import nbsix.com.constructionbank.Module.Major.Home.HomePageActivity;
+import nbsix.com.constructionbank.Network.RequestProperty;
 import nbsix.com.constructionbank.Network.RetrofitHelper;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 import nbsix.com.constructionbank.Utils.TextToSpeechUtil;
 import nbsix.com.constructionbank.Utils.ToastUtil;
 import nbsix.com.constructionbank.Utils.UserState;
+import nbsix.com.constructionbank.Utils.tools.isJsonObj;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
+
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -63,10 +67,11 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     TimeButton identifying_code_but;
     @OnClick (R.id.identifying_code_but)
     public void getIdentifying_code(){
-        JsonObject obj = new JsonObject();
-        obj.addProperty("phone","18725663275");
+        String phoneNum=phone.getText().toString();
+        JsonObject obj=RequestProperty.CreateJsonObjectBody();
+        obj.addProperty("phone",phoneNum);
         ToastUtil.ShortToast("获取验证码");
-        RetrofitHelper.getCaptchaAPI()
+        RetrofitHelper.getLoginRegisterAPI()
                 .getCaptcha(obj)
                 .compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
@@ -122,12 +127,47 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
 
     @OnClick(R.id.register)
     public void do_register(){
-
+        JsonObject obj=RequestProperty.CreateJsonObjectBody();
+        String phoneNum=phone.getText().toString();
+        String password=my_password.getText().toString();
+        String captcha=identifying_code.getText().toString();
+        obj.addProperty("phone",phoneNum);
+        obj.addProperty("password",password);
+        obj.addProperty("captcha",captcha);
+        RetrofitHelper.getLoginRegisterAPI()
+                .register(obj)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    String a=bean.string();
+                }, throwable -> {
+                    ToastUtil.ShortToast("数据错误");
+                });
     }
 
     @OnClick(R.id.login_btn)
     public void do_login(){
-        afterlogin(1);
+        String userName=username.getText().toString();
+        String pwd=password.getText().toString();
+        JsonObject obj=RequestProperty.CreateJsonObjectBody();
+        obj.addProperty("phone",userName);
+        obj.addProperty("password",pwd);
+        RetrofitHelper.getLoginRegisterAPI()
+                .login(obj)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    String a=bean.string();
+                    isJsonObj is=new isJsonObj();//{"success":false,"message":"\u624b\u673a\u53f7\u683c\u5f0f\u9519\u8bef","data":{"phone":false}}
+                    ToastUtil.ShortToast(is.handleData("message",a));
+                    afterlogin(1);
+                }, throwable -> {
+                    ToastUtil.ShortToast("数据错误");
+                });
+
+
     }
     @BindView(R.id.back)
     ImageView back;
@@ -194,50 +234,10 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             afterlogin(2);
         }
 
-        showNormalDialog();
-
     }
 
 
-    private void showNormalDialog(){
-        /* @setIcon 设置对话框图标
-         * @setTitle 设置对话框标题
-         * @setMessage 设置对话框消息提示
-         * setXXX方法返回Dialog对象，因此可以链式设置属性
-         */
-        final AlertDialog.Builder normalDialog =
-                new AlertDialog.Builder(this);
-        //normalDialog.setIcon(R.mipmap.launcher);
-        normalDialog.setTitle("版本升级");
-        normalDialog.setMessage("检查到更新,是否进行升级？");
-        normalDialog.setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        update();
-                    }
-                });
-        normalDialog.setNegativeButton("关闭",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //...To-do
-                    }
-                });
-        // 显示
-        normalDialog.show();
-    }
 
-    private String url = "http://link.moobplayer.com/download2/m001.apk";
-    public void update(){
-        VersionUpdateConfig.getInstance()//获取配置实例
-                .setContext(this)//设置上下文
-                .setDownLoadURL(url)//设置文件下载链接
-                .setNotificationIconRes(R.mipmap.launcher)//设置通知大图标
-                .setNotificationSmallIconRes(R.mipmap.launcher)//设置通知小图标
-                .setNotificationTitle("版本升级")//设置通知标题
-                .startDownLoad();//开始下载
-    }
 
     private View.OnFocusChangeListener onFocusChangeListener=new View.OnFocusChangeListener() {
         @Override
@@ -264,6 +264,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         public void afterTextChanged(Editable s) {
             login_btn.setEnabled(username.getText().length() != 0 && password.getText().length() != 0);
             register.setEnabled(phone.getText().length() != 0 && my_password.getText().length() != 0&& identifying_code.getText().length() != 0);
+            identifying_code_but.setEnabled(phone.getText().length() != 0);
         }
     };
 
