@@ -75,7 +75,11 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
-                    identifying_code_but.setLength(33 * 1000).initTimer();
+                    if(isGetStringFromJson.handleData("success",a).equals(true)){
+                        identifying_code_but.setLength(33 * 1000).initTimer();
+                    }else{
+                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                    }
                 }, throwable -> {
                     ToastUtil.ShortToast("数据错误");
                 });
@@ -139,6 +143,11 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
+                    if(isGetStringFromJson.handleData("success",a).equals(true)){
+                        afterlogin(1);
+                    }else{
+                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                    }
                 }, throwable -> {
                     ToastUtil.ShortToast("数据错误");
                 });
@@ -158,9 +167,13 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
+                    if(isGetStringFromJson.handleData("success",a).equals(true)){
+                        afterlogin(1);
+                    }else{
+                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                    }
                    //{"success":false,"message":"\u624b\u673a\u53f7\u683c\u5f0f\u9519\u8bef","data":{"phone":false}}
-                    ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
-                    afterlogin(1);
+
                 }, throwable -> {
                     ToastUtil.ShortToast("数据错误");
                 });
@@ -193,6 +206,12 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
 
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        identifying_code_but.onDestroy();
     }
 
     @Override
