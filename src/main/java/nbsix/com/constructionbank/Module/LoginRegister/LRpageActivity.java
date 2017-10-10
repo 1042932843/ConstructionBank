@@ -1,15 +1,14 @@
 package nbsix.com.constructionbank.Module.LoginRegister;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
+
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
+
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
@@ -30,6 +29,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import nbsix.com.constructionbank.Design.Dialog.DialogLoading;
 import nbsix.com.constructionbank.Design.TimeButton.TimeButton;
 import nbsix.com.constructionbank.Design.keyEditText.KeyEditText;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
@@ -38,13 +38,18 @@ import nbsix.com.constructionbank.Module.Major.Home.HomePageActivity;
 import nbsix.com.constructionbank.Network.RequestProperty;
 import nbsix.com.constructionbank.Network.RetrofitHelper;
 import nbsix.com.constructionbank.R;
+import nbsix.com.constructionbank.Utils.LogUtil;
+import nbsix.com.constructionbank.Utils.PreferenceUtil;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 import nbsix.com.constructionbank.Utils.ToastUtil;
 import nbsix.com.constructionbank.Utils.UserState;
 import nbsix.com.constructionbank.Utils.tools.isGetStringFromJson;
+import nbsix.com.constructionbank.Utils.tools.isJsonObj;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
 
+
+    DialogLoading dialogLoading;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -75,7 +80,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
-                    if(isGetStringFromJson.handleData("success",a).equals(true)){
+                    if("true".equals(isGetStringFromJson.handleData("success",a))){
                         identifying_code_but.setLength(33 * 1000).initTimer();
                     }else{
                         ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
@@ -129,6 +134,8 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
 
     @OnClick(R.id.register)
     public void do_register(){
+        dialogLoading.setMessage("注册中");
+        dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
         JsonObject obj=RequestProperty.CreateJsonObjectBody();
         String phoneNum=phone.getText().toString();
         String password=my_password.getText().toString();
@@ -143,12 +150,16 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
-                    if(isGetStringFromJson.handleData("success",a).equals(true)){
-                        afterlogin(1);
+                    if("true".equals(isGetStringFromJson.handleData("success",a))){
+                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                        username.setText(phoneNum);
+                        setType_login();
                     }else{
                         ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }
+                    dialogLoading.dismiss();
                 }, throwable -> {
+                    dialogLoading.dismiss();
                     ToastUtil.ShortToast("数据错误");
                 });
     }
@@ -157,26 +168,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     public void do_login(){
         String userName=username.getText().toString();
         String pwd=password.getText().toString();
-        JsonObject obj=RequestProperty.CreateJsonObjectBody();
-        obj.addProperty("phone",userName);
-        obj.addProperty("password",pwd);
-        RetrofitHelper.getLoginRegisterAPI()
-                .login(obj)
-                .compose(this.bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(bean -> {
-                    String a=bean.string();
-                    if(isGetStringFromJson.handleData("success",a).equals(true)){
-                        afterlogin(1);
-                    }else{
-                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
-                    }
-                   //{"success":false,"message":"\u624b\u673a\u53f7\u683c\u5f0f\u9519\u8bef","data":{"phone":false}}
-
-                }, throwable -> {
-                    ToastUtil.ShortToast("数据错误");
-                });
+        login(userName,pwd);
 
 
     }
@@ -205,7 +197,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
-
+        CheakStatus();
     }
 
     @Override
@@ -221,6 +213,8 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        dialogLoading=new DialogLoading();
+        dialogLoading.setCancelable(false);
         back.setVisibility(View.GONE);
         username.setKeyPreImeListener(this);
         password.setKeyPreImeListener(this);
@@ -241,14 +235,6 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         ForegroundColorSpan Span = new ForegroundColorSpan(ContextCompat.getColor(this,R.color.colorPrimary));
         builder.setSpan(Span, 16,20, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         user_agreement.setText(builder);
-
-
-        if(UserState.isLogin()&&!UserState.isAuthentication()){
-            afterlogin(1);
-        }
-        if(UserState.isLogin()&&UserState.isAuthentication()){
-            afterlogin(2);
-        }
 
     }
 
@@ -285,6 +271,57 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     };
 
 
+    /**
+     * 执行登录
+     */
+    public void login(String username,String pwd){
+        dialogLoading.setMessage("登录中");
+        dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
+        JsonObject obj=RequestProperty.CreateJsonObjectBody();
+        obj.addProperty("phone",username);
+        obj.addProperty("password",pwd);
+        RetrofitHelper.getLoginRegisterAPI()
+                .login(obj)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    String a=bean.string();//{"success":true,"message":"","data":{"token":"1haL06uZXgHQIT6-0HuZ24Q1eQWjVSN0","status":"\u5b9e\u540d\u8ba4\u8bc1"}}
+                    if("true".equals(isGetStringFromJson.handleData("success",a))){
+                        String token=isGetStringFromJson.handleData("token",isJsonObj.handleData("data",a));
+                        String status=isGetStringFromJson.handleData("status",isJsonObj.handleData("data",a));
+
+                        PreferenceUtil.putStringPRIVATE("username",username);
+                        PreferenceUtil.putStringPRIVATE("token",token);
+                        PreferenceUtil.putStringPRIVATE("status",status);
+                        CheakStatus();
+                    }else{
+                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                    }
+                    dialogLoading.dismiss();
+                }, throwable -> {
+                    dialogLoading.dismiss();
+                    ToastUtil.ShortToast("数据错误");
+                });
+    }
+
+    /**
+     * 检查状态
+     */
+    public void CheakStatus(){
+        String s=PreferenceUtil.getStringPRIVATE("status",UserState.NA);
+        LogUtil.d(s);
+        switch (s){
+            case "N/A":
+                break;
+            case"实名认证":
+                afterlogin(1);
+                break;
+            case"2":
+                afterlogin(2);
+                break;
+        }
+    }
 
     /**
      * 根据用户状态处理页面跳转
@@ -296,12 +333,12 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             //未登录
             case 0:
                 break;
-            //登录了未认证
+            //需要实名认证
             case 1:
                 it.setClass(this,StartAuthenticationActivity.class);
                 startActivity(it);
                 break;
-            //登录了已认证
+            //已经认证
             case 2:
                 it.setClass(this,HomePageActivity.class);
                 startActivity(it);

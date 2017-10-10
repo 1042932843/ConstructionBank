@@ -102,7 +102,6 @@ public class GeneralJournalFragment extends BaseFragment {
             expandableListView.expandGroup(i);
         }
 
-
     }
 
 

@@ -56,7 +56,6 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
         holder.name.setText(name);
         Glide.with(context).load(mDatas.get(position).getImg()).apply(app.optionsNormalCrop).into(holder.img);
         holder.img.setOnClickListener(v -> {
-            if(UserState.isLogin()){
                 switch (name){
                     case "二维码收款":
                         it.setClass(context, QRgatheringActivity.class);
@@ -65,11 +64,6 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
                     case "建行贷款":
                         break;
                     case "":
-                }
-
-            }else{
-                it.setClass(context, LRpageActivity.class);
-                context.startActivity(it);
             }
 
         });

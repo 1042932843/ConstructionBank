@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="nbsix.com.constructionbank.Module.LoginRegister.LRpageActivity">
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -223,6 +224,7 @@
                     android:layout_height="wrap_content">
                     <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
                         android:id="@+id/phone"
+                        android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/text_background_edit"

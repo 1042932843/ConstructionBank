@@ -81,10 +81,7 @@ public class StartAuthenticationActivity extends BaseActivity {
         };
 
         changeFragmentIndex(0);
-        if(UserState.isLogin()&&!UserState.isAuthentication())
-        {
-            changeFragmentIndex(0);
-        }
+
 
     }
 

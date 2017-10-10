@@ -9,14 +9,14 @@ package nbsix.com.constructionbank.Utils;
  */
 
 public class UserState {
+    public static boolean islogin() {
+        return islogin;
+    }
 
-    public static boolean isLogin(){
-        return false;
+    public static void setIslogin(boolean islogin) {
+        UserState.islogin = islogin;
     }
-    public static boolean isAuditing(){
-        return false;
-    }
-    public static boolean isAuthentication(){
-        return false;
-    }
+
+    public static boolean islogin=false;
+    public static String NA="N/A";
 }

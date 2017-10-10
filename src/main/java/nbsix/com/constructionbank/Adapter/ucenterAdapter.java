@@ -22,6 +22,7 @@ import nbsix.com.constructionbank.Module.Major.Authentication.AuthenticationInfo
 import nbsix.com.constructionbank.Module.Major.Authentication.StartAuthenticationActivity;
 import nbsix.com.constructionbank.Module.Major.Credit.MyCreditActivity;
 import nbsix.com.constructionbank.R;
+import nbsix.com.constructionbank.Utils.PreferenceUtil;
 import nbsix.com.constructionbank.Utils.UserState;
 
 /**
@@ -75,7 +76,8 @@ public class ucenterAdapter extends RecyclerView.Adapter<ucenterAdapter.MyViewHo
                         context.startActivity(it);
                         break;
                     case "认证信息":
-                        if(UserState.isAuthentication()){
+                        String s= PreferenceUtil.getStringPRIVATE("status",UserState.NA);
+                        if("已认证".equals(s)){
                             it.setClass(context, AuthenticationInfoActivity.class);
                             context.startActivity(it);
                         }else{
