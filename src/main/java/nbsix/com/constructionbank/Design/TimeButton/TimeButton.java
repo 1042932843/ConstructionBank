@@ -104,8 +104,6 @@ public class TimeButton extends TintButton implements View.OnClickListener {
     public void onClick(View v) {
         if (mOnclickListener != null)
             mOnclickListener.onClick(v);
-        initTimer();
-
         // t.scheduleAtFixedRate(task, delay, period);
     }
 
