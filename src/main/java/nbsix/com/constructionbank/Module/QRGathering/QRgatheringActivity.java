@@ -97,8 +97,8 @@ public class QRgatheringActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(EventUtil event){
-        String msglog = event.getMsg();
-        switch (msglog){
+        String Type = event.getType();
+        switch (Type){
             case "流水明细":
                 changeFragmentIndex(1);
                 break;

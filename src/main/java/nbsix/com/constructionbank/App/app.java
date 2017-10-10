@@ -34,7 +34,7 @@ import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.EventUtil;
 import nbsix.com.constructionbank.Utils.ToastUtil;
 import nbsix.com.constructionbank.Utils.imageloader.GlideImageLoader;
-import nbsix.com.constructionbank.Utils.tools.isJsonObj;
+import nbsix.com.constructionbank.Utils.tools.isGetStringFromJson;
 
 /**
  * Name: app
@@ -50,7 +50,7 @@ public class app extends Application implements Application.ActivityLifecycleCal
     public static app getInstance() {
         return mInstance;
     }
-
+    private String url = "";
 
     Context contextActivity;
 
@@ -134,11 +134,12 @@ public class app extends Application implements Application.ActivityLifecycleCal
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(EventUtil event){
-        String msglog = event.getMsg();
-        switch (msglog){
+        String Type = event.getType();
+        switch (Type){
             case "强制升级":
-                ToastUtil.ShortToast("强制升级");
-                showUpDateDialog("强制升级","如果取消将无法使用app");
+                url=event.getMsg();
+                //ToastUtil.ShortToast("强制升级");
+                showUpDateDialog(Type,"如果取消将无法使用app");
                 break;
 
         }
@@ -146,7 +147,7 @@ public class app extends Application implements Application.ActivityLifecycleCal
 
 
 
-    private String url = "";
+
     public void update(){
         JsonObject obj= RequestProperty.CreateJsonObjectBody();
         RetrofitHelper.getUpdateAPI()
@@ -155,8 +156,12 @@ public class app extends Application implements Application.ActivityLifecycleCal
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
-                    isJsonObj.handleData("success",a);//{"success":false,"message":"","data":[]}
-                    showUpDateDialog("版本升级","检查到更新,是否进行升级");
+                    if(isGetStringFromJson.handleData("success",a).equals(true)){
+                        url=isGetStringFromJson.handleData("url",a);
+                        showUpDateDialog("版本升级","检查到更新,是否进行升级");
+                    }
+                     //{"success":false,"message":"","data":[]}
+
                 }, throwable -> {
                     ToastUtil.ShortToast("数据错误");
                 });

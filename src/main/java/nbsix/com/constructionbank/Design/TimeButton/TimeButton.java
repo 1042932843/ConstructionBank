@@ -28,8 +28,8 @@ import nbsix.com.constructionbank.App.app;
 
 public class TimeButton extends TintButton implements View.OnClickListener {
     private long length = 60 * 1000;// 倒计时长度,这里给了默认60秒
-    private String textafter = "秒后重新获取";
-    private String textbefore = "点击获取验证码";
+    private String textafter = "秒重新获取";
+    private String textbefore = "获取验证码";
     private final String TIME = "time";
     private final String CTIME = "ctime";
     private View.OnClickListener mOnclickListener;
@@ -64,7 +64,7 @@ public class TimeButton extends TintButton implements View.OnClickListener {
         };
     };
 
-    private void initTimer() {
+    public TimeButton initTimer() {
         time = length;
         t = new Timer();
         tt = new TimerTask() {
@@ -75,6 +75,10 @@ public class TimeButton extends TintButton implements View.OnClickListener {
                 han.sendEmptyMessage(0x01);
             }
         };
+        this.setText(time / 1000 + textafter);
+        this.setEnabled(false);
+        t.schedule(tt, 0, 1000);
+        return this;
     }
 
     private void clearTimer() {
@@ -101,9 +105,7 @@ public class TimeButton extends TintButton implements View.OnClickListener {
         if (mOnclickListener != null)
             mOnclickListener.onClick(v);
         initTimer();
-        this.setText(time / 1000 + textafter);
-        this.setEnabled(false);
-        t.schedule(tt, 0, 1000);
+
         // t.scheduleAtFixedRate(task, delay, period);
     }
 

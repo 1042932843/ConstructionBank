@@ -7,7 +7,7 @@ import java.io.IOException;
 import nbsix.com.constructionbank.Utils.EventUtil;
 import nbsix.com.constructionbank.Utils.LogUtil;
 import nbsix.com.constructionbank.Utils.ToastUtil;
-import nbsix.com.constructionbank.Utils.tools.isJsonObj;
+import nbsix.com.constructionbank.Utils.tools.isGetStringFromJson;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -35,7 +35,7 @@ public class StatusInterceptor implements Interceptor {
                     value.string();
                     byte[] resp = value.bytes();
                     String json = new String(resp, "UTF-8");
-                    url= isJsonObj.handleData("url",json);
+                    url= isGetStringFromJson.handleData("url",json);
                     EventBus.getDefault().post(new EventUtil("强制升级",url));
                     // 注意。由于前面value.bytes()把响应流读完并关闭了，所以这里需要重新生成一个response，否则数据就无法正常解析了
                     originalResponse = originalResponse.newBuilder()

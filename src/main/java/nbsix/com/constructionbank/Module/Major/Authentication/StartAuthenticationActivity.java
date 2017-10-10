@@ -199,8 +199,8 @@ public class StartAuthenticationActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(EventUtil event){
-        String msglog = event.getMsg();
-        switch (msglog){
+        String Type = event.getType();
+        switch (Type){
             case "证件上传":
                 changeFragmentIndex(1);
                 break;

@@ -30,8 +30,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import nbsix.com.VersionUpdate.entity.VersionUpdateConfig;
-import nbsix.com.constructionbank.App.appConfig;
 import nbsix.com.constructionbank.Design.TimeButton.TimeButton;
 import nbsix.com.constructionbank.Design.keyEditText.KeyEditText;
 import nbsix.com.constructionbank.Module.Base.BaseActivity;
@@ -41,10 +39,9 @@ import nbsix.com.constructionbank.Network.RequestProperty;
 import nbsix.com.constructionbank.Network.RetrofitHelper;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
-import nbsix.com.constructionbank.Utils.TextToSpeechUtil;
 import nbsix.com.constructionbank.Utils.ToastUtil;
 import nbsix.com.constructionbank.Utils.UserState;
-import nbsix.com.constructionbank.Utils.tools.isJsonObj;
+import nbsix.com.constructionbank.Utils.tools.isGetStringFromJson;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
 
@@ -78,6 +75,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
+                    identifying_code_but.setLength(33 * 1000).initTimer();
                 }, throwable -> {
                     ToastUtil.ShortToast("数据错误");
                 });
@@ -160,8 +158,8 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
-                    isJsonObj is=new isJsonObj();//{"success":false,"message":"\u624b\u673a\u53f7\u683c\u5f0f\u9519\u8bef","data":{"phone":false}}
-                    ToastUtil.ShortToast(is.handleData("message",a));
+                   //{"success":false,"message":"\u624b\u673a\u53f7\u683c\u5f0f\u9519\u8bef","data":{"phone":false}}
+                    ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     afterlogin(1);
                 }, throwable -> {
                     ToastUtil.ShortToast("数据错误");
@@ -204,7 +202,6 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        identifying_code_but.setTextAfter("秒重新获取").setTextBefore("获取验证码").setLength(60 * 1000);
         back.setVisibility(View.GONE);
         username.setKeyPreImeListener(this);
         password.setKeyPreImeListener(this);
