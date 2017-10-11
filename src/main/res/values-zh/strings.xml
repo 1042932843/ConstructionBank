@@ -9,8 +9,10 @@
     <string name="my_credit">我的贷款</string>
     <string name="user_login">用户登录</string>
     <string name="authentication">资料认证</string>
+    <string name="unselected">未选择</string>
     <string name="set">设置</string>
     <string name="login">登录</string>
+    <string name="makesure">确认</string>
     <string name="nickname">昵称</string>
     <string name="next_step">下一步</string>
     <string name="get_id_code">获取验证码</string>
@@ -34,13 +36,14 @@
     <string name="title1">真实姓名</string>
     <string name="title2">身份证号</string>
     <string name="title3">手机号码</string>
-    <string name="title4">单位名称</string>
-    <string name="title5">开户选择</string>
+    <string name="title4">商铺地址</string>
+    <string name="title5">商管员手机号或ID</string>
     <string name="hint1">请输入您的真实姓名（与身份证一致）</string>
     <string name="hint2">请输入您的身份证号码 </string>
     <string name="hint3">请输入您的手机号码 </string>
     <string name="hint4">请输入您的单位名称 </string>
-    <string name="hint5">是否初次开户 </string>
+    <string name="hint5">请输入商管员ID或手机号 </string>
     <string name="hint6">(该营业执照没有在银行开立过账户) </string>
+    <string name="hint7">请输入详细地址</string>
 
 </resources>

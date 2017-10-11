@@ -72,7 +72,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         String phoneNum=phone.getText().toString();
         JsonObject obj=RequestProperty.CreateJsonObjectBody();
         obj.addProperty("phone",phoneNum);
-        ToastUtil.ShortToast("获取验证码");
+        LogUtil.d("获取验证码");
         RetrofitHelper.getLoginRegisterAPI()
                 .getCaptcha(obj)
                 .compose(this.bindToLifecycle())
@@ -81,7 +81,10 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 .subscribe(bean -> {
                     String a=bean.string();
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
-                        identifying_code_but.setLength(33 * 1000).initTimer();
+                        //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                        String seconds=isGetStringFromJson.handleData("seconds",isJsonObj.handleData("data",a));
+                        int time=Integer.parseInt(seconds);
+                        identifying_code_but.setLength(time * 1000).initTimer();
                     }else{
                         ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }
@@ -197,13 +200,24 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
-        CheakStatus();
+        if(!UserState.NA.equals(PreferenceUtil.getStringPRIVATE("username",UserState.NA))){
+            username.setText(PreferenceUtil.getStringPRIVATE("username",UserState.NA));
+        }
+        if (!UserState.NA.equals(PreferenceUtil.getStringPRIVATE("password",UserState.NA))&&!UserState.NA.equals(PreferenceUtil.getStringPRIVATE("username",UserState.NA))){
+            password.setText(PreferenceUtil.getStringPRIVATE("password",UserState.NA));
+            login(PreferenceUtil.getStringPRIVATE("username",UserState.NA),PreferenceUtil.getStringPRIVATE("password",UserState.NA));
+        }
+
+
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        identifying_code_but.onDestroy();
+        if(identifying_code_but!=null){
+            identifying_code_but.onDestroy();
+        }
+
     }
 
     @Override
@@ -292,6 +306,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                         String status=isGetStringFromJson.handleData("status",isJsonObj.handleData("data",a));
 
                         PreferenceUtil.putStringPRIVATE("username",username);
+                        PreferenceUtil.putStringPRIVATE("password",pwd);
                         PreferenceUtil.putStringPRIVATE("token",token);
                         PreferenceUtil.putStringPRIVATE("status",status);
                         CheakStatus();
@@ -314,7 +329,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         switch (s){
             case "N/A":
                 break;
-            case"实名认证":
+            case"profile":
                 afterlogin(1);
                 break;
             case"2":

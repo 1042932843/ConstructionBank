@@ -28,6 +28,8 @@ import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.ResultFra
 import nbsix.com.constructionbank.Module.Major.Home.HomePageActivity;
 import nbsix.com.constructionbank.R;
 import nbsix.com.constructionbank.Utils.EventUtil;
+import nbsix.com.constructionbank.Utils.LogUtil;
+import nbsix.com.constructionbank.Utils.PreferenceUtil;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 import nbsix.com.constructionbank.Utils.UserState;
 
@@ -60,7 +62,7 @@ public class StartAuthenticationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
-
+        CheakStatus();
     }
 
     @Override
@@ -80,9 +82,26 @@ public class StartAuthenticationActivity extends BaseActivity {
                 Result
         };
 
-        changeFragmentIndex(0);
 
 
+    }
+
+    /**
+     * 检查状态
+     */
+    public void CheakStatus(){
+        String s= PreferenceUtil.getStringPRIVATE("status",UserState.NA);
+        LogUtil.d(s);
+        switch (s){
+            case "N/A":
+                break;
+            case"profile":
+                changeFragmentIndex(0);
+                break;
+            case"2":
+                changeFragmentIndex(1);
+                break;
+        }
     }
 
 

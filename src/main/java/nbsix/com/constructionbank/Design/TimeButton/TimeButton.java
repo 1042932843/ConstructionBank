@@ -71,7 +71,7 @@ public class TimeButton extends TintButton implements View.OnClickListener {
 
             @Override
             public void run() {
-                Log.e("dsy", time / 1000 + "");
+                //Log.e("dsy", time / 1000 + "");
                 han.sendEmptyMessage(0x01);
             }
         };

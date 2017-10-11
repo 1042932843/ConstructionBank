@@ -3,14 +3,13 @@ package nbsix.com.constructionbank.Module.QRGathering.Fragement;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import nbsix.com.constructionbank.Adapter.dsyExpandableListViewAdapter;
+import nbsix.com.constructionbank.Adapter.RunningAccountDetailsExpandableListViewAdapter;
 import nbsix.com.constructionbank.Entity.GeneralJournal.dataDay;
 import nbsix.com.constructionbank.Entity.GeneralJournal.dataDayGroup;
 import nbsix.com.constructionbank.Module.Base.BaseFragment;
@@ -19,7 +18,7 @@ import nbsix.com.constructionbank.Utils.SystemBarHelper;
 
 
 public class GeneralJournalFragment extends BaseFragment {
-    private dsyExpandableListViewAdapter adapter;
+    private RunningAccountDetailsExpandableListViewAdapter adapter;
     List<dataDayGroup> mydataDayGroups=new ArrayList<>();
 
     @BindView(R.id.toolbar)
@@ -96,7 +95,7 @@ public class GeneralJournalFragment extends BaseFragment {
         dataDayGroups.add(dataDayGroup3);
         mydataDayGroups.clear();
         mydataDayGroups.addAll(dataDayGroups);
-        adapter=new dsyExpandableListViewAdapter(mydataDayGroups,getContext());
+        adapter=new RunningAccountDetailsExpandableListViewAdapter(mydataDayGroups,getContext());
         expandableListView.setAdapter(adapter);
         for(int i = 0; i < adapter.getGroupCount(); i++){
             expandableListView.expandGroup(i);

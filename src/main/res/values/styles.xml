@@ -59,4 +59,14 @@
         <!--外围是否模糊-->
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
+    <style name="AppTheme.AppCompat.Dialog.Alert2" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+        <item name="android:windowMinWidthMinor">80%</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--外围是否模糊-->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>
