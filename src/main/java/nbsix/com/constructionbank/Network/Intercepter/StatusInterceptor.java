@@ -4,7 +4,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
-import nbsix.com.constructionbank.Utils.EventUtil;
+import nbsix.com.constructionbank.Entity.Common.EventUtil;
 import nbsix.com.constructionbank.Utils.LogUtil;
 import nbsix.com.constructionbank.Utils.ToastUtil;
 import nbsix.com.constructionbank.Utils.tools.isGetStringFromJson;

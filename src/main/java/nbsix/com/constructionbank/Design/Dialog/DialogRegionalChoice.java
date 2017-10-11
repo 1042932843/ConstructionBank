@@ -1,11 +1,8 @@
 package nbsix.com.constructionbank.Design.Dialog;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,9 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-
-import com.bilibili.magicasakura.widgets.TintTextView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -26,7 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import nbsix.com.constructionbank.Design.keyEditText.KeyEditText;
 import nbsix.com.constructionbank.R;
-import nbsix.com.constructionbank.Utils.EventUtil;
+import nbsix.com.constructionbank.Entity.Common.EventUtil;
 import nbsix.com.constructionbank.Utils.LogUtil;
 
 

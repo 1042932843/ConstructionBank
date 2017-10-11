@@ -12,7 +12,7 @@ import nbsix.com.constructionbank.Module.Base.BaseActivity;
 import nbsix.com.constructionbank.Module.QRGathering.Fragement.GeneralJournalFragment;
 import nbsix.com.constructionbank.Module.QRGathering.Fragement.QrFragment;
 import nbsix.com.constructionbank.R;
-import nbsix.com.constructionbank.Utils.EventUtil;
+import nbsix.com.constructionbank.Entity.Common.EventUtil;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 
 public class QRgatheringActivity extends BaseActivity {

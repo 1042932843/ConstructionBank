@@ -1,9 +1,7 @@
 package nbsix.com.constructionbank.Module.Major.Authentication.Fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,7 +15,6 @@ import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,18 +23,9 @@ import butterknife.OnClick;
 import nbsix.com.constructionbank.Adapter.ImagePickerAdapter;
 import nbsix.com.constructionbank.Design.Dialog.SelectDialog;
 import nbsix.com.constructionbank.Module.Base.BaseFragment;
-import nbsix.com.constructionbank.Network.RetrofitHelper;
-import nbsix.com.constructionbank.Network.api.UploadService;
-import nbsix.com.constructionbank.Network.api.response.Result;
 import nbsix.com.constructionbank.R;
-import nbsix.com.constructionbank.Utils.EventUtil;
+import nbsix.com.constructionbank.Entity.Common.EventUtil;
 import nbsix.com.constructionbank.Utils.LogUtil;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class CertificateInfoFragment extends BaseFragment implements ImagePickerAdapter.OnRecyclerViewItemClickListener{

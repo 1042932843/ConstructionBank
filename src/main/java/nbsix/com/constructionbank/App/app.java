@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -31,7 +30,7 @@ import nbsix.com.constructionbank.Module.LoginRegister.LRpageActivity;
 import nbsix.com.constructionbank.Network.RequestProperty;
 import nbsix.com.constructionbank.Network.RetrofitHelper;
 import nbsix.com.constructionbank.R;
-import nbsix.com.constructionbank.Utils.EventUtil;
+import nbsix.com.constructionbank.Entity.Common.EventUtil;
 import nbsix.com.constructionbank.Utils.ToastUtil;
 import nbsix.com.constructionbank.Utils.imageloader.GlideImageLoader;
 import nbsix.com.constructionbank.Utils.tools.isGetStringFromJson;

@@ -20,7 +20,7 @@ import nbsix.com.constructionbank.App.app;
 import nbsix.com.constructionbank.Design.PayCustomView.PayCustomView;
 import nbsix.com.constructionbank.Module.Base.BaseFragment;
 import nbsix.com.constructionbank.R;
-import nbsix.com.constructionbank.Utils.EventUtil;
+import nbsix.com.constructionbank.Entity.Common.EventUtil;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
 
 

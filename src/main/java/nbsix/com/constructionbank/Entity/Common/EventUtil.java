@@ -1,4 +1,4 @@
-package nbsix.com.constructionbank.Utils;
+package nbsix.com.constructionbank.Entity.Common;
 
 /**
  * Name: EventUtil

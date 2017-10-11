@@ -7,8 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -27,7 +25,7 @@ import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.Certifica
 import nbsix.com.constructionbank.Module.Major.Authentication.Fragment.ResultFragment;
 import nbsix.com.constructionbank.Module.Major.Home.HomePageActivity;
 import nbsix.com.constructionbank.R;
-import nbsix.com.constructionbank.Utils.EventUtil;
+import nbsix.com.constructionbank.Entity.Common.EventUtil;
 import nbsix.com.constructionbank.Utils.LogUtil;
 import nbsix.com.constructionbank.Utils.PreferenceUtil;
 import nbsix.com.constructionbank.Utils.SystemBarHelper;
