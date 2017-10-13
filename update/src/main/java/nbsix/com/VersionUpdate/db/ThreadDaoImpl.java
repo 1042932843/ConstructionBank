@@ -1,4 +1,4 @@
-package nbsix.com.VersionUpdate.db;
+package nbsix.clpays.VersionUpdate.db;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import nbsix.com.VersionUpdate.entity.ThreadBean;
+import nbsix.clpays.VersionUpdate.entity.ThreadBean;
 
 /**
  * Name: ThreadDaoImpl

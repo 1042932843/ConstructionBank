@@ -1,4 +1,4 @@
-package nbsix.com.VersionUpdate;
+package nbsix.clpays.VersionUpdate;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package nbsix.com.VersionUpdate.service;
+package nbsix.clpays.VersionUpdate.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -29,11 +29,11 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import nbsix.com.VersionUpdate.R;
-import nbsix.com.VersionUpdate.download.DownloadTask;
-import nbsix.com.VersionUpdate.download.InitThread;
-import nbsix.com.VersionUpdate.entity.Config;
-import nbsix.com.VersionUpdate.entity.FileBean;
+import nbsix.clpays.VersionUpdate.R;
+import nbsix.clpays.VersionUpdate.download.DownloadTask;
+import nbsix.clpays.VersionUpdate.download.InitThread;
+import nbsix.clpays.VersionUpdate.entity.Config;
+import nbsix.clpays.VersionUpdate.entity.FileBean;
 
 
 /**

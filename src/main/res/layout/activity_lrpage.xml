@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nbsix.com.constructionbank.Module.LoginRegister.LRpageActivity">
+    tools:context="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.LoginRegister.LRpageActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -145,7 +145,7 @@
             android:layout_below="@+id/buttonPanel"
             android:layout_centerHorizontal="true">
 
-            <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+            <com.clpays.tianfugou.Design.keyEditText.KeyEditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
                 android:textSize="14sp"
                 app:drawableLeftTint="@color/selector_focus"/>
 
-            <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+            <com.clpays.tianfugou.Design.keyEditText.KeyEditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -222,7 +222,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+                    <com.clpays.tianfugou.Design.keyEditText.KeyEditText
                         android:id="@+id/phone"
                         android:inputType="number"
                         android:layout_width="match_parent"
@@ -240,7 +240,7 @@
                         android:layout_toLeftOf="@+id/identifying_code_but"
                         android:layout_toStartOf="@+id/identifying_code_but"
                         app:drawableLeftTint="@color/selector_focus"/>
-                    <nbsix.com.constructionbank.Design.TimeButton.TimeButton
+                    <com.clpays.tianfugou.Design.TimeButton.TimeButton
                         android:enabled="false"
                         android:layout_alignParentRight="true"
                         android:id="@+id/identifying_code_but"
@@ -255,7 +255,7 @@
                 </RelativeLayout>
 
 
-                <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+                <com.clpays.tianfugou.Design.keyEditText.KeyEditText
                     android:id="@+id/identifying_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -274,7 +274,7 @@
                     app:drawableLeftTint="@color/selector_focus"
                      />
 
-                <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+                <com.clpays.tianfugou.Design.keyEditText.KeyEditText
                     android:id="@+id/my_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

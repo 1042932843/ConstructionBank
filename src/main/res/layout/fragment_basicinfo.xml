@@ -25,7 +25,7 @@
             android:focusableInTouchMode="true"
             />
 
-        <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+        <com.clpays.tianfugou.Design.keyEditText.KeyEditText
             android:id="@+id/name_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -63,7 +63,7 @@
             android:id="@+id/ID"
             android:layout_marginRight="@dimen/_4dp"/>
 
-        <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+        <com.clpays.tianfugou.Design.keyEditText.KeyEditText
             android:id="@+id/ID_edit"
 
             android:layout_width="match_parent"
@@ -102,7 +102,7 @@
             android:id="@+id/phonenum"
             android:layout_marginRight="@dimen/_4dp"/>
 
-        <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+        <com.clpays.tianfugou.Design.keyEditText.KeyEditText
             android:id="@+id/phonenum_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -152,19 +152,23 @@
             android:layout_toEndOf="@+id/com"
             android:layout_marginLeft="@dimen/_4dp"
             >
-            <TextView
+            <com.clpays.tianfugou.Design.keyEditText.KeyEditText
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/_8dp"
-                android:gravity="center|left"
                 android:id="@+id/ad"
                 android:ems="16"
+                android:drawablePadding="@dimen/padding_half"
+                android:textColorHint="@color/gray_20"
+                android:textColor="@color/colorPrimary"
                 android:maxLines="1"
                 android:textSize="@dimen/textsize14sp"
-                android:textColor="@color/gray_20"
+                android:background="@null"
+                android:textCursorDrawable="@drawable/edittext_cursor"
                 android:layout_toLeftOf="@+id/imageView3"
                 android:layout_toStartOf="@+id/imageView3"
-                android:text="@string/unselected"/>
+                android:hint="@string/unselected"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -196,7 +200,7 @@
             android:id="@+id/shangguanyuan"
             android:layout_marginRight="@dimen/_4dp"/>
 
-        <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+        <com.clpays.tianfugou.Design.keyEditText.KeyEditText
             android:id="@+id/shangguanyuan_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

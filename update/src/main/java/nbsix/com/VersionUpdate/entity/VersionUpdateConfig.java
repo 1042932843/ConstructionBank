@@ -1,12 +1,12 @@
-package nbsix.com.VersionUpdate.entity;
+package nbsix.clpays.VersionUpdate.entity;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import nbsix.com.VersionUpdate.Activity.TranslucentActivity;
-import nbsix.com.VersionUpdate.service.UpdateService;
+import nbsix.clpays.VersionUpdate.Activity.TranslucentActivity;
+import nbsix.clpays.VersionUpdate.service.UpdateService;
 
 
 /**

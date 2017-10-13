@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nbsix.com.constructionbank.Module.Major.Home.HomePageActivity"
+    tools:context="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.Major.Home.HomePageActivity"
     >
 
 

@@ -94,7 +94,7 @@
                     android:id="@+id/paycustomView_layout"
                     android:visibility="gone">
 
-                    <nbsix.com.constructionbank.Design.PayCustomView.PayCustomView
+                    <com.clpays.tianfugou.Design.PayCustomView.PayCustomView
                         android:id="@+id/paycustomView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

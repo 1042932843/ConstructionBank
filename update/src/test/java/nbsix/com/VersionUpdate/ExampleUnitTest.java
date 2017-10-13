@@ -1,4 +1,4 @@
-package nbsix.com.VersionUpdate;
+package nbsix.clpays.VersionUpdate;
 
 import org.junit.Test;
 

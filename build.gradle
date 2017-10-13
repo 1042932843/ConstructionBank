@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "nbsix.com.constructionbank"
+        applicationId "com.clpays.tianfugou"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
@@ -32,9 +32,7 @@ repositories {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+
 
     configurations.all {
         resolutionStrategy.force 'com.android.support:support-annotations:25.3.1'//强制指定

@@ -1,4 +1,4 @@
-package nbsix.com.VersionUpdate.db;
+package nbsix.clpays.VersionUpdate.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

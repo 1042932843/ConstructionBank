@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue"
-    tools:context="nbsix.com.constructionbank.Module.Major.AccountInfo.AccountInfoActivity">
+    tools:context="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.Major.AccountInfo.AccountInfoActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -69,7 +69,7 @@
 
     </RelativeLayout>
 
-    <nbsix.com.constructionbank.Design.CreditSesame.CreditSesameView
+    <com.clpays.tianfugou.Design.CreditSesame.CreditSesameView
         android:layout_below="@+id/userinfo"
         android:id="@+id/sesame_view"
         android:layout_width="wrap_content"

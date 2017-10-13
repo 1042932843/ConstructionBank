@@ -1,8 +1,8 @@
-package nbsix.com.VersionUpdate.db;
+package nbsix.clpays.VersionUpdate.db;
 
 import java.util.List;
 
-import nbsix.com.VersionUpdate.entity.ThreadBean;
+import nbsix.clpays.VersionUpdate.entity.ThreadBean;
 
 /**
  * Name: ThreadDao

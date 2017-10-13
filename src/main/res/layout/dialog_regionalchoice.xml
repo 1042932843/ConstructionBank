@@ -26,7 +26,7 @@
 
         />
 
-    <nbsix.com.constructionbank.Design.keyEditText.KeyEditText
+    <com.clpays.tianfugou.Design.keyEditText.KeyEditText
         android:id="@+id/edit_where"
         android:textColorHint="@color/gray_20"
         android:textColor="@color/colorPrimary"

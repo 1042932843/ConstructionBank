@@ -45,4 +45,5 @@
 
     <dimen name="app_bar_default_elevation">0dp</dimen>
 
+    <dimen name="parent_list_height">50dp</dimen>
 </resources>

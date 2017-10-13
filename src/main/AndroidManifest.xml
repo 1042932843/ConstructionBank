@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="nbsix.com.constructionbank">
+    package="nbsix.clpays.tianfugou">
 
     <!-- 用户权限设置 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".App.app"
+        android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.App.app"
         android:allowBackup="true"
         android:icon="@mipmap/launcher"
         android:label="@string/app_name"
@@ -18,36 +18,42 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
         <activity
-            android:name=".Module.Major.Home.HomePageActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
-            android:name=".Module.QRGathering.QRgatheringActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Module.Major.AccountInfo.AccountInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Module.Major.Authentication.AuthenticationInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Module.Major.Authentication.StartAuthenticationActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Module.Major.Credit.MyCreditActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Module.Major.Set.SetActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".Module.LoginRegister.LRpageActivity"
+            android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.Major.Home.HomePageActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.Major.AccountInfo.AccountInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.Major.Authentication.AuthenticationInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.Major.Authentication.StartAuthenticationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.Major.Authentication.PackagesActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.Major.Credit.MyCreditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.Major.Set.SetActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity android:name="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.LoginRegister.LRpageActivity"
+            android:screenOrientation="portrait">
+
         </activity>
     </application>
 

@@ -5,7 +5,7 @@
               android:background="@android:color/transparent"
               android:orientation="horizontal">
 
-    <nbsix.com.constructionbank.Design.stepsView.VerticalStepViewIndicator
+    <com.clpays.tianfugou.Design.stepsView.VerticalStepViewIndicator
         android:id="@+id/steps_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
