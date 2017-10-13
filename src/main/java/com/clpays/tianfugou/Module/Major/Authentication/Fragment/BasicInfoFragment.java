@@ -15,6 +15,7 @@ import com.clpays.tianfugou.Entity.RegionalChoice.EventUtil;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
@@ -29,7 +30,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import nbsix.clpays.tianfugou.R;
 
 import com.clpays.tianfugou.Utils.PreferenceUtil;
 

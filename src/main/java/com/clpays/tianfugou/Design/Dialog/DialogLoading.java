@@ -9,8 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bilibili.magicasakura.widgets.TintTextView;
-
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 
 
 /**

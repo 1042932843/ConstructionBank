@@ -9,15 +9,18 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 
 import com.clpays.tianfugou.Entity.PackageChoice.FirstBean;
 import com.clpays.tianfugou.Entity.PackageChoice.SecondBean;
+import com.clpays.tianfugou.R;
 
 import java.util.ArrayList;
 
-import nbsix.clpays.tianfugou.R;
+import butterknife.OnClick;
 
 /**
  * Name: MainAdapter
@@ -84,32 +87,31 @@ public class MainAdapter extends BaseExpandableListAdapter {
             convertView = LayoutInflater.from(mContext).inflate(
                     R.layout.layout_list_package_header, null);
             holder = new ViewHolder();
-            holder.choice = (CheckBox) convertView.findViewById(R.id.checkBox2);
+            holder.choice = (RadioButton) convertView.findViewById(R.id.RadioButton);
             holder.title = (TextView) convertView.findViewById(R.id.title);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        //区分箭头往上还是
         if(isExpanded){
-            holder.choice.setChecked(false);
-        }else{
             holder.choice.setChecked(true);
+        }else{
+            holder.choice.setChecked(false);
         }
+        ;
         holder.title.setText(mData.get(parentPosition).getTitle());
         return convertView;
     }
     class ViewHolder{
         private TextView title;
-        private CheckBox choice;
+        private RadioButton choice;
     }
+
     public ExpandableListView getExpandableListView() {
         ExpandableListView mExpandableListView = new ExpandableListView(
                 mContext);
         AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, (int) mContext
-                .getResources().getDimension(
-                        R.dimen.parent_list_height));
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mExpandableListView.setLayoutParams(lp);
         mExpandableListView.setDividerHeight(0);// 取消group项的分割线
         mExpandableListView.setChildDivider(null);// 取消child项的分割线
@@ -117,7 +119,7 @@ public class MainAdapter extends BaseExpandableListAdapter {
         return mExpandableListView;
     }
     /**
-     * 第二级菜单式配
+     * 第二级菜单适配
      * @param parentPosition
      * @param childPosition
      * @param isExpanded
@@ -161,7 +163,7 @@ public class MainAdapter extends BaseExpandableListAdapter {
                 AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         (bean.getSecondBean().size() + 1)* (int) mContext
-                        .getResources().getDimension(R.dimen.parent_list_height));
+                                .getResources().getDimension(R.dimen.parent_list_height));
                 childListView.setLayoutParams(lp);
             }
         });
@@ -174,10 +176,9 @@ public class MainAdapter extends BaseExpandableListAdapter {
             public void onGroupCollapse(int groupPosition) {
                 Log.e("xxx",groupPosition+">>onGroupCollapse");
                 AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, (int) mContext
-                        .getResources().getDimension(R.dimen.parent_list_height));
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 childListView.setLayoutParams(lp);
-                holder.choice.setChecked(true);
+
             }
         });
         /**
@@ -208,6 +209,15 @@ public class MainAdapter extends BaseExpandableListAdapter {
     public interface OnExpandClickListener{
         void onclick(int parentPosition, int childPosition, int childIndex);
     }
+    View.OnClickListener listener;
+    public void setOnCheckBoxClickListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
+
+    public interface OnCheckBoxClickListener{
+        void onclick(int parentPosition, int childPosition, int childIndex);
+    }
+
     OnExpandClickListener mListener;
     public void setOnChildListener(OnExpandClickListener listener){
         this.mListener = listener;

@@ -20,8 +20,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 import com.clpays.tianfugou.Design.PayCustomView.PayCustomView;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
-import nbsix.clpays.tianfugou.R;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 
 

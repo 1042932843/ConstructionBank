@@ -14,10 +14,11 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.clpays.tianfugou.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import nbsix.clpays.tianfugou.R;
 
 /**
  * Name: HorizontalStepsViewIndicator

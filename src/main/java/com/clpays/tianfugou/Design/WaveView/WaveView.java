@@ -22,12 +22,12 @@ import android.view.ViewTreeObserver;
 import android.view.animation.LinearInterpolator;
 
 
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import nbsix.clpays.tianfugou.R;
 
 import static android.view.animation.Animation.INFINITE;
 
@@ -164,7 +164,7 @@ public class WaveView extends View {
     private void init(Context context, AttributeSet attrs){
         if (attrs != null){
             //attars
-            TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.WaveView);
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.WaveView);
 
             int bgColor =  typedArray.getColor(R.styleable.WaveView_backgroudColor,BG_COLOR);
             int pColor = typedArray.getColor(R.styleable.WaveView_progressColor,WAVE_COLOR);

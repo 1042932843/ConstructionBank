@@ -13,7 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 
 
 /**

@@ -17,7 +17,7 @@ import com.clpays.tianfugou.Adapter.CredentialsAdapter;
 import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Entity.Credentials.CredentialsItem;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 
 public class AuthenticationInfoActivity extends BaseActivity {

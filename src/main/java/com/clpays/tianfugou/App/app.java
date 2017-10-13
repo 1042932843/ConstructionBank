@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
+import com.clpays.tianfugou.R;
 import com.google.gson.JsonObject;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
@@ -30,7 +31,6 @@ import io.reactivex.schedulers.Schedulers;
 import nbsix.com.VersionUpdate.entity.VersionUpdateConfig;
 import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
 
-import nbsix.clpays.tianfugou.R;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Utils.imageloader.GlideImageLoader;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;

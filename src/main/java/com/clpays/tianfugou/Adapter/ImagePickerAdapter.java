@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.clpays.tianfugou.R;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.clpays.tianfugou.Module.Major.Authentication.Fragment.CertificateInfoFragment;
-import nbsix.clpays.tianfugou.R;
 /**
  * Name: ImagePickerAdapter
  * Author: Dusky

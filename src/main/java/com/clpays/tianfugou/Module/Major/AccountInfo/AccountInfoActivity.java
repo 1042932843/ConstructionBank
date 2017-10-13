@@ -9,7 +9,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import com.clpays.tianfugou.Design.CreditSesame.CreditSesameView;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.TextToSpeechUtil;
 

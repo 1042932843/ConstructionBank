@@ -14,7 +14,7 @@ import butterknife.BindView;
 
 import com.clpays.tianfugou.Entity.HomePage.homeItem;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 
 

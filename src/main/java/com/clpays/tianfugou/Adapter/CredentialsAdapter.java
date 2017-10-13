@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.clpays.tianfugou.Entity.Credentials.CredentialsItem;
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 
 
 /**

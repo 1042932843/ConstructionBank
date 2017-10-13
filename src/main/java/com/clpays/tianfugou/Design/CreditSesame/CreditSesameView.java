@@ -17,10 +17,10 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
+import com.clpays.tianfugou.R;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import nbsix.clpays.tianfugou.R;
 
 
 /**

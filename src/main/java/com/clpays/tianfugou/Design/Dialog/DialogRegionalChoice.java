@@ -20,8 +20,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.clpays.tianfugou.Design.keyEditText.KeyEditText;
 import com.clpays.tianfugou.Entity.RegionalChoice.EventUtil;
-import nbsix.clpays.tianfugou.R;
 
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.LogUtil;
 
 

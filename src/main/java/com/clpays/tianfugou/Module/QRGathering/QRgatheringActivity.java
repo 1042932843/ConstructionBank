@@ -8,13 +8,13 @@ import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
 import com.clpays.tianfugou.Module.QRGathering.Fragement.GeneralJournalFragment;
 import com.clpays.tianfugou.Module.QRGathering.Fragement.QrFragment;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import nbsix.clpays.tianfugou.R;
 
 public class QRgatheringActivity extends BaseActivity {
 

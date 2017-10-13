@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 
 public class SetActivity extends BaseActivity {

@@ -22,7 +22,7 @@ import java.util.List;
 
 import com.clpays.tianfugou.Entity.UCenter.ucItem;
 
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.UserState;
 

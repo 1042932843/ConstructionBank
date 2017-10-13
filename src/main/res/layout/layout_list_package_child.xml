@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="@dimen/_16dp"
+    android:paddingTop="@dimen/_4dp"
+    android:paddingBottom="@dimen/_4dp"
+    android:paddingLeft="@dimen/_32dp">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="The Rename dialogs let you perform the Rename refactoring for various entities such as classes, fields, methods, packages, etc. You can select where the changes to occurrences of the entity name are required and where not."
+        android:layout_toLeftOf="@+id/arrow"
+        android:layout_toStartOf="@+id/arrow" />
+
+</RelativeLayout>

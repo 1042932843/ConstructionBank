@@ -9,10 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.clpays.tianfugou.Entity.PackageChoice.SecondBean;
+import com.clpays.tianfugou.R;
 
 import java.util.ArrayList;
 
-import nbsix.clpays.tianfugou.R;
 
 /**
  * Name: ChildAdapter
@@ -69,32 +69,39 @@ public class ChildAdapter extends BaseExpandableListAdapter {
     /**
      * 主菜单布局
      * @param parentPosition
-     * @param isExpandabled  是否展开
+     * @param isExpanded  是否展开
      * @param view
      * @param viewGroup
      * @return
      */
     @Override
-    public View getGroupView(int parentPosition, boolean isExpandabled, View view, ViewGroup viewGroup) {
+    public View getGroupView(int parentPosition, boolean isExpanded, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if(view == null){
-            view = LayoutInflater.from(mContext).inflate(R.layout.child_adapter,null);
+            view = LayoutInflater.from(mContext).inflate(R.layout.layout_list_package_header2,null);
             holder = new ViewHolder();
-            holder.mChildGroupTV = (TextView)view.findViewById(R.id.childGroupTV);
-            holder.mImg = (ImageView)view.findViewById(R.id.kpi_back_img);
-            holder.mTvScore = (TextView)view.findViewById(R.id.score_value);
+            holder.title = (TextView)view.findViewById(R.id.title);
+            holder.arrow = (ImageView)view.findViewById(R.id.arrow);
+
             view.setTag(holder);
         }else{
             holder = (ViewHolder) view.getTag();
         }
-        holder.mChildGroupTV.setText(mDatas.get(parentPosition).getTitle());
+        //区分箭头往上还是
+        if(isExpanded){
+            holder.arrow.setImageResource(R.drawable.up_hui);
+        }else{
+            holder.arrow.setImageResource(R.drawable.down_hui);
+        }
+
+        holder.title.setText(mDatas.get(parentPosition).getTitle());
         return view;
     }
     class ViewHolder {
 
-        private TextView mChildGroupTV;
-        private ImageView mImg;
-        private TextView mTvScore;
+        private TextView title;
+        private ImageView arrow;
+
     }
     /**
      * 子菜单布局
@@ -110,22 +117,20 @@ public class ChildAdapter extends BaseExpandableListAdapter {
         ChildHolder holder = null;
         if (view == null) {
             view = LayoutInflater.from(mContext).inflate(
-                    R.layout.child_child, null);
+                    R.layout.layout_list_package_child, null);
             holder = new ChildHolder();
-            holder.childChildTV = (TextView) view.findViewById(R.id.childGroupTV);
-            holder.score = (TextView) view.findViewById(R.id.score_value);
+            holder.childChildTV = (TextView) view.findViewById(R.id.text);
+
                     view.setTag(holder);
         } else {
             holder = (ChildHolder) view.getTag();
         }
         holder.childChildTV.setText(mDatas.get(parentPosition).getSecondBean().get(childPosition).getTitle());
-        holder.score.setVisibility(View.VISIBLE);
         return view;
     }
     class ChildHolder {
 
         private TextView childChildTV;
-        private TextView score;
     }
     @Override
     public boolean isChildSelectable(int i, int i1) {

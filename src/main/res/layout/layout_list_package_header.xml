@@ -1,23 +1,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingRight="@dimen/_16dp"
-    android:paddingLeft="@dimen/_16dp">
+    android:paddingTop="@dimen/_12dp"
+    android:paddingBottom="@dimen/_4dp"
+    >
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="121"
-        android:layout_toLeftOf="@+id/checkBox2"
-        android:layout_toStartOf="@+id/checkBox2" />
+        android:layout_toLeftOf="@+id/RadioButton"
+        android:layout_toStartOf="@+id/RadioButton" />
 
-    <CheckBox
+    <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:id="@+id/checkBox2"
+        android:id="@+id/RadioButton"
+        android:focusable="false"
+        android:clickable="false"
         />
 </RelativeLayout>

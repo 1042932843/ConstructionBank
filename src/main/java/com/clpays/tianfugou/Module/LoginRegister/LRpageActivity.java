@@ -28,6 +28,7 @@ import com.clpays.tianfugou.Module.Base.BaseActivity;
 import com.clpays.tianfugou.Module.Major.Authentication.StartAuthenticationActivity;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonObject;
@@ -40,7 +41,6 @@ import io.reactivex.schedulers.Schedulers;
 import com.clpays.tianfugou.Design.keyEditText.KeyEditText;
 import com.clpays.tianfugou.Module.Major.Home.HomePageActivity;
 
-import nbsix.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.LogUtil;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.SystemBarHelper;

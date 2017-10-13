@@ -40,16 +40,153 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-
-    <ExpandableListView
-        android:id="@+id/expandableListView"
+    <com.clpays.tianfugou.Design.myScrollView.myScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
         android:overScrollMode="never"
-        android:groupIndicator="@null"
-        >
+        android:layout_marginBottom="@dimen/_16dp">
 
-    </ExpandableListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:groupIndicator="@null"
+            android:paddingLeft="@dimen/_12dp"
+            android:paddingRight="@dimen/_12dp"
+            >
+
+        </com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/expandableListView"
+            android:orientation="vertical"
+            android:padding="@dimen/_12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="账户类型选择（可多选）"
+                android:layout_marginBottom="@dimen/_6dp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_40dp"
+                android:paddingTop="@dimen/_8dp"
+                android:paddingLeft="@dimen/_8dp"
+                android:paddingRight="@dimen/_8dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="个人开户"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"/>
+                <CheckBox
+                    android:id="@+id/person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_40dp"
+                android:paddingTop="@dimen/_8dp"
+                android:paddingLeft="@dimen/_8dp"
+                android:paddingRight="@dimen/_8dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="单位开户"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"/>
+                <CheckBox
+                    android:id="@+id/com"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/_12dp"
+            android:paddingRight="@dimen/_12dp"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_20"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/expandableListView"
+            android:orientation="vertical"
+            android:padding="@dimen/_12dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="开户选择"
+                android:layout_marginBottom="@dimen/_6dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_48dp"
+                android:paddingTop="@dimen/_8dp"
+                android:paddingLeft="@dimen/_8dp"
+                android:paddingRight="@dimen/_8dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="所持营业执照是否初次开户"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"/>
+                <CheckBox
+                    android:id="@+id/account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+            </LinearLayout>
+        <com.bilibili.magicasakura.widgets.TintButton
+            android:layout_marginLeft="@dimen/_16dp"
+            android:layout_marginRight="@dimen/_16dp"
+            android:id="@+id/next_step"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16dp"
+            android:layout_below="@+id/scrollView"
+            android:background="@drawable/selector_login"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="@string/next_step"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_large" />
+    </LinearLayout>
+
+    </com.clpays.tianfugou.Design.myScrollView.myScrollView>
 
 </RelativeLayout>

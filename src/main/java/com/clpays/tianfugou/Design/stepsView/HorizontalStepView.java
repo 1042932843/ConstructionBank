@@ -12,9 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.List;
+import com.clpays.tianfugou.R;
 
-import nbsix.clpays.tianfugou.R;
+import java.util.List;
 
 /**
  * Name: HorizontalStepView

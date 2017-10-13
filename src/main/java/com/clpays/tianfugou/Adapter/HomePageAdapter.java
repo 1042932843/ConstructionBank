@@ -17,7 +17,7 @@ import java.util.List;
 import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Entity.HomePage.homeItem;
 import com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity;
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 
 
 /**

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import com.clpays.tianfugou.Entity.RegionalChoice.Title;
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.ToastUtil;
 
 /**

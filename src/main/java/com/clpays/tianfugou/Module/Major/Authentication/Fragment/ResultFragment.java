@@ -3,7 +3,7 @@ package com.clpays.tianfugou.Module.Major.Authentication.Fragment;
 import android.os.Bundle;
 
 import com.clpays.tianfugou.Module.Base.BaseFragment;
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 
 
 public class ResultFragment extends BaseFragment {

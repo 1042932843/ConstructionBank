@@ -12,6 +12,7 @@ import com.clpays.tianfugou.Design.WaveView.WaveView;
 import com.clpays.tianfugou.Entity.UCenter.ucItem;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Module.Major.Set.SetActivity;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import nbsix.clpays.tianfugou.R;
 
 
 public class userFragment extends BaseFragment {

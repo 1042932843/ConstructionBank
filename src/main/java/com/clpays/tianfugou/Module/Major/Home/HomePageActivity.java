@@ -22,6 +22,7 @@ import com.clpays.tianfugou.Module.Major.Home.Fragment.homeFragment;
 import com.clpays.tianfugou.Module.Major.Home.Fragment.msgFragment;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonObject;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -32,7 +33,6 @@ import io.reactivex.schedulers.Schedulers;
 
 import com.clpays.tianfugou.Module.Major.Home.Fragment.userFragment;
 
-import nbsix.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.LogUtil;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.SystemBarHelper;

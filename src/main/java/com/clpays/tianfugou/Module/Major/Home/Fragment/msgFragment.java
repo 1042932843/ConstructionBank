@@ -8,7 +8,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 
 

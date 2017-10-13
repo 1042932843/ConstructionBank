@@ -9,9 +9,9 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.support.v7.app.AlertDialog;
 
-import java.io.File;
+import com.clpays.tianfugou.R;
 
-import nbsix.clpays.tianfugou.R;
+import java.io.File;
 
 /**
  * Created by hcc on 16/8/4 21:18

@@ -8,6 +8,7 @@ import com.clpays.tianfugou.Adapter.RunningAccountDetailsExpandableListViewAdapt
 import com.clpays.tianfugou.Entity.GeneralJournal.dataDay;
 import com.clpays.tianfugou.Entity.GeneralJournal.dataDayGroup;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
+import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import nbsix.clpays.tianfugou.R;
 
 
 public class GeneralJournalFragment extends BaseFragment {

@@ -15,7 +15,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 
-import nbsix.clpays.tianfugou.R;
+import com.clpays.tianfugou.R;
 
 
 /**

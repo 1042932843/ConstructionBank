@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.clpays.tianfugou.Adapter.ImagePickerAdapter;
 import com.clpays.tianfugou.Design.Dialog.SelectDialog;
+import com.clpays.tianfugou.R;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -24,7 +25,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import com.clpays.tianfugou.Module.Base.BaseFragment;
-import nbsix.clpays.tianfugou.R;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Utils.LogUtil;
 

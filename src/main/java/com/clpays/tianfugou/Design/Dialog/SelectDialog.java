@@ -18,9 +18,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.clpays.tianfugou.R;
+
 import java.util.List;
 
-import nbsix.clpays.tianfugou.R;
 
 /**
  * Name: SelectDialog
