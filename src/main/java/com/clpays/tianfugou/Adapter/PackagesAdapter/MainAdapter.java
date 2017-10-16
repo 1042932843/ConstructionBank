@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 
+import com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView;
 import com.clpays.tianfugou.Entity.PackageChoice.FirstBean;
 import com.clpays.tianfugou.Entity.PackageChoice.SecondBean;
 import com.clpays.tianfugou.R;
@@ -33,6 +34,12 @@ public class MainAdapter extends BaseExpandableListAdapter {
     private Context mContext;
     private ArrayList<FirstBean> mData;
     ViewHolder holder = null;
+
+    public int getPackage() {
+        return Package;
+    }
+
+    int Package;
     public MainAdapter(Context context, ArrayList<FirstBean> data){
         this.mContext = context;
         this.mData = data;
@@ -72,6 +79,7 @@ public class MainAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+
     /**
      *  第一级菜单适配器布局
      * @param parentPosition
@@ -98,8 +106,10 @@ public class MainAdapter extends BaseExpandableListAdapter {
         }else{
             holder.choice.setChecked(false);
         }
-        ;
+
         holder.title.setText(mData.get(parentPosition).getTitle());
+
+
         return convertView;
     }
     class ViewHolder{
@@ -107,8 +117,8 @@ public class MainAdapter extends BaseExpandableListAdapter {
         private RadioButton choice;
     }
 
-    public ExpandableListView getExpandableListView() {
-        ExpandableListView mExpandableListView = new ExpandableListView(
+    public CustomExpandableListView getExpandableListView() {
+        CustomExpandableListView mExpandableListView = new CustomExpandableListView(
                 mContext);
         AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -129,7 +139,7 @@ public class MainAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public View getChildView(final int parentPosition, final int childPosition, boolean isExpanded, View view, ViewGroup viewGroup) {
-        final ExpandableListView childListView = getExpandableListView();
+        final CustomExpandableListView childListView = getExpandableListView();
         //获取子菜单的数据
         final ArrayList<SecondBean> childData = new ArrayList<SecondBean>();
         final SecondBean bean = getChild(parentPosition,childPosition);
@@ -171,7 +181,7 @@ public class MainAdapter extends BaseExpandableListAdapter {
          *子ExpandableListView关闭时，此时只剩下group这一项，
          * 所以子ExpandableListView的总高度即为一项的高度
          * */
-        childListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+        childListView.setOnGroupCollapseListener(new CustomExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
                 Log.e("xxx",groupPosition+">>onGroupCollapse");
@@ -209,14 +219,7 @@ public class MainAdapter extends BaseExpandableListAdapter {
     public interface OnExpandClickListener{
         void onclick(int parentPosition, int childPosition, int childIndex);
     }
-    View.OnClickListener listener;
-    public void setOnCheckBoxClickListener(View.OnClickListener listener){
-        this.listener = listener;
-    }
 
-    public interface OnCheckBoxClickListener{
-        void onclick(int parentPosition, int childPosition, int childIndex);
-    }
 
     OnExpandClickListener mListener;
     public void setOnChildListener(OnExpandClickListener listener){

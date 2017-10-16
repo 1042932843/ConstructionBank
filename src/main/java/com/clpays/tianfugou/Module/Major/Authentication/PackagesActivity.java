@@ -1,14 +1,18 @@
 package com.clpays.tianfugou.Module.Major.Authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ScrollView;
 
 import com.clpays.tianfugou.Adapter.PackagesAdapter.MainAdapter;
+import com.clpays.tianfugou.Design.Dialog.DialogLoading;
+import com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView;
 import com.clpays.tianfugou.Design.myScrollView.myScrollView;
 import com.clpays.tianfugou.Entity.PackageChoice.FirstBean;
 import com.clpays.tianfugou.Entity.PackageChoice.SecondBean;
@@ -17,16 +21,27 @@ import com.clpays.tianfugou.Module.Base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
+import com.clpays.tianfugou.Network.RequestProperty;
+import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
+import com.clpays.tianfugou.Utils.ToastUtil;
+import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
+import com.google.gson.JsonObject;
+
+import org.greenrobot.eventbus.EventBus;
+import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PackagesActivity extends BaseActivity implements ExpandableListView.OnGroupExpandListener,
         MainAdapter.OnExpandClickListener{
-
+    DialogLoading dialogLoading;
+    int Package=0;
     boolean isSvToBottom;
     float mLastY;
     int THRESHOLD_Y_LIST_VIEW = 20;
@@ -41,8 +56,45 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
         finish();
     }
 
+    @OnClick(R.id.next_step)
+    public void next(){
+
+       if(Package==0){
+           ToastUtil.ShortToast("请选择对应套餐");
+           return;
+       }
+        dialogLoading.setMessage("资料提交中");
+        dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
+        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+        obj.addProperty("package",Package);
+        JsonArray jsonArray = new JsonArray();
+        jsonArray.add(1);
+        jsonArray.add(2);
+        jsonArray.add(5);
+        obj.add("selected",jsonArray);
+        RetrofitHelper.getPackageAPI()
+                .pushpackage(obj)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    String a=bean.string();
+                    if("true".equals(isGetStringFromJson.handleData("success",a))){
+                        EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("证照上传"));
+                        finish();
+                    }else{
+                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                    }
+                    dialogLoading.dismiss();
+                }, throwable -> {
+                    dialogLoading.dismiss();
+                    //ToastUtil.ShortToast("数据错误");
+                });
+
+    }
+
     @BindView(R.id.expandableListView)
-    ExpandableListView expandableListView;
+    CustomExpandableListView expandableListView;
 
     MainAdapter mainAdapter;
 
@@ -112,7 +164,9 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                     if(j==0){
                         secondBean.setTitle("开立个人结算账户——银行惠福龙卡（免费）");
                         ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("weqwe");
+                        thirdBean.setTitle("经济观察报 记者 李意安 如果时间回到2012年，你可能不曾想过，身上不带一分钱一张卡就能畅通无阻地在一个城市生活一周、一个月甚至更长的时间。是的，仅仅五年后的今天，这已经成为许多人的生活方式。无论是餐厅吃饭、超市购物、搭乘公交，还是市场买菜，只需要拿上手机就能轻松支付。\n" +
+                                "变化可能不仅于此，当你跨出国门，诸如银联、支付宝、微信支付这样的字眼不仅在日本、东南亚等地随处可见，即使远及欧洲、美国，这些熟悉的品牌也已广泛覆盖。\n" +
+                                "就在刚刚过去的十一黄金周期间，支付宝方面发布统计数据显示，在境外用支付宝付款的人次同比激增七倍多，人均消费金额达1480元。同时，约有370万用户在境外使用支付宝查找当地的吃喝玩乐信息和商家优惠。而此前银联2016年的年报显示，截至2016年末，银联受理网络延伸至160多个国家地区，境外商户累计达到1986万户，累计发卡6800万张，欧洲受理网络覆盖率已经达到50%。");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==1){
@@ -158,14 +212,21 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        dialogLoading=new DialogLoading();
         mainAdapter = new MainAdapter(this,mDatas);
         expandableListView.setAdapter(mainAdapter);
         //设置点击父控件的监听
         expandableListView.setOnGroupExpandListener(this);
+        expandableListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ToastUtil.ShortToast(position);
+            }
+        });
         //点击最里面的菜单的点击事件
         mainAdapter.setOnChildListener(this);
         //将滑动事件交给子控件
-        expandableListView.setOnTouchListener(new View.OnTouchListener() {
+        /*expandableListView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getAction();
@@ -186,11 +247,11 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                     } else {
                         // 不允许scrollview拦截点击事件， expandableListView滑动
                         scrollView.requestDisallowInterceptTouchEvent(true);
-                    }*/
+                    }
                 }
                 return false;
             }
-        });
+        });*/
 
 
         scrollView.setScrollToBottomListener(new myScrollView.OnScrollToBottomListener() {
@@ -218,6 +279,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
      */
     @Override
     public void onGroupExpand(int groupPosition) {
+        Package=groupPosition+1;
         Log.e("xxx","onGroupExpand>>"+groupPosition);
         for (int i = 0; i < mDatas.size(); i++) {
             if (i != groupPosition) {

@@ -25,6 +25,14 @@ public final class PreferenceUtil {
     edit.apply();
   }
 
+  public static void resetPrivate(Context context){
+    SharedPreferences sharedPreferences = app.getInstance().getSharedPreferences("preference_mu", MODE_PRIVATE);
+    Editor editor = sharedPreferences.edit();
+    editor.remove("token");
+    editor.remove("status");
+    editor.apply();
+  }
+
 
   public static String getString(String key, String defValue) {
 

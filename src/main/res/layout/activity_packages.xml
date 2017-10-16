@@ -40,21 +40,11 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-    <com.clpays.tianfugou.Design.myScrollView.myScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:overScrollMode="never"
-        android:layout_marginBottom="@dimen/_16dp">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
         <com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView
             android:id="@+id/expandableListView"
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
@@ -64,7 +54,17 @@
             >
 
         </com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView>
-
+        <com.clpays.tianfugou.Design.myScrollView.myScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/expandableListView"
+            android:overScrollMode="never"
+            android:layout_marginBottom="@dimen/_16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -171,6 +171,7 @@
                     />
             </RelativeLayout>
             </LinearLayout>
+
         <com.bilibili.magicasakura.widgets.TintButton
             android:layout_marginLeft="@dimen/_16dp"
             android:layout_marginRight="@dimen/_16dp"
@@ -180,13 +181,13 @@
             android:layout_marginTop="@dimen/_16dp"
             android:layout_below="@+id/scrollView"
             android:background="@drawable/selector_login"
-            android:enabled="false"
+            android:enabled="true"
             android:gravity="center"
             android:text="@string/next_step"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_large" />
     </LinearLayout>
+</com.clpays.tianfugou.Design.myScrollView.myScrollView>
 
-    </com.clpays.tianfugou.Design.myScrollView.myScrollView>
 
 </RelativeLayout>

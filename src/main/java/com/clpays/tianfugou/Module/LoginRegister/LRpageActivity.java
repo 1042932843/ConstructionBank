@@ -87,6 +87,14 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                         identifying_code_but.setLength(time * 1000).initTimer();
                     }else{
                         ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                        String seconds=isGetStringFromJson.handleData("seconds", isJsonObj.handleData("data",a));
+                        if(seconds.isEmpty()){
+
+                        }else{
+                            int time=Integer.parseInt(seconds);
+                            identifying_code_but.setLength(time * 1000).initTimer();
+                        }
+
                     }
                 }, throwable -> {
                    // ToastUtil.ShortToast("数据错误");
@@ -306,6 +314,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                         PreferenceUtil.putStringPRIVATE("status",status);
                         CheakStatus();
                     }else{
+
                         ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }
                     dialogLoading.dismiss();
@@ -326,6 +335,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                 break;
             case"package":
             case"profile":
+            case "upload":
                 afterlogin(1);
                 break;
             case"2":

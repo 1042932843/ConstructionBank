@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
@@ -15,6 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.google.gson.JsonObject;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
@@ -37,7 +39,7 @@ import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 
 /**
  * Name: app
- * Author: Dusky、
+ * Author: Dusky
  * QQ: 1042932843
  * Comment: //TODO
  * Date: 2017-09-09 15:01
@@ -138,7 +140,11 @@ public class app extends Application implements Application.ActivityLifecycleCal
             case "强制升级":
                 url=event.getMsg();
                 //ToastUtil.ShortToast("强制升级");
-                showUpDateDialog(Type,"如果取消将无法使用app");
+                showDialog(Type,"如果取消将无法使用app");
+                break;
+            case "重新登录":
+                PreferenceUtil.resetPrivate(this);//清空
+                showDialog(Type,"身份验证失效，请重新登录");
                 break;
 
         }
@@ -156,7 +162,7 @@ public class app extends Application implements Application.ActivityLifecycleCal
                     String a=bean.string();
                     if(isGetStringFromJson.handleData("success",a).equals(true)){
                         url=isGetStringFromJson.handleData("url",a);
-                        showUpDateDialog("版本升级","检查到更新,是否进行升级");
+                        showDialog("版本升级","检查到更新,是否进行升级");
                     }
                      //{"success":false,"message":"","data":[]}
 
@@ -166,7 +172,7 @@ public class app extends Application implements Application.ActivityLifecycleCal
 
     }
 
-    private void showUpDateDialog(String title,String message){
+    private void showDialog(String title,String message){
         /* @setIcon 设置对话框图标
          * @setTitle 设置对话框标题
          * @setMessage 设置对话框消息提示
@@ -181,7 +187,14 @@ public class app extends Application implements Application.ActivityLifecycleCal
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        doUpdate(url);
+                        if("强制升级".equals(title)||"版本升级".equals(title)){
+                            doUpdate(url);
+                        }
+                        if("重新登录".equals(title)){
+                            Intent it=new Intent(app.this,LRpageActivity.class);
+                            startActivity(it);
+                        }
+
                     }
                 });
         normalDialog.setNegativeButton("关闭",
@@ -189,7 +202,7 @@ public class app extends Application implements Application.ActivityLifecycleCal
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //...To-do
-                        if("强制升级".equals(title)){
+                        if("强制升级".equals(title)||"重新登录".equals(title)){
                             System.exit(0);
                         }
                     }

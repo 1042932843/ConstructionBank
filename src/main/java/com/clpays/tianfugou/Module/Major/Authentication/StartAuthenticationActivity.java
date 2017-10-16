@@ -49,8 +49,10 @@ public class StartAuthenticationActivity extends BaseActivity {
 
     @OnClick(R.id.back)
     public void back(){
-        if(index!=0){
+        if(index==2){
             changeFragmentIndex(index-1);
+        }else if(index==1){
+            goPackage();
         }else{
             showExitDialog();
         }
@@ -67,7 +69,7 @@ public class StartAuthenticationActivity extends BaseActivity {
         final AlertDialog.Builder normalDialog =
                 new AlertDialog.Builder(this);
         normalDialog.setIcon(R.mipmap.launcher);
-        normalDialog.setTitle("确定退出？");
+        normalDialog.setTitle("确定退出认证？");
         normalDialog.setMessage("退出后会保留帐号的填写流程记录,记得下次来补充完整哦~");
         normalDialog.setPositiveButton("退出",
                 new DialogInterface.OnClickListener() {
@@ -133,6 +135,9 @@ public class StartAuthenticationActivity extends BaseActivity {
             case"package":
                 changeFragmentIndex(0);
                 goPackage();
+                break;
+            case "upload":
+                changeFragmentIndex(1);
                 break;
         }
     }
@@ -276,7 +281,7 @@ public class StartAuthenticationActivity extends BaseActivity {
             case "套餐选择":
                 goPackage();
                 break;
-            case "证件上传":
+            case "证照上传":
                 changeFragmentIndex(1);
                 break;
             case "提交完成":

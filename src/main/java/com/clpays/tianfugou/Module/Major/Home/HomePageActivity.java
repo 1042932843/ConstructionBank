@@ -138,6 +138,7 @@ public class HomePageActivity extends BaseActivity {
                                 break;
                             case"profile":
                             case"package":
+                            case "upload":
                                 Intent it=new Intent(this, StartAuthenticationActivity.class);
                                 startActivity(it);
                                 this.finish();

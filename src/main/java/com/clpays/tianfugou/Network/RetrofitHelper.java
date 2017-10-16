@@ -11,6 +11,7 @@ import com.clpays.tianfugou.Network.api.AppService;
 import com.clpays.tianfugou.Network.api.AuthenticationService;
 import com.clpays.tianfugou.Network.api.HomePageService;
 import com.clpays.tianfugou.Network.api.LoginRegisterService;
+import com.clpays.tianfugou.Network.api.PackageService;
 import com.clpays.tianfugou.Network.api.UpdateService;
 import com.clpays.tianfugou.Network.api.UploadService;
 import com.clpays.tianfugou.Utils.CommonUtil;
@@ -63,6 +64,10 @@ public class RetrofitHelper {
 
   public static AppService getAppAPI(){
     return createApi(AppService.class, ApiConstants.Base_URL);
+  }
+
+  public static PackageService getPackageAPI(){
+    return createApi(PackageService.class, ApiConstants.Base_URL);
   }
 
   /**

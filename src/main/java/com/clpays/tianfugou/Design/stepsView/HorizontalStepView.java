@@ -186,7 +186,8 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
     {
         if(mTextContainer != null)
         {
-           // mTextContainer.removeAllViews();加这个是SB？每次进来都清一次，闪个不停
+
+            //mTextContainer.removeAllViews(); //加这个设计是SB？每次进来都清一次，闪个不停
             List<Float> complectedXPosition = mStepsViewIndicator.getCircleCenterPointPositionList();
             if(mStepBeanList != null && complectedXPosition != null && complectedXPosition.size() > 0&&!ok)
             {
@@ -212,8 +213,11 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
                     }
 
                     mTextContainer.addView(mTextView);
-                    ok=true;
+                   if(i==mStepBeanList.size()){
+                       ok=true;
+                   }
                 }
+
             }
         }
     }
