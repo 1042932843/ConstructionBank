@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.clpays.tianfugou.Adapter.PackagesAdapter.MainAdapter;
@@ -51,6 +53,24 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
     @BindView(R.id.scrollView)
     myScrollView scrollView;
 
+    @BindView(R.id.posLayout)
+    RelativeLayout posLayout;
+    @BindView(R.id.comLayout)
+    RelativeLayout comLayout;
+    @BindView(R.id.personLayout)
+    RelativeLayout personLayout;
+    @BindView(R.id.shopLayout)
+    RelativeLayout shopLayout;
+
+    @BindView(R.id.person)
+    CheckBox person;
+    @BindView(R.id.com)
+    CheckBox com;
+    @BindView(R.id.pos)
+    CheckBox pos;
+    @BindView(R.id.shop)
+    CheckBox shop;
+
     @OnClick(R.id.back)
     public void back(){
         finish();
@@ -63,15 +83,29 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
            ToastUtil.ShortToast("请选择对应套餐");
            return;
        }
-        dialogLoading.setMessage("资料提交中");
-        dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         obj.addProperty("package",Package);
         JsonArray jsonArray = new JsonArray();
-        jsonArray.add(1);
-        jsonArray.add(2);
+        if(person.isChecked()){
+            jsonArray.add(1);
+        }
+        if(com.isChecked()){
+            jsonArray.add(2);
+        }
+        if(pos.isChecked()){
+            jsonArray.add(3);
+        }
+        if(shop.isChecked()){
+            jsonArray.add(4);
+        }
         jsonArray.add(5);
+        if(jsonArray.size()<=1){
+            ToastUtil.ShortToast("请选择套餐需求内容");
+            return;
+        }
         obj.add("selected",jsonArray);
+        dialogLoading.setMessage("资料提交中");
+        dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
         RetrofitHelper.getPackageAPI()
                 .pushpackage(obj)
                 .compose(this.bindToLifecycle())
@@ -110,19 +144,19 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                     SecondBean secondBean=new SecondBean();
                     ArrayList<ThirdBean> thirdBeanArrayList=new ArrayList<>();
                     if(j==0){
-                        secondBean.setTitle("开立个人结算账户——银行惠福龙卡（免费）");
+                        secondBean.setTitle("免费开立银行个人账户");
                         ThirdBean thirdBean=new ThirdBean();
                         thirdBean.setTitle("weqwe");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==1){
-                        secondBean.setTitle("开立对公结算账户——享受5折价格优惠");
+                        secondBean.setTitle("优惠开立银行对公账户");
                         ThirdBean thirdBean=new ThirdBean();
                         thirdBean.setTitle("weqwe");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==2){
-                        secondBean.setTitle("优惠办理银行无抵押信用贷款——无需担保抵押，最高额度达200万元");
+                        secondBean.setTitle("优惠办理银行无抵押信用贷款");
                         ThirdBean thirdBean=new ThirdBean();
                         thirdBean.setTitle("weqwe");
                         thirdBeanArrayList.add(thirdBean);
@@ -132,23 +166,29 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                 }
             }else if(i==1){
                 firstBean.setTitle("套餐二:免费开立银行个人账户+优惠开立银行对公账户+免费赠送银行POS+优惠办理银行无抵押信用贷款");
-                for(int j=0;j<3;j++){
+                for(int j=0;j<4;j++){
                     SecondBean secondBean=new SecondBean();
                     ArrayList<ThirdBean> thirdBeanArrayList=new ArrayList<>();
                     if(j==0){
-                        secondBean.setTitle("开立个人结算账户——银行惠福龙卡（免费）");
+                        secondBean.setTitle("免费开立银行个人账户");
                         ThirdBean thirdBean=new ThirdBean();
                         thirdBean.setTitle("weqwe");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==1){
-                        secondBean.setTitle("开立对公结算账户——享受5折价格优惠");
+                        secondBean.setTitle("优惠开立银行对公账户");
                         ThirdBean thirdBean=new ThirdBean();
                         thirdBean.setTitle("weqwe");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==2){
-                        secondBean.setTitle("优惠办理银行无抵押信用贷款——无需担保抵押，最高额度达200万元");
+                        secondBean.setTitle("优惠办理银行无抵押信用贷款");
+                        ThirdBean thirdBean=new ThirdBean();
+                        thirdBean.setTitle("weqwe");
+                        thirdBeanArrayList.add(thirdBean);
+                        secondBean.setSecondBean(thirdBeanArrayList);
+                    }else if(j==3){
+                        secondBean.setTitle("免费赠送银行POS");
                         ThirdBean thirdBean=new ThirdBean();
                         thirdBean.setTitle("weqwe");
                         thirdBeanArrayList.add(thirdBean);
@@ -158,29 +198,43 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                 }
             }else if(i==2){
                 firstBean.setTitle("套餐三:免费开立银行个人账户+优惠开立银行对公账户+免费赠送银行POS+免费入驻建行善融商城+优惠办理银行无抵押信用贷款");
-                for(int j=0;j<3;j++){
+                for(int j=0;j<5;j++){
                     SecondBean secondBean=new SecondBean();
                     ArrayList<ThirdBean> thirdBeanArrayList=new ArrayList<>();
-                    if(j==0){
-                        secondBean.setTitle("开立个人结算账户——银行惠福龙卡（免费）");
-                        ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("经济观察报 记者 李意安 如果时间回到2012年，你可能不曾想过，身上不带一分钱一张卡就能畅通无阻地在一个城市生活一周、一个月甚至更长的时间。是的，仅仅五年后的今天，这已经成为许多人的生活方式。无论是餐厅吃饭、超市购物、搭乘公交，还是市场买菜，只需要拿上手机就能轻松支付。\n" +
-                                "变化可能不仅于此，当你跨出国门，诸如银联、支付宝、微信支付这样的字眼不仅在日本、东南亚等地随处可见，即使远及欧洲、美国，这些熟悉的品牌也已广泛覆盖。\n" +
-                                "就在刚刚过去的十一黄金周期间，支付宝方面发布统计数据显示，在境外用支付宝付款的人次同比激增七倍多，人均消费金额达1480元。同时，约有370万用户在境外使用支付宝查找当地的吃喝玩乐信息和商家优惠。而此前银联2016年的年报显示，截至2016年末，银联受理网络延伸至160多个国家地区，境外商户累计达到1986万户，累计发卡6800万张，欧洲受理网络覆盖率已经达到50%。");
-                        thirdBeanArrayList.add(thirdBean);
-                        secondBean.setSecondBean(thirdBeanArrayList);
-                    }else if(j==1){
-                        secondBean.setTitle("开立对公结算账户——享受5折价格优惠");
-                        ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("weqwe");
-                        thirdBeanArrayList.add(thirdBean);
-                        secondBean.setSecondBean(thirdBeanArrayList);
-                    }else if(j==2){
-                        secondBean.setTitle("优惠办理银行无抵押信用贷款——无需担保抵押，最高额度达200万元");
-                        ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("weqwe");
-                        thirdBeanArrayList.add(thirdBean);
-                        secondBean.setSecondBean(thirdBeanArrayList);
+                    ThirdBean thirdBean=new ThirdBean();
+                    switch (j){
+                        case 0:
+                            secondBean.setTitle("免费开立银行个人账户");
+                            thirdBean.setTitle("经济观察报 记者 李意安 如果时间回到2012年，你可能不曾想过，身上不带一分钱一张卡就能畅通无阻地在一个城市生活一周、一个月甚至更长的时间。是的，仅仅五年后的今天，这已经成为许多人的生活方式。无论是餐厅吃饭、超市购物、搭乘公交，还是市场买菜，只需要拿上手机就能轻松支付。\n" +
+                                    "变化可能不仅于此，当你跨出国门，诸如银联、支付宝、微信支付这样的字眼不仅在日本、东南亚等地随处可见，即使远及欧洲、美国，这些熟悉的品牌也已广泛覆盖。\n" +
+                                    "就在刚刚过去的十一黄金周期间，支付宝方面发布统计数据显示，在境外用支付宝付款的人次同比激增七倍多，人均消费金额达1480元。同时，约有370万用户在境外使用支付宝查找当地的吃喝玩乐信息和商家优惠。而此前银联2016年的年报显示，截至2016年末，银联受理网络延伸至160多个国家地区，境外商户累计达到1986万户，累计发卡6800万张，欧洲受理网络覆盖率已经达到50%。");
+                            thirdBeanArrayList.add(thirdBean);
+                            secondBean.setSecondBean(thirdBeanArrayList);
+                            break;
+                        case 1:
+                            secondBean.setTitle("优惠开立银行对公账户");
+                            thirdBean.setTitle("weqwe");
+                            thirdBeanArrayList.add(thirdBean);
+                            secondBean.setSecondBean(thirdBeanArrayList);
+                            break;
+                        case 2:
+                            secondBean.setTitle("免费赠送银行POS");
+                            thirdBean.setTitle("weqwe");
+                            thirdBeanArrayList.add(thirdBean);
+                            secondBean.setSecondBean(thirdBeanArrayList);
+                            break;
+                        case 3:
+                            secondBean.setTitle("免费入住建行善融商城");
+                            thirdBean.setTitle("weqwe");
+                            thirdBeanArrayList.add(thirdBean);
+                            secondBean.setSecondBean(thirdBeanArrayList);
+                            break;
+                        case 4:
+                            secondBean.setTitle("优惠办理银行无抵押信用贷款");
+                            thirdBean.setTitle("weqwe");
+                            thirdBeanArrayList.add(thirdBean);
+                            secondBean.setSecondBean(thirdBeanArrayList);
+                            break;
                     }
                     secondBeanArrayList.add(secondBean);
                 }
@@ -217,10 +271,17 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
         expandableListView.setAdapter(mainAdapter);
         //设置点击父控件的监听
         expandableListView.setOnGroupExpandListener(this);
-        expandableListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtil.ShortToast(position);
+            public void onGroupCollapse(int groupPosition) {
+                if(Package==groupPosition+1){
+                    Package=0;
+                    posLayout.setVisibility(View.GONE);
+                    comLayout.setVisibility(View.GONE);
+                    personLayout.setVisibility(View.GONE);
+                    shopLayout.setVisibility(View.GONE);
+                }
+
             }
         });
         //点击最里面的菜单的点击事件
@@ -280,6 +341,27 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
     @Override
     public void onGroupExpand(int groupPosition) {
         Package=groupPosition+1;
+        if(Package==1){
+            comLayout.setVisibility(View.VISIBLE);
+            personLayout.setVisibility(View.VISIBLE);
+        }
+        else if(Package==2){
+            posLayout.setVisibility(View.VISIBLE);
+            comLayout.setVisibility(View.VISIBLE);
+            personLayout.setVisibility(View.VISIBLE);
+        }
+        else if(Package==3){
+            posLayout.setVisibility(View.VISIBLE);
+            comLayout.setVisibility(View.VISIBLE);
+            personLayout.setVisibility(View.VISIBLE);
+            shopLayout.setVisibility(View.VISIBLE);
+        }else{
+            posLayout.setVisibility(View.GONE);
+            comLayout.setVisibility(View.GONE);
+            personLayout.setVisibility(View.GONE);
+            shopLayout.setVisibility(View.GONE);
+        }
+
         Log.e("xxx","onGroupExpand>>"+groupPosition);
         for (int i = 0; i < mDatas.size(); i++) {
             if (i != groupPosition) {

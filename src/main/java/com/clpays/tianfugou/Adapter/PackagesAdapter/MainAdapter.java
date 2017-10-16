@@ -112,6 +112,9 @@ public class MainAdapter extends BaseExpandableListAdapter {
 
         return convertView;
     }
+
+
+
     class ViewHolder{
         private TextView title;
         private RadioButton choice;
