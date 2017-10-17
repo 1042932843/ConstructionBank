@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.clpays.tianfugou.R;
 import com.lzy.imagepicker.ImagePicker;
@@ -25,7 +26,7 @@ import com.clpays.tianfugou.Module.Major.Authentication.Fragment.CertificateInfo
  */
 
 public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.SelectedPicViewHolder> {
-    private int maxImgCount;
+
     private Context mContext;
     private List<ImageItem> mData;
     private LayoutInflater mInflater;
@@ -33,7 +34,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
     private boolean isAdded;   //是否额外添加了最后一个图片
 
     public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int clickPosition,int position);
     }
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
@@ -42,24 +43,17 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
     public void setImages(List<ImageItem> data) {
         mData = new ArrayList<>(data);
-        if (getItemCount() < maxImgCount) {
-            mData.add(new ImageItem());
-            isAdded = true;
-        } else {
-            isAdded = false;
-        }
         notifyDataSetChanged();
     }
 
-    public List<ImageItem> getImages() {
-        //由于图片未选满时，最后一张显示添加图片，因此这个方法返回真正的已选图片
-        if (isAdded) return new ArrayList<>(mData.subList(0, mData.size() - 1));
-        else return mData;
+    public ArrayList<ImageItem> getImages(int choice) {
+        ArrayList<ImageItem> imageItems=new ArrayList<>();
+        imageItems.add(mData.get(choice));
+      return imageItems;
     }
 
-    public ImagePickerAdapter(Context mContext, List<ImageItem> data, int maxImgCount) {
+    public ImagePickerAdapter(Context mContext, List<ImageItem> data) {
         this.mContext = mContext;
-        this.maxImgCount = maxImgCount;
         this.mInflater = LayoutInflater.from(mContext);
         setImages(data);
     }
@@ -82,30 +76,40 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
     public class SelectedPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView iv_img;
+        private TextView Type;
         private int clickPosition;
+        private int Position;
 
         public SelectedPicViewHolder(View itemView) {
             super(itemView);
             iv_img = (ImageView) itemView.findViewById(R.id.iv_img);
+            Type=(TextView)itemView.findViewById(R.id.type);
         }
 
         public void bind(int position) {
             //设置条目的点击事件
             itemView.setOnClickListener(this);
             //根据条目位置设置图片
-            ImageItem item = mData.get(position);
-            if (isAdded && position == getItemCount() - 1) {
-                iv_img.setImageResource(android.R.drawable.ic_menu_add);
-                clickPosition = CertificateInfoFragment.IMAGE_ITEM_ADD;
-            } else {
-                ImagePicker.getInstance().getImageLoader().displayImage((Activity) mContext, item.path, iv_img, 0, 0);
-                clickPosition = position;
+
+            if(mData.size()>0){
+                    ImageItem item = mData.get(position);
+                    if(!item.path.isEmpty()){
+                        ImagePicker.getInstance().getImageLoader().displayImage((Activity) mContext, item.path, iv_img, 0, 0);
+                        clickPosition = position;
+                        Position=position;
+                    }else{
+                        iv_img.setImageResource(android.R.drawable.ic_menu_add);
+                        Type.setText(item.type);
+                        clickPosition = CertificateInfoFragment.IMAGE_ITEM_ADD;
+                        Position=position;
+                    }
             }
+
         }
 
         @Override
         public void onClick(View v) {
-            if (listener != null) listener.onItemClick(v, clickPosition);
+            if (listener != null) listener.onItemClick(v, clickPosition,Position);
         }
     }
 }

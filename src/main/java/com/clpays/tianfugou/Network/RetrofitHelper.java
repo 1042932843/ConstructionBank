@@ -50,9 +50,6 @@ public class RetrofitHelper {
     return createApi(UpdateService.class, ApiConstants.Base_URL);
   }
 
-  public static UploadService getUploadAPI(){
-    return createApi(UploadService.class, ApiConstants.Base_URL);
-  }
 
   public static LoginRegisterService getLoginRegisterAPI(){
     return createApi(LoginRegisterService.class, ApiConstants.Base_URL);
@@ -68,6 +65,10 @@ public class RetrofitHelper {
 
   public static PackageService getPackageAPI(){
     return createApi(PackageService.class, ApiConstants.Base_URL);
+  }
+
+  public static UploadService getUploadAPI(){
+    return createApi(UploadService.class, ApiConstants.Base_URL);
   }
 
   /**

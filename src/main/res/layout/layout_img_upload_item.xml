@@ -6,8 +6,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/relativeLayout3"
-        android:layout_toEndOf="@+id/relativeLayout3"
         android:layout_marginLeft="@dimen/_16dp"
         android:layout_marginRight="@dimen/_16dp">
 

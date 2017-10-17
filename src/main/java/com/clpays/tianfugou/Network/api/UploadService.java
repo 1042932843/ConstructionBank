@@ -1,9 +1,13 @@
 package com.clpays.tianfugou.Network.api;
 
 import com.clpays.tianfugou.Network.api.response.Result;
+import com.google.gson.JsonObject;
 
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -24,5 +28,8 @@ public interface UploadService {
    */
     @Multipart
     @POST("upload.php")
-    Call<Result> uploadImage(@Part MultipartBody.Part file);
+    Call<Result> Upload(@Part MultipartBody.Part file);
+
+    @POST("user/fetchupload")
+    Observable<ResponseBody> fetchUpload(@Body JsonObject bean);
 }

@@ -244,8 +244,13 @@ public class StartAuthenticationActivity extends BaseActivity {
      * 切换Fragment的下标
      */
     private void changeFragmentIndex(int currentIndex) {
-        index = currentIndex;
-        switchFragment();
+        if(index==currentIndex){//修正重复显示的问题（毕竟是add）
+
+        }else{
+            index = currentIndex;
+            switchFragment();
+        }
+
     }
 
     /**
