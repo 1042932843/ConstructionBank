@@ -74,6 +74,8 @@
            >
 
             <TextView
+                android:id="@+id/title_c"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="账户类型选择（可多选）"
