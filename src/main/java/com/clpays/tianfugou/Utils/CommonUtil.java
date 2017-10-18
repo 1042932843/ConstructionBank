@@ -38,7 +38,7 @@ public class CommonUtil {
     AlertDialog.Builder builder = new AlertDialog.Builder(context);
     builder.setIcon(R.mipmap.launcher)         //
             .setTitle(R.string.app_name)            //
-            .setMessage("当前无网络").setPositiveButton("设置", new DialogInterface.OnClickListener() {
+            .setMessage("当前无网络,请前往设置").setPositiveButton("设置", new DialogInterface.OnClickListener() {
 
       @Override
       public void onClick(DialogInterface dialog, int which) {

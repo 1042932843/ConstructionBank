@@ -166,7 +166,6 @@ public class RetrofitHelper {
             .header("Cache-Control", "public, max-age=" + maxAge)
             .build();
       } else {
-        CommonUtil.showNoNetWorkDlg(app.getInstance());
         response = response.newBuilder()
             .removeHeader("Pragma")
             .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)

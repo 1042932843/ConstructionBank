@@ -2,6 +2,7 @@ package com.clpays.tianfugou.Module.Major.Authentication.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +16,9 @@ import com.clpays.tianfugou.Design.Dialog.SelectDialog;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.ToastUtil;
+import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 import com.clpays.tianfugou.Utils.tools.isJsonArray;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
@@ -152,9 +155,11 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setAdapter(autoAddAdapter);
+        recyclerView2.setVisibility(View.GONE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        fetch();
     }
     @Override
     public int getLayoutResId() {
@@ -164,7 +169,23 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
     @Override
     public void finishCreateView(Bundle state) {
         initRecyclerView();
-        fetch();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(hidden){
+
+        }else{
+            lazyLoad();
+        }
+    }
+
+    protected void lazyLoad() {
+        if(UserState.NA.equals(PreferenceUtil.getStringPRIVATE("username", UserState.NA))){
+
+        }else{
+            fetch();
+        }
     }
 
     //加载数据
@@ -189,21 +210,23 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                                     if(imageItem.type.equals("资产产权证书")){
                                         //资产UI标记
                                         zichan=true;
+                                        recyclerView2.setVisibility(View.VISIBLE);
                                     }else{
                                         selImageList.add(imageItem);
                                     }
                                 }catch (Exception e){
-
+                                    ToastUtil.ShortToast("数据出错，请尝试下拉刷新此页");
                                 }
                             }
                         maxImgCount=selImageList.size();
                         adapter.setImages(selImageList);
                     }else{
-                        //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }
 
                 }, throwable -> {
                     //ToastUtil.ShortToast("数据错误");
+                    ToastUtil.ShortToast("数据出错，请尝试下拉刷新此页");
                 });
     }
 

@@ -40,4 +40,16 @@
     </android.support.v7.widget.Toolbar>
 
 
+    <com.bilibili.magicasakura.widgets.TintButton
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16dp"
+        android:background="@drawable/selector_login"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_large" />
 </RelativeLayout>

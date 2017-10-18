@@ -3,9 +3,11 @@ package com.clpays.tianfugou.Module.Major.Authentication;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -36,6 +38,7 @@ import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.UserState;
 
 public class StartAuthenticationActivity extends BaseActivity {
+
 
     private Fragment[] fragments;
     private int currentTabIndex;
@@ -158,7 +161,6 @@ public class StartAuthenticationActivity extends BaseActivity {
             case "review_upload":
                 changeFragmentIndex(1);
                 break;
-
 
             case "checked":
             case "prepared":

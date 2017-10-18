@@ -43,7 +43,7 @@
     <string name="hint2">请输入您的身份证号码 </string>
     <string name="hint3">请输入您的手机号码 </string>
     <string name="hint4">请输入您的单位名称 </string>
-    <string name="hint5">此项选填</string>
+    <string name="hint5">推广必填</string>
     <string name="hint6">(该营业执照没有在银行开立过账户) </string>
     <string name="hint7">请输入详细地址</string>
 

@@ -19,7 +19,6 @@ public class RequestProperty {
         JsonObject object=new JsonObject();
         object.addProperty("ver", appConfig.versionName);
         object.addProperty("platform", appConfig.platform);
-        object.addProperty("rid", appConfig.rid);
         return object;
     }
 
@@ -27,7 +26,6 @@ public class RequestProperty {
         JsonObject object=new JsonObject();
         object.addProperty("ver", appConfig.versionName);
         object.addProperty("platform", appConfig.platform);
-        object.addProperty("rid", appConfig.rid);
         String token= PreferenceUtil.getStringPRIVATE("token", UserState.NA);
         object.addProperty("token", token);
         return object;

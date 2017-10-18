@@ -6,6 +6,11 @@
     android:layout_margin="@dimen/_12dp"
     >
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipe_refresh">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +19,7 @@
             android:id="@+id/stu_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/renzheng_tijiao"
+            android:src="@drawable/renzheng_shenhe"
             android:layout_centerHorizontal="true"
           />
 
@@ -160,6 +165,6 @@
             android:textSize="@dimen/textsize_large" />
     </RelativeLayout>
 
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

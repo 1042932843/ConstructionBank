@@ -3,6 +3,7 @@ package com.clpays.tianfugou.Module.Major.Authentication.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,7 +39,8 @@ public class ResultFragment extends BaseFragment {
     @BindView(R.id.stu_img)
     ImageView stu_img;
     DialogLoading dialogLoading;
-
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.status_shenhetongguo)
     RelativeLayout status_shenhetongguo;
     @BindView(R.id.status_shenhe)
@@ -61,6 +63,36 @@ public class ResultFragment extends BaseFragment {
     public void ok(){
         showExitDialog("是的，我已经准备好了相关材料","确认之后服务器会向您分配专员");
     }
+
+    @Override
+    public void setUserVisibleHint(boolean hidden) {
+        super.setUserVisibleHint(hidden);
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(UserState.NA.equals(PreferenceUtil.getStringPRIVATE("username", UserState.NA))){
+
+        }else{
+            JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();
+            RetrofitHelper.getAppAPI()
+                    .checkStatus(obj)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(bean -> {
+                        swipeRefreshLayout.setRefreshing(false);
+                        String a = bean.string();//{"success":true,"message":"","data":{"token":"1haL06uZXgHQIT6-0HuZ24Q1eQWjVSN0","status":"\u5b9e\u540d\u8ba4\u8bc1"}}
+                        if ("true".equals(isGetStringFromJson.handleData("success", a))) {
+                            String status = isGetStringFromJson.handleData("status", isJsonObj.handleData("data", a));
+                            PreferenceUtil.putStringPRIVATE("status", status);
+                            CheckStatus();
+                        }
+                    },throwable -> {
+                        swipeRefreshLayout.setRefreshing(false);
+                    });
+        }
+    }
+
 
     private void showExitDialog(String title,String msg){
         /* @setIcon 设置对话框图标
@@ -135,8 +167,12 @@ public class ResultFragment extends BaseFragment {
     public void finishCreateView(Bundle state) {
         initRecyclerView();
         dialogLoading=new DialogLoading();
-        CheckStatus();
-
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                lazyLoad();
+            }
+        });
     }
 
 

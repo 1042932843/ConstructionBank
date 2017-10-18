@@ -1,5 +1,6 @@
 package com.clpays.tianfugou.Module.Major.Authentication.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -152,6 +153,13 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
 
 
 
+    static boolean realnameE;
+    static boolean idcardE;
+    static boolean phonenumE;
+    boolean addressE;
+    boolean address2E;
+    boolean shopopE;
+
     //加载数据
     public void fetch(){
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
@@ -169,19 +177,74 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                         address=isGetStringFromJson.handleData("address1",isJsonObj.handleData("data",a));
                         address2=isGetStringFromJson.handleData("address2",isJsonObj.handleData("data",a));
                         String shopop=isGetStringFromJson.handleData("shopop",isJsonObj.handleData("data",a));
+
+                        String error=isJsonObj.handleData("error",isJsonObj.handleData("data",a));
+                        String e="(需要修改)";
+                        if(!error.isEmpty()){
+                            String Erealname=isGetStringFromJson.handleData("realname", error);
+                            if(!Erealname.isEmpty()){
+                                realnameE=true;
+                            }
+                            String Eidcard=isGetStringFromJson.handleData("idcard",error);
+                            if(!Eidcard.isEmpty()){
+                                idcardE=true;
+                            }
+                            String Ephonenum=isGetStringFromJson.handleData("phonenum",error);
+                            if(!Ephonenum.isEmpty()){
+                                phonenumE=true;
+                            }
+                            String Eaddress=isGetStringFromJson.handleData("address1",error);
+                            if(!Eaddress.isEmpty()){
+                                addressE=true;
+                            }
+                            String Eaddress2=isGetStringFromJson.handleData("address2",error);
+                            if(!Eaddress2.isEmpty()){
+                                address2E=true;
+                            }
+                            String Eshopop=isGetStringFromJson.handleData("shopop",error);
+                            if(!Eshopop.isEmpty()){
+                                shopopE=true;
+                            }
+
+                        }
                         if(!realname.isEmpty()){
+                            if(realnameE){
+
+                                realname=realname+e;
+                            }
                             name_edit.setText(realname);
+
                         }
                         if(!idcard.isEmpty()){
+
+                            if(idcardE){
+
+                                idcard=idcard+e;
+                            }
                             ID_edit.setText(idcard);
                         }
                         if(!phonenum.isEmpty()){
+
+                            if(phonenumE){
+
+                                phonenum=phonenum+e;
+                            }
                             phonenum_edit.setText(phonenum);
                         }
                         if(!address.isEmpty()&&!address2.isEmpty()){
-                            ad_text.setText(address+"  "+address2);
+                            String ad=address+"  "+address2;
+                            if(addressE){
+                                ad_text.setTextColor(ContextCompat.getColor(getActivity(),R.color.red));
+                                ad=ad+e;
+                            }
+                            ad_text.setText(ad);
                         }
                         if(!shopop.isEmpty()){
+
+                            if(shopopE){
+
+                                shopop=shopop+e;
+                            }
                             shangguanyuan_edit.setText(shopop);
                         }
 
@@ -248,6 +311,28 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
 
         @Override
         public void afterTextChanged(Editable s) {
+
+            if(realnameE){
+                name_edit.setTextColor(ContextCompat.getColor(getActivity(),R.color.red));
+            }else{
+                name_edit.setTextColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            }
+            if(idcardE){
+                ID_edit.setTextColor(ContextCompat.getColor(getActivity(),R.color.red));
+            }else{
+                ID_edit.setTextColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            }
+            if (phonenumE){
+                phonenum_edit.setTextColor(ContextCompat.getColor(getActivity(),R.color.red));
+            }else{
+                phonenum_edit.setTextColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            }
+            if(shopopE){
+                shopopE=false;
+                shangguanyuan_edit.setTextColor(ContextCompat.getColor(getActivity(),R.color.red));
+            }else{
+                shangguanyuan_edit.setTextColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            }
             next_step.setEnabled(name_edit.getText().length() != 0
                     && ID_edit.getText().length() != 0
                     && phonenum_edit.getText().length() != 0

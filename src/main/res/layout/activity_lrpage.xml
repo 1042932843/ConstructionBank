@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="nbsix.clpays.tianfugou.com.clpays.tianfugou.Module.LoginRegister.LRpageActivity">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -25,7 +24,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_180dp"
-                android:src="@drawable/zhuce_bg"
+                android:src="@drawable/bg_denglu"
                 android:scaleType="centerCrop"/>
 
             <android.support.v7.widget.Toolbar

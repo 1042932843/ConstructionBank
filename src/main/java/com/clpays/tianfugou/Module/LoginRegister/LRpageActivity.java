@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Design.Dialog.DialogLoading;
 import com.clpays.tianfugou.Design.TimeButton.TimeButton;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
@@ -29,6 +30,7 @@ import com.clpays.tianfugou.Module.Major.Authentication.StartAuthenticationActiv
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper;
 import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonObject;
@@ -46,6 +48,8 @@ import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
+
+import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_SET;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
 
@@ -292,6 +296,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
      * 执行登录
      */
     public void login(String username,String pwd){
+
         dialogLoading.setMessage("登录中");
         dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
         JsonObject obj=RequestProperty.CreateJsonObjectBody();
@@ -307,7 +312,8 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
                         String token=isGetStringFromJson.handleData("token",isJsonObj.handleData("data",a));
                         String status=isGetStringFromJson.handleData("status",isJsonObj.handleData("data",a));
-
+                        String rid=isGetStringFromJson.handleData("rid",isJsonObj.handleData("data",a));
+                        app.getInstance().setAlias(rid);//推送ID
                         PreferenceUtil.putStringPRIVATE("username",username);
                         //PreferenceUtil.putStringPRIVATE("password",pwd);
                         PreferenceUtil.putStringPRIVATE("token",token);
@@ -336,9 +342,15 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             case"package":
             case"profile":
             case "upload":
+            case "review_profile":
+            case "review_upload":
+            case "review_profile_upload":
+            case "checked":
+            case "prepared":
+            case "waiting":
                 afterlogin(1);
                 break;
-            case"2":
+            case"finish":
                 afterlogin(2);
                 break;
         }
@@ -358,11 +370,10 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             case 1:
                 it.setClass(this,StartAuthenticationActivity.class);
                 startActivity(it);
+                finish();
                 break;
             //已经认证
             case 2:
-                it.setClass(this,HomePageActivity.class);
-                startActivity(it);
                 finish();
                 break;
         }

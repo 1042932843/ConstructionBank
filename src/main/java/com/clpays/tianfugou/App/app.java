@@ -6,8 +6,10 @@ import android.app.Notification;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -19,10 +21,16 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.clpays.tianfugou.Module.Major.Home.HomePageActivity;
+import com.clpays.tianfugou.Network.NetObserver.DuskyObserver;
+import com.clpays.tianfugou.Network.NetObserver.NetReceiver;
+import com.clpays.tianfugou.Network.NetObserver.NetWorkUtil;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.CommonUtil;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
+import com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper;
+import com.clpays.tianfugou.Utils.ToastUtil;
 import com.google.gson.JsonObject;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
@@ -32,6 +40,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import cn.jpush.android.api.BasicPushNotificationBuilder;
@@ -45,6 +55,9 @@ import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Utils.imageloader.GlideImageLoader;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 
+import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_DELETE;
+import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_SET;
+
 /**
  * Name: app
  * Author: Dusky
@@ -53,7 +66,7 @@ import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
  * Date: 2017-09-09 15:01
  */
 
-public class app extends Application implements Application.ActivityLifecycleCallbacks{
+public class app extends Application implements DuskyObserver, Application.ActivityLifecycleCallbacks{
     public static app mInstance;
     public static RequestOptions optionsRoundedCorners,optionsRoundedCircle,optionsNormal,optionsNormalCrop;
     public static app getInstance() {
@@ -61,6 +74,7 @@ public class app extends Application implements Application.ActivityLifecycleCal
     }
     private String url = "";
 
+    private NetReceiver netReceiver;
     Context contextActivity;
 
     // 用于存放倒计时时间（验证码按钮）
@@ -71,6 +85,7 @@ public class app extends Application implements Application.ActivityLifecycleCal
         super.onCreate();
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+        addObserver(this);
         mInstance = this;
         getAppVersionName(this);
         getRegistrationID();
@@ -80,6 +95,12 @@ public class app extends Application implements Application.ActivityLifecycleCal
         //注册
         registerActivityLifecycleCallbacks(this);
         EventBus.getDefault().register(this);
+
+        netReceiver =new NetReceiver();
+        //注册网络监听广播
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(netReceiver, intentFilter);
     }
 
 
@@ -87,6 +108,12 @@ public class app extends Application implements Application.ActivityLifecycleCal
     public void onTerminate() {
         super.onTerminate();
         EventBus.getDefault().unregister(this);
+        //注销网络监听广播
+        if (netReceiver != null) {
+            unregisterReceiver(netReceiver);
+        }
+        removeObserver(this);
+
     }
 
     //初始化glide配置
@@ -155,7 +182,7 @@ public class app extends Application implements Application.ActivityLifecycleCal
                 showDialog(Type,"如果取消将无法使用app");
                 break;
             case "重新登录":
-                PreferenceUtil.resetPrivate(this);//清空
+                PreferenceUtil.resetPrivate();//清空
                 showDialog(Type,"身份验证失效，请重新登录");
                 break;
 
@@ -306,5 +333,81 @@ public class app extends Application implements Application.ActivityLifecycleCal
     public void onActivityDestroyed(Activity activity) {
 
     }
+    public void addObserver(DuskyObserver observer) {
+        if (!observers.contains(observer)) {
+            observers.add(observer);
+        }
+    }
+    public void removeObserver(DuskyObserver observer) {
+        if (observers != null && observers.contains(observer)) {
+            observers.remove(observer);
+        }
+    }
 
+    private int currentNetType = -1;
+    private List<DuskyObserver> observers = new ArrayList<>();
+    public void notifyNetObserver(int type) {
+        //与当前一样就不用发了
+        if (currentNetType == type) {
+            return;
+        } else {
+            currentNetType = type;
+            if (observers != null && observers.size() > 0) {
+                for (DuskyObserver observer : observers) {
+                    observer.updateNetStatus(type);
+                }
+            }
+        }
+    }
+    @Override
+    public void updateNetStatus(int type) {
+        if(contextActivity==null||contextActivity instanceof HomePageActivity){
+            return;
+        }
+        String Message="";
+        switch (type){
+            case NetWorkUtil.NET_NO_CONNECTION:
+                Message="没有可靠的网络链接";
+                CommonUtil.showNoNetWorkDlg(contextActivity);
+                break;
+            case NetWorkUtil.NET_TYPE_2G:
+                Message="正在使用2G流量";
+                break;
+            case NetWorkUtil.NET_TYPE_3G:
+                Message="正在使用3G流量";
+                break;
+            case NetWorkUtil.NET_TYPE_4G:
+                Message="正在使用4G流量";
+                break;
+            case NetWorkUtil.NET_TYPE_WIFI:
+                Message="当前为Wifi环境";
+                break;
+            case NetWorkUtil.NET_TYPE_UNKNOWN:
+                Message="未知的网络类型";
+                CommonUtil.showNoNetWorkDlg(contextActivity);
+                break;
+
+        }
+        if (!Message.equals("")){
+            ToastUtil.ShortToast(Message);
+        }
+
+    }
+
+
+    public void setAlias(String alias){
+        int action = ACTION_SET;
+        TagAliasOperatorHelper.TagAliasBean tagAliasBean = new TagAliasOperatorHelper.TagAliasBean();
+        tagAliasBean.action = action;
+        tagAliasBean.isAliasAction = true;
+        tagAliasBean.alias=alias;
+        TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(),1,tagAliasBean);
+    }
+    public void delAlias(){
+        int action = ACTION_DELETE;
+        TagAliasOperatorHelper.TagAliasBean tagAliasBean = new TagAliasOperatorHelper.TagAliasBean();
+        tagAliasBean.action = action;
+        tagAliasBean.isAliasAction = true;
+        TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(),1,tagAliasBean);
+    }
 }

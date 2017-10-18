@@ -12,6 +12,7 @@ import com.clpays.tianfugou.Module.Base.BaseActivity;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.TextToSpeechUtil;
+import com.clpays.tianfugou.Utils.ToastUtil;
 
 public class AccountInfoActivity extends BaseActivity {
     TextToSpeechUtil textToSpeech;
@@ -29,8 +30,7 @@ public class AccountInfoActivity extends BaseActivity {
 
     @OnClick(R.id.daikuan)
     public void daikuan(){
-
-        textToSpeech.Speech("哈哈哈");
+        ToastUtil.ShortToast("功能暂时未开放，请留意后续更新");
 
     }
 
@@ -57,7 +57,7 @@ public class AccountInfoActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        sesameView.setSesameValues(879);
+        sesameView.setSesameValues(0);
     }
 
     @Override

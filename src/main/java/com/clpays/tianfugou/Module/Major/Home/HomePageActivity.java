@@ -25,6 +25,8 @@ import com.clpays.tianfugou.Module.Major.Home.Fragment.msgFragment;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.CommonUtil;
+import com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper;
 import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonObject;
@@ -42,6 +44,10 @@ import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
+
+import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_ADD;
+import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_DELETE;
+import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_SET;
 
 public class HomePageActivity extends BaseActivity {
     public static final String TAG = HomePageActivity.class.getSimpleName();
@@ -65,6 +71,10 @@ public class HomePageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         initPermission();
+        if(!CommonUtil.isNetworkAvailable(this)){
+            CommonUtil.showNoNetWorkDlg(this);
+        }
+
 
     }
 
@@ -99,6 +109,7 @@ public class HomePageActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        //PreferenceUtil.resetPrivate();
         CheckLogin();
         initNumberBadge();
         initBottomNavigationBar();
@@ -114,6 +125,7 @@ public class HomePageActivity extends BaseActivity {
         String s= PreferenceUtil.getStringPRIVATE("token", UserState.NA);
         //LogUtil.d(s);
        if(s.isEmpty()||UserState.NA.equals(s)){
+           ToastUtil.ShortToast("请登录！");
            Intent it=new Intent(this, LRpageActivity.class);
            startActivity(it);
        }else{
@@ -125,6 +137,7 @@ public class HomePageActivity extends BaseActivity {
      * 如果已经登录(保存了token)，那么检查状态
      */
     public void CheckStatus(){
+
         dialogLoading=new DialogLoading();
         dialogLoading.setMessage("检查状态");
         dialogLoading.setCancelable(false);
@@ -337,4 +350,6 @@ public class HomePageActivity extends BaseActivity {
 
         return super.onKeyDown(keyCode, event);
     }
+
+
 }
