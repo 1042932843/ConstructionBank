@@ -8,7 +8,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
@@ -31,7 +33,10 @@ import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.ToastUtil;
+import com.clpays.tianfugou.Utils.tools.isGetBooleanFromJson;
+import com.clpays.tianfugou.Utils.tools.isGetJsonArrayFromJson;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
+import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonObject;
 
 import org.greenrobot.eventbus.EventBus;
@@ -59,8 +64,8 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
     RelativeLayout comLayout;
     @BindView(R.id.personLayout)
     RelativeLayout personLayout;
-    @BindView(R.id.shopLayout)
-    RelativeLayout shopLayout;
+    @BindView(R.id.accountLayout)
+    LinearLayout accountLayout;
 
     @BindView(R.id.person)
     CheckBox person;
@@ -68,11 +73,13 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
     CheckBox com;
     @BindView(R.id.pos)
     CheckBox pos;
-    @BindView(R.id.shop)
-    CheckBox shop;
+    @BindView(R.id.account)
+    CheckBox account;
+
 
     @OnClick(R.id.back)
     public void back(){
+        EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("基本资料"));
         finish();
     }
 
@@ -86,6 +93,10 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         obj.addProperty("package",Package);
         JsonArray jsonArray = new JsonArray();
+        if(!person.isChecked()&&!com.isChecked()){
+            ToastUtil.ShortToast("个人开户和单位开户必须至少选择一个！");
+            return;
+        }
         if(person.isChecked()){
             jsonArray.add(1);
         }
@@ -95,9 +106,11 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
         if(pos.isChecked()){
             jsonArray.add(3);
         }
-        if(shop.isChecked()){
-            jsonArray.add(4);
+
+        if(account.isChecked()){
+            obj.addProperty("isnewbank",true);
         }
+        jsonArray.add(4);
         jsonArray.add(5);
         if(jsonArray.size()<=1){
             ToastUtil.ShortToast("请选择套餐需求内容");
@@ -247,9 +260,66 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
         }
 
         mainAdapter.notifyDataSetChanged();
+        fetch();
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
+    //加载数据
+    public void fetch(){
+        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+        RetrofitHelper.getPackageAPI()
+                .fetchpackage(obj)
+                //.compose(this.bindToLifecycle())这里因为在不可见情况下更新页面，所以不能绑定生命周期
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    String a=bean.string();
+                    if("true".equals(isGetStringFromJson.handleData("success",a))){
+                        String Package=isGetStringFromJson.handleData("package", isJsonObj.handleData("data",a));
+                        boolean isnewbank= isGetBooleanFromJson.handleData("isnewbank", isJsonObj.handleData("data",a));
+                        JsonArray selected= isGetJsonArrayFromJson.handleData("selected", isJsonObj.handleData("data",a));
+                        switch (Integer.parseInt(Package)){
+                            case 1:
+                                expandableListView.expandGroup(0);
+                                break;
+                            case 2:
+                                expandableListView.expandGroup(1);
+                                break;
+                            case 3:
+                                expandableListView.expandGroup(2);
+                                break;
+                        }
+
+                        account.setChecked(isnewbank);
+
+                        for(int i=0;i<selected.size();i++){
+                            switch (selected.get(i).getAsInt()){
+                                case 1:
+                                    person.setChecked(true);
+                                    break;
+                                case 2:
+                                    com.setChecked(true);
+                                    break;
+                                case 3:
+                                    pos.setChecked(true);
+                                    break;
+                                case 4:
+                                    break;
+                            }
+                        }
+
+                    }else{
+                        //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                    }
+
+                }, throwable -> {
+                    //ToastUtil.ShortToast("数据错误");
+                });
+    }
 
 
     @Override
@@ -266,6 +336,18 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        com.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    accountLayout.setVisibility(View.VISIBLE);
+                    account.setChecked(true);
+                }else{
+                    accountLayout.setVisibility(View.GONE);
+                    account.setChecked(false);
+                }
+            }
+        });
         dialogLoading=new DialogLoading();
         mainAdapter = new MainAdapter(this,mDatas);
         expandableListView.setAdapter(mainAdapter);
@@ -279,7 +361,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                     posLayout.setVisibility(View.GONE);
                     comLayout.setVisibility(View.GONE);
                     personLayout.setVisibility(View.GONE);
-                    shopLayout.setVisibility(View.GONE);
+                    accountLayout.setVisibility(View.GONE);
                 }
 
             }
@@ -354,12 +436,10 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
             posLayout.setVisibility(View.VISIBLE);
             comLayout.setVisibility(View.VISIBLE);
             personLayout.setVisibility(View.VISIBLE);
-            shopLayout.setVisibility(View.VISIBLE);
         }else{
             posLayout.setVisibility(View.GONE);
             comLayout.setVisibility(View.GONE);
             personLayout.setVisibility(View.GONE);
-            shopLayout.setVisibility(View.GONE);
         }
 
         Log.e("xxx","onGroupExpand>>"+groupPosition);

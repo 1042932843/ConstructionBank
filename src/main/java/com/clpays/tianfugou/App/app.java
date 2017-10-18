@@ -2,17 +2,23 @@ package com.clpays.tianfugou.App;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Notification;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.clpays.tianfugou.Module.Major.Home.HomePageActivity;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
@@ -28,6 +34,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Map;
 
+import cn.jpush.android.api.BasicPushNotificationBuilder;
+import cn.jpush.android.api.JPushInterface;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import nbsix.com.VersionUpdate.entity.VersionUpdateConfig;
@@ -61,7 +69,11 @@ public class app extends Application implements Application.ActivityLifecycleCal
     @Override
     public void onCreate() {
         super.onCreate();
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
         mInstance = this;
+        getAppVersionName(this);
+        getRegistrationID();
         init();
         initLeakCanary();
         initImagePicker();
@@ -150,6 +162,30 @@ public class app extends Application implements Application.ActivityLifecycleCal
         }
     }
 
+    /**
+     * 返回当前程序版本名
+     */
+    public String getAppVersionName(Context context) {
+        String versionName = "";
+        try {
+            // ---get the package info---
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            appConfig.versionName = pi.versionName;
+            appConfig.versioncode = pi.versionCode;
+            versionName=appConfig.versionName;
+            if (versionName == null || versionName.length() <= 0) {
+                return "";
+            }
+        } catch (Exception e) {
+            Log.e("VersionInfo", "Exception", e);
+        }
+        return versionName;
+    }
+
+    public void getRegistrationID(){
+        appConfig.rid = JPushInterface.getRegistrationID(getApplicationContext());
+    }
 
 
     public void update(){
@@ -228,7 +264,7 @@ public class app extends Application implements Application.ActivityLifecycleCal
             contextActivity = activity.getParent();
         }else
             contextActivity = activity;
-        if(contextActivity instanceof LRpageActivity){
+        if(contextActivity instanceof HomePageActivity){
             update();
         }
 

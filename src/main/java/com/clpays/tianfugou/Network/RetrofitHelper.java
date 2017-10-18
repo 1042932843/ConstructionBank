@@ -71,6 +71,7 @@ public class RetrofitHelper {
     return createApi(UploadService.class, ApiConstants.Base_URL);
   }
 
+
   /**
    * 根据传入的baseUrl，和api创建retrofit
    */

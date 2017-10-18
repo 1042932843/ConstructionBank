@@ -78,12 +78,17 @@ public class ucenterAdapter extends RecyclerView.Adapter<ucenterAdapter.MyViewHo
                         break;
                     case "认证信息":
                         String s= PreferenceUtil.getStringPRIVATE("status",UserState.NA);
-                        if("已认证".equals(s)){
-                            it.setClass(context, AuthenticationInfoActivity.class);
-                            context.startActivity(it);
-                        }else{
-                            it.setClass(context, StartAuthenticationActivity.class);
-                            context.startActivity(it);
+                        switch (s){
+                            case "waiting":
+                            case "checked":
+                            case "prepared":
+                                it.setClass(context, StartAuthenticationActivity.class);
+                                context.startActivity(it);
+                                break;
+                            default:
+                                it.setClass(context, AuthenticationInfoActivity.class);
+                                context.startActivity(it);
+                                break;
                         }
 
                         break;

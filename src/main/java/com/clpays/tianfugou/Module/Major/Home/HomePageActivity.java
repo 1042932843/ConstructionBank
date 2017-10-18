@@ -1,11 +1,13 @@
 package com.clpays.tianfugou.Module.Major.Home;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
@@ -23,11 +25,13 @@ import com.clpays.tianfugou.Module.Major.Home.Fragment.msgFragment;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonObject;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
+import cn.jpush.android.api.InstrumentedActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -88,8 +92,13 @@ public class HomePageActivity extends BaseActivity {
     }
 
     @Override
-    public void initViews(Bundle savedInstanceState) {
+    public void onResume(){
+        super.onResume();
 
+    }
+
+    @Override
+    public void initViews(Bundle savedInstanceState) {
         CheckLogin();
         initNumberBadge();
         initBottomNavigationBar();
@@ -118,6 +127,7 @@ public class HomePageActivity extends BaseActivity {
     public void CheckStatus(){
         dialogLoading=new DialogLoading();
         dialogLoading.setMessage("检查状态");
+        dialogLoading.setCancelable(false);
         dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();
         RetrofitHelper.getAppAPI()
@@ -134,6 +144,7 @@ public class HomePageActivity extends BaseActivity {
                         String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
                         LogUtil.d(s);
                         switch (s){
+                            case "finish":
                             case "N/A":
                                 break;
                             case"profile":
@@ -141,7 +152,23 @@ public class HomePageActivity extends BaseActivity {
                             case "upload":
                                 Intent it=new Intent(this, StartAuthenticationActivity.class);
                                 startActivity(it);
-                                this.finish();
+                                break;
+                            case "review_profile":
+                                showExitDialog("基本资料审核未通过","请前往相关页面修改！");
+                                break;
+                            case "review_upload":
+                                showExitDialog("证件上传审核未通过","请前往相关页面修改！");
+                                break;
+                            case "review_profile_upload":
+                                showExitDialog("基本资料和证件上传审核未通过","请前往相关页面修改！");
+                                break;
+                            case "waiting":
+                                showExitDialog("认证审核中","是否前往相关页面查看?(所有流程完成后才可使用应用功能)");
+                                break;
+                            case "checked":
+                                showExitDialog("审核认证成功","是否前往相关页面查看?(所有流程完成后才可使用应用功能)");
+                            case "prepared":
+
                                 break;
                         }
                     }else{
@@ -155,6 +182,44 @@ public class HomePageActivity extends BaseActivity {
     }
 
 
+
+    private void showExitDialog(String title,String msg){
+        /* @setIcon 设置对话框图标
+         * @setTitle 设置对话框标题
+         * @setMessage 设置对话框消息提示
+         * setXXX方法返回Dialog对象，因此可以链式设置属性
+         */
+        final AlertDialog.Builder normalDialog =
+                new AlertDialog.Builder(this);
+        normalDialog.setIcon(R.mipmap.launcher);
+        normalDialog.setTitle(title);
+        normalDialog.setMessage(msg);
+        normalDialog.setCancelable(false);
+        normalDialog.setPositiveButton("确认",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent it=new Intent(HomePageActivity.this, StartAuthenticationActivity.class);
+                        startActivity(it);
+                    }
+                });
+        if(title.equals("证件上传审核未通过")||title.equals("基本资料审核未通过")||title.equals("基本资料和证件上传审核未通过")){
+
+        }else{
+            normalDialog.setNegativeButton("取消",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //...To-do
+                        }
+                    });
+        }
+
+
+
+        // 显示
+        normalDialog.show();
+    }
     /**
      * 消息数量
      */
@@ -162,8 +227,8 @@ public class HomePageActivity extends BaseActivity {
         numberBadgeItem = new TextBadgeItem()
                 .setBorderWidth(4)
                 .setBackgroundColorResource(R.color.colorPrimary)
-                .setText("" + 99)
                 .setHideOnSelect(false);
+        numberBadgeItem.hide();
     }
 
     /**
@@ -178,6 +243,9 @@ public class HomePageActivity extends BaseActivity {
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener(){
             @Override
             public void onTabSelected(int position) {
+                if(position==1){
+                    numberBadgeItem.hide();
+                }
                 changeFragmentIndex(position);
             }
             @Override

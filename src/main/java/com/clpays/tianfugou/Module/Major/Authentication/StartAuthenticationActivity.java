@@ -40,7 +40,7 @@ public class StartAuthenticationActivity extends BaseActivity {
     private Fragment[] fragments;
     private int currentTabIndex;
     private int index=-1;
-
+    FragmentTransaction trx;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -49,8 +49,17 @@ public class StartAuthenticationActivity extends BaseActivity {
 
     @OnClick(R.id.back)
     public void back(){
-        if(index==2){
-            changeFragmentIndex(index-1);
+        String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
+        if("review_profile".equals(s)||"review_upload".equals(s)){
+            showExitDialog();
+        }else if("review_profile_upload".equals(s)){
+            if(index==1){
+                changeFragmentIndex(0);
+            }else{
+                showExitDialog();
+            }
+        }else if(index==2){
+            finish();
         }else if(index==1){
             goPackage();
         }else{
@@ -137,6 +146,8 @@ public class StartAuthenticationActivity extends BaseActivity {
             case "N/A":
                 break;
             case"profile":
+            case "review_profile":
+            case "review_profile_upload":
                 changeFragmentIndex(0);
                 break;
             case"package":
@@ -144,7 +155,15 @@ public class StartAuthenticationActivity extends BaseActivity {
                 goPackage();
                 break;
             case "upload":
+            case "review_upload":
                 changeFragmentIndex(1);
+                break;
+
+
+            case "checked":
+            case "prepared":
+            case "waiting":
+                changeFragmentIndex(2);
                 break;
         }
     }
@@ -217,7 +236,7 @@ public class StartAuthenticationActivity extends BaseActivity {
                 List<StepBean> stepsBeanList3 = new ArrayList<>();
                 StepBean stepBean02 = new StepBean("基本资料",StepBean.STEP_COMPLETED);
                 StepBean stepBean12= new StepBean("证照上传",StepBean.STEP_COMPLETED);
-                StepBean stepBean22 = new StepBean("提交完成",StepBean.STEP_CURRENT);
+                StepBean stepBean22 = new StepBean("提交完成",StepBean.STEP_COMPLETED);
                 stepsBeanList3.add(stepBean02);
                 stepsBeanList3.add(stepBean12);
                 stepsBeanList3.add(stepBean22);
@@ -253,18 +272,19 @@ public class StartAuthenticationActivity extends BaseActivity {
 
     }
 
+
     /**
      * Fragment切换
      */
     private void switchFragment() {
         setStepView();
-        FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
+        trx = getSupportFragmentManager().beginTransaction();
         trx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         trx.hide(fragments[currentTabIndex]);
         if (!fragments[index].isAdded()) {
             trx.add(R.id.container, fragments[index]);
         }
-        trx.show(fragments[index]).commit();
+        trx.show(fragments[index]).commitAllowingStateLoss();//重要
         currentTabIndex = index;
     }
 
@@ -290,6 +310,9 @@ public class StartAuthenticationActivity extends BaseActivity {
     public void onEvent(EventUtil event){
         String Type = event.getType();
         switch (Type){
+            case "基本资料":
+                changeFragmentIndex(0);
+                break;
             case "套餐选择":
                 goPackage();
                 break;
@@ -312,17 +335,23 @@ public class StartAuthenticationActivity extends BaseActivity {
         // TODO Auto-generated method stub
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             //登录了并且是在审核状态UserState.isLogin()&&UserState.isAuditing()
+            String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
+            if("review_profile".equals(s)){
+                showExitDialog();
+            }
+            if("review_profile_upload".equals(s)){
+                if(index==1){
+                    changeFragmentIndex(0);
+                }else{
+                    showExitDialog();
+                }
+            }
+
             if(index==2){
-                Intent it=new Intent(this, HomePageActivity.class);
-                startActivity(it);
                 this.finish();
-            }
-
-            if(index!=0&&index!=2){
+            }else if(index!=0&&index!=2){
                 changeFragmentIndex(index-1);
-            }
-
-            else {
+            }else {
                 showExitDialog();
             }
             return true;

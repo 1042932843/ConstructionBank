@@ -215,7 +215,15 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                 .subscribe(bean -> {
                     String a=bean.string();
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
-                        EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("套餐选择"));
+                        String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
+                        if("review_profile".equals(s)){
+                            EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("提交完成"));
+                        }else if("review_profile_upload".equals(s)){
+                            EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("证件上传"));
+                        }else {
+                            EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("套餐选择"));
+                        }
+
                     }else{
                         ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }

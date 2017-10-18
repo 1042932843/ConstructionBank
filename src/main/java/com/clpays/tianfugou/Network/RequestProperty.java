@@ -17,15 +17,17 @@ import com.clpays.tianfugou.Utils.UserState;
 public class RequestProperty {
     public static JsonObject CreateJsonObjectBody(){
         JsonObject object=new JsonObject();
-        object.addProperty("ver", appConfig.ver);
+        object.addProperty("ver", appConfig.versionName);
         object.addProperty("platform", appConfig.platform);
+        object.addProperty("rid", appConfig.rid);
         return object;
     }
 
     public static JsonObject CreateTokenJsonObjectBody(){
         JsonObject object=new JsonObject();
-        object.addProperty("ver", appConfig.ver);
+        object.addProperty("ver", appConfig.versionName);
         object.addProperty("platform", appConfig.platform);
+        object.addProperty("rid", appConfig.rid);
         String token= PreferenceUtil.getStringPRIVATE("token", UserState.NA);
         object.addProperty("token", token);
         return object;

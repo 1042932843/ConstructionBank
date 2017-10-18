@@ -11,4 +11,7 @@ package com.clpays.tianfugou.App;
 public class appConfig {
     public static String ver="1.0";
     public static String platform="android";
+    public static String versionName="";
+    public static int versioncode;
+    public static String rid;
 }

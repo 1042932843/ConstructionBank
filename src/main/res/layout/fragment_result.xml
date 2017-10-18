@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="@dimen/_12dp"
     >
 
     <RelativeLayout
@@ -18,6 +19,7 @@
           />
 
         <RelativeLayout
+            android:id="@+id/all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/stu_img">
@@ -65,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="审核结果我们会发送到消息中心，请注意查看\n由于高峰期,预计审核时间3天"
+                    android:text="审核结果我们会发送到消息中心，请注意查看\n预计审核时间3天"
                     />
             </RelativeLayout>
             <RelativeLayout
@@ -113,14 +115,51 @@
                     android:layout_below="@id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:text="请准备好以下相关材料:\n1.营业执照正本原件及复印件两份（加盖公章）\n2.法人身份证原件及复印件两份（加盖公章）\n3.公司章程一份,所有股东签字,加盖骑缝章（个体工商户不需提供）\n4.开户许可证原件及复印件两份（加盖公章）（此项初次开户客户不提供）"
                     />
             </RelativeLayout>
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/status_prepared"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
+                <TextView
+                    android:layout_margin="@dimen/_1dp"
+                    android:id="@+id/textViewprepared"
+                    android:textSize="@dimen/textsize16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="等待专员联系"/>
+                <TextView
+                    android:layout_margin="@dimen/_1dp"
+                    android:id="@+id/prepared"
+                    android:layout_below="@id/textViewprepared"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="测试数据"
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <com.bilibili.magicasakura.widgets.TintButton
+            android:id="@+id/next_step"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_12dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/selector_login"
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/next_step"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_large" />
     </RelativeLayout>
+
 
 
 </LinearLayout>

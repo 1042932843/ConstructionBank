@@ -10,10 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.clpays.tianfugou.Adapter.ImagePickerAdapter;
+import com.clpays.tianfugou.Adapter.ImagePickerAutoAddAdapter;
 import com.clpays.tianfugou.Design.Dialog.SelectDialog;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 import com.clpays.tianfugou.Utils.tools.isJsonArray;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
@@ -26,6 +28,7 @@ import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,29 +36,101 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Utils.LogUtil;
+import com.lzy.imagepicker.ui.ImagePreviewDelActivity2;
 
-
+/**
+ * Name: CertificateInfoFragment
+ * Author: Dusky
+ * QQ: 1042932843
+ * Comment: //时间紧凑各种魔改。呵呵，这就是外包吧。
+ * Date: 2017-10-17 14:06
+ */
 public class CertificateInfoFragment extends BaseFragment implements ImagePickerAdapter.OnRecyclerViewItemClickListener {
     public static final int IMAGE_ITEM_ADD = -1;
     public static final int REQUEST_CODE_SELECT = 100;
     public static final int REQUEST_CODE_PREVIEW = 101;
 
     private ImagePickerAdapter adapter;
-    private ArrayList<ImageItem> selImageList; //当前选择的所有图片
+    private ImagePickerAutoAddAdapter autoAddAdapter;
+    JsonArray jsonArray = new JsonArray();
+    boolean isAuto;
+    boolean zichan;
+    boolean isUpload;
+
+    ImagePickerAutoAddAdapter.OnRecyclerViewItemClickListener onRecyclerViewItemClickListener=new ImagePickerAutoAddAdapter.OnRecyclerViewItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+            isAuto=true;
+            switch (position) {
+                case IMAGE_ITEM_ADD:
+                    List<String> names = new ArrayList<>();
+                    names.add("拍照");
+                    names.add("相册");
+                    showDialog(new SelectDialog.SelectDialogListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            switch (position) {
+                                case 0: // 直接调起相机
+
+                                    //打开选择,本次允许选择的数量
+                                    ImagePicker.getInstance().setSelectLimit(maxImgCount2 - selImageList2.size());
+                                    Intent intent = new Intent(getActivity(), ImageGridActivity.class);
+                                    intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
+                                    startActivityForResult(intent, REQUEST_CODE_SELECT);
+                                    break;
+                                case 1:
+                                    //打开选择,本次允许选择的数量
+                                    ImagePicker.getInstance().setSelectLimit(maxImgCount2 - selImageList2.size());
+                                    Intent intent1 = new Intent(getActivity(), ImageGridActivity.class);
+                                /* 如果需要进入选择的时候显示已经选中的图片，
+                                 * 详情请查看ImagePickerActivity
+                                 * */
+//                                intent1.putExtra(ImageGridActivity.EXTRAS_IMAGES,images);
+                                    startActivityForResult(intent1, REQUEST_CODE_SELECT);
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        }
+                    }, names);
+
+
+                    break;
+                default:
+                    //打开预览
+                    Intent intentPreview = new Intent(getActivity(), ImagePreviewDelActivity2.class);
+                    intentPreview.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, (ArrayList<ImageItem>) autoAddAdapter.getImages());
+                    intentPreview.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
+                    intentPreview.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
+                    startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
+                    break;
+            }
+        }
+    };
+    private ArrayList<ImageItem> selImageList; //当前选择的所有图片adapter1
+    private ArrayList<ImageItem> selImageList2; //当前选择的所有图片adapter2
     private int maxImgCount = 1;
+    private int maxImgCount2=1;
 
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.recyclerView2)
+    RecyclerView recyclerView2;
 
 
     @OnClick(R.id.next_step)
     public void next(){
-        EventBus.getDefault().post(new EventUtil("提交完成"));
+        push();
+
     }
 
     public static CertificateInfoFragment newInstance() {
@@ -69,9 +144,14 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
     @Override
     public void initRecyclerView(){
         selImageList = new ArrayList<>();
+        selImageList2=new ArrayList<>();
         adapter = new ImagePickerAdapter(getContext(), selImageList);
+        autoAddAdapter = new ImagePickerAutoAddAdapter(getContext(), selImageList2,maxImgCount2);
         adapter.setOnItemClickListener(this);
-
+        autoAddAdapter.setOnItemClickListener(onRecyclerViewItemClickListener);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setAdapter(autoAddAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -106,15 +186,18 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                                 try{
                                     String item=  array.get(i).getAsString();
                                     imageItem.type=item;
-                                    selImageList.add(imageItem);
+                                    if(imageItem.type.equals("资产产权证书")){
+                                        //资产UI标记
+                                        zichan=true;
+                                    }else{
+                                        selImageList.add(imageItem);
+                                    }
                                 }catch (Exception e){
 
                                 }
-
                             }
                         maxImgCount=selImageList.size();
                         adapter.setImages(selImageList);
-
                     }else{
                         //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }
@@ -140,6 +223,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
     @Override
     public void onItemClick(View view, int clickPosition,int position) {
         choice=position;
+        isAuto=false;
         switch (clickPosition) {
             case IMAGE_ITEM_ADD:
                 List<String> names = new ArrayList<>();
@@ -174,13 +258,16 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                 }, names);
 
                 break;
+
+
+
             default:
                 //打开预览
                 Intent intentPreview = new Intent(getActivity(), ImagePreviewDelActivity.class);
-                String a=selImageList.get(choice).type;
+                //String a=selImageList.get(choice).type;
                 ArrayList<ImageItem> list=adapter.getImages(choice);
                 intentPreview.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, list);
-                intentPreview.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
+                intentPreview.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, clickPosition);
                 intentPreview.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
                 startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
                 break;
@@ -190,31 +277,148 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-            //添加图片返回
-            if (data != null && requestCode == REQUEST_CODE_SELECT) {
-                images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                if (images != null) {
-                    ImageItem imageItem=images.get(0);
-                    imageItem.type=selImageList.get(choice).type;
-                    selImageList.set(choice,imageItem);
-                    adapter.setImages(selImageList);
+        if(isAuto){
+            if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+                //添加图片返回
+                if (data != null && requestCode == REQUEST_CODE_SELECT) {
+                    images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                    if (images != null) {
+                        selImageList2.addAll(images);
+                        maxImgCount2=selImageList2.size()+1;
+                        autoAddAdapter.setMaxImgCount(maxImgCount2);
+                        autoAddAdapter.setImages(selImageList2);
+                        ImageItem imageItem= images.get(0);
+                        imageItem.type="资产产权证书";
+                        uploadImage(imageItem);
+                    }
+                }
+            } else if (resultCode == ImagePicker.RESULT_CODE_BACK) {
+                //预览图片返回
+                if (data != null && requestCode == REQUEST_CODE_PREVIEW) {
+                    images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
+                    if (images != null) {
+                        selImageList2.clear();
+                        selImageList2.addAll(images);
+                        maxImgCount2=images.size()+1;
+                        autoAddAdapter.setMaxImgCount(maxImgCount2);
+                        autoAddAdapter.setImages(selImageList2);
+                    }
                 }
             }
-        } else if (resultCode == ImagePicker.RESULT_CODE_BACK) {
-            //预览图片返回
-            if (data != null && requestCode == REQUEST_CODE_PREVIEW) {
-                images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
-                if (images != null) {
-                    ImageItem imageItem=images.get(0);
-                    selImageList.set(choice,imageItem);
-                    adapter.setImages(selImageList);
+        }else{
+            if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+                //添加图片返回
+                if (data != null && requestCode == REQUEST_CODE_SELECT) {
+                    images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                    if (images != null) {
+                        ImageItem imageItem=images.get(0);
+                        imageItem.type=selImageList.get(choice).type;
+                        selImageList.set(choice,imageItem);
+                        adapter.setImages(selImageList);
+                        uploadImage(imageItem);
+                    }
+                }
+            } else if (resultCode == ImagePicker.RESULT_CODE_BACK) {
+                //预览图片返回
+                if (data != null && requestCode == REQUEST_CODE_PREVIEW) {
+                    images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
+                    if (images != null&&images.size()>0) {
+                        ImageItem imageItem=images.get(0);
+                        selImageList.set(choice,imageItem);
+                        adapter.setImages(selImageList);
+                    }
                 }
             }
         }
+
     }
 
 
+
+
+    public void push(){
+
+        if(isUpload){
+            ToastUtil.ShortToast("正在上传,请耐心等待");
+            return;
+        }
+        int size=selImageList.size();
+        ArrayList<ImageItem> total=new ArrayList<>();
+        total.addAll(selImageList);
+        total.addAll(selImageList2);
+        int totalsize=total.size();
+        for(int i=0;i<totalsize;i++){
+            if("OK".equals(total.get(i).pushok));
+            jsonArray.add(total.get(i).id);
+        }
+        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+        if(jsonArray.size()<size){
+            ToastUtil.ShortToast("请上传上述要求证件图片!");
+            return;
+        }
+        for(int i=0;i<size;i++){
+            if("OK".equals(selImageList.get(i).pushok)){
+
+            }else{
+                ToastUtil.ShortToast("请上传"+selImageList.get(i).type+"!");
+                return;
+            }
+        }
+        if(selImageList2.size()<=0&&zichan){
+            ToastUtil.ShortToast("请至少上传一张资产证明图片!");
+            return;
+        }
+        obj.add("uploaded",jsonArray);
+        RetrofitHelper.getUploadAPI()
+                .pushUpload(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    String a=bean.string();
+                    if("true".equals(isGetStringFromJson.handleData("success",a))){
+                        EventBus.getDefault().post(new EventUtil("提交完成"));
+                    }else{
+                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                    }
+
+                }, throwable -> {
+                    ToastUtil.ShortToast("数据错误");
+                });
+    }
+
+    public void uploadImage(ImageItem imageItem){
+        isUpload=true;
+        String imagePath=imageItem.path;
+        File file = new File(imagePath);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+        obj.addProperty("type",imageItem.type);
+// 添加描述
+        String descriptionString = obj.toString();
+        RequestBody description =RequestBody.create(MediaType.parse("multipart/form-data"), descriptionString);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        RetrofitHelper.getUploadAPI()
+                .UploadPic(body,description)
+                //.compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    isUpload=false;
+                    String a=bean.string();
+                    if("true".equals(isGetStringFromJson.handleData("success",a))){
+                        String attachid=isGetStringFromJson.handleData("attachid", isJsonObj.handleData("data",a));
+                        imageItem.pushok="OK";
+                        imageItem.id=Integer.parseInt(attachid);
+                    }else{
+                        //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                    }
+
+                }, throwable -> {
+                    isUpload=false;
+                    ToastUtil.ShortToast(imageItem.type+"上传失败,请尝试重新添加图片");
+                });
+    }
     /**
      * Upload Image Client Code
 

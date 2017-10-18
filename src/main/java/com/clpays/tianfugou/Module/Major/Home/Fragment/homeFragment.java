@@ -42,7 +42,7 @@ public class homeFragment extends BaseFragment {
         item1.setImg(R.drawable.shoukuan_pic);
         homeItems.add(item1);
         homeItem item2=new homeItem();
-        item2.setName("建行贷款");
+        item2.setName("银行贷款");
         item2.setImg(R.drawable.daikuan_pic);
         homeItems.add(item2);
         homeItem item3=new homeItem();
