@@ -164,32 +164,35 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                     SecondBean secondBean=new SecondBean();
                     ArrayList<ThirdBean> thirdBeanArrayList=new ArrayList<>();
                     if(j==0){
-                        secondBean.setTitle("免费开立银行个人账户");
+                        secondBean.setTitle("1.开立个人结算账户—银行惠福龙卡（免费）");
                         ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("建行专门为成都国际商贸城的入驻商家打造一款银行储蓄卡——惠福龙卡，它不仅具备普通储蓄卡的所有基本功能，还增加了结算优惠、存款增值等特色功能：\n" +
+                        thirdBean.setTitle("  建行专门为成都国际商贸城的入驻商家打造一款银行储蓄卡——惠福龙卡，它不仅具备普通储蓄卡的所有基本功能，还增加了结算优惠、存款增值等特色功能：\n" +
                                 "免开立工本费和每年的账户管理费；\n" +
                                 "享受活期便利和定期收益；\n" +
                                 "全国境内银行系统内存取现和转账免手续费；\n" +
                                 "截至2017年12月31日全国跨行取现免手续费；\n" +
-                                "银行手机银行跨行转账免手续费；使用手机银行以外的渠道跨行转账，每年免12笔转账手续费。");
+                                "银行手机银行跨行转账免手续费；使用手机银行以外的渠道跨行转账，每年免12笔转账手续费。\n "
+                        +"\t <img src=\""+R.drawable.fuka_1+"\" /> <img src=\"" + R.drawable.fuka_2 + "\" />");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==1){
-                        secondBean.setTitle("优惠开立银行对公账户");
+                        secondBean.setTitle("2.开立对公结算账户—享受5折价格优惠");
                         ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("建行对公结算账户既是各商家日常交易结算所需，账户上的交易流水、资金沉淀和缴税金额等更是申请建行无抵押信用贷款的必要条件，建行本次仅针对商贸城入驻商家提供666元对公开户大礼包（原价1360元），优惠幅度达5折：\n" +
+                        thirdBean.setTitle("  建行对公结算账户既是各商家日常交易结算所需，账户上的交易流水、资金沉淀和缴税金额等更是申请建行无抵押信用贷款的必要条件，建行本次仅针对商贸城入驻商家提供666元对公开户大礼包（原价1360元），优惠幅度达5折：\n" +
                                 "支付密码器免费赠送；\n" +
                                 "网银优惠办理（原价480元/年）；\n" +
                                 "结算卡优惠办理（原价300元/年）；\n" +
                                 "回单卡优惠办理（原价360元/年）；\n" +
                                 "短信通知优惠办理（原价96元/年）；\n" +
-                                "账户管理费优惠办理（原价360元/年）；");
+                                "账户管理费优惠办理（原价360元/年）；\n"
+                                +"<img src=\""+R.drawable.duigong_1+"\" />");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==2){
-                        secondBean.setTitle("优惠办理银行无抵押信用贷款");
+                        secondBean.setTitle("3.优惠办理银行无抵押信用贷款");
                         ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("贷款特点：依据商贸城商家在建行账户上的交易流水、存款余额或商家的缴税金额核定贷款金额，不定期限、随借随还的信用贷款，支持网上申请和归还，最高额度200万元，日利率低于万分之2。");
+                        thirdBean.setTitle("  贷款特点：依据商贸城商家在建行账户上的交易流水、存款余额或商家的缴税金额核定贷款金额，不定期限、随借随还的信用贷款，支持网上申请和归还，最高额度200万元，日利率低于万分之2。\n\n"
+                                +"<img src=\""+R.drawable.daikuan_1+"\" /> <img src=\"" + R.drawable.daikuan_2 + "\" />");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }
@@ -201,38 +204,41 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                     SecondBean secondBean=new SecondBean();
                     ArrayList<ThirdBean> thirdBeanArrayList=new ArrayList<>();
                     if(j==0){
-                        secondBean.setTitle("免费开立银行个人账户");
+                        secondBean.setTitle("1.开立个人结算账户—银行惠福龙卡（免费）");
                         ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("建行专门为成都国际商贸城的入驻商家打造一款银行储蓄卡——惠福龙卡，它不仅具备普通储蓄卡的所有基本功能，还增加了结算优惠、存款增值等特色功能：\n" +
+                        thirdBean.setTitle("  建行专门为成都国际商贸城的入驻商家打造一款银行储蓄卡——惠福龙卡，它不仅具备普通储蓄卡的所有基本功能，还增加了结算优惠、存款增值等特色功能：\n" +
                                 "免开立工本费和每年的账户管理费；\n" +
                                 "享受活期便利和定期收益；\n" +
                                 "全国境内银行系统内存取现和转账免手续费；\n" +
                                 "截至2017年12月31日全国跨行取现免手续费；\n" +
-                                "银行手机银行跨行转账免手续费；使用手机银行以外的渠道跨行转账，每年免12笔转账手续费。");
+                                "银行手机银行跨行转账免手续费；使用手机银行以外的渠道跨行转账，每年免12笔转账手续费。\n"
+                                +"<img src=\""+R.drawable.fuka_1+"\" /> <img src=\"" + R.drawable.fuka_2 + "\" />");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==1){
-                        secondBean.setTitle("优惠开立银行对公账户");
+                        secondBean.setTitle("2.开立对公结算账户—享受5折价格优惠");
                         ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("建行对公结算账户既是各商家日常交易结算所需，账户上的交易流水、资金沉淀和缴税金额等更是申请建行无抵押信用贷款的必要条件，建行本次仅针对商贸城入驻商家提供666元对公开户大礼包（原价1360元），优惠幅度达5折：\n" +
+                        thirdBean.setTitle("  建行对公结算账户既是各商家日常交易结算所需，账户上的交易流水、资金沉淀和缴税金额等更是申请建行无抵押信用贷款的必要条件，建行本次仅针对商贸城入驻商家提供666元对公开户大礼包（原价1360元），优惠幅度达5折：\n" +
                                 "支付密码器免费赠送；\n" +
                                 "网银优惠办理（原价480元/年）；\n" +
                                 "结算卡优惠办理（原价300元/年）；\n" +
                                 "回单卡优惠办理（原价360元/年）；\n" +
                                 "短信通知优惠办理（原价96元/年）；\n" +
-                                "账户管理费优惠办理（原价360元/年）；");
+                                "账户管理费优惠办理（原价360元/年）；"
+                                +"<img src=\""+R.drawable.duigong_1+"\" />");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==2){
-                        secondBean.setTitle("优惠办理银行无抵押信用贷款");
+                        secondBean.setTitle("3.优惠办理银行无抵押信用贷款");
                         ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("贷款特点：依据商贸城商家在建行账户上的交易流水、存款余额或商家的缴税金额核定贷款金额，不定期限、随借随还的信用贷款，支持网上申请和归还，最高额度200万元，日利率低于万分之2。");
+                        thirdBean.setTitle("  贷款特点：依据商贸城商家在建行账户上的交易流水、存款余额或商家的缴税金额核定贷款金额，不定期限、随借随还的信用贷款，支持网上申请和归还，最高额度200万元，日利率低于万分之2。\n"
+                                +"<img src=\""+R.drawable.daikuan_1+"\" /> <img src=\"" + R.drawable.daikuan_2 + "\" />");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }else if(j==3){
-                        secondBean.setTitle("免费赠送银行POS");
+                        secondBean.setTitle("4.成都国际商贸城线下支付工具—建行POS");
                         ThirdBean thirdBean=new ThirdBean();
-                        thirdBean.setTitle("建行将为商家免费赠送带扫码功能固定POS。支持微信、支付宝和各家银行卡支付。固定POS提供公网通讯模式，速度更快，更可节约通讯费用。免费提供POS用纸。若商家营业执照经营范围有商品批发，可给予特殊费率，收费标准为：\n" +
+                        thirdBean.setTitle("  建行将为商家免费赠送带扫码功能固定POS。支持微信、支付宝和各家银行卡支付。固定POS提供公网通讯模式，速度更快，更可节约通讯费用。免费提供POS用纸。若商家营业执照经营范围有商品批发，可给予特殊费率，收费标准为：\n" +
                                 "借记卡：0.5%，单笔20元封顶\n" +
                                 "贷记卡：0.5%，本行信用卡单笔20元封顶，他行信用卡不封顶\n" +
                                 "微信、支付宝：0.5%。\n" +
@@ -245,7 +251,8 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                                 "建行POS为商家免费提供微信公众号获客平台，将商家的照片、介绍提供给客户，还可以定位和导航哟！！\n" +
                                 "建行POS为商家免费开放后台系统，客户使用建行POS完成交易后将客户信息实时推送至商家的后台，商家还可以添加备注，记录客户消费习惯、喜爱等信息，为二次营销提供帮助。\n" +
                                 "4)\t免费的营销推广平台，兜住客户没商量\n" +
-                                "建行POS为商家提供建行免费推广平台，商家可自主发放各种优惠券，所有关注建行公众号的客户均可领取商家发放的优惠券，将天南海北的朋友聚集到商家身边。");
+                                "建行POS为商家提供建行免费推广平台，商家可自主发放各种优惠券，所有关注建行公众号的客户均可领取商家发放的优惠券，将天南海北的朋友聚集到商家身边。\n "
+                                +"<img src=\""+R.drawable.pos_1+"\" /> <img src=\"" + R.drawable.pos_2 + "\" /><img src=\"" + R.drawable.pos_3 + "\" /><img src=\"" + R.drawable.pos_4 + "\" />");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }
@@ -259,31 +266,33 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                     ThirdBean thirdBean=new ThirdBean();
                     switch (j){
                         case 0:
-                            secondBean.setTitle("免费开立银行个人账户");
-                            thirdBean.setTitle("建行专门为成都国际商贸城的入驻商家打造一款银行储蓄卡——惠福龙卡，它不仅具备普通储蓄卡的所有基本功能，还增加了结算优惠、存款增值等特色功能：\n" +
+                            secondBean.setTitle("1.开立个人结算账户—银行惠福龙卡（免费）");
+                            thirdBean.setTitle("  建行专门为成都国际商贸城的入驻商家打造一款银行储蓄卡——惠福龙卡，它不仅具备普通储蓄卡的所有基本功能，还增加了结算优惠、存款增值等特色功能：\n" +
                                     "免开立工本费和每年的账户管理费；\n" +
                                     "享受活期便利和定期收益；\n" +
                                     "全国境内银行系统内存取现和转账免手续费；\n" +
                                     "截至2017年12月31日全国跨行取现免手续费；\n" +
-                                    "银行手机银行跨行转账免手续费；使用手机银行以外的渠道跨行转账，每年免12笔转账手续费。");
+                                    "银行手机银行跨行转账免手续费；使用手机银行以外的渠道跨行转账，每年免12笔转账手续费。\n"
+                                    +"<img src=\""+R.drawable.fuka_1+"\" /> <img src=\"" + R.drawable.fuka_2 + "\" />");
                             thirdBeanArrayList.add(thirdBean);
                             secondBean.setSecondBean(thirdBeanArrayList);
                             break;
                         case 1:
-                            secondBean.setTitle("优惠开立银行对公账户");
-                            thirdBean.setTitle("建行对公结算账户既是各商家日常交易结算所需，账户上的交易流水、资金沉淀和缴税金额等更是申请建行无抵押信用贷款的必要条件，建行本次仅针对商贸城入驻商家提供666元对公开户大礼包（原价1360元），优惠幅度达5折：\n" +
+                            secondBean.setTitle("2.开立对公结算账户—享受5折价格优惠");
+                            thirdBean.setTitle("  建行对公结算账户既是各商家日常交易结算所需，账户上的交易流水、资金沉淀和缴税金额等更是申请建行无抵押信用贷款的必要条件，建行本次仅针对商贸城入驻商家提供666元对公开户大礼包（原价1360元），优惠幅度达5折：\n" +
                                     "支付密码器免费赠送；\n" +
                                     "网银优惠办理（原价480元/年）；\n" +
                                     "结算卡优惠办理（原价300元/年）；\n" +
                                     "回单卡优惠办理（原价360元/年）；\n" +
                                     "短信通知优惠办理（原价96元/年）；\n" +
-                                    "账户管理费优惠办理（原价360元/年）；");
+                                    "账户管理费优惠办理（原价360元/年）；\n"
+                                    +"<img src=\""+R.drawable.duigong_1+"\" />");
                             thirdBeanArrayList.add(thirdBean);
                             secondBean.setSecondBean(thirdBeanArrayList);
                             break;
-                        case 2:
-                            secondBean.setTitle("免费赠送银行POS");
-                            thirdBean.setTitle("建行将为商家免费赠送带扫码功能固定POS。支持微信、支付宝和各家银行卡支付。固定POS提供公网通讯模式，速度更快，更可节约通讯费用。免费提供POS用纸。若商家营业执照经营范围有商品批发，可给予特殊费率，收费标准为：\n" +
+                        case 3:
+                            secondBean.setTitle("4.成都国际商贸城线下支付工具—建行POS");
+                            thirdBean.setTitle("  建行将为商家免费赠送带扫码功能固定POS。支持微信、支付宝和各家银行卡支付。固定POS提供公网通讯模式，速度更快，更可节约通讯费用。免费提供POS用纸。若商家营业执照经营范围有商品批发，可给予特殊费率，收费标准为：\n" +
                                     "借记卡：0.5%，单笔20元封顶\n" +
                                     "贷记卡：0.5%，本行信用卡单笔20元封顶，他行信用卡不封顶\n" +
                                     "微信、支付宝：0.5%。\n" +
@@ -296,22 +305,25 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                                     "建行POS为商家免费提供微信公众号获客平台，将商家的照片、介绍提供给客户，还可以定位和导航哟！！\n" +
                                     "建行POS为商家免费开放后台系统，客户使用建行POS完成交易后将客户信息实时推送至商家的后台，商家还可以添加备注，记录客户消费习惯、喜爱等信息，为二次营销提供帮助。\n" +
                                     "4)\t免费的营销推广平台，兜住客户没商量\n" +
-                                    "建行POS为商家提供建行免费推广平台，商家可自主发放各种优惠券，所有关注建行公众号的客户均可领取商家发放的优惠券，将天南海北的朋友聚集到商家身边。");
-                            thirdBeanArrayList.add(thirdBean);
-                            secondBean.setSecondBean(thirdBeanArrayList);
-                            break;
-                        case 3:
-                            secondBean.setTitle("免费入住建行善融商城");
-                            thirdBean.setTitle("建行将为符合条件的入驻商家提供我行善融商务B2B和B2C线上交易平台，多渠道获客，并对商家提供免费宣传，优先开展联合促销。\n" +
-                                    "优惠：\n" +
-                                    "平台费用免收；\n" +
-                                    "交易费率：贷记卡交易——0.5%");
+                                    "建行POS为商家提供建行免费推广平台，商家可自主发放各种优惠券，所有关注建行公众号的客户均可领取商家发放的优惠券，将天南海北的朋友聚集到商家身边。\n"
+                                    +"<img src=\""+R.drawable.pos_1+"\" /> <img src=\"" + R.drawable.pos_2 + "\" /><img src=\"" + R.drawable.pos_3 + "\" /><img src=\"" + R.drawable.pos_4 + "\" />");
                             thirdBeanArrayList.add(thirdBean);
                             secondBean.setSecondBean(thirdBeanArrayList);
                             break;
                         case 4:
-                            secondBean.setTitle("优惠办理银行无抵押信用贷款");
-                            thirdBean.setTitle("贷款特点：依据商贸城商家在建行账户上的交易流水、存款余额或商家的缴税金额核定贷款金额，不定期限、随借随还的信用贷款，支持网上申请和归还，最高额度200万元，日利率低于万分之2。");
+                            secondBean.setTitle("5.免费入住建行善融商城");
+                            thirdBean.setTitle("  建行将为符合条件的入驻商家提供我行善融商务B2B和B2C线上交易平台，多渠道获客，并对商家提供免费宣传，优先开展联合促销。\n" +
+                                    "优惠：\n" +
+                                    "平台费用免收；\n" +
+                                    "交易费率：贷记卡交易——0.5% \n"
+                                    +"<img src=\""+R.drawable.shangcheng_1+"\" /> <img src=\"" + R.drawable.shangcheng_2 + "\" />");
+                            thirdBeanArrayList.add(thirdBean);
+                            secondBean.setSecondBean(thirdBeanArrayList);
+                            break;
+                        case 2:
+                            secondBean.setTitle("3.优惠办理银行无抵押信用贷款");
+                            thirdBean.setTitle("  贷款特点：依据商贸城商家在建行账户上的交易流水、存款余额或商家的缴税金额核定贷款金额，不定期限、随借随还的信用贷款，支持网上申请和归还，最高额度200万元，日利率低于万分之2。 \n "
+                                    +"<img src=\""+R.drawable.daikuan_1+"\" /> <img src=\"" + R.drawable.daikuan_2 + "\" />");
                             thirdBeanArrayList.add(thirdBean);
                             secondBean.setSecondBean(thirdBeanArrayList);
                             break;
@@ -408,10 +420,10 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     accountLayout.setVisibility(View.VISIBLE);
-                    account.setChecked(true);
+                    //account.setChecked(true);修复逻辑问题
                 }else{
                     accountLayout.setVisibility(View.GONE);
-                    account.setChecked(false);
+                    //account.setChecked(false);修复逻辑问题
                 }
             }
         });

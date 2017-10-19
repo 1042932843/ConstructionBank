@@ -1,6 +1,8 @@
 package com.clpays.tianfugou.Adapter.PackagesAdapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,17 @@ import java.util.ArrayList;
 public class ChildAdapter extends BaseExpandableListAdapter {
     private Context mContext;
     private ArrayList<SecondBean> mDatas;
+
+    final Html.ImageGetter imageGetter = new Html.ImageGetter() {
+
+        public Drawable getDrawable(String source) {
+            Drawable drawable=null;
+            int rId=Integer.parseInt(source);
+            drawable=mContext.getResources().getDrawable(rId);
+            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+            return drawable;};
+    };
+
     int mPosition;
     public ChildAdapter(Context context, ArrayList<SecondBean> data, int pos){
         this.mContext = context;
@@ -125,7 +138,7 @@ public class ChildAdapter extends BaseExpandableListAdapter {
         } else {
             holder = (ChildHolder) view.getTag();
         }
-        holder.childChildTV.setText(mDatas.get(parentPosition).getSecondBean().get(childPosition).getTitle());
+        holder.childChildTV.setText(Html.fromHtml(mDatas.get(parentPosition).getSecondBean().get(childPosition).getTitle(), imageGetter, null));
         return view;
     }
     class ChildHolder {
