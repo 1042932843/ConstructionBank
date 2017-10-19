@@ -265,12 +265,13 @@ public class StartAuthenticationActivity extends BaseActivity {
      * 切换Fragment的下标
      */
     private void changeFragmentIndex(int currentIndex) {
-        if(index==currentIndex){//修正重复显示的问题（毕竟是add）
+        index = currentIndex;
+        switchFragment();
+       /* if(index==currentIndex){//修正重复显示的问题（毕竟是add）
 
         }else{
-            index = currentIndex;
-            switchFragment();
-        }
+
+        }*/
 
     }
 
@@ -284,7 +285,7 @@ public class StartAuthenticationActivity extends BaseActivity {
         trx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         trx.hide(fragments[currentTabIndex]);
         if (!fragments[index].isAdded()) {
-            trx.add(R.id.container, fragments[index]);
+            trx.replace(R.id.container, fragments[index]);
         }
         trx.show(fragments[index]).commitAllowingStateLoss();//重要
         currentTabIndex = index;

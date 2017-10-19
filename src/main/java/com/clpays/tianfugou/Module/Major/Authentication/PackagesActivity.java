@@ -252,7 +252,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                                 "建行POS为商家免费开放后台系统，客户使用建行POS完成交易后将客户信息实时推送至商家的后台，商家还可以添加备注，记录客户消费习惯、喜爱等信息，为二次营销提供帮助。\n" +
                                 "4)\t免费的营销推广平台，兜住客户没商量\n" +
                                 "建行POS为商家提供建行免费推广平台，商家可自主发放各种优惠券，所有关注建行公众号的客户均可领取商家发放的优惠券，将天南海北的朋友聚集到商家身边。\n "
-                                +"<img src=\""+R.drawable.pos_1+"\" /> <img src=\"" + R.drawable.pos_2 + "\" /><img src=\"" + R.drawable.pos_3 + "\" /><img src=\"" + R.drawable.pos_4 + "\" />");
+                                +"<img src=\""+R.drawable.pos_1+"\" /> <img src=\"" + R.drawable.pos_2 + "\" /> <img src=\"" + R.drawable.pos_3 + "\" /> <img src=\"" + R.drawable.pos_4 + "\" />");
                         thirdBeanArrayList.add(thirdBean);
                         secondBean.setSecondBean(thirdBeanArrayList);
                     }
@@ -306,7 +306,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                                     "建行POS为商家免费开放后台系统，客户使用建行POS完成交易后将客户信息实时推送至商家的后台，商家还可以添加备注，记录客户消费习惯、喜爱等信息，为二次营销提供帮助。\n" +
                                     "4)\t免费的营销推广平台，兜住客户没商量\n" +
                                     "建行POS为商家提供建行免费推广平台，商家可自主发放各种优惠券，所有关注建行公众号的客户均可领取商家发放的优惠券，将天南海北的朋友聚集到商家身边。\n"
-                                    +"<img src=\""+R.drawable.pos_1+"\" /> <img src=\"" + R.drawable.pos_2 + "\" /><img src=\"" + R.drawable.pos_3 + "\" /><img src=\"" + R.drawable.pos_4 + "\" />");
+                                    +"<img src=\""+R.drawable.pos_1+"\" /> <img src=\"" + R.drawable.pos_2 + "\" /> <img src=\"" + R.drawable.pos_3 + "\" /> <img src=\"" + R.drawable.pos_4 + "\" />");
                             thirdBeanArrayList.add(thirdBean);
                             secondBean.setSecondBean(thirdBeanArrayList);
                             break;

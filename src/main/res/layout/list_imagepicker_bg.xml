@@ -11,28 +11,36 @@
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_160dp"
-        android:layout_marginLeft="@dimen/_12dp"
-        android:layout_marginRight="@dimen/_12dp"
+        android:layout_marginLeft="@dimen/_16dp"
+        android:layout_marginRight="@dimen/_16dp"
         android:layout_marginTop="@dimen/_12dp"
         android:layout_marginBottom="@dimen/_12dp"
+        android:padding="@dimen/_2dp"
+        android:background="@drawable/list_imagepicker_bg"
         >
-        <TextView
-            android:id="@+id/type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="资产产权证书"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/_24dp"
-            android:textSize="@dimen/textsize14sp"
-            android:textColor="@color/gray_20"/>
+
         <ImageView
             android:id="@+id/iv_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerInside"
             app:srcCompat="@android:drawable/ic_menu_add"
-            android:background="@drawable/list_imagepicker_bg"/>
+            />
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="资产产权证书（至少一张）"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_24dp"
+            android:textSize="@dimen/textsize14sp"
+            android:paddingLeft="@dimen/_4dp"
+            android:paddingRight="@dimen/_4dp"
+            android:paddingTop="@dimen/_2dp"
+            android:paddingBottom="@dimen/_2dp"
+            android:background="@color/alpha_background_dark"
+            android:textColor="@color/white"/>
     </RelativeLayout>
 
 

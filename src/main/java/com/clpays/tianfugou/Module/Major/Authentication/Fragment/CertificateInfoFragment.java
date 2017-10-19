@@ -176,8 +176,14 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
         if(hidden){
 
         }else{
-            lazyLoad();
+            fetch();
         }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
     }
 
     protected void lazyLoad() {
@@ -200,6 +206,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                     String a=bean.string();
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
                         selImageList.clear();
+                        selImageList2.clear();//这样一个逻辑
                         JsonArray array=isJsonArray.handleData("attachlist",isJsonObj.handleData("data",a));
                         int size=array.size();
                             for(int i=0;i<size;i++){
@@ -360,11 +367,6 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
 
 
     public void push(){
-
-        if(isUpload){
-            ToastUtil.ShortToast("正在上传,请耐心等待");
-            return;
-        }
         int size=selImageList.size();
         ArrayList<ImageItem> total=new ArrayList<>();
         total.addAll(selImageList);
@@ -387,6 +389,13 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                 return;
             }
         }
+        for(int i=0;i<size;i++){
+            if(selImageList.get(i).isUpload==1){
+                ToastUtil.ShortToast("正在上传"+selImageList.get(i).type);
+                return;
+            }
+        }
+
         if(selImageList2.size()<=0&&zichan){
             ToastUtil.ShortToast("请至少上传一张资产证明图片!");
             return;
@@ -410,7 +419,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
     }
 
     public void uploadImage(ImageItem imageItem){
-        isUpload=true;
+        imageItem.isUpload=1;//
         String imagePath=imageItem.path;
         File file = new File(imagePath);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -427,18 +436,18 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
-                    isUpload=false;
+                    imageItem.isUpload=-1;
                     String a=bean.string();
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
                         String attachid=isGetStringFromJson.handleData("attachid", isJsonObj.handleData("data",a));
                         imageItem.pushok="OK";
                         imageItem.id=Integer.parseInt(attachid);
                     }else{
-                        //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                        ToastUtil.ShortToast(imageItem.type+"没有获取到服务器反馈id,请尝试重新选择上传");
                     }
 
                 }, throwable -> {
-                    isUpload=false;
+                    imageItem.isUpload=-1;
                     ToastUtil.ShortToast(imageItem.type+"上传失败,请尝试重新添加图片");
                 });
     }

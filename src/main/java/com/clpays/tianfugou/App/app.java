@@ -163,12 +163,12 @@ public class app extends Application implements DuskyObserver, Application.Activ
         imagePicker.setShowCamera(true);                      //显示拍照按钮
         imagePicker.setCrop(true);                           //允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true);                   //是否按矩形区域保存
-        imagePicker.setSelectLimit(3);              //选中数量限制
+        imagePicker.setSelectLimit(1);              //选中数量限制
         imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        imagePicker.setFocusWidth(1080);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setFocusHeight(675);                      //裁剪框的高度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setOutPutX(1080);                         //保存文件的宽度。单位像素
-        imagePicker.setOutPutY(675);                         //保存文件的高度。单位像素
+        imagePicker.setFocusWidth(800);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(500);                      //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(800);                         //保存文件的宽度。单位像素
+        imagePicker.setOutPutY(500);                         //保存文件的高度。单位像素
     }
 
 
@@ -183,6 +183,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
                 break;
             case "重新登录":
                 PreferenceUtil.resetPrivate();//清空
+                app.getInstance().delAlias();//删除推送对象
                 showDialog(Type,"身份验证失效，请重新登录");
                 break;
 
