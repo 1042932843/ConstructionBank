@@ -324,6 +324,10 @@ public class StartAuthenticationActivity extends BaseActivity {
                 break;
             case "提交完成":
                 changeFragmentIndex(2);
+                break;
+            case "检查状态":
+                CheckStatus();
+                break;
         }
     }
 

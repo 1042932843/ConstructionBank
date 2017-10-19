@@ -62,7 +62,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
 
     private ImagePickerAdapter adapter;
     private ImagePickerAutoAddAdapter autoAddAdapter;
-    JsonArray jsonArray = new JsonArray();
+
     boolean isAuto;
     boolean zichan;
     boolean isUpload;
@@ -196,6 +196,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
 
     //加载数据
     public void fetch(){
+        zichan=false;
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         RetrofitHelper.getUploadAPI()
                 .fetchUpload(obj)
@@ -258,7 +259,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
             case IMAGE_ITEM_ADD:
                 List<String> names = new ArrayList<>();
                 names.add("拍照");
-                names.add("相册");
+                //names.add("相册");
                 showDialog(new SelectDialog.SelectDialogListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -367,38 +368,39 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
 
 
     public void push(){
-        int size=selImageList.size();
+        JsonArray jsonArray = new JsonArray();
         ArrayList<ImageItem> total=new ArrayList<>();
         total.addAll(selImageList);
         total.addAll(selImageList2);
         int totalsize=total.size();
-        for(int i=0;i<totalsize;i++){
-            if("OK".equals(total.get(i).pushok));
-            jsonArray.add(total.get(i).id);
-        }
+
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
-        if(jsonArray.size()<size){
-            ToastUtil.ShortToast("请上传上述要求证件图片!");
-            return;
+
+        for(int i=0;i<totalsize;i++){
+            if(total.get(i).isUpload==1){
+                ToastUtil.ShortToast("正在上传"+total.get(i).type);
+                return;
+            }
         }
-        for(int i=0;i<size;i++){
-            if("OK".equals(selImageList.get(i).pushok)){
+
+        for(int i=0;i<totalsize;i++){
+            if("OK".equals(total.get(i).pushok)&&total.get(i).id!=-1){
 
             }else{
-                ToastUtil.ShortToast("请上传"+selImageList.get(i).type+"!");
+                ToastUtil.ShortToast("请上传"+total.get(i).type+"!");
                 return;
             }
         }
-        for(int i=0;i<size;i++){
-            if(selImageList.get(i).isUpload==1){
-                ToastUtil.ShortToast("正在上传"+selImageList.get(i).type);
-                return;
-            }
+        if(selImageList2.size()<1&&zichan){
+            ToastUtil.ShortToast("请上传至少一张资产产权证书!");
+            return;
         }
 
-        if(selImageList2.size()<=0&&zichan){
-            ToastUtil.ShortToast("请至少上传一张资产证明图片!");
-            return;
+        for(int i=0;i<totalsize;i++){
+            if("OK".equals(total.get(i).pushok)){
+                jsonArray.add(total.get(i).id);
+            }
+
         }
         obj.add("uploaded",jsonArray);
         RetrofitHelper.getUploadAPI()

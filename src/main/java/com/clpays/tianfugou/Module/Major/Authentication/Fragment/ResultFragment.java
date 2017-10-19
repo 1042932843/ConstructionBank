@@ -28,6 +28,8 @@ import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -64,13 +66,18 @@ public class ResultFragment extends BaseFragment {
         showExitDialog("是的，我已经准备好了相关材料","确认之后服务器会向您分配专员");
     }
 
-    @Override
-    public void setUserVisibleHint(boolean hidden) {
-        super.setUserVisibleHint(hidden);
-    }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(hidden){
+
+        }else{
+            CheckStatus();
+        }
+    }
+    @Override
     protected void lazyLoad() {
+
         if(UserState.NA.equals(PreferenceUtil.getStringPRIVATE("username", UserState.NA))){
 
         }else{
@@ -85,7 +92,7 @@ public class ResultFragment extends BaseFragment {
                         if ("true".equals(isGetStringFromJson.handleData("success", a))) {
                             String status = isGetStringFromJson.handleData("status", isJsonObj.handleData("data", a));
                             PreferenceUtil.putStringPRIVATE("status", status);
-                            CheckStatus();
+                            EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("检查状态"));
                         }
                     },throwable -> {
                         swipeRefreshLayout.setRefreshing(false);
@@ -165,6 +172,7 @@ public class ResultFragment extends BaseFragment {
 
     @Override
     public void finishCreateView(Bundle state) {
+
         initRecyclerView();
         dialogLoading=new DialogLoading();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -173,6 +181,7 @@ public class ResultFragment extends BaseFragment {
                 lazyLoad();
             }
         });
+
     }
 
 

@@ -10,6 +10,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/namelayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_36dp"
         android:focusableInTouchMode="true"
@@ -42,6 +43,7 @@
             android:background="@null"
             />
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -49,7 +51,18 @@
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/name_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:text="@string/xiugai"
+        android:visibility="gone"
+       />
+
     <RelativeLayout
+        android:id="@+id/idlayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_36dp"
         android:layout_marginTop="@dimen/_8dp"
@@ -75,11 +88,12 @@
             android:paddingLeft="@dimen/padding_half"
             android:textCursorDrawable="@drawable/edittext_cursor"
             android:textSize="14sp"
-            android:layout_toRightOf="@+id/ID"
-            android:layout_toEndOf="@+id/ID"
-            android:layout_marginLeft="@dimen/_4dp"
             android:background="@null"
-            />
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/ID"
+            android:layout_toEndOf="@+id/ID" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,8 +101,18 @@
             android:background="@color/gray_20"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
+    <TextView
+        android:id="@+id/id_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:text="@string/xiugai"
+        android:visibility="gone"
+        />
 
     <RelativeLayout
+        android:id="@+id/phonelayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_36dp"
         android:layout_marginTop="@dimen/_8dp"
@@ -125,10 +149,19 @@
             android:background="@color/gray_20"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-
+    <TextView
+        android:id="@+id/phone_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:text="@string/xiugai"
+        android:visibility="gone"
+        />
 
 
     <RelativeLayout
+        android:id="@+id/shangpulayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_36dp"
         android:layout_marginTop="@dimen/_8dp"
@@ -168,6 +201,9 @@
                 android:layout_toLeftOf="@+id/imageView3"
                 android:layout_toStartOf="@+id/imageView3"
                 android:hint="@string/unselected"/>
+
+
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -184,9 +220,18 @@
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
-
+    <TextView
+        android:id="@+id/shangpu_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:text="@string/xiugai"
+        android:visibility="gone"
+       />
 
     <RelativeLayout
+        android:id="@+id/shangguanyuanlayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_36dp"
         android:layout_marginTop="@dimen/_8dp"
@@ -223,7 +268,15 @@
             android:background="@color/gray_20"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-
+    <TextView
+        android:id="@+id/shangguanyuan_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/xiugai"
+        />
     <com.bilibili.magicasakura.widgets.TintButton
         android:id="@+id/next_step"
         android:layout_width="match_parent"
