@@ -49,6 +49,8 @@ import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 
+import java.net.SocketTimeoutException;
+
 import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_SET;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
@@ -287,7 +289,6 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         public void afterTextChanged(Editable s) {
             login_btn.setEnabled(username.getText().length() != 0 && password.getText().length() != 0);
             register.setEnabled(phone.getText().length() != 0 && my_password.getText().length() != 0&& identifying_code.getText().length() != 0);
-            identifying_code_but.setEnabled(phone.getText().length() != 0);
         }
     };
 
@@ -325,8 +326,11 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                     }
                     dialogLoading.dismiss();
                 }, throwable -> {
+                    if(throwable instanceof SocketTimeoutException){
+                        ToastUtil.ShortToast("服务器连接超时");
+                    }
                     dialogLoading.dismiss();
-                    //ToastUtil.ShortToast("数据错误");
+
                 });
     }
 
