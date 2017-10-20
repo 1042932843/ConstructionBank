@@ -297,6 +297,11 @@ public class HomePageActivity extends BaseActivity {
     public void initToolBar() {
 
     }
+    //protected覆写，属于eventBus的bug? -->https://github.com/greenrobot/EventBus/issues/156  倒数第三行
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //super.onSaveInstanceState(outState);防止fragment重叠
+    }
 
     /**
      * RxPermission权限动态申请
