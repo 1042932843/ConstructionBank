@@ -17,21 +17,31 @@
         <activity
             android:name=".ui.ImageGridActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/ImagePickerTheme"/>
+            android:theme="@style/ImagePickerTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.ImageCropActivity"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="false"
-            android:theme="@style/ImagePickerTheme"/>
+            android:theme="@style/ImagePickerTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.ImagePreviewActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/ImagePickerThemeFullScreen"/>
+            android:theme="@style/ImagePickerThemeFullScreen"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.ImagePreviewDelActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/ImagePickerThemeFullScreen"/>
+            android:theme="@style/ImagePickerThemeFullScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.ImagePreviewDelActivity2"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/ImagePickerThemeFullScreen"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name=".ImagePickerProvider"

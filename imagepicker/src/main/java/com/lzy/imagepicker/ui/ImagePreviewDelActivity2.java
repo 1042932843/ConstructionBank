@@ -23,7 +23,7 @@ import com.lzy.imagepicker.util.NavigationBarChangeListener;
  * 修订历史：预览已经选择的图片，并可以删除, 感谢 ikkong 的提交
  * ================================================
  */
-public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements View.OnClickListener {
+public class ImagePreviewDelActivity2 extends ImagePreviewBaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,18 +76,15 @@ public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //移除当前图片刷新界面,没有直接new一个进去的原因是需要type字段。
-                mImageItems.get(0).path="";
-                mImageItems.get(0).id=-1;
-                mImageItems.get(0).pushok="";
-                onBackPressed();
-               /* if (mImageItems.size() > 0) {
+                //移除当前图片刷新界面
+                mImageItems.remove(mCurrentPosition);
+                if (mImageItems.size() > 0) {
                     mAdapter.setData(mImageItems);
                     mAdapter.notifyDataSetChanged();
                     mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
                 } else {
                     onBackPressed();
-                }*/
+                }
             }
         });
         builder.show();
