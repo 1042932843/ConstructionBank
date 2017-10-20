@@ -1,6 +1,8 @@
 package com.clpays.tianfugou.Module.Major.Authentication.Fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,6 +34,8 @@ import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +51,8 @@ import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Utils.LogUtil;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity2;
+
+import net.bither.util.NativeUtil;
 
 /**
  * Name: CertificateInfoFragment
@@ -259,7 +265,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
             case IMAGE_ITEM_ADD:
                 List<String> names = new ArrayList<>();
                 names.add("拍照");
-                //names.add("相册");
+                names.add("相册");
                 showDialog(new SelectDialog.SelectDialogListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -423,6 +429,16 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
     public void uploadImage(ImageItem imageItem){
         imageItem.isUpload=1;//
         String imagePath=imageItem.path;
+        FileInputStream fis = null;
+
+        try {
+            fis = new FileInputStream(imagePath);
+            Bitmap bitmap  = BitmapFactory.decodeStream(fis);
+            NativeUtil.compressBitmap(bitmap, imagePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         File file = new File(imagePath);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
