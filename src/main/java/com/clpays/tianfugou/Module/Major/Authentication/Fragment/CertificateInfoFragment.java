@@ -389,7 +389,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
             }
         }
 
-        for(int i=0;i<totalsize;i++){
+        for(int i=0;i<totalsize;i++){//我只是为了分清业务才把这些循环放出来的，我知道可以在上面第一次循环就处理了。优化的时候要注意点。
             if("OK".equals(total.get(i).pushok)&&total.get(i).id!=-1){
 
             }else{

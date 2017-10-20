@@ -3,6 +3,7 @@ package com.clpays.tianfugou.Adapter.PackagesAdapter;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 
 import com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView;
+import com.clpays.tianfugou.Design.myScrollView.myScrollView;
 import com.clpays.tianfugou.Entity.PackageChoice.FirstBean;
 import com.clpays.tianfugou.Entity.PackageChoice.SecondBean;
 import com.clpays.tianfugou.R;
@@ -34,15 +36,17 @@ public class MainAdapter extends BaseExpandableListAdapter {
     private Context mContext;
     private ArrayList<FirstBean> mData;
     ViewHolder holder = null;
+    myScrollView scrollView;
 
     public int getPackage() {
         return Package;
     }
 
     int Package;
-    public MainAdapter(Context context, ArrayList<FirstBean> data){
+    public MainAdapter(Context context, ArrayList<FirstBean> data,myScrollView scrollView){
         this.mContext = context;
         this.mData = data;
+        this.scrollView=scrollView;
     }
     @Override
     public int getGroupCount() {
@@ -165,33 +169,38 @@ public class MainAdapter extends BaseExpandableListAdapter {
                 return false;
             }
         });
-        /**
-         *子ExpandableListView展开时，因为group只有一项，所以子ExpandableListView的总高度=
-         * （子ExpandableListView的child数量 + 1 ）* 每一项的高度
-         * */
-        childListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+        //滑动冲突的解决方案
+        childListView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onGroupExpand(int groupPosition) {
-                Log.e("xxx",groupPosition+"onGroupExpand>>");
-                AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        (bean.getSecondBean().size() + 1)* (int) mContext
-                                .getResources().getDimension(R.dimen.parent_list_height));
-                childListView.setLayoutParams(lp);
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_MOVE) {
+                    int top = childListView.getChildAt(0).getTop();
+                    float nowY = event.getY();
+                    scrollView.requestDisallowInterceptTouchEvent(true);
+                }
+
+                return false;
             }
         });
-        /**
-         *子ExpandableListView关闭时，此时只剩下group这一项，
-         * 所以子ExpandableListView的总高度即为一项的高度
-         * */
-        childListView.setOnGroupCollapseListener(new CustomExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Log.e("xxx",groupPosition+">>onGroupCollapse");
-                AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                childListView.setLayoutParams(lp);
 
+
+        // 监听listview滚到最底部
+        childListView.setOnScrollListener(new ExpandableListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                switch (scrollState) {
+                    // 当不滚动时
+                    case ExpandableListView.OnScrollListener.SCROLL_STATE_IDLE:
+                        // 判断滚动到底部
+
+                        break;
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
             }
         });
         /**

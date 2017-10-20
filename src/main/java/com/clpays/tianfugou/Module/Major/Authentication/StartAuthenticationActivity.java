@@ -12,8 +12,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 
+import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Design.stepsView.HorizontalStepView;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
+import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
 import com.clpays.tianfugou.Module.Major.Authentication.Fragment.CertificateInfoFragment;
 import com.clpays.tianfugou.Module.Major.Authentication.Fragment.ResultFragment;
 
@@ -88,6 +90,10 @@ public class StartAuthenticationActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //...To-do
+                        app.getInstance().delAlias();
+                        PreferenceUtil.resetPrivate();
+                        Intent it=new Intent(StartAuthenticationActivity.this, LRpageActivity.class);
+                        startActivity(it);
                         finish();
                     }
                 });

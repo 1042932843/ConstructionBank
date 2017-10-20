@@ -161,8 +161,8 @@ public class app extends Application implements DuskyObserver, Application.Activ
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideImageLoader());   //设置图片加载器
         imagePicker.setShowCamera(true);                      //显示拍照按钮
-        imagePicker.setCrop(true);                           //允许裁剪（单选才有效）
-        imagePicker.setSaveRectangle(true);                   //是否按矩形区域保存
+        imagePicker.setCrop(false);                           //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(false);                   //是否按矩形区域保存
         imagePicker.setSelectLimit(1);              //选中数量限制
         imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
         imagePicker.setFocusWidth(800);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
@@ -292,7 +292,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
             contextActivity = activity.getParent();
         }else
             contextActivity = activity;
-        if(contextActivity instanceof HomePageActivity){
+        if(contextActivity instanceof HomePageActivity||contextActivity instanceof LRpageActivity){
             update();
         }
 

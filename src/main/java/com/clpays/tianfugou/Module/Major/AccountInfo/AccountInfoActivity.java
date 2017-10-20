@@ -15,7 +15,6 @@ import com.clpays.tianfugou.Utils.TextToSpeechUtil;
 import com.clpays.tianfugou.Utils.ToastUtil;
 
 public class AccountInfoActivity extends BaseActivity {
-    TextToSpeechUtil textToSpeech;
 
     @BindView(R.id.sesame_view)
     CreditSesameView sesameView;
@@ -47,7 +46,7 @@ public class AccountInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
-        textToSpeech=new TextToSpeechUtil(this);
+
     }
 
     @Override
@@ -76,6 +75,5 @@ public class AccountInfoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        textToSpeech.Stop();
     }
 }

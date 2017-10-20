@@ -428,7 +428,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
             }
         });
         dialogLoading=new DialogLoading();
-        mainAdapter = new MainAdapter(this,mDatas);
+        mainAdapter = new MainAdapter(this,mDatas,scrollView);
         expandableListView.setAdapter(mainAdapter);
         //设置点击父控件的监听
         expandableListView.setOnGroupExpandListener(this);
@@ -449,6 +449,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
         //点击最里面的菜单的点击事件
         mainAdapter.setOnChildListener(this);
         //将滑动事件交给子控件
+
         /*expandableListView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

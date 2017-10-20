@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.clpays.tianfugou.Design.myScrollView.myScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:overScrollMode="never"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
    >
 
     <android.support.v7.widget.Toolbar
@@ -54,17 +60,12 @@
             >
 
         </com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView>
-        <com.clpays.tianfugou.Design.myScrollView.myScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/expandableListView"
-            android:overScrollMode="never"
-            >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_below="@+id/expandableListView"
                 >
         <LinearLayout
             android:layout_width="match_parent"
@@ -223,7 +224,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_large" />
     </LinearLayout>
-</com.clpays.tianfugou.Design.myScrollView.myScrollView>
+
 
 
 </RelativeLayout>
+</com.clpays.tianfugou.Design.myScrollView.myScrollView>

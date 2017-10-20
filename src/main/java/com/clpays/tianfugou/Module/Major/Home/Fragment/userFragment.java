@@ -100,6 +100,7 @@ public class userFragment extends BaseFragment {
         waveView.setMax(50);
         waveView.setProgress(40);
         initRecyclerView();
+        lazyLoad();
     }
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -155,55 +156,36 @@ public class userFragment extends BaseFragment {
      */
     public void CheckStatus(){
 
-        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();
-        RetrofitHelper.getAppAPI()
-                .checkStatus(obj)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(bean -> {
+        String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
+        LogUtil.d(s);
+        switch (s){
+            case "finish":
+            case "N/A":
+                break;
+            case"profile":
+            case"package":
+            case "upload":
+                Intent it=new Intent(getActivity(), StartAuthenticationActivity.class);
+                startActivity(it);
+                break;
+            case "review_profile":
+                showExitDialog("基本资料审核未通过","请前往相关页面修改！");
+                break;
+            case "review_upload":
+                showExitDialog("证件上传审核未通过","请前往相关页面修改！");
+                break;
+            case "review_profile_upload":
+                showExitDialog("基本资料和证件上传审核未通过","请前往相关页面修改！");
+                break;
+            case "waiting":
+                showExitDialog("认证审核中","是否前往相关页面查看?(所有流程完成后才可使用应用功能)");
+                break;
+            case "checked":
+                showExitDialog("审核认证成功","是否前往相关页面查看?(所有流程完成后才可使用应用功能)");
+            case "prepared":
 
-                    String a=bean.string();//{"success":true,"message":"","data":{"token":"1haL06uZXgHQIT6-0HuZ24Q1eQWjVSN0","status":"\u5b9e\u540d\u8ba4\u8bc1"}}
-                    if("true".equals(isGetStringFromJson.handleData("success",a))){
-
-                        String status=isGetStringFromJson.handleData("status", isJsonObj.handleData("data",a));
-                        PreferenceUtil.putStringPRIVATE("status",status);
-                        String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
-                        LogUtil.d(s);
-                        switch (s){
-                            case "finish":
-                            case "N/A":
-                                break;
-                            case"profile":
-                            case"package":
-                            case "upload":
-                                Intent it=new Intent(getActivity(), StartAuthenticationActivity.class);
-                                startActivity(it);
-                                break;
-                            case "review_profile":
-                                showExitDialog("基本资料审核未通过","请前往相关页面修改！");
-                                break;
-                            case "review_upload":
-                                showExitDialog("证件上传审核未通过","请前往相关页面修改！");
-                                break;
-                            case "review_profile_upload":
-                                showExitDialog("基本资料和证件上传审核未通过","请前往相关页面修改！");
-                                break;
-                            case "waiting":
-                                showExitDialog("认证审核中","是否前往相关页面查看?(所有流程完成后才可使用应用功能)");
-                                break;
-                            case "checked":
-                                showExitDialog("审核认证成功","是否前往相关页面查看?(所有流程完成后才可使用应用功能)");
-                            case "prepared":
-
-                                break;
-                        }
-                    }else{
-                        //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
-                        LogUtil.e(isGetStringFromJson.handleData("message",a));
-                    }
-                }, throwable -> {
-
-                });
+                break;
+        }
     }
 
     private void showExitDialog(String title,String msg){

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -56,6 +57,7 @@ public class HomePageActivity extends BaseActivity {
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar bottomNavigationBar;
 
+
     @Nullable
     TextBadgeItem numberBadgeItem;
 
@@ -104,13 +106,13 @@ public class HomePageActivity extends BaseActivity {
     @Override
     public void onResume(){
         super.onResume();
-
+        CheckLogin();
     }
 
     @Override
     public void initViews(Bundle savedInstanceState) {
         //PreferenceUtil.resetPrivate();
-        CheckLogin();
+        normalDialog = new AlertDialog.Builder(this);
         initNumberBadge();
         initBottomNavigationBar();
         //初始化Fragment
@@ -118,10 +120,14 @@ public class HomePageActivity extends BaseActivity {
 
     }
 
+
+
+
     /**
      * 检查登录,没登录去登录页面,登录了检查状态
      */
     public void CheckLogin(){
+
         String s= PreferenceUtil.getStringPRIVATE("token", UserState.NA);
         //LogUtil.d(s);
        if(s.isEmpty()||UserState.NA.equals(s)){
@@ -189,21 +195,23 @@ public class HomePageActivity extends BaseActivity {
                         LogUtil.e(isGetStringFromJson.handleData("message",a));
                     }
                 }, throwable -> {
-
+                    PreferenceUtil.putStringPRIVATE("status",UserState.NA);
+                    ToastUtil.ShortToast("检查状态失败");
                     dialogLoading.dismiss();
                 });
     }
 
-
-
+     AlertDialog.Builder normalDialog;
+    AlertDialog dia;
     private void showExitDialog(String title,String msg){
         /* @setIcon 设置对话框图标
          * @setTitle 设置对话框标题
          * @setMessage 设置对话框消息提示
          * setXXX方法返回Dialog对象，因此可以链式设置属性
          */
-        final AlertDialog.Builder normalDialog =
-                new AlertDialog.Builder(this);
+        if(dia!=null){
+            dia.dismiss();
+        }
         normalDialog.setIcon(R.mipmap.launcher);
         normalDialog.setTitle(title);
         normalDialog.setMessage(msg);
@@ -231,7 +239,7 @@ public class HomePageActivity extends BaseActivity {
 
 
         // 显示
-        normalDialog.show();
+        dia= normalDialog.show();
     }
     /**
      * 消息数量

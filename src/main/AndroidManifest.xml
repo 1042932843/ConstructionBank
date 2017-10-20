@@ -84,7 +84,8 @@
 
 
         <activity android:name="com.clpays.tianfugou.Module.LoginRegister.LRpageActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop">
 
         </activity>
 

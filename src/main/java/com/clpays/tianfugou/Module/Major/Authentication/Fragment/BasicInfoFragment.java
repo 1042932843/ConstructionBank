@@ -74,6 +74,10 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     public void chose(){
         dialogRegionalChoice.show(getFragmentManager(),DialogRegionalChoice.TAG);
     }
+    @OnClick (R.id.ad)
+    public void chose2(){
+        dialogRegionalChoice.show(getFragmentManager(),DialogRegionalChoice.TAG);
+    }
 
     @BindView(R.id.next_step)
     Button next_step;
