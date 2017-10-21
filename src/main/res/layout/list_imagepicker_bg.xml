@@ -30,7 +30,7 @@
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="资产产权证书（至少一张）"
+            android:text="资产产权证书（可上传多张或不传）"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/_24dp"

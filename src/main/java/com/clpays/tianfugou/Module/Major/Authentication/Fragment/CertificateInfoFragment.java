@@ -397,10 +397,10 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                 return;
             }
         }
-        if(selImageList2.size()<1&&zichan){
+        /*if(selImageList2.size()<1&&zichan){
             ToastUtil.ShortToast("请上传至少一张资产产权证书!");
             return;
-        }
+        }*/
 
         for(int i=0;i<totalsize;i++){
             if("OK".equals(total.get(i).pushok)){

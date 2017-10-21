@@ -76,6 +76,10 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     @OnClick (R.id.identifying_code_but)
     public void getIdentifying_code(){
         String phoneNum=phone.getText().toString();
+        if(phoneNum.isEmpty()){
+            ToastUtil.ShortToast("请填写手机号");
+            return;
+        }
         JsonObject obj= RequestProperty.CreateJsonObjectBody();
         obj.addProperty("phone",phoneNum);
         LogUtil.d("获取验证码");
