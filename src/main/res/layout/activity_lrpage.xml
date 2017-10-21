@@ -240,7 +240,7 @@
                         android:layout_toStartOf="@+id/identifying_code_but"
                         app:drawableLeftTint="@color/selector_focus"/>
                     <com.clpays.tianfugou.Design.TimeButton.TimeButton
-                        android:enabled="false"
+                        android:enabled="true"
                         android:layout_alignParentRight="true"
                         android:id="@+id/identifying_code_but"
                         android:layout_width="@dimen/_108dp"
