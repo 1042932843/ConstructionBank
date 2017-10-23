@@ -260,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/text_background_edit"
-                    android:drawableLeft="@drawable/ic_lock_outline_white_24dp"
+                    android:drawableLeft="@drawable/ic_yzm_outline_white_24dp"
                     android:drawablePadding="@dimen/padding_half"
                     android:hint="@string/id_code"
                     android:textColorHint="@color/gray_20"

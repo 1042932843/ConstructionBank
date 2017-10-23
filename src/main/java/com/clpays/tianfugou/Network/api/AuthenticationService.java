@@ -26,7 +26,10 @@ public interface AuthenticationService {
     @POST("user/fetchchecked")//审核完，需要准备的资料
     Observable<ResponseBody> fetchchecked(@Body JsonObject bean);
 
-    @POST("user/fetchchecked")//审核完，需要准备的资料OK
+    @POST("user/pushchecked")//审核完，需要准备的资料OK
     Observable<ResponseBody> pushchecked(@Body JsonObject bean);
+
+    @POST("user/fetchprepared")//审核完，需要准备的资料OK
+    Observable<ResponseBody> fetchprepared(@Body JsonObject bean);
 
 }

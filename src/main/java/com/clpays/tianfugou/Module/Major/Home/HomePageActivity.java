@@ -188,6 +188,8 @@ public class HomePageActivity extends BaseActivity {
                                 showExitDialog("审核认证成功","是否前往相关页面查看?(所有流程完成后才可使用应用功能)");
                             case "prepared":
 
+                                Intent it2=new Intent(this, StartAuthenticationActivity.class);
+                                startActivity(it2);
                                 break;
                         }
                     }else{

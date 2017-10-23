@@ -362,8 +362,8 @@ public class StartAuthenticationActivity extends BaseActivity {
 
             if(index==2){
                 this.finish();
-            }else if(index!=0&&index!=2){
-                changeFragmentIndex(index-1);
+            }else if(index==1){
+                goPackage();//修复返回变成到流程1的问题
             }else {
                 showExitDialog();
             }

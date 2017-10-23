@@ -48,6 +48,7 @@ public class StatusInterceptor implements Interceptor {
             case 403:
                 //ToastUtil.ShortToast("错误"+code+"，身份验证失效，请重新登录！");
                 EventBus.getDefault().post(new EventUtil("重新登录"));
+                break;
             case 404:
                 ToastUtil.ShortToast("错误"+code+"，服务器维护中");
                 break;

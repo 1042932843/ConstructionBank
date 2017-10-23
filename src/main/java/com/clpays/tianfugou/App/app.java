@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -75,7 +76,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
     private String url = "";
 
     private NetReceiver netReceiver;
-    Context contextActivity;
+    Activity contextActivity;
 
     // 用于存放倒计时时间（验证码按钮）
     public static Map<String, Long> map;
@@ -242,37 +243,48 @@ public class app extends Application implements DuskyObserver, Application.Activ
          * @setMessage 设置对话框消息提示
          * setXXX方法返回Dialog对象，因此可以链式设置属性
          */
-        final AlertDialog.Builder normalDialog = new AlertDialog.Builder(contextActivity);
-        //normalDialog.setIcon(R.mipmap.launcher);
-        normalDialog.setTitle(title);
-        normalDialog.setMessage(message);
-        normalDialog.setCancelable(false);
-        normalDialog.setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if("强制升级".equals(title)||"版本升级".equals(title)){
-                            doUpdate(url);
-                        }
-                        if("重新登录".equals(title)){
-                            Intent it=new Intent(app.this,LRpageActivity.class);
-                            startActivity(it);
-                        }
 
-                    }
-                });
-        normalDialog.setNegativeButton("关闭",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //...To-do
-                        if("强制升级".equals(title)||"重新登录".equals(title)){
-                            System.exit(0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            if(contextActivity.isDestroyed()){
+                return;
+            }
+        }
+        if (contextActivity == null || contextActivity.isFinishing()) {
+            return;
+        }
+            final AlertDialog.Builder normalDialog = new AlertDialog.Builder(contextActivity);
+            //normalDialog.setIcon(R.mipmap.launcher);
+            normalDialog.setTitle(title);
+            normalDialog.setMessage(message);
+            normalDialog.setCancelable(false);
+            normalDialog.setPositiveButton("确定",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if("强制升级".equals(title)||"版本升级".equals(title)){
+                                doUpdate(url);
+                            }
+                            if("重新登录".equals(title)){
+                                Intent it=new Intent(app.this,LRpageActivity.class);
+                                startActivity(it);
+                            }
+
                         }
-                    }
-                });
-        // 显示
-        normalDialog.show();
+                    });
+            normalDialog.setNegativeButton("关闭",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //...To-do
+                            if("强制升级".equals(title)||"重新登录".equals(title)){
+                                System.exit(0);
+                            }
+                        }
+                    });
+            // 显示
+            normalDialog.show();
+
+
     }
 
     public void doUpdate(String url){
