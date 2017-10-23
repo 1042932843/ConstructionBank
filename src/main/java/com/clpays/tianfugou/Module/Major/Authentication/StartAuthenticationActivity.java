@@ -349,22 +349,19 @@ public class StartAuthenticationActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             //登录了并且是在审核状态UserState.isLogin()&&UserState.isAuditing()
             String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
-            if("review_profile".equals(s)){
+            if("review_profile".equals(s)||"review_upload".equals(s)){
                 showExitDialog();
-            }
-            if("review_profile_upload".equals(s)){
+            }else if("review_profile_upload".equals(s)){
                 if(index==1){
                     changeFragmentIndex(0);
                 }else{
                     showExitDialog();
                 }
-            }
-
-            if(index==2){
-                this.finish();
+            }else if(index==2){
+                finish();
             }else if(index==1){
-                goPackage();//修复返回变成到流程1的问题
-            }else {
+                goPackage();
+            }else{
                 showExitDialog();
             }
             return true;

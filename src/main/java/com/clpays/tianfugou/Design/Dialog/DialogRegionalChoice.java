@@ -21,6 +21,7 @@ import butterknife.OnClick;
 import com.clpays.tianfugou.Design.keyEditText.KeyEditText;
 import com.clpays.tianfugou.Entity.RegionalChoice.EventUtil;
 
+import com.clpays.tianfugou.Module.Major.Authentication.Fragment.BasicInfoFragment;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.LogUtil;
 
@@ -35,6 +36,7 @@ import com.clpays.tianfugou.Utils.LogUtil;
 
 public class DialogRegionalChoice extends DialogFragment implements KeyEditText.KeyPreImeListener{
     public static final String TAG = DialogRegionalChoice.class.getSimpleName();
+    public static String ad="";
 
     @BindView(R.id.makesure_btn)
     Button makesure_btn;
@@ -86,6 +88,8 @@ public class DialogRegionalChoice extends DialogFragment implements KeyEditText.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AppTheme_AppCompat_Dialog_Alert2);
+
+
     }
 
     @Nullable
@@ -96,6 +100,18 @@ public class DialogRegionalChoice extends DialogFragment implements KeyEditText.
         edit_where.addTextChangedListener(textWatcher);
         edit_where.setKeyPreImeListener(this);
         spinner1.setOnItemSelectedListener(onItemSelectedListener);
+        String[] titleArr = getResources().getStringArray(R.array.area);
+        if( null != titleArr ){
+
+            int titleLength = titleArr.length;
+
+            for( int index = 0; index < titleLength; index++ ){
+                if(titleArr[index].equals(ad)){
+                    spinner1.setSelection(index);
+                }
+            }
+
+        }
         return view;
 
     }

@@ -82,6 +82,12 @@
             android:name="com.clpays.tianfugou.Module.Major.Set.SetActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.clpays.tianfugou.Module.LoginRegister.RetrievepasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.clpays.tianfugou.Module.Major.Home.FunctionTipActivity"
+            android:screenOrientation="portrait" />
 
         <activity android:name="com.clpays.tianfugou.Module.LoginRegister.LRpageActivity"
             android:screenOrientation="portrait"

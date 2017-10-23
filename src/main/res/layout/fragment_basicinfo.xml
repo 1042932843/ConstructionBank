@@ -43,12 +43,6 @@
             android:background="@null"
             />
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray_20"
-            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
     <TextView
@@ -60,6 +54,11 @@
         android:text="@string/xiugai"
         android:visibility="gone"
        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_20"
+        />
 
     <RelativeLayout
         android:id="@+id/idlayout"
@@ -95,11 +94,7 @@
             android:layout_toRightOf="@+id/ID"
             android:layout_toEndOf="@+id/ID" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray_20"
-            android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
     <TextView
         android:id="@+id/id_e"
@@ -109,6 +104,11 @@
         android:gravity="center"
         android:text="@string/xiugai"
         android:visibility="gone"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_20"
         />
 
     <RelativeLayout
@@ -143,11 +143,6 @@
             android:background="@null"
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray_20"
-            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
     <TextView
         android:id="@+id/phone_e"
@@ -159,6 +154,12 @@
         android:visibility="gone"
         />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_20"
+        />
 
     <RelativeLayout
         android:id="@+id/shangpulayout"
@@ -214,11 +215,7 @@
 
             </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray_20"
-            android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
 
     <TextView
@@ -229,6 +226,11 @@
         android:gravity="center"
         android:text="@string/xiugai"
         android:visibility="gone"
+       />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_20"
        />
 
     <RelativeLayout
@@ -263,11 +265,7 @@
             android:background="@null"
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/gray_20"
-            android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
     <TextView
         android:id="@+id/shangguanyuan_e"
@@ -278,6 +276,12 @@
         android:visibility="gone"
         android:text="@string/xiugai"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_20" />
+
     <com.bilibili.magicasakura.widgets.TintButton
         android:id="@+id/next_step"
         android:layout_width="match_parent"

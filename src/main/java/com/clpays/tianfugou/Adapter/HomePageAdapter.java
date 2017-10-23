@@ -16,8 +16,11 @@ import java.util.List;
 
 import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Entity.HomePage.homeItem;
+import com.clpays.tianfugou.Module.Major.Home.FunctionTipActivity;
 import com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.PreferenceUtil;
+import com.clpays.tianfugou.Utils.UserState;
 
 
 /**
@@ -54,14 +57,39 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
         holder.name.setText(name);
         Glide.with(context).load(mDatas.get(position).getImg()).apply(app.optionsNormalCrop).into(holder.img);
         holder.img.setOnClickListener(v -> {
+            String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
                 switch (name){
                     case "二维码收款":
-                        it.setClass(context, QRgatheringActivity.class);
-                        context.startActivity(it);
+                        if("finish".equals(s)){
+                            it.setClass(context, QRgatheringActivity.class);
+                            context.startActivity(it);
+                        }else{
+                            it.setClass(context, FunctionTipActivity.class);
+                            it.putExtra("Title",name);
+                            context.startActivity(it);
+                        }
+
                         break;
-                    case "建行贷款":
+                    case "银行贷款":
+                        if("finish".equals(s)){
+                            //it.setClass(context, QRgatheringActivity.class);
+                            //context.startActivity(it);
+                        }else{
+                            it.setClass(context, FunctionTipActivity.class);
+                            it.putExtra("Title",name);
+                            context.startActivity(it);
+                        }
                         break;
-                    case "":
+                    case "商城缴费":
+                        if("finish".equals(s)){
+                            it.setClass(context, QRgatheringActivity.class);
+                            context.startActivity(it);
+                        }else{
+                            it.setClass(context, FunctionTipActivity.class);
+                            it.putExtra("Title",name);
+                            context.startActivity(it);
+                        }
+                        break;
             }
 
         });

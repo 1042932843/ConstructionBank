@@ -72,10 +72,12 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     RelativeLayout shangpudizhi;
     @OnClick(R.id.shangpudizhi)
     public void chose(){
+        DialogRegionalChoice.ad=address;
         dialogRegionalChoice.show(getFragmentManager(),DialogRegionalChoice.TAG);
     }
     @OnClick (R.id.ad)
     public void chose2(){
+        DialogRegionalChoice.ad=address;
         dialogRegionalChoice.show(getFragmentManager(),DialogRegionalChoice.TAG);
     }
 
@@ -150,15 +152,21 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
         ID_edit.addTextChangedListener(textWatcher);
         shangguanyuan_edit.addTextChangedListener(textWatcher);
         phonenum_edit.addTextChangedListener(textWatcher);
-
+        load=false;
+        if(!load){
+            lazyLoad();
+            load=true;
+        }
     }
 
+    boolean load;
     @Override
     public void onHiddenChanged(boolean hidden) {
         if(hidden){
 
         }else{
             lazyLoad();
+            load=true;
         }
     }
 
@@ -245,7 +253,6 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
 
                         }
                         if(!idcard.isEmpty()){
-
                             if(idcardE){
                                 id_e.setText(Eidcard);
                                 id_e.setVisibility(View.VISIBLE);
@@ -311,7 +318,7 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                         if("review_profile".equals(s)){
                             EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("提交完成"));
                         }else if("review_profile_upload".equals(s)){
-                            EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("证件上传"));
+                            EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("证照上传"));
                         }else {
                             EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("套餐选择"));
                         }

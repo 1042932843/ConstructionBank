@@ -80,6 +80,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             ToastUtil.ShortToast("请填写手机号");
             return;
         }
+        identifying_code_but.setEnabled(false);
         JsonObject obj= RequestProperty.CreateJsonObjectBody();
         obj.addProperty("phone",phoneNum);
         LogUtil.d("获取验证码");
@@ -99,7 +100,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                         ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                         String seconds=isGetStringFromJson.handleData("seconds", isJsonObj.handleData("data",a));
                         if(seconds.isEmpty()){
-
+                            identifying_code_but.setEnabled(true);
                         }else{
                             int time=Integer.parseInt(seconds);
                             identifying_code_but.setLength(time * 1000).initTimer();
@@ -107,6 +108,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
 
                     }
                 }, throwable -> {
+                    identifying_code_but.setEnabled(true);
                    // ToastUtil.ShortToast("数据错误");
                 });
 

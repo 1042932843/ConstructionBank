@@ -2,6 +2,7 @@ package com.clpays.tianfugou.App;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Dialog;
 import android.app.Notification;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -236,7 +237,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
                 });
 
     }
-
+    Dialog dialog;
     private void showDialog(String title,String message){
         /* @setIcon 设置对话框图标
          * @setTitle 设置对话框标题
@@ -244,6 +245,9 @@ public class app extends Application implements DuskyObserver, Application.Activ
          * setXXX方法返回Dialog对象，因此可以链式设置属性
          */
 
+        if(dialog!=null){
+            dialog.dismiss();
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             if(contextActivity.isDestroyed()){
                 return;
@@ -282,8 +286,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
                         }
                     });
             // 显示
-            normalDialog.show();
-
+        dialog= normalDialog.show();
 
     }
 

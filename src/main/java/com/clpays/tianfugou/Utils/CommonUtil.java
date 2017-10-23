@@ -54,7 +54,8 @@ public class CommonUtil {
         context.startActivity(intent);
 
       }
-    }).setNegativeButton("知道了", null).show();
+    }).setNegativeButton("知道了", null);
+    builder.show();
   }
 
   /**
