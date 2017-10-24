@@ -7,6 +7,7 @@
     <string name="type_pay">付款</string>
     <string name="credit_inm">立即贷款</string>
     <string name="my_credit">我的贷款</string>
+    <string name="my_message">通知</string>
     <string name="retrieve_password">找回密码</string>
     <string name="packages">套餐选择</string>
     <string name="user_login">用户登录</string>

@@ -51,7 +51,8 @@
         android:theme="@style/BaseAppTheme">
         <activity
             android:name="com.clpays.tianfugou.Module.Major.Home.HomePageActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -74,6 +75,9 @@
             android:name="com.clpays.tianfugou.Module.Major.Authentication.PackagesActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.clpays.tianfugou.Module.Message.MessageActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.clpays.tianfugou.Module.Major.Credit.MyCreditActivity"

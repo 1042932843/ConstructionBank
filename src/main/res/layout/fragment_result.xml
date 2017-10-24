@@ -78,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="审核结果我们会发送到消息中心，请注意查看\n预计审核时间3天"
+                    android:text="审核结果我们会发送到通知，请注意查看"
                     />
             </RelativeLayout>
             <RelativeLayout
@@ -126,7 +126,7 @@
                     android:layout_below="@id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="请准备好以下相关材料:\n1.营业执照正本原件及复印件两份（加盖公章）\n2.法人身份证原件及复印件两份（加盖公章）\n3.公司章程一份,所有股东签字,加盖骑缝章（个体工商户不需提供）\n4.开户许可证原件及复印件两份（加盖公章）（此项初次开户客户不提供）"
+                    android:text=""
                     />
             </RelativeLayout>
 

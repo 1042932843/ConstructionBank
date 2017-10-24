@@ -17,6 +17,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.clpays.tianfugou.Module.Major.Home.HomePageActivity;
+import com.clpays.tianfugou.Module.Message.MessageActivity;
 import com.clpays.tianfugou.Utils.ExampleUtil;
 
 import org.json.JSONException;
@@ -61,7 +62,7 @@ public class MyReceiver extends BroadcastReceiver {
                 Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
 
                 //打开自定义的Activity
-                Intent i = new Intent(context, HomePageActivity.class);
+                Intent i = new Intent(context, MessageActivity.class);
                 i.putExtras(bundle);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );

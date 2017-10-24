@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_64dp"
+       >
+	
+	<ImageView
+		android:id="@+id/pic"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:src="@drawable/massage"
+		android:layout_margin="@dimen/_8dp"
+		/>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:weightSum="2"
+		android:layout_toRightOf="@+id/pic"
+		android:layout_toEndOf="@+id/pic">
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1">
+			<TextView
+				android:id="@+id/text_title"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:text="@string/app_name"
+				android:gravity="center_vertical"
+				android:layout_alignParentLeft="true"
+				android:layout_toLeftOf="@+id/text_time"
+				android:layout_toStartOf="@+id/text_time" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:gravity="center_vertical"
+				android:layout_alignParentRight="true"
+				android:text="@string/app_name"
+				android:id="@+id/text_time" />
+		</RelativeLayout>
+
+	</LinearLayout>
+</RelativeLayout>
