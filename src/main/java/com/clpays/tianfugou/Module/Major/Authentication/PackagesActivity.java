@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,8 +33,10 @@ import io.reactivex.schedulers.Schedulers;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.ToastUtil;
+import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetBooleanFromJson;
 import com.clpays.tianfugou.Utils.tools.isGetJsonArrayFromJson;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
@@ -545,5 +548,17 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
     public void onclick(int parentPosition, int childPosition, int childIndex) {
         Log.e("xxx","点了"+"parentPosition>>"+"childPosition>>"+childPosition+
                 "childIndex>>"+childIndex);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("基本资料"));
+            finish();//修复返回问题
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }
