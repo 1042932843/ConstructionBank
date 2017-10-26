@@ -1,5 +1,6 @@
 package com.clpays.tianfugou.Module.LoginRegister;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.support.design.widget.AppBarLayout;
@@ -8,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 
 import android.os.Bundle;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
@@ -30,7 +32,6 @@ import com.clpays.tianfugou.Module.Major.Authentication.StartAuthenticationActiv
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
-import com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper;
 import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonObject;
@@ -41,7 +42,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import com.clpays.tianfugou.Design.keyEditText.KeyEditText;
-import com.clpays.tianfugou.Module.Major.Home.HomePageActivity;
 
 import com.clpays.tianfugou.Utils.LogUtil;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
@@ -50,8 +50,6 @@ import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 
 import java.net.SocketTimeoutException;
-
-import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_SET;
 
 public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreImeListener {
 
@@ -198,6 +196,32 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         finish();
     }
 
+    @OnClick(R.id.forget)
+    public void forget(){
+        String[] items = new String[] {"短信验证找回", "取消" };
+        AlertDialog dialog = new AlertDialog.Builder(this).setTitle("忘记密码？").setIcon(R.mipmap.launcher)
+                .setItems(items, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       // Toast.makeText(MainActivity.this, items[which], Toast.LENGTH_SHORT).show();
+                        Intent it=new Intent();
+                        switch (items[which]){
+                            case "通过旧密码修改":
+                                it.setClass(LRpageActivity.this,ChangePasswordActivity.class);
+                                startActivity(it);
+                                break;
+                            case "短信验证找回":
+                                it.setClass(LRpageActivity.this,FindPasswordActivity.class);
+                                startActivity(it);
+                                break;
+                            case "取消":
+                                break;
+                        }
+                    }
+                }).create();
+        dialog.show();
+    }
 
     @BindView(R.id.login_layout)
     LinearLayout login_layout;

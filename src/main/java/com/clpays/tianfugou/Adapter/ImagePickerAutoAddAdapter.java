@@ -2,6 +2,7 @@ package com.clpays.tianfugou.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Module.Major.Authentication.Fragment.CertificateInfoFragment;
 import com.clpays.tianfugou.R;
 import com.lzy.imagepicker.ImagePicker;
@@ -86,13 +89,14 @@ public class ImagePickerAutoAddAdapter extends RecyclerView.Adapter<ImagePickerA
     public class SelectedPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView iv_img;
-        private TextView Type;
+        private TextView Type,error;
         private int clickPosition;
 
         public SelectedPicViewHolder(View itemView) {
             super(itemView);
             iv_img = (ImageView) itemView.findViewById(R.id.iv_img);
             Type=(TextView)itemView.findViewById(R.id.type);
+            error=(TextView)itemView.findViewById(R.id.error);
         }
 
         public void bind(int position) {
@@ -104,7 +108,17 @@ public class ImagePickerAutoAddAdapter extends RecyclerView.Adapter<ImagePickerA
                 iv_img.setImageResource(android.R.drawable.ic_menu_add);
                 clickPosition = CertificateInfoFragment.IMAGE_ITEM_ADD;
             } else {
-                ImagePicker.getInstance().getImageLoader().displayImage((Activity) mContext, item.path, iv_img, 0, 0);
+                if(!item.path.isEmpty()){
+                    Glide.with(mContext).load(item.path).apply(app.optionsNormal).into(iv_img);
+                    Type.setText(item.type);
+                    if(!item.comment.isEmpty()){
+                        error.setText(item.comment);
+                        error.setTextColor(ContextCompat.getColor(mContext,R.color.red));
+                        error.setVisibility(View.VISIBLE);
+                    }else{
+                        error.setVisibility(View.GONE);
+                    }
+                }
                 clickPosition = position;
             }
         }

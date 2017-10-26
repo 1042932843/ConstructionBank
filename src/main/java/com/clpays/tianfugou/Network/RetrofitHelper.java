@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import com.clpays.tianfugou.App.app;
+import com.clpays.tianfugou.Module.Message.MessageActivity;
 import com.clpays.tianfugou.Network.Intercepter.StatusInterceptor;
 import com.clpays.tianfugou.Network.api.ApiConstants;
 import com.clpays.tianfugou.Network.api.AppService;
 import com.clpays.tianfugou.Network.api.AuthenticationService;
 import com.clpays.tianfugou.Network.api.HomePageService;
 import com.clpays.tianfugou.Network.api.LoginRegisterService;
+import com.clpays.tianfugou.Network.api.MessageService;
 import com.clpays.tianfugou.Network.api.PackageService;
 import com.clpays.tianfugou.Network.api.UpdateService;
 import com.clpays.tianfugou.Network.api.UploadService;
@@ -69,6 +71,10 @@ public class RetrofitHelper {
 
   public static UploadService getUploadAPI(){
     return createApi(UploadService.class, ApiConstants.Base_URL);
+  }
+
+  public static MessageService getMSGAPI(){
+    return createApi(MessageService.class, ApiConstants.Base_URL);
   }
 
 

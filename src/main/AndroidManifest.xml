@@ -87,8 +87,13 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.clpays.tianfugou.Module.LoginRegister.RetrievepasswordActivity"
+            android:name="com.clpays.tianfugou.Module.LoginRegister.FindPasswordActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.clpays.tianfugou.Module.LoginRegister.ChangePasswordActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.clpays.tianfugou.Module.Major.Home.FunctionTipActivity"
             android:screenOrientation="portrait" />
@@ -197,7 +202,7 @@
 
         <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="e92b4d1e8f1ecc3905856ab7" /> <!--  </>值来自开发者平台取得的AppKey-->
+        <meta-data android:name="JPUSH_APPKEY" android:value="e92b4d1e8f1ecc3905856ab7" /> <!--  </>值来自开发者平台取得的AppKeye92b4d1e8f1ecc3905856ab7-->
 
     </application>
 

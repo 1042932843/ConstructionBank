@@ -24,4 +24,10 @@ public interface LoginRegisterService {
 
     @POST("user/login")
     Observable<ResponseBody> login(@Body JsonObject bean);
+
+    @POST("user/findpw")
+    Observable<ResponseBody> findpw(@Body JsonObject bean);
+
+    @POST("user/changepw")
+    Observable<ResponseBody> changepw(@Body JsonObject bean);
 }

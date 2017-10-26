@@ -26,6 +26,23 @@
             android:scaleType="centerInside"
             app:srcCompat="@android:drawable/ic_menu_add"
             />
+
+        <TextView
+            android:id="@+id/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize14sp"
+            android:paddingLeft="@dimen/_4dp"
+            android:paddingRight="@dimen/_4dp"
+            android:paddingTop="@dimen/_2dp"
+            android:paddingBottom="@dimen/_2dp"
+            android:background="@color/alpha_background_dark"
+            android:textColor="@color/red"
+            android:layout_above="@+id/type"
+            android:layout_marginBottom="@dimen/_2dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
+
         <TextView
             android:id="@+id/type"
             android:layout_width="wrap_content"

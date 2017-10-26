@@ -196,6 +196,7 @@
                 android:layout_marginTop="@dimen/_8dp">
 
             <TextView
+                android:id="@+id/forget"
                 android:layout_width="@dimen/_96dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_4dp"

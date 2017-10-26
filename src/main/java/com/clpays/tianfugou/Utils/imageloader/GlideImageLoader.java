@@ -24,7 +24,7 @@ public class GlideImageLoader implements ImageLoader {
     public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
 
         Glide.with(activity)                             //配置上下文
-                .load(Uri.fromFile(new File(path)))
+                .load(path)
                 .apply(app.optionsNormal)
                 .into(imageView);
     }
@@ -32,7 +32,7 @@ public class GlideImageLoader implements ImageLoader {
     @Override
     public void displayImagePreview(Activity activity, String path, ImageView imageView, int width, int height) {
         Glide.with(activity)                             //配置上下文
-                .load(Uri.fromFile(new File(path)))      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
+                .load(path)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                 .apply(app.optionsNormal)
                 .into(imageView);
     }

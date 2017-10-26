@@ -2,6 +2,7 @@ package com.clpays.tianfugou.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.R;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -17,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.clpays.tianfugou.Module.Major.Authentication.Fragment.CertificateInfoFragment;
+
+import uk.co.senab.photoview.Compat;
+
 /**
  * Name: ImagePickerAdapter
  * Author: Dusky
@@ -76,7 +82,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
     public class SelectedPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView iv_img;
-        private TextView Type;
+        private TextView Type,error;
         private int clickPosition;
         private int Position;
 
@@ -84,6 +90,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
             super(itemView);
             iv_img = (ImageView) itemView.findViewById(R.id.iv_img);
             Type=(TextView)itemView.findViewById(R.id.type);
+            error=(TextView)itemView.findViewById(R.id.error);
         }
 
         public void bind(int position) {
@@ -93,10 +100,19 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
             if(mData.size()>0){
                     ImageItem item = mData.get(position);
+
                     if(!item.path.isEmpty()){
-                        ImagePicker.getInstance().getImageLoader().displayImage((Activity) mContext, item.path, iv_img, 0, 0);
+                        Glide.with(mContext).load(item.path).apply(app.optionsNormal).into(iv_img);
+                        Type.setText(item.type);
                         clickPosition = position;
                         Position=position;
+                        if(!item.comment.isEmpty()){
+                            error.setText(item.comment);
+                            error.setTextColor(ContextCompat.getColor(mContext,R.color.red));
+                            error.setVisibility(View.VISIBLE);
+                        }else{
+                            error.setVisibility(View.GONE);
+                        }
                     }else{
                         iv_img.setImageResource(android.R.drawable.ic_menu_add);
                         Type.setText(item.type);

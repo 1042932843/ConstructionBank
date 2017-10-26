@@ -26,6 +26,7 @@ import com.clpays.tianfugou.Utils.tools.isJsonArray;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -215,16 +216,39 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                         selImageList.clear();
                         selImageList2.clear();//这样一个逻辑
                         JsonArray array=isJsonArray.handleData("attachlist",isJsonObj.handleData("data",a));
+                        String uploaded= isJsonObj.handleData("uploaded",isJsonObj.handleData("data",a));
+                        JsonArray zichanlist=isJsonArray.handleData("资产产权证书",uploaded);
+                        int size2=zichanlist.size();
+                        for (int i=0;i<size2;i++){
+                            ImageItem imageItem=new ImageItem();
+                            imageItem.type="资产产权证书";
+                            imageItem.path=isGetStringFromJson.handleData("url",zichanlist.get(i).toString());
+                            imageItem.comment=isGetStringFromJson.handleData("comment",zichanlist.get(i).toString());
+                            String id=isGetStringFromJson.handleData("id",zichanlist.get(i).toString());
+                            if(!id.isEmpty()){
+                                imageItem.id=Integer.parseInt(id);
+                                imageItem.pushok="OK";
+                            }
+                            selImageList2.add(imageItem);
+                        }
                         int size=array.size();
                             for(int i=0;i<size;i++){
                                 ImageItem imageItem=new ImageItem();
                                 try{
                                     String item=  array.get(i).getAsString();
                                     imageItem.type=item;
+                                    imageItem.path=isGetStringFromJson.handleData("url",isJsonObj.handleData(imageItem.type,uploaded));
+                                    imageItem.comment=isGetStringFromJson.handleData("comment",isJsonObj.handleData(imageItem.type,uploaded));
+                                    String id=isGetStringFromJson.handleData("id",isJsonObj.handleData(imageItem.type,uploaded));
+                                    if(!id.isEmpty()){
+                                        imageItem.id=Integer.parseInt(id);
+                                        imageItem.pushok="OK";
+                                    }
                                     if(imageItem.type.equals("资产产权证书")){
                                         //资产UI标记
                                         zichan=true;
                                         recyclerView2.setVisibility(View.VISIBLE);
+
                                     }else{
                                         selImageList.add(imageItem);
                                     }
@@ -234,13 +258,14 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                             }
                         maxImgCount=selImageList.size();
                         adapter.setImages(selImageList);
+                        autoAddAdapter.setImages(selImageList2);
                     }else{
                         ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }
 
                 }, throwable -> {
                     //ToastUtil.ShortToast("数据错误");
-                    ToastUtil.ShortToast("数据出错，请尝试下拉刷新此页");
+                    //ToastUtil.ShortToast("数据出错，请尝试下拉刷新此页");
                 });
     }
 
@@ -325,6 +350,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                         autoAddAdapter.setMaxImgCount(maxImgCount2);
                         autoAddAdapter.setImages(selImageList2);
                         ImageItem imageItem= images.get(0);
+                        imageItem.comment="";
                         imageItem.type="资产产权证书";
                         uploadImage(imageItem);
                     }
@@ -350,6 +376,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                     if (images != null) {
                         ImageItem imageItem=images.get(0);
                         imageItem.type=selImageList.get(choice).type;
+                        imageItem.comment="";
                         selImageList.set(choice,imageItem);
                         adapter.setImages(selImageList);
                         uploadImage(imageItem);
@@ -447,7 +474,7 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
         String descriptionString = obj.toString();
         RequestBody description =RequestBody.create(MediaType.parse("multipart/form-data"), descriptionString);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-
+        imageItem.pushok="";
         RetrofitHelper.getUploadAPI()
                 .UploadPic(body,description)
                 //.compose(this.bindToLifecycle())
