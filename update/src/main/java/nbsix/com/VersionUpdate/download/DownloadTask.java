@@ -1,4 +1,4 @@
-package nbsix.clpays.VersionUpdate.download;
+package nbsix.com.VersionUpdate.download;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,12 +6,12 @@ import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
 
-import nbsix.clpays.VersionUpdate.db.ThreadDao;
-import nbsix.clpays.VersionUpdate.db.ThreadDaoImpl;
-import nbsix.clpays.VersionUpdate.entity.Config;
-import nbsix.clpays.VersionUpdate.entity.FileBean;
-import nbsix.clpays.VersionUpdate.entity.ThreadBean;
-import nbsix.clpays.VersionUpdate.service.UpdateService;
+import nbsix.com.VersionUpdate.db.ThreadDao;
+import nbsix.com.VersionUpdate.db.ThreadDaoImpl;
+import nbsix.com.VersionUpdate.entity.Config;
+import nbsix.com.VersionUpdate.entity.FileBean;
+import nbsix.com.VersionUpdate.entity.ThreadBean;
+import nbsix.com.VersionUpdate.service.UpdateService;
 
 
 /**

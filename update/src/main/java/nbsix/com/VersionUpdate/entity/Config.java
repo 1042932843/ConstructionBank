@@ -1,4 +1,4 @@
-package nbsix.clpays.VersionUpdate.entity;
+package nbsix.com.VersionUpdate.entity;
 
 import android.os.Environment;
 

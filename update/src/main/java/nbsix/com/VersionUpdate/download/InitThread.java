@@ -1,4 +1,4 @@
-package nbsix.clpays.VersionUpdate.download;
+package nbsix.com.VersionUpdate.download;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +8,8 @@ import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import nbsix.clpays.VersionUpdate.entity.Config;
-import nbsix.clpays.VersionUpdate.entity.FileBean;
-
+import nbsix.com.VersionUpdate.entity.Config;
+import nbsix.com.VersionUpdate.entity.FileBean;
 
 
 /**

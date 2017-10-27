@@ -1,4 +1,4 @@
-package nbsix.clpays.VersionUpdate.download;
+package nbsix.com.VersionUpdate.download;
 
 import java.io.File;
 import java.io.InputStream;
@@ -6,9 +6,9 @@ import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import nbsix.clpays.VersionUpdate.entity.Config;
-import nbsix.clpays.VersionUpdate.entity.FileBean;
-import nbsix.clpays.VersionUpdate.entity.ThreadBean;
+import nbsix.com.VersionUpdate.entity.Config;
+import nbsix.com.VersionUpdate.entity.FileBean;
+import nbsix.com.VersionUpdate.entity.ThreadBean;
 
 /**
  * Name: DownloadThread

@@ -1,6 +1,6 @@
-package nbsix.clpays.VersionUpdate.download;
+package nbsix.com.VersionUpdate.download;
 
-import nbsix.clpays.VersionUpdate.entity.ThreadBean;
+import nbsix.com.VersionUpdate.entity.ThreadBean;
 
 /**
  * Name: DownloadCallBack

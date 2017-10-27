@@ -27,6 +27,7 @@ public class ImageItem implements Serializable, Parcelable {
     public String pushok="";
     public int id=-1;
     public int isUpload=-1;
+    public String comment="";
 
     /** 图片的路径和创建时间相同就认为是同一张图片 */
     @Override
@@ -58,6 +59,7 @@ public class ImageItem implements Serializable, Parcelable {
         dest.writeLong(this.addTime);
         dest.writeInt(this.id);
         dest.writeInt(this.isUpload);
+        dest.writeString(this.comment);
 
     }
 
@@ -77,6 +79,7 @@ public class ImageItem implements Serializable, Parcelable {
         this.addTime = in.readLong();
         this.id=in.readInt();
         this.isUpload=in.readInt();
+        this.comment=in.readString();
     }
 
     public static final Parcelable.Creator<ImageItem> CREATOR = new Parcelable.Creator<ImageItem>() {

@@ -1,4 +1,4 @@
-package nbsix.clpays.VersionUpdate.Activity;
+package nbsix.com.VersionUpdate.Activity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nbsix.clpays.VersionUpdate.R;
-import nbsix.clpays.VersionUpdate.entity.VersionUpdateConfig;
+import nbsix.com.VersionUpdate.entity.VersionUpdateConfig;
 
 /***
  * 透明的Activity 用于运行权限检测
