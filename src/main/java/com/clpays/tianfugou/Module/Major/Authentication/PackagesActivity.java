@@ -17,10 +17,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.clpays.tianfugou.Adapter.PackagesAdapter.MainAdapter;
+import com.clpays.tianfugou.Adapter.PackagesAdapter.PackagesExpandableListViewAdapter;
 import com.clpays.tianfugou.Design.Dialog.DialogLoading;
 import com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView;
 import com.clpays.tianfugou.Design.myScrollView.myScrollView;
 import com.clpays.tianfugou.Entity.PackageChoice.FirstBean;
+import com.clpays.tianfugou.Entity.PackageChoice.NewPackagesBean;
 import com.clpays.tianfugou.Entity.PackageChoice.SecondBean;
 import com.clpays.tianfugou.Entity.PackageChoice.ThirdBean;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
@@ -49,38 +51,19 @@ import com.google.gson.JsonArray;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PackagesActivity extends BaseActivity implements ExpandableListView.OnGroupExpandListener,
-        MainAdapter.OnExpandClickListener{
+public class PackagesActivity extends BaseActivity{
     DialogLoading dialogLoading;
     int Package=0;
     boolean isSvToBottom;
     float mLastY;
     int THRESHOLD_Y_LIST_VIEW = 20;
+
+    private ArrayList<NewPackagesBean> mDatas = new ArrayList<NewPackagesBean>();
+    PackagesExpandableListViewAdapter packagesExpandableListViewAdapter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.scrollView)
-    myScrollView scrollView;
 
-    @BindView(R.id.posLayout)
-    RelativeLayout posLayout;
-    @BindView(R.id.comLayout)
-    RelativeLayout comLayout;
-    @BindView(R.id.personLayout)
-    RelativeLayout personLayout;
-    @BindView(R.id.accountLayout)
-    LinearLayout accountLayout;
-    @BindView(R.id.title_c)
-    TextView title_c;
-
-    @BindView(R.id.person)
-    CheckBox person;
-    @BindView(R.id.com)
-    CheckBox com;
-    @BindView(R.id.pos)
-    CheckBox pos;
-    @BindView(R.id.account)
-    CheckBox account;
 
 
     @OnClick(R.id.back)
@@ -99,34 +82,6 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         obj.addProperty("package",Package);
         JsonArray jsonArray = new JsonArray();
-        if(!person.isChecked()&&!com.isChecked()){
-            ToastUtil.ShortToast("个人开户和单位开户必须至少选择一个！");
-            return;
-        }
-        if(person.isChecked()){
-            jsonArray.add(1);
-        }
-        if(com.isChecked()){
-            jsonArray.add(2);
-        }
-        if(pos.isChecked()&&Package!=1){
-            jsonArray.add(3);
-        }
-
-        if(account.isChecked()&&com.isChecked()){
-            obj.addProperty("isnewbank",true);
-        }else{
-            obj.addProperty("isnewbank",false);
-        }
-        if(Package==3){
-            jsonArray.add(4);
-        }
-        jsonArray.add(5);
-        if(jsonArray.size()<=1){
-            ToastUtil.ShortToast("请选择套餐需求内容");
-            return;
-        }
-        obj.add("selected",jsonArray);
         dialogLoading.setMessage("资料提交中");
         dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
         RetrofitHelper.getPackageAPI()
@@ -151,13 +106,14 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
     }
 
     @BindView(R.id.expandableListView)
-    CustomExpandableListView expandableListView;
+    ExpandableListView expandableListView;
 
-    MainAdapter mainAdapter;
+    //MainAdapter mainAdapter;
 
-    private ArrayList<FirstBean> mDatas = new ArrayList<FirstBean>();
+
     @Override
     public void loadData(){
+        /*
         for(int i=0;i<3;i++){
             FirstBean firstBean = new FirstBean();
             ArrayList<SecondBean> secondBeanArrayList = new ArrayList<SecondBean>();
@@ -342,8 +298,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
         }
 
         mainAdapter.notifyDataSetChanged();
-        fetch();
-
+        fetch();*/
     }
     @Override
     public void onResume() {
@@ -376,23 +331,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                                 break;
                         }
 
-                        account.setChecked(isnewbank);
 
-                        for(int i=0;i<selected.size();i++){
-                            switch (selected.get(i).getAsInt()){
-                                case 1:
-                                    person.setChecked(true);
-                                    break;
-                                case 2:
-                                    com.setChecked(true);
-                                    break;
-                                case 3:
-                                    pos.setChecked(true);
-                                    break;
-                                case 4:
-                                    break;
-                            }
-                        }
 
                     }else{
                         //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
@@ -418,7 +357,10 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        com.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        packagesExpandableListViewAdapter =new PackagesExpandableListViewAdapter(mDatas,this);
+        expandableListView.setAdapter(packagesExpandableListViewAdapter);
+        /*com.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
@@ -431,11 +373,11 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
             }
         });
         dialogLoading=new DialogLoading();
-        mainAdapter = new MainAdapter(this,mDatas,scrollView);
-        expandableListView.setAdapter(mainAdapter);
+        //mainAdapter = new MainAdapter(this,mDatas,scrollView);
+        //expandableListView.setAdapter(mainAdapter);
         //设置点击父控件的监听
-        expandableListView.setOnGroupExpandListener(this);
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+        //expandableListView.setOnGroupExpandListener(this);
+        /*expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
                 if(Package==groupPosition+1){
@@ -449,8 +391,9 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
 
             }
         });
+        */
         //点击最里面的菜单的点击事件
-        mainAdapter.setOnChildListener(this);
+        //mainAdapter.setOnChildListener(this);
         //将滑动事件交给子控件
 
         /*expandableListView.setOnTouchListener(new View.OnTouchListener() {
@@ -481,7 +424,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
         });*/
 
 
-        scrollView.setScrollToBottomListener(new myScrollView.OnScrollToBottomListener() {
+        /*scrollView.setScrollToBottomListener(new myScrollView.OnScrollToBottomListener() {
             @Override
             public void onScrollToBottom() {
                 isSvToBottom = true;
@@ -492,6 +435,7 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
                 isSvToBottom = false;
             }
         });
+        */
     }
 
     @Override
@@ -500,55 +444,6 @@ public class PackagesActivity extends BaseActivity implements ExpandableListView
     }
 
 
-    /**
-     * 保证listview只展开一项
-     * @param groupPosition
-     */
-    @Override
-    public void onGroupExpand(int groupPosition) {
-        Package=groupPosition+1;
-        if(Package==1){
-            title_c.setVisibility(View.VISIBLE);
-            comLayout.setVisibility(View.VISIBLE);
-            personLayout.setVisibility(View.VISIBLE);
-            posLayout.setVisibility(View.GONE);
-        }
-        else if(Package==2){
-            title_c.setVisibility(View.VISIBLE);
-            posLayout.setVisibility(View.VISIBLE);
-            comLayout.setVisibility(View.VISIBLE);
-            personLayout.setVisibility(View.VISIBLE);
-        }
-        else if(Package==3){
-            title_c.setVisibility(View.VISIBLE);
-            posLayout.setVisibility(View.VISIBLE);
-            comLayout.setVisibility(View.VISIBLE);
-            personLayout.setVisibility(View.VISIBLE);
-        }else{
-            title_c.setVisibility(View.GONE);
-            posLayout.setVisibility(View.GONE);
-            comLayout.setVisibility(View.GONE);
-            personLayout.setVisibility(View.GONE);
-        }
-
-        Log.e("xxx","onGroupExpand>>"+groupPosition);
-        for (int i = 0; i < mDatas.size(); i++) {
-            if (i != groupPosition) {
-                expandableListView.collapseGroup(i);
-            }
-        }
-    }
-    /***
-     * 点击最次级菜单的点击事件
-     * @param parentPosition
-     * @param childPosition
-     * @param childIndex
-     */
-    @Override
-    public void onclick(int parentPosition, int childPosition, int childIndex) {
-        Log.e("xxx","点了"+"parentPosition>>"+"childPosition>>"+childPosition+
-                "childIndex>>"+childIndex);
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

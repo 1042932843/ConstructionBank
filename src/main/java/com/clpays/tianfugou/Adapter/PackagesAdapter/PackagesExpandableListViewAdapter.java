@@ -1,4 +1,4 @@
-package com.clpays.tianfugou.Adapter;
+package com.clpays.tianfugou.Adapter.PackagesAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,22 +9,23 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import com.clpays.tianfugou.Entity.PackageChoice.NewPackagesBean;
 import com.clpays.tianfugou.Entity.RegionalChoice.Title;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.ToastUtil;
 
 /**
- * Name: RegionalChoiceExpandableListViewAdapter
+ * Name: PackagesExpandableListViewAdapter
  * Author: Dusky
  * QQ: 1042932843
- * Comment: //多层展开adapter这个暂时没用
- * Date: 2017-09-13 14:51
+ * Comment: //多层展开PackagesExpandableListViewAdapter
+ * Date: 2017-10-31 16:05
  */
 
-public class RegionalChoiceExpandableListViewAdapter extends BaseExpandableListAdapter {
-    private List<Title> dataTitleGroups;
+public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter {
+    private List<NewPackagesBean> dataTitleGroups;
     private Context mcontext;
-    public RegionalChoiceExpandableListViewAdapter(List<Title> data, Context context) {
+    public PackagesExpandableListViewAdapter(List<NewPackagesBean> data, Context context) {
         dataTitleGroups=data;
         mcontext=context;
     }
@@ -40,11 +41,11 @@ public class RegionalChoiceExpandableListViewAdapter extends BaseExpandableListA
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        if(dataTitleGroups.get(groupPosition).getItems().size()<=0){
-            ToastUtil.ShortToast("当日木有数据");
+        if(dataTitleGroups.get(groupPosition).getBeenList().size()<=0){
+            ToastUtil.ShortToast("木有数据");
             return 0;
         }
-        return dataTitleGroups.get(groupPosition).getItems().size();//  获得某个父项的子项数目
+        return dataTitleGroups.get(groupPosition).getBeenList().size();//  获得某个父项的子项数目
     }
 
     @Override
@@ -54,7 +55,7 @@ public class RegionalChoiceExpandableListViewAdapter extends BaseExpandableListA
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return dataTitleGroups.get(groupPosition).getItems().get(childPosition);
+        return dataTitleGroups.get(groupPosition).getBeenList().get(childPosition);
     }
 
     @Override
@@ -93,7 +94,7 @@ public class RegionalChoiceExpandableListViewAdapter extends BaseExpandableListA
         }
         convertView.setTag(R.layout.layout_list_timeitem, groupPosition);
 
-        if("".equals(dataTitleGroups.get(groupPosition).getItems().get(childPosition).getName())){
+        if("".equals(dataTitleGroups.get(groupPosition).getBeenList().get(childPosition).getTitle())){
 
         }else{
 
