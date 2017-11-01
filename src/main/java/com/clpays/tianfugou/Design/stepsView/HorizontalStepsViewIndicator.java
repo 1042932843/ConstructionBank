@@ -131,7 +131,7 @@ public class HorizontalStepsViewIndicator extends View
         mLinePadding = 0.85f * defaultStepIndicatorNum;
 
         mCompleteIcon = ContextCompat.getDrawable(getContext(), R.drawable.wancheng);//已经完成的icon
-        mAttentionIcon = ContextCompat.getDrawable(getContext(), R.drawable.attention);//正在进行的icon
+        mAttentionIcon = ContextCompat.getDrawable(getContext(), R.drawable.wancheng);//正在进行的icon
         mDefaultIcon = ContextCompat.getDrawable(getContext(), R.drawable.weiwancheng);//未完成的icon
     }
 

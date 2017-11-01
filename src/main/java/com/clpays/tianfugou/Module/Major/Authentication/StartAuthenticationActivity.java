@@ -192,13 +192,13 @@ public class StartAuthenticationActivity extends BaseActivity {
                     stepView.setStepViewTexts(stepsBeanList)
                             .setTextSize(14)//set textSize
                             .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
-                            .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator完成线的颜色
+                            .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.hah))//设置StepsViewIndicator完成线的颜色
                             .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
                             .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
                             .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
-                            .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_online))//设置StepsViewIndicator CompleteIcon
-                            .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_offline))//设置StepsViewIndicator DefaultIcon
-                            .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
+                            .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.wancheng))//设置StepsViewIndicator CompleteIcon
+                            .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon
+                            .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.wancheng));//设置StepsViewIndicator AttentionIcon
                     break;
                 }else{
                     List<StepBean> stepsBeanList = new ArrayList<>();
@@ -211,13 +211,13 @@ public class StartAuthenticationActivity extends BaseActivity {
                     stepView.setStepViewTexts(stepsBeanList)
                             .setTextSize(14)//set textSize
                             .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
-                            .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator完成线的颜色
+                            .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.hah))//设置StepsViewIndicator完成线的颜色
                             .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
                             .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
                             .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
-                            .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_online))//设置StepsViewIndicator CompleteIcon
-                            .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_offline))//设置StepsViewIndicator DefaultIcon
-                            .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
+                            .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.wancheng))//设置StepsViewIndicator CompleteIcon
+                            .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon
+                            .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.wancheng));//设置StepsViewIndicator AttentionIcon
                     break;
                 }
 
@@ -232,13 +232,13 @@ public class StartAuthenticationActivity extends BaseActivity {
                 stepView.setStepViewTexts(stepsBeanList2)
                         .setTextSize(12)//set textSize
                         .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
-                        .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator完成线的颜色
+                        .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.hah))//设置StepsViewIndicator完成线的颜色
                         .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
                         .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
                         .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
-                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_online))//设置StepsViewIndicator CompleteIcon
-                        .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_offline))//设置StepsViewIndicator DefaultIcon
-                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
+                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.wancheng))//设置StepsViewIndicator CompleteIcon
+                        .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon
+                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.wancheng));//设置StepsViewIndicator AttentionIcon
                 break;
             case 2:
                 List<StepBean> stepsBeanList3 = new ArrayList<>();
@@ -251,13 +251,13 @@ public class StartAuthenticationActivity extends BaseActivity {
                 stepView.setStepViewTexts(stepsBeanList3)
                         .setTextSize(14)//set textSize
                         .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
-                        .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator完成线的颜色
+                        .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.hah))//设置StepsViewIndicator完成线的颜色
                         .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
                         .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
                         .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
-                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_online))//设置StepsViewIndicator CompleteIcon
-                        .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, android.R.drawable.presence_offline))//设置StepsViewIndicator DefaultIcon
-                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.default_icon));//设置StepsViewIndicator AttentionIcon
+                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.wancheng))//设置StepsViewIndicator CompleteIcon
+                        .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon
+                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.wancheng));//设置StepsViewIndicator AttentionIcon
                 break;
         }
     }

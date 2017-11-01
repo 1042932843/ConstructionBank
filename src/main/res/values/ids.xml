@@ -4,4 +4,5 @@
     <item name="translucent_view" type="id"/>
     <item name="visible" type="id"/>
     <item name="masked" type="id"/>
+    <item name="item_id" type="id" />
 </resources>

@@ -29,6 +29,7 @@ public class Fragment4 extends Fragment {
 						// TODO Auto-generated method stub
 						startActivity(new Intent(getActivity(),
 								HomePageActivity.class));
+						//动画
 						AnimationUtil.finishActivityAnimation(getActivity());
 					}
 				});
