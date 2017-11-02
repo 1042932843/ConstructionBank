@@ -27,8 +27,7 @@ public class Fragment4 extends Fragment {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						// TODO Auto-generated method stub
-						startActivity(new Intent(getActivity(),
-								HomePageActivity.class));
+						getActivity().finish();
 						//动画
 						AnimationUtil.finishActivityAnimation(getActivity());
 					}

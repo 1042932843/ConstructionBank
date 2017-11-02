@@ -194,7 +194,7 @@ public class StartAuthenticationActivity extends BaseActivity {
                             .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
                             .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.hah))//设置StepsViewIndicator完成线的颜色
                             .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
-                            .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
+                            .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.colorPrimary))//设置StepsView text完成线的颜色
                             .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
                             .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.wancheng))//设置StepsViewIndicator CompleteIcon
                             .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon
@@ -213,7 +213,7 @@ public class StartAuthenticationActivity extends BaseActivity {
                             .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
                             .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.hah))//设置StepsViewIndicator完成线的颜色
                             .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
-                            .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
+                            .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.colorPrimary))//设置StepsView text完成线的颜色
                             .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
                             .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.wancheng))//设置StepsViewIndicator CompleteIcon
                             .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon
@@ -234,7 +234,7 @@ public class StartAuthenticationActivity extends BaseActivity {
                         .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
                         .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.hah))//设置StepsViewIndicator完成线的颜色
                         .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
-                        .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
+                        .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.colorPrimary))//设置StepsView text完成线的颜色
                         .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
                         .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.wancheng))//设置StepsViewIndicator CompleteIcon
                         .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon
@@ -253,7 +253,7 @@ public class StartAuthenticationActivity extends BaseActivity {
                         .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
                         .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.hah))//设置StepsViewIndicator完成线的颜色
                         .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
-                        .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text完成线的颜色
+                        .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.colorPrimary))//设置StepsView text完成线的颜色
                         .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
                         .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.wancheng))//设置StepsViewIndicator CompleteIcon
                         .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon

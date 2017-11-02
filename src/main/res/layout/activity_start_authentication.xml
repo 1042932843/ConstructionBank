@@ -44,8 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/gray_20_4f"
         android:padding="@dimen/_4dp"
         />
 

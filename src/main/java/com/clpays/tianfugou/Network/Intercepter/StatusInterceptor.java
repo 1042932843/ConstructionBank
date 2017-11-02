@@ -50,7 +50,7 @@ public class StatusInterceptor implements Interceptor {
                 EventBus.getDefault().post(new EventUtil("重新登录"));
                 break;
             case 404:
-                ToastUtil.ShortToast("错误"+code+"，服务器维护中");
+                EventBus.getDefault().post(new EventUtil("状态改变"));
                 break;
             case 500:
             case 502:

@@ -47,6 +47,7 @@ import com.google.gson.JsonObject;
 
 import org.greenrobot.eventbus.EventBus;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +114,7 @@ public class PackagesActivity extends BaseActivity{
 
     @Override
     public void loadData(){
+        fetch();
         /*
         for(int i=0;i<3;i++){
             FirstBean firstBean = new FirstBean();
@@ -316,19 +318,19 @@ public class PackagesActivity extends BaseActivity{
                 .subscribe(bean -> {
                     String a=bean.string();
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
-                        String Package=isGetStringFromJson.handleData("package", isJsonObj.handleData("data",a));
+                        //{"success":true,"message":"","data":{"selected":["1"],"isnewbank":false,"packages":{"1":{"id":"1","name":"\u514d\u8d39\u83b7\u5f97\u4e2a\u4eba\u6536\u6b3e\u94f6\u884c\u8d26\u6237","intro":"","related":null},"2":{"id":"2","name":"\u4f18\u60e0\u5f00\u7acb\u5bf9\u516c\u6536\u6b3e\u8d26\u6237","intro":"","related":"4"},"3":{"id":"3","name":"\u514d\u8d39\u83b7\u53d6\u667a\u80fdPOS\u673a","intro":"","related":null},"4":{"id":"4","name":"\u514d\u8d39\u5165\u4f4f\u5efa\u884c\u5584\u878d\u5546\u57ce","intro":"","related":"2"}}}}
+                        String Package=isJsonObj.handleData("packages", isJsonObj.handleData("data",a));
+                        JsonObject myJsondata = new JsonParser().parse(Package).getAsJsonObject();
+                        int what=  myJsondata.size();
                         boolean isnewbank= isGetBooleanFromJson.handleData("isnewbank", isJsonObj.handleData("data",a));
                         JsonArray selected= isGetJsonArrayFromJson.handleData("selected", isJsonObj.handleData("data",a));
-                        switch (Integer.parseInt(Package)){
-                            case 1:
-                                expandableListView.expandGroup(0);
-                                break;
-                            case 2:
-                                expandableListView.expandGroup(1);
-                                break;
-                            case 3:
-                                expandableListView.expandGroup(2);
-                                break;
+                        for (int p=0;p<what;p++){
+                            //myJsondata.get(p).toString();
+                        }
+                        int size=selected.size();
+                        for(int i=0;i<size;i++){
+                           int s= selected.get(i).getAsInt()-1;//套餐1是0项
+                            //expandableListView.expandGroup(s);
                         }
 
 
@@ -357,6 +359,18 @@ public class PackagesActivity extends BaseActivity{
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+
+        for(int i=0;i<5;i++){
+            NewPackagesBean bean=new NewPackagesBean();
+            bean.setTitle("套餐"+i);
+            bean.setChoice(false);
+            List<ThirdBean> thirdBeenlist=new ArrayList<>();
+            ThirdBean thirdBean=new ThirdBean();
+            thirdBean.setTitle("测试内容测试内容测试事实打开了世界大赛拉开大家");
+            thirdBeenlist.add(thirdBean);
+            bean.setBeenList(thirdBeenlist);
+            mDatas.add(bean);
+        }
 
         packagesExpandableListViewAdapter =new PackagesExpandableListViewAdapter(mDatas,this);
         expandableListView.setAdapter(packagesExpandableListViewAdapter);

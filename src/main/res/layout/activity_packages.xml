@@ -49,6 +49,7 @@
         android:paddingLeft="@dimen/_12dp"
         android:paddingRight="@dimen/_12dp"
         android:groupIndicator="@null"
+        android:divider="@null"
         android:layout_height="wrap_content">
 
     </ExpandableListView>

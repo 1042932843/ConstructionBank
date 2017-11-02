@@ -3,6 +3,7 @@ package com.clpays.tianfugou.Module.Major.Home;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
 import com.clpays.tianfugou.Module.Major.Authentication.StartAuthenticationActivity;
 import com.clpays.tianfugou.Module.Major.Home.Fragment.homeFragment;
 import com.clpays.tianfugou.Module.Major.Home.Fragment.msgFragment;
+import com.clpays.tianfugou.Module.Welcome.viewPage.ViewPagerActivity;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
@@ -73,9 +75,6 @@ public class HomePageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         initPermission();
-        if(!CommonUtil.isNetworkAvailable(this)){
-            CommonUtil.showNoNetWorkDlg(this);
-        }
 
 
     }
@@ -106,7 +105,24 @@ public class HomePageActivity extends BaseActivity {
     @Override
     public void onResume(){
         super.onResume();
-        CheckLogin();
+        SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
+        boolean isFirst = sp.getBoolean("isFirst", true);
+        if (isFirst == true) {
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putBoolean("isFirst", false);
+            edit.apply();
+            //应用首次启动
+            Intent it=new Intent(HomePageActivity.this,ViewPagerActivity.class);
+            startActivity(it);
+        } else {
+            //应用非首次启动
+            if(!CommonUtil.isNetworkAvailable(this)){
+                CommonUtil.showNoNetWorkDlg(this);
+            }else{
+                CheckLogin();
+            }
+
+        }
     }
 
     @Override

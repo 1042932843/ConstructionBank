@@ -50,6 +50,7 @@
     <color name="gray_80_alpha_30">#48BEBBB4</color>
     <color name="gray_80_alpha_60">#4fBEBBB4</color>
     <color name="gray_20">#80B3B3B3</color>
+    <color name="gray_20_4f">#4fB3B3B3</color>
     <color name="gray_light">#dcdcdc</color>
     <color name="white">#FFFFFF</color>
     <color name="white_alpha_30">#48FFFFFF</color>

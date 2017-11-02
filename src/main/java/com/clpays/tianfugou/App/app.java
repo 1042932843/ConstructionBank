@@ -188,6 +188,9 @@ public class app extends Application implements DuskyObserver, Application.Activ
                 app.getInstance().delAlias();//删除推送对象
                 showDialog(Type,"身份验证失效，请重新登录");
                 break;
+            case "状态改变":
+                showDialog(Type,"您的状态已经改变");
+                break;
 
         }
     }
@@ -272,9 +275,15 @@ public class app extends Application implements DuskyObserver, Application.Activ
                                 Intent it=new Intent(app.this,LRpageActivity.class);
                                 startActivity(it);
                             }
+                            if("状态改变".equals(title)){
+                                contextActivity.finish();
+                            }
 
                         }
                     });
+        if("状态改变".equals(title)){
+
+        }else{
             normalDialog.setNegativeButton("关闭",
                     new DialogInterface.OnClickListener() {
                         @Override
@@ -285,6 +294,8 @@ public class app extends Application implements DuskyObserver, Application.Activ
                             }
                         }
                     });
+        }
+
             // 显示
         dialog= normalDialog.show();
 

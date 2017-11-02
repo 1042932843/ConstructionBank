@@ -1,14 +1,18 @@
 package com.clpays.tianfugou.Adapter.PackagesAdapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.List;
 
+import com.clpays.tianfugou.Design.textViewHtml.MImageGetter;
 import com.clpays.tianfugou.Entity.PackageChoice.NewPackagesBean;
 import com.clpays.tianfugou.Entity.RegionalChoice.Title;
 import com.clpays.tianfugou.R;
@@ -77,11 +81,18 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mcontext);
-            convertView = inflater.inflate(R.layout.layout_list_regionalchoiceheader, null);
+            convertView = inflater.inflate(R.layout.package_title_layout, null);
         }
-        convertView.setTag(R.layout.layout_list_regionalchoiceheader, groupPosition);
+        convertView.setTag(R.layout.package_title_layout, groupPosition);
         TextView title = (TextView) convertView.findViewById(R.id.title);
-
+        CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
+        checkBox.setChecked(dataTitleGroups.get(groupPosition).isChoice());
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ToastUtil.ShortToast(isChecked+"");
+            }
+        });
         title.setText(dataTitleGroups.get(groupPosition).getTitle());
         return convertView;//  获得父项显示的view
     }
@@ -90,16 +101,12 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mcontext);
-            convertView = inflater.inflate(R.layout.layout_list_regionalchoiceitem, null);
+            convertView = inflater.inflate(R.layout.package_item_layout, null);
         }
-        convertView.setTag(R.layout.layout_list_timeitem, groupPosition);
-
-        if("".equals(dataTitleGroups.get(groupPosition).getBeenList().get(childPosition).getTitle())){
-
-        }else{
-
-        }
-
+        convertView.setTag(R.layout.package_item_layout, groupPosition);
+        TextView content = (TextView) convertView.findViewById(R.id.content);
+        String html=dataTitleGroups.get(groupPosition).getBeenList().get(childPosition).getTitle();
+        content.setText(Html.fromHtml(html, new MImageGetter(content, mcontext), null));
 
         return convertView;
     }

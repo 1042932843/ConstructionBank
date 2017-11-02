@@ -209,7 +209,7 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                     String a=bean.string();
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
                          realname=isGetStringFromJson.handleData("realname", isJsonObj.handleData("data",a));
-                         idcard=isGetStringFromJson.handleData("idcard",isJsonObj.handleData("data",a));
+                         idcard=isGetStringFromJson.handleData("shopname",isJsonObj.handleData("data",a));
                         phonenum=isGetStringFromJson.handleData("phonenum",isJsonObj.handleData("data",a));
                         address=isGetStringFromJson.handleData("address1",isJsonObj.handleData("data",a));
                         address2=isGetStringFromJson.handleData("address2",isJsonObj.handleData("data",a));
@@ -294,12 +294,12 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     }
 
     //提交数据
-    public void submit(String realname,String idcard,String phonenum,String address1,String address2,String shangguanyuan){
+    public void submit(String realname,String shopname,String phonenum,String address1,String address2,String shangguanyuan){
         dialogLoading.setMessage("资料提交中");
         dialogLoading.show(getFragmentManager(),DialogLoading.TAG);
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         obj.addProperty("realname",realname);
-        obj.addProperty("idcard",idcard);
+        obj.addProperty("shopname",shopname);
         obj.addProperty("phonenum",phonenum);
         obj.addProperty("address1",address1);
         obj.addProperty("address2",address2);

@@ -11,7 +11,7 @@ import android.content.Context;
  */
 
 public class VoiceUtils {
-    private static VoiceUtils mVoice;
+   /* private static VoiceUtils mVoice;
     public static VoiceUtils getInstance(){
         synchronized (VoiceUtils.class){
             if(null==mVoice){
@@ -98,5 +98,5 @@ public class VoiceUtils {
         }else {
             mTts.startSpeaking(msg,mSynthesizerListener);
         }
-    }
+    }*/
 }
