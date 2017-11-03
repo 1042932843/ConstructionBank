@@ -35,6 +35,7 @@ import io.reactivex.schedulers.Schedulers;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.GsonUtil;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.ToastUtil;
@@ -324,15 +325,33 @@ public class PackagesActivity extends BaseActivity{
                         int what=  myJsondata.size();
                         boolean isnewbank= isGetBooleanFromJson.handleData("isnewbank", isJsonObj.handleData("data",a));
                         JsonArray selected= isGetJsonArrayFromJson.handleData("selected", isJsonObj.handleData("data",a));
-                        for (int p=0;p<what;p++){
-                            //myJsondata.get(p).toString();
-                        }
                         int size=selected.size();
-                        for(int i=0;i<size;i++){
-                           int s= selected.get(i).getAsInt()-1;//套餐1是0项
-                            //expandableListView.expandGroup(s);
+                        for (int p=0;p<what;p++){
+                            String data = isJsonObj.handleData(p+1+"",Package);
+
+                            NewPackagesBean newPackagesBean=new NewPackagesBean();
+                            boolean select=false;
+                            for(int i=0;i<size;i++){
+                                int s= selected.get(i).getAsInt()-1;//套餐1是0项
+                                if(s==p){
+                                    select=true;
+                                }
+                            }
+                            newPackagesBean.setChoice(select);
+                            String title=isGetStringFromJson.handleData("name",data);
+                            newPackagesBean.setTitle(title);
+                            String Related=isGetStringFromJson.handleData("related",data);
+                            newPackagesBean.setRelated(Related);
+                            String content=isGetStringFromJson.handleData("intro",data);
+                            List<ThirdBean> thirdBeenlist=new ArrayList<>();
+                            ThirdBean thirdBean=new ThirdBean();
+                            thirdBean.setTitle(content);
+                            thirdBeenlist.add(thirdBean);
+                            newPackagesBean.setBeenList(thirdBeenlist);
+                            mDatas.add(newPackagesBean);
                         }
 
+                        packagesExpandableListViewAdapter.notifyDataSetChanged();
 
 
                     }else{
@@ -359,18 +378,6 @@ public class PackagesActivity extends BaseActivity{
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-
-        for(int i=0;i<5;i++){
-            NewPackagesBean bean=new NewPackagesBean();
-            bean.setTitle("套餐"+i);
-            bean.setChoice(false);
-            List<ThirdBean> thirdBeenlist=new ArrayList<>();
-            ThirdBean thirdBean=new ThirdBean();
-            thirdBean.setTitle("测试内容测试内容测试事实打开了世界大赛拉开大家");
-            thirdBeenlist.add(thirdBean);
-            bean.setBeenList(thirdBeenlist);
-            mDatas.add(bean);
-        }
 
         packagesExpandableListViewAdapter =new PackagesExpandableListViewAdapter(mDatas,this);
         expandableListView.setAdapter(packagesExpandableListViewAdapter);

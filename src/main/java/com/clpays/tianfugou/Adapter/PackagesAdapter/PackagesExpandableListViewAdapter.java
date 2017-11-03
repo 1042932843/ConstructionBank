@@ -37,7 +37,7 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
     @Override
     public int getGroupCount() {
         if (dataTitleGroups == null||dataTitleGroups.size()<=0) {
-            ToastUtil.ShortToast("木有数据");
+            //ToastUtil.ShortToast("木有数据");
             return 0;
         }
         return dataTitleGroups.size();//父项的数量
@@ -46,7 +46,7 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
     @Override
     public int getChildrenCount(int groupPosition) {
         if(dataTitleGroups.get(groupPosition).getBeenList().size()<=0){
-            ToastUtil.ShortToast("木有数据");
+            //ToastUtil.ShortToast("木有数据");
             return 0;
         }
         return dataTitleGroups.get(groupPosition).getBeenList().size();//  获得某个父项的子项数目
@@ -86,11 +86,23 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
         convertView.setTag(R.layout.package_title_layout, groupPosition);
         TextView title = (TextView) convertView.findViewById(R.id.title);
         CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
-        checkBox.setChecked(dataTitleGroups.get(groupPosition).isChoice());
+        boolean isc=dataTitleGroups.get(groupPosition).isChoice();
+        checkBox.setChecked(isc);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ToastUtil.ShortToast(isChecked+"");
+                //ToastUtil.ShortToast(isChecked+"");
+                //对列表本身进行操作
+                if(!buttonView.isPressed())return;  //加这一条，否则当我setChecked()时会触发此listener
+                dataTitleGroups.get(groupPosition).setChoice(isChecked);
+                String r=dataTitleGroups.get(groupPosition).getRelated();
+                if(!r.isEmpty()){
+                    int size=dataTitleGroups.size();
+                    int a=Integer.parseInt(dataTitleGroups.get(groupPosition).getRelated());
+                    dataTitleGroups.get(a-1).setChoice(isChecked);
+                    notifyDataSetChanged();
+
+                }
             }
         });
         title.setText(dataTitleGroups.get(groupPosition).getTitle());

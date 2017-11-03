@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.RelativeLayout;
 
 import com.clpays.tianfugou.Adapter.HomePageAdapter;
 
@@ -12,12 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import com.clpays.tianfugou.Design.FullyLinearLayoutManager.FullyLinearLayoutManager;
 import com.clpays.tianfugou.Entity.HomePage.homeItem;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
+import com.clpays.tianfugou.Module.Major.Home.FunctionTipActivity;
+import com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
@@ -37,6 +42,38 @@ public class homeFragment extends BaseFragment {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.shoukuan)
+    RelativeLayout shoukuan;
+    @OnClick(R.id.shoukuan)
+    public void setShoukuan(){
+        String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
+        Intent it=new Intent();
+        if("finish".equals(s)){
+            it.setClass(getActivity(), QRgatheringActivity.class);
+            startActivity(it);
+        }else{
+            it.setClass(getActivity(), FunctionTipActivity.class);
+            it.putExtra("Title","收款");
+            startActivity(it);
+        }
+    }
+
+    @BindView(R.id.sao)
+    RelativeLayout sao;
+    @OnClick(R.id.sao)
+    public void setSao(){
+        String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
+        Intent it=new Intent();
+        if("finish".equals(s)){
+            it.setClass(getActivity(), QRgatheringActivity.class);
+            startActivity(it);
+        }else{
+            it.setClass(getActivity(), FunctionTipActivity.class);
+            it.putExtra("Title","扫一扫");
+            startActivity(it);
+        }
+    }
+
     public static homeFragment newInstance() {
 
         return new homeFragment();
@@ -47,12 +84,8 @@ public class homeFragment extends BaseFragment {
     }
     @Override
     public void initRecyclerView(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new FullyLinearLayoutManager(getContext()));
         List<homeItem> homeItems =new ArrayList<>();
-        homeItem item1=new homeItem();
-        item1.setName("二维码收款");
-        item1.setImg(R.drawable.bg1_index);
-        homeItems.add(item1);
         homeItem item2=new homeItem();
         item2.setName("银行贷款");
         item2.setImg(R.drawable.bg2_index);
@@ -64,6 +97,7 @@ public class homeFragment extends BaseFragment {
 
         HomePageAdapter adapter=new HomePageAdapter(getContext(), homeItems);
         recyclerView.setAdapter(adapter);
+        recyclerView.setNestedScrollingEnabled(false);
     }
     @Override
     public int getLayoutResId() {

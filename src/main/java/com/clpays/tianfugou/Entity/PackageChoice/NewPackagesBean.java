@@ -17,6 +17,16 @@ public class NewPackagesBean {
     String title;
     boolean isChoice;
 
+    public String getRelated() {
+        return related;
+    }
+
+    public void setRelated(String related) {
+        this.related = related;
+    }
+
+    String related;
+
     public String getTitle() {
         return title;
     }
