@@ -17,6 +17,16 @@ public class NewPackagesBean {
     String title;
     boolean isChoice;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    String id;
+
     public String getRelated() {
         return related;
     }

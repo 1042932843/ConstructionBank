@@ -76,14 +76,21 @@ public class PackagesActivity extends BaseActivity{
 
     @OnClick(R.id.next_step)
     public void next(){
-
-       if(Package==0){
-           ToastUtil.ShortToast("请选择对应套餐");
-           return;
-       }
-        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
-        obj.addProperty("package",Package);
         JsonArray jsonArray = new JsonArray();
+        for(int i=0;i<mDatas.size();i++){
+            if(mDatas.get(i).isChoice()){
+             String id=  mDatas.get(i).getId();
+                jsonArray.add(id);
+            }
+
+        }
+        if(jsonArray.size()<=0){
+            ToastUtil.ShortToast("请选择相应服务后提交");
+            return;
+        }
+
+        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+        obj.add("selected",jsonArray);
         dialogLoading.setMessage("资料提交中");
         dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
         RetrofitHelper.getPackageAPI()
@@ -340,6 +347,8 @@ public class PackagesActivity extends BaseActivity{
                             newPackagesBean.setChoice(select);
                             String title=isGetStringFromJson.handleData("name",data);
                             newPackagesBean.setTitle(title);
+                            String id=isGetStringFromJson.handleData("id",data);
+                            newPackagesBean.setId(id);
                             String Related=isGetStringFromJson.handleData("related",data);
                             newPackagesBean.setRelated(Related);
                             String content=isGetStringFromJson.handleData("intro",data);
@@ -393,7 +402,7 @@ public class PackagesActivity extends BaseActivity{
                 }
             }
         });
-        dialogLoading=new DialogLoading();
+
         //mainAdapter = new MainAdapter(this,mDatas,scrollView);
         //expandableListView.setAdapter(mainAdapter);
         //设置点击父控件的监听
