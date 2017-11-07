@@ -167,7 +167,7 @@ public class StartAuthenticationActivity extends BaseActivity {
             case "review_upload":
                 changeFragmentIndex(1);
                 break;
-
+            case "makecard":
             case "checked":
             case "prepared":
             case "waiting":
@@ -181,7 +181,6 @@ public class StartAuthenticationActivity extends BaseActivity {
         String s= PreferenceUtil.getStringPRIVATE("status",UserState.NA);
         switch (index){
             case 0:
-                if(!"profile".equals(s)){
                     List<StepBean> stepsBeanList = new ArrayList<>();
                     StepBean stepBean0 = new StepBean("基本资料",StepBean.STEP_COMPLETED);
                     StepBean stepBean1 = new StepBean("证照上传",StepBean.STEP_UNDO);
@@ -200,31 +199,12 @@ public class StartAuthenticationActivity extends BaseActivity {
                             .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon
                             .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.wancheng));//设置StepsViewIndicator AttentionIcon
                     break;
-                }else{
-                    List<StepBean> stepsBeanList = new ArrayList<>();
-                    StepBean stepBean0 = new StepBean("基本资料",StepBean.STEP_UNDO);
-                    StepBean stepBean1 = new StepBean("证照上传",StepBean.STEP_UNDO);
-                    StepBean stepBean2 = new StepBean("提交完成",StepBean.STEP_UNDO);
-                    stepsBeanList.add(stepBean0);
-                    stepsBeanList.add(stepBean1);
-                    stepsBeanList.add(stepBean2);
-                    stepView.setStepViewTexts(stepsBeanList)
-                            .setTextSize(14)//set textSize
-                            .setLinePaddingProportion(2.8f)//设置indicator线与线间距的比例系数
-                            .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(this, R.color.hah))//设置StepsViewIndicator完成线的颜色
-                            .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(this, R.color.white))//设置StepsViewIndicator未完成线的颜色
-                            .setStepViewComplectedTextColor(ContextCompat.getColor(this, R.color.colorPrimary))//设置StepsView text完成线的颜色
-                            .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.white))//设置StepsView text未完成线的颜色
-                            .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.wancheng))//设置StepsViewIndicator CompleteIcon
-                            .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.weiwancheng))//设置StepsViewIndicator DefaultIcon
-                            .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.wancheng));//设置StepsViewIndicator AttentionIcon
-                    break;
-                }
+
 
             case 1:
                 List<StepBean> stepsBeanList2 = new ArrayList<>();
                 StepBean stepBean01 = new StepBean("基本资料",StepBean.STEP_COMPLETED);
-                StepBean stepBean11= new StepBean("证照上传",StepBean.STEP_UNDO);
+                StepBean stepBean11= new StepBean("证照上传",StepBean.STEP_COMPLETED);
                 StepBean stepBean21 = new StepBean("提交完成",StepBean.STEP_UNDO);
                 stepsBeanList2.add(stepBean01);
                 stepsBeanList2.add(stepBean11);

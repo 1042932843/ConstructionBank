@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    >
@@ -42,7 +44,7 @@
 
 
 
-    <ExpandableListView
+    <com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView
         android:id="@+id/expandableListView"
         android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
@@ -50,11 +52,9 @@
         android:paddingRight="@dimen/_12dp"
         android:groupIndicator="@null"
         android:divider="@null"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-    </ExpandableListView>
-
-
+    </com.clpays.tianfugou.Design.myExpandableListview.CustomExpandableListView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,6 +63,31 @@
                 android:layout_below="@+id/expandableListView"
                 >
 
+                <RelativeLayout
+                    android:id="@+id/isnew"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_48dp"
+                    android:paddingTop="@dimen/_8dp"
+                    android:paddingLeft="@dimen/_8dp"
+                    android:paddingRight="@dimen/_8dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="所持营业执照是否初次开户"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"/>
+                    <CheckBox
+                        android:id="@+id/account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
         <com.bilibili.magicasakura.widgets.TintButton
             android:layout_marginLeft="@dimen/_16dp"
             android:layout_marginRight="@dimen/_16dp"
@@ -71,7 +96,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16dp"
-            android:layout_below="@+id/scrollView"
             android:background="@drawable/selector_login"
             android:enabled="true"
             android:gravity="center"
@@ -83,3 +107,4 @@
 
 
 </RelativeLayout>
+    </ScrollView>

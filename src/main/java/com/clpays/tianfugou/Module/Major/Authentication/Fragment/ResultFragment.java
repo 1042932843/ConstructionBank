@@ -92,7 +92,12 @@ public class ResultFragment extends BaseFragment {
                         if ("true".equals(isGetStringFromJson.handleData("success", a))) {
                             String status = isGetStringFromJson.handleData("status", isJsonObj.handleData("data", a));
                             PreferenceUtil.putStringPRIVATE("status", status);
-                            EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("检查状态"));
+                            if(status.equals("finish")){
+                                getActivity().finish();
+                            }else{
+                                EventBus.getDefault().post(new com.clpays.tianfugou.Entity.Common.EventUtil("检查状态"));
+                            }
+
                         }
                     },throwable -> {
                         swipeRefreshLayout.setRefreshing(false);
@@ -271,6 +276,42 @@ public class ResultFragment extends BaseFragment {
                 status_prepared.setVisibility(View.GONE);
                 status_shenhe.setVisibility(View.VISIBLE);
                 stu_img.setImageResource(R.drawable.renzheng_shenhe);
+                break;
+
+            case "makecard":
+                status_shenhetongguo.setVisibility(View.GONE);
+                status_shenhe.setVisibility(View.GONE);
+                status_prepared.setVisibility(View.VISIBLE);
+                next_step.setVisibility(View.GONE);
+                stu_img.setImageResource(R.drawable.renzheng_tijiao);
+                JsonObject obj3= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+                RetrofitHelper.getAuthenticationAPI()
+                        .fetchmakecard(obj3)
+                        //.compose(this.bindToLifecycle())这里因为在不可见情况下更新页面，所以不能绑定生命周期
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(bean -> {
+                            String a=bean.string();
+                            if("true".equals(isGetStringFromJson.handleData("success",a))){
+                                String name=isGetStringFromJson.handleData("name", isJsonObj.handleData("data",a));
+                                String phone=isGetStringFromJson.handleData("phone",isJsonObj.handleData("data",a));
+                                String time =isGetStringFromJson.handleData("time",isJsonObj.handleData("data",a));
+                                if(name.isEmpty()){
+                                    prepared.setText("银行正在安排专员和时间,请耐心等待后续通知");
+                                }else{
+                                    prepared.setText("专员名称:"+name+"\n"+"手机号码:"+phone+"\n"+"预约时间:"+time);
+                                }
+                            }else{
+                                //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
+                            }
+
+                        }, throwable -> {
+                            ToastUtil.ShortToast("数据错误,请尝试重新确认");
+                        });
+
+                break;
+            case "finish":
+                getActivity().finish();
                 break;
         }
     }

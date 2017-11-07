@@ -32,4 +32,7 @@ public interface AuthenticationService {
     @POST("user/fetchprepared")//审核完，需要准备的资料OK
     Observable<ResponseBody> fetchprepared(@Body JsonObject bean);
 
+    @POST("user/fetchmakecard")//审核完，需要准备的资料OK
+    Observable<ResponseBody> fetchmakecard(@Body JsonObject bean);
+
 }

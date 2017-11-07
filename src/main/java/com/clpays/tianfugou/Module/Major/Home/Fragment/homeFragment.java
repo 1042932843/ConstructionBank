@@ -98,6 +98,7 @@ public class homeFragment extends BaseFragment {
         HomePageAdapter adapter=new HomePageAdapter(getContext(), homeItems);
         recyclerView.setAdapter(adapter);
         recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setFocusableInTouchMode(false); //设置不需要焦点
     }
     @Override
     public int getLayoutResId() {

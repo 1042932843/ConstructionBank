@@ -113,9 +113,9 @@ public class RetrofitHelper {
               .addInterceptor(interceptor).addInterceptor(statusInterceptor)
               //.addNetworkInterceptor(new CacheInterceptor())这里关闭缓存
               .retryOnConnectionFailure(true)
-              .connectTimeout(30, TimeUnit.SECONDS)
-              .writeTimeout(20, TimeUnit.SECONDS)
-              .readTimeout(20, TimeUnit.SECONDS)
+              .connectTimeout(10, TimeUnit.SECONDS)
+              .writeTimeout(10, TimeUnit.SECONDS)
+              .readTimeout(10, TimeUnit.SECONDS)
               //.addInterceptor(new UserAgentInterceptor())
               .build();
         }

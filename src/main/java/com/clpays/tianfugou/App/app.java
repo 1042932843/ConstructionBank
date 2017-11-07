@@ -273,6 +273,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
                             }
                             if("重新登录".equals(title)){
                                 Intent it=new Intent(app.this,LRpageActivity.class);
+                                it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(it);
                             }
                             if("状态改变".equals(title)){

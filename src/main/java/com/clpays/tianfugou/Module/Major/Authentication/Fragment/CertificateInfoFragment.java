@@ -218,18 +218,20 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                         JsonArray array=isJsonArray.handleData("attachlist",isJsonObj.handleData("data",a));
                         String uploaded= isJsonObj.handleData("uploaded",isJsonObj.handleData("data",a));
                         JsonArray zichanlist=isJsonArray.handleData("资产产权证书",uploaded);
-                        int size2=zichanlist.size();
-                        for (int i=0;i<size2;i++){
-                            ImageItem imageItem=new ImageItem();
-                            imageItem.type="资产产权证书";
-                            imageItem.path=isGetStringFromJson.handleData("url",zichanlist.get(i).toString());
-                            imageItem.comment=isGetStringFromJson.handleData("comment",zichanlist.get(i).toString());
-                            String id=isGetStringFromJson.handleData("id",zichanlist.get(i).toString());
-                            if(!id.isEmpty()){
-                                imageItem.id=Integer.parseInt(id);
-                                imageItem.pushok="OK";
+                        if(zichanlist!=null) {
+                            int size2 = zichanlist.size();
+                            for (int i = 0; i < size2; i++) {
+                                ImageItem imageItem = new ImageItem();
+                                imageItem.type = "资产产权证书";
+                                imageItem.path = isGetStringFromJson.handleData("url", zichanlist.get(i).toString());
+                                imageItem.comment = isGetStringFromJson.handleData("comment", zichanlist.get(i).toString());
+                                String id = isGetStringFromJson.handleData("id", zichanlist.get(i).toString());
+                                if (!id.isEmpty()) {
+                                    imageItem.id = Integer.parseInt(id);
+                                    imageItem.pushok = "OK";
+                                }
+                                selImageList2.add(imageItem);
                             }
-                            selImageList2.add(imageItem);
                         }
                         int size=array.size();
                             for(int i=0;i<size;i++){

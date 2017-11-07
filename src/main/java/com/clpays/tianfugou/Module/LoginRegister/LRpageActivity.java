@@ -382,6 +382,7 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
             case "checked":
             case "prepared":
             case "waiting":
+            case "makecard":
                 afterlogin(1);
                 break;
             case"finish":

@@ -65,8 +65,11 @@ public class PackagesActivity extends BaseActivity{
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.isnew)
+    RelativeLayout isnew;
 
-
+    @BindView(R.id.account)
+    CheckBox account;
 
     @OnClick(R.id.back)
     public void back(){
@@ -84,12 +87,14 @@ public class PackagesActivity extends BaseActivity{
             }
 
         }
+
         if(jsonArray.size()<=0){
             ToastUtil.ShortToast("请选择相应服务后提交");
             return;
         }
 
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+        obj.addProperty("isnewbank",packagesExpandableListViewAdapter.isnewbank());
         obj.add("selected",jsonArray);
         dialogLoading.setMessage("资料提交中");
         dialogLoading.show(getSupportFragmentManager(),DialogLoading.TAG);
@@ -115,7 +120,7 @@ public class PackagesActivity extends BaseActivity{
     }
 
     @BindView(R.id.expandableListView)
-    ExpandableListView expandableListView;
+    CustomExpandableListView expandableListView;
 
     //MainAdapter mainAdapter;
 
@@ -314,7 +319,7 @@ public class PackagesActivity extends BaseActivity{
     public void onResume() {
         super.onResume();
     }
-
+    boolean isnewbank;
     //加载数据
     public void fetch(){
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
@@ -330,7 +335,8 @@ public class PackagesActivity extends BaseActivity{
                         String Package=isJsonObj.handleData("packages", isJsonObj.handleData("data",a));
                         JsonObject myJsondata = new JsonParser().parse(Package).getAsJsonObject();
                         int what=  myJsondata.size();
-                        boolean isnewbank= isGetBooleanFromJson.handleData("isnewbank", isJsonObj.handleData("data",a));
+                        isnewbank= isGetBooleanFromJson.handleData("isnewbank", isJsonObj.handleData("data",a));
+                        //account.setChecked(isnewbank);
                         JsonArray selected= isGetJsonArrayFromJson.handleData("selected", isJsonObj.handleData("data",a));
                         int size=selected.size();
                         for (int p=0;p<what;p++){
@@ -355,11 +361,15 @@ public class PackagesActivity extends BaseActivity{
                             List<ThirdBean> thirdBeenlist=new ArrayList<>();
                             ThirdBean thirdBean=new ThirdBean();
                             thirdBean.setTitle(content);
+                            if(id.equals("2")){
+                                thirdBeenlist.add(thirdBean);
+                            }
                             thirdBeenlist.add(thirdBean);
+
                             newPackagesBean.setBeenList(thirdBeenlist);
                             mDatas.add(newPackagesBean);
                         }
-
+                        packagesExpandableListViewAdapter.setIsnewbank(isnewbank);
                         packagesExpandableListViewAdapter.notifyDataSetChanged();
 
 
@@ -387,9 +397,30 @@ public class PackagesActivity extends BaseActivity{
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        dialogLoading=new DialogLoading();
+        packagesExpandableListViewAdapter =new PackagesExpandableListViewAdapter(mDatas, this, new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        packagesExpandableListViewAdapter =new PackagesExpandableListViewAdapter(mDatas,this);
+            }
+        });
         expandableListView.setAdapter(packagesExpandableListViewAdapter);
+
+
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                // TODO Auto-generated method stub
+                for (int i = 0; i < packagesExpandableListViewAdapter.getGroupCount(); i++) {
+                    if (groupPosition != i) {
+                        expandableListView.collapseGroup(i);
+                    }
+                }
+
+            }
+
+        });
         /*com.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

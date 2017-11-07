@@ -29,9 +29,28 @@ import com.clpays.tianfugou.Utils.ToastUtil;
 public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter {
     private List<NewPackagesBean> dataTitleGroups;
     private Context mcontext;
-    public PackagesExpandableListViewAdapter(List<NewPackagesBean> data, Context context) {
+    private CompoundButton.OnCheckedChangeListener isnewListener;
+
+    public boolean isnewbank() {
+        return isnewbank;
+    }
+
+    public void setIsnewbank(boolean isnewbank) {
+        this.isnewbank = isnewbank;
+    }
+
+    private boolean isnewbank=true;
+
+    //自定义接口，用于回调按钮点击事件到Activity
+    public interface IsNewListener{
+        public void isnewListener(View v);
+    }
+
+    public PackagesExpandableListViewAdapter(List<NewPackagesBean> data, Context context,CompoundButton.OnCheckedChangeListener isnewListener) {
         dataTitleGroups=data;
         mcontext=context;
+        this.isnewListener=isnewListener;
+
     }
 
     @Override
@@ -92,9 +111,13 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //ToastUtil.ShortToast(isChecked+"");
+                if(groupPosition==1||groupPosition==3){
+                    //isnewListener.onCheckedChanged(buttonView,isChecked);
+                }
                 //对列表本身进行操作
                 if(!buttonView.isPressed())return;  //加这一条，否则当我setChecked()时会触发此listener
                 dataTitleGroups.get(groupPosition).setChoice(isChecked);
+
                 String r=dataTitleGroups.get(groupPosition).getRelated();
                 if(!r.isEmpty()){
                     int size=dataTitleGroups.size();
@@ -103,6 +126,7 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                     notifyDataSetChanged();
 
                 }
+
             }
         });
         title.setText(dataTitleGroups.get(groupPosition).getTitle());
@@ -111,15 +135,27 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(mcontext);
-            convertView = inflater.inflate(R.layout.package_item_layout, null);
-        }
-        convertView.setTag(R.layout.package_item_layout, groupPosition);
-        TextView content = (TextView) convertView.findViewById(R.id.content);
-        String html=dataTitleGroups.get(groupPosition).getBeenList().get(childPosition).getTitle();
-        content.setText(Html.fromHtml(html, new MImageGetter(content, mcontext), null));
-
+            if(dataTitleGroups.get(groupPosition).getBeenList().size()>1&&childPosition==0){
+                LayoutInflater inflater = LayoutInflater.from(mcontext);
+                convertView = inflater.inflate(R.layout.package_item2_layout, null);
+                convertView.setTag(R.layout.package_item2_layout, groupPosition);
+                CheckBox account = (CheckBox) convertView.findViewById(R.id.account);
+                account.setChecked(isnewbank);
+                account.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(!buttonView.isPressed())return;  //加这一条，否则当我setChecked()时会触发此listener
+                        isnewbank=isChecked;
+                    }
+                });
+            }else {
+                LayoutInflater inflater = LayoutInflater.from(mcontext);
+                convertView = inflater.inflate(R.layout.package_item_layout, null);
+                convertView.setTag(R.layout.package_item_layout, groupPosition);
+                TextView content = (TextView) convertView.findViewById(R.id.content);
+                String html=dataTitleGroups.get(groupPosition).getBeenList().get(childPosition).getTitle();
+                content.setText(Html.fromHtml(html, new MImageGetter(content, mcontext), null));
+            }
         return convertView;
     }
 

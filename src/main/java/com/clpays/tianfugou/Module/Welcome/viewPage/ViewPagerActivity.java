@@ -38,8 +38,6 @@ public class ViewPagerActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		SystemBarHelper.immersiveStatusBar(this);
-
 	}
 
 	@Override
