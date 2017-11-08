@@ -81,8 +81,6 @@ dependencies {
     compile project(path: ':update')
     compile 'cn.jiguang.sdk:jpush:3.0.9'  // 此处以JPush 3.0.9 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.7'  // 此处以JCore 1.1.7 版本为例。
-    compile project(path: ':lib-bither-compress')
-    compile ('com.alibaba.android:ultraviewpager:1.0.6.1@aar') {
-        transitive = true
-    }
+    compile project(path: ':ultraviewpager')
+    compile 'com.zxy.android:tiny:0.0.6'
 }

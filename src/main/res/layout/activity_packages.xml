@@ -62,7 +62,19 @@
                 android:orientation="vertical"
                 android:layout_below="@+id/expandableListView"
                 >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_20">
 
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="注:点击各服务选项查看详细内容"
+                    android:textSize="@dimen/textsize14sp"
+                    android:layout_marginTop="@dimen/_12dp"/>
                 <RelativeLayout
                     android:id="@+id/isnew"
                     android:visibility="gone"
@@ -103,7 +115,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_large" />
     </LinearLayout>
-
 
 
 </RelativeLayout>

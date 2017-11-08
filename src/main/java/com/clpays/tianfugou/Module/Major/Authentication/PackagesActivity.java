@@ -79,6 +79,7 @@ public class PackagesActivity extends BaseActivity{
 
     @OnClick(R.id.next_step)
     public void next(){
+        mDatas.get(0).setChoice(true);
         JsonArray jsonArray = new JsonArray();
         for(int i=0;i<mDatas.size();i++){
             if(mDatas.get(i).isChoice()){
@@ -361,9 +362,6 @@ public class PackagesActivity extends BaseActivity{
                             List<ThirdBean> thirdBeenlist=new ArrayList<>();
                             ThirdBean thirdBean=new ThirdBean();
                             thirdBean.setTitle(content);
-                            if(id.equals("2")){
-                                thirdBeenlist.add(thirdBean);
-                            }
                             thirdBeenlist.add(thirdBean);
 
                             newPackagesBean.setBeenList(thirdBeenlist);

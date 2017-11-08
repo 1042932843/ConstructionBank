@@ -27,7 +27,20 @@
             android:background="@drawable/check_selector"
             android:button="@null"
             android:focusable="false"
+            android:text="    "
             />
+
+        <TextView
+            android:id="@+id/tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/checkbox"
+            android:layout_toStartOf="@+id/checkbox"
+            android:gravity="center"
+            android:textSize="@dimen/textsize14sp"
+            android:focusable="false"
+             />
 
     </RelativeLayout>
 

@@ -71,6 +71,7 @@ public class ViewPagerActivity extends BaseActivity {
 				.setRadius((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()));
         //set the alignment
 		ultraViewPager.getIndicator().setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
+		ultraViewPager.getIndicator().setMargin(0,0,0,30);
         //construct built-in indicator, and add it to  UltraViewPager
 		ultraViewPager.getIndicator().build();
 

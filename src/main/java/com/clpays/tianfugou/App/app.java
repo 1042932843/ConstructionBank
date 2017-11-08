@@ -56,6 +56,7 @@ import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Utils.imageloader.GlideImageLoader;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
+import com.zxy.tiny.Tiny;
 
 import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_DELETE;
 import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_SET;
@@ -85,6 +86,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
     @Override
     public void onCreate() {
         super.onCreate();
+        Tiny.getInstance().init(this);
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         addObserver(this);

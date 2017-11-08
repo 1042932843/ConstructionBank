@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.clpays.tianfugou.Adapter.ImagePickerAdapter;
 import com.clpays.tianfugou.Adapter.ImagePickerAutoAddAdapter;
+import com.clpays.tianfugou.Adapter.helper.FullyLinearLayoutManager;
 import com.clpays.tianfugou.Design.Dialog.SelectDialog;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
@@ -52,8 +53,9 @@ import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Utils.LogUtil;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity2;
+import com.zxy.tiny.Tiny;
+import com.zxy.tiny.callback.FileCallback;
 
-import net.bither.util.NativeUtil;
 
 /**
  * Name: CertificateInfoFragment
@@ -163,9 +165,10 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setAdapter(autoAddAdapter);
         recyclerView2.setVisibility(View.GONE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new FullyLinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        recyclerView.setNestedScrollingEnabled(false);//禁止rcyc嵌套滑动
         fetch();
     }
     @Override
@@ -458,8 +461,19 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
     public void uploadImage(ImageItem imageItem){
         imageItem.isUpload=1;//
         String imagePath=imageItem.path;
-        FileInputStream fis = null;
+        Tiny.FileCompressOptions options = new Tiny.FileCompressOptions();
+        Tiny.getInstance().source(imagePath).asFile().withOptions(options).compress(new FileCallback() {
+            @Override
+            public void callback(boolean isSuccess, String outfile) {
+                //return the compressed file path
+                if(isSuccess){
+                    imageItem.path=outfile;
+                }
+                doUp(imageItem);
+            }
+        });
 
+       /* FileInputStream fis = null;
         try {
             fis = new FileInputStream(imagePath);
             Bitmap bitmap  = BitmapFactory.decodeStream(fis);
@@ -467,8 +481,14 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
 
-        File file = new File(imagePath);
+
+    }
+
+
+    public void doUp(ImageItem imageItem){
+        File file = new File(imageItem.path);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         obj.addProperty("type",imageItem.type);

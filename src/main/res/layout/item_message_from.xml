@@ -30,20 +30,27 @@
 			android:layout_height="@dimen/_64dp"
 			android:src="@drawable/massage"
 			android:layout_margin="@dimen/_8dp"
+			android:layout_centerVertical="true"
 			/>
 		<TextView
+
 			android:id="@+id/content"
-			android:paddingBottom="10dp"
+			android:paddingTop="@dimen/_4dp"
+			android:paddingBottom="@dimen/_4dp"
+			android:paddingLeft="@dimen/_12dp"
+			android:paddingRight="@dimen/_4dp"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textSize="16sp"
-			android:maxWidth="200dp"
+			android:textSize="14sp"
 			android:background="@drawable/kuang"
+			android:text="就阿萨德加拉塞克打扫楼道口萨拉丁卡卡扩大绿色低卡斯柯达拉斯克洛斯柯达大苏打三大"
+			android:gravity="start"
 			android:layout_centerVertical="true"
 			android:layout_toRightOf="@+id/pic"
 			android:layout_toEndOf="@+id/pic"
-			android:layout_marginLeft="11dp"
-			android:layout_marginStart="11dp" />
+			android:layout_marginLeft="12dp"
+			android:layout_marginRight="@dimen/_12dp"
+			 />
 	</RelativeLayout>
 
 </LinearLayout>

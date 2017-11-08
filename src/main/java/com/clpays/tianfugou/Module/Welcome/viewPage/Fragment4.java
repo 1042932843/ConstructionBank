@@ -29,7 +29,7 @@ public class Fragment4 extends Fragment {
 						// TODO Auto-generated method stub
 						getActivity().finish();
 						//动画
-						AnimationUtil.finishActivityAnimation(getActivity());
+						//AnimationUtil.finishActivityAnimation(getActivity());
 					}
 				});
 		return view;
