@@ -103,8 +103,8 @@ public class HomePageActivity extends BaseActivity {
     }
 
     @Override
-    public void onResume(){
-        super.onResume();
+    public void onStart(){
+        super.onStart();
         SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
         boolean isFirst = sp.getBoolean("isFirst", true);
         if (isFirst == true) {

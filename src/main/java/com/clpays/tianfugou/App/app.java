@@ -33,6 +33,9 @@ import com.clpays.tianfugou.Utils.CommonUtil;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper;
 import com.clpays.tianfugou.Utils.ToastUtil;
+import com.clpays.tianfugou.Utils.tools.isJsonArray;
+import com.clpays.tianfugou.Utils.tools.isJsonObj;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
@@ -46,11 +49,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import androidkun.com.versionupdatelibrary.entity.VersionUpdateConfig;
 import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import nbsix.com.VersionUpdate.entity.VersionUpdateConfig;
 import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
 
 import com.clpays.tianfugou.Entity.Common.EventUtil;
@@ -76,6 +79,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
         return mInstance;
     }
     private String url = "";
+    public static String md5="";
 
     private NetReceiver netReceiver;
     Activity contextActivity;
@@ -183,7 +187,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
             case "强制升级":
                 url=event.getMsg();
                 //ToastUtil.ShortToast("强制升级");
-                showDialog(Type,"如果取消将无法使用app");
+                showDialog(Type,"应用正常使用需要进行升级");
                 break;
             case "重新登录":
                 PreferenceUtil.resetPrivate();//清空
@@ -231,9 +235,18 @@ public class app extends Application implements DuskyObserver, Application.Activ
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
-                    if(isGetStringFromJson.handleData("success",a).equals(true)){
-                        url=isGetStringFromJson.handleData("url",a);
-                        showDialog("版本升级","检查到更新,是否进行升级");
+                    if(isGetStringFromJson.handleData("success",a).equals("true")){
+                        String data=isJsonObj.handleData("data",a);
+                        url=isGetStringFromJson.handleData("url",data);
+                        md5=isGetStringFromJson.handleData("md5",data);
+                        JsonArray content= isJsonArray.handleData("info",data);
+                        String c="";
+                        for(int i=0;i<content.size();i++){
+                          String u= content.get(i).getAsString();
+                            c=c+u+"\n";
+                        }
+
+                        showDialog("版本升级",c);
                     }
                      //{"success":false,"message":"","data":[]}
 
@@ -250,7 +263,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
          * setXXX方法返回Dialog对象，因此可以链式设置属性
          */
 
-        if(dialog!=null){
+        if(dialog!=null&&dialog.isShowing()){
             dialog.dismiss();
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -287,16 +300,15 @@ public class app extends Application implements DuskyObserver, Application.Activ
         if("状态改变".equals(title)){
 
         }else{
-            normalDialog.setNegativeButton("关闭",
+            normalDialog.setNegativeButton("取消",
                     new DialogInterface.OnClickListener() {
+
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //...To-do
-                            if("强制升级".equals(title)||"重新登录".equals(title)){
-                                System.exit(0);
-                            }
+
                         }
-                    });
+                    }
+            );
         }
 
             // 显示
@@ -308,6 +320,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
         VersionUpdateConfig.getInstance()//获取配置实例
                 .setContext(this)//设置上下文
                 .setDownLoadURL(url)//设置文件下载链接
+                .setMD5(md5)
                 .setNotificationIconRes(R.mipmap.launcher)//设置通知大图标
                 .setNotificationSmallIconRes(R.mipmap.launcher)//设置通知小图标
                 .setNotificationTitle("版本升级")//设置通知标题
@@ -321,7 +334,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
             contextActivity = activity.getParent();
         }else
             contextActivity = activity;
-        if(contextActivity instanceof HomePageActivity||contextActivity instanceof LRpageActivity){
+        if(contextActivity instanceof LRpageActivity||contextActivity instanceof HomePageActivity){
             update();
         }
 
@@ -333,6 +346,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
             contextActivity = activity.getParent();
         }else
             contextActivity = activity;
+
     }
 
 

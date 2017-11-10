@@ -222,7 +222,7 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                             if(!Erealname.isEmpty()){
                                 realnameE=true;
                             }
-                            Eidcard =isGetStringFromJson.handleData("idcard",error);
+                            Eidcard =isGetStringFromJson.handleData("shopname",error);
                             if(!Eidcard.isEmpty()){
                                 idcardE=true;
                             }

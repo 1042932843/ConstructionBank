@@ -24,6 +24,7 @@ import com.clpays.tianfugou.Entity.UCenter.ucItem;
 
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
+import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.UserState;
 
 /**
@@ -86,8 +87,9 @@ public class ucenterAdapter extends RecyclerView.Adapter<ucenterAdapter.MyViewHo
                                 context.startActivity(it);
                                 break;
                             default:
-                                it.setClass(context, AuthenticationInfoActivity.class);
-                                context.startActivity(it);
+                                ToastUtil.ShortToast("功能研发中，请期待后续版本更新");
+                                //it.setClass(context, AuthenticationInfoActivity.class);
+                                //context.startActivity(it);
                                 break;
                         }
 

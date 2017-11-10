@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.clpays.tianfugou"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -78,9 +78,9 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     compile 'com.bilibili:magicasakura:0.1.7@aar'
     compile project(path: ':imagepicker')
-    compile project(path: ':update')
     compile 'cn.jiguang.sdk:jpush:3.0.9'  // 此处以JPush 3.0.9 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.7'  // 此处以JCore 1.1.7 版本为例。
     compile project(path: ':ultraviewpager')
     compile 'com.zxy.android:tiny:0.0.6'
+    compile project(path: ':versionupdatelibrary')
 }

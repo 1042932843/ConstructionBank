@@ -48,7 +48,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
     }
 
     public void setImages(List<ImageItem> data) {
-        mData = new ArrayList<>(data);
+        mData=data;
         notifyDataSetChanged();
     }
 
@@ -71,6 +71,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
     @Override
     public void onBindViewHolder(SelectedPicViewHolder holder, int position) {
+        holder.setIsRecyclable(false);//可以用setTag的方式解决。主要是因为holder复用造成的。
         holder.bind(position);
     }
 
