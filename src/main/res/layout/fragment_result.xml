@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="正在审核您的资料..."/>
+                    android:text="资料审核中..."/>
                 <TextView
                     android:layout_margin="@dimen/_1dp"
                     android:id="@+id/shenhezhong"
@@ -78,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="审核结果我们会发送到通知，请注意查看"
+                    android:text="相关材料正在审核中，需等1-2个工作日"
                     />
             </RelativeLayout>
             <RelativeLayout
@@ -119,14 +119,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="审核通过:"/>
+                    android:text="审核通过"/>
                 <TextView
                     android:layout_margin="@dimen/_1dp"
                     android:id="@+id/tongguo"
                     android:layout_below="@id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="请准备以下纸质资料:\n"
                     />
             </RelativeLayout>
 
@@ -143,15 +143,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="等待专员联系"/>
+                    android:text="预约安排中"/>
                 <TextView
-                    android:layout_margin="@dimen/_1dp"
+                    android:layout_margin="@dimen/_16dp"
                     android:id="@+id/prepared"
                     android:layout_below="@id/textViewprepared"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="测试数据"
                     />
             </RelativeLayout>
 

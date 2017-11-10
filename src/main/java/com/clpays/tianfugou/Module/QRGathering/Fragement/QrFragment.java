@@ -67,7 +67,7 @@ public class QrFragment extends BaseFragment {
     @Override
     public void finishCreateView(Bundle state) {
         SystemBarHelper.setHeightAndPadding(getContext(), toolbar);
-        Glide.with(getContext()).load(R.drawable.qr_g_dsy).apply(app.optionsNormal).into(qr);
+       // Glide.with(getContext()).load(R.drawable.qr_g_dsy).apply(app.optionsNormal).into(qr);
         paycustomView.loadLoading();
         Observable.timer(5000, TimeUnit.MILLISECONDS)
                 .compose(bindToLifecycle())

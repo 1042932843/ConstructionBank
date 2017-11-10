@@ -95,7 +95,7 @@ public class GeneralJournalFragment extends BaseFragment {
         dataDayGroups.add(dataDayGroup2);
         dataDayGroups.add(dataDayGroup3);
         mydataDayGroups.clear();
-        mydataDayGroups.addAll(dataDayGroups);
+        //mydataDayGroups.addAll(dataDayGroups);隐藏测试数据
         adapter=new RunningAccountDetailsExpandableListViewAdapter(mydataDayGroups,getContext());
         expandableListView.setAdapter(adapter);
         for(int i = 0; i < adapter.getGroupCount(); i++){

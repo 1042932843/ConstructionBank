@@ -343,16 +343,19 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
                         String token=isGetStringFromJson.handleData("token",isJsonObj.handleData("data",a));
                         String status=isGetStringFromJson.handleData("status",isJsonObj.handleData("data",a));
-                        String rid=isGetStringFromJson.handleData("rid",isJsonObj.handleData("data",a));
-                        app.getInstance().setAlias(rid);//推送ID
+                        //String rid=isGetStringFromJson.handleData("rid",isJsonObj.handleData("data",a));
+                        app.getInstance().setAlias(token);//推送ID
                         PreferenceUtil.putStringPRIVATE("username",username);
                         //PreferenceUtil.putStringPRIVATE("password",pwd);
                         PreferenceUtil.putStringPRIVATE("token",token);
                         PreferenceUtil.putStringPRIVATE("status",status);
                         CheakStatus();
                     }else{
+                        String e=isGetStringFromJson.handleData("message",a);
+                        if(!e.isEmpty()){
+                            ToastUtil.ShortToast(e);
+                        }
 
-                        ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }
                     dialogLoading.dismiss();
                 }, throwable -> {

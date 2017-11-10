@@ -52,6 +52,8 @@ public class ResultFragment extends BaseFragment {
     RelativeLayout status_prepared;
     @BindView(R.id.prepared)
     TextView prepared;
+    @BindView(R.id.textViewprepared)
+    TextView textViewprepared;
 
 
     @BindView(R.id.yuanyin)
@@ -63,7 +65,7 @@ public class ResultFragment extends BaseFragment {
     TintButton next_step;
     @OnClick(R.id.next_step)
     public void ok(){
-        showExitDialog("是的，我已经准备好了相关材料","确认之后服务器会向您分配专员");
+        showExitDialog("提示","我已准备好纸质资料");
     }
 
 
@@ -131,16 +133,6 @@ public class ResultFragment extends BaseFragment {
                                 .subscribe(bean -> {
                                     String a=bean.string();
                                     if("true".equals(isGetStringFromJson.handleData("success",a))){
-                                        String name=isGetStringFromJson.handleData("name", isJsonObj.handleData("data",a));
-                                        String phone=isGetStringFromJson.handleData("phone",isJsonObj.handleData("data",a));
-                                        String time =isGetStringFromJson.handleData("time ",isJsonObj.handleData("data",a));
-                                        if(name.isEmpty()){
-                                            prepared.setText("银行正在安排专员和时间,请耐心等待后续通知");
-                                        }else{
-                                            prepared.setText("专员名称:"+name+"\n"+
-                                                    "手机号码:"+phone+"\n"+
-                                                    "预约时间:"+time);
-                                        }
 
                                         PreferenceUtil.putStringPRIVATE("status","prepared");
                                         CheckStatus();
@@ -212,8 +204,8 @@ public class ResultFragment extends BaseFragment {
                 status_shenhe.setVisibility(View.GONE);
                 status_shenhetongguo.setVisibility(View.VISIBLE);
 
-                dialogLoading.setMessage("状态检查中...");
-                dialogLoading.show(getFragmentManager(),DialogLoading.TAG);
+                //dialogLoading.setMessage("状态检查中...");
+                //dialogLoading.show(getFragmentManager(),DialogLoading.TAG);
                 JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
                 RetrofitHelper.getAuthenticationAPI()
                         .fetchchecked(obj)
@@ -222,12 +214,18 @@ public class ResultFragment extends BaseFragment {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(bean -> {
                             String a=bean.string();
-                            dialogLoading.dismiss();
+                            //dialogLoading.dismiss();
                             if("true".equals(isGetStringFromJson.handleData("success",a))){
+                                tongguo.setText("");
+                                tongguo.append("请准备以下纸质资料"+"\n");
                                 JsonArray array= isGetJsonArrayFromJson.handleData("attachlist", isJsonObj.handleData("data",a));
                                 for(int i=0;i<array.size();i++){
-                                    tongguo.append(array.get(i).toString()+"\n");
+                                    if(!array.get(i).isJsonNull()){
+                                        tongguo.append(array.get(i).toString()+"\n");
+                                    }
                                 }
+
+                                tongguo.append("齐全后请点击下一步，等待银行预约上门收取资料的时间");
                                 next_step.setVisibility(View.VISIBLE);
                             }else{
                                 //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
@@ -235,7 +233,7 @@ public class ResultFragment extends BaseFragment {
 
                         }, throwable -> {
                             ToastUtil.ShortToast("数据错误,请尝试重新加载本页面");
-                            dialogLoading.dismiss();
+                            //dialogLoading.dismiss();
                         });
 
                 break;
@@ -258,9 +256,10 @@ public class ResultFragment extends BaseFragment {
                                 String phone=isGetStringFromJson.handleData("phone",isJsonObj.handleData("data",a));
                                 String time =isGetStringFromJson.handleData("time",isJsonObj.handleData("data",a));
                                 if(name.isEmpty()){
-                                    prepared.setText("银行正在安排专员和时间,请耐心等待后续通知");
+                                    prepared.setText("正在安排专员上门收取资料的时间");
                                 }else{
-                                    prepared.setText("专员名称:"+name+"\n"+"手机号码:"+phone+"\n"+"预约时间:"+time);
+                                    textViewprepared.setText("已安排预约");
+                                    prepared.setText("专员姓名:"+name+"\n"+"专员电话:"+phone+"\n"+"专员将在:"+time+"上门收取资料，请准备好纸质资料"+"\n"+"注意：\n" +"1、法人必须在场\n" +"2、公章、法人章、财务章备齐（如有）");
                                 }
                             }else{
                                 //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
@@ -272,6 +271,7 @@ public class ResultFragment extends BaseFragment {
 
                 break;
             case "waiting":
+                next_step.setVisibility(View.GONE);
                 status_shenhetongguo.setVisibility(View.GONE);
                 status_prepared.setVisibility(View.GONE);
                 status_shenhe.setVisibility(View.VISIBLE);
@@ -297,9 +297,11 @@ public class ResultFragment extends BaseFragment {
                                 String phone=isGetStringFromJson.handleData("phone",isJsonObj.handleData("data",a));
                                 String time =isGetStringFromJson.handleData("time",isJsonObj.handleData("data",a));
                                 if(name.isEmpty()){
-                                    prepared.setText("银行正在安排专员和时间,请耐心等待后续通知");
+                                    textViewprepared.setText("预约安排中");
+                                    prepared.setText("正在安排派车接送至银行办理开户及产品业务...");
                                 }else{
-                                    prepared.setText("专员名称:"+name+"\n"+"手机号码:"+phone+"\n"+"预约时间:"+time);
+                                    textViewprepared.setText("已安排预约");
+                                    prepared.setText("专员姓名:"+name+"\n"+"专员电话:"+phone+"\n"+"银行将在:"+time+"派车接送您办理开户及产品业务");
                                 }
                             }else{
                                 //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));

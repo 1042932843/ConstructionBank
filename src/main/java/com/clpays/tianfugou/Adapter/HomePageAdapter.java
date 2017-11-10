@@ -20,6 +20,7 @@ import com.clpays.tianfugou.Module.Major.Home.FunctionTipActivity;
 import com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
+import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.UserState;
 
 
@@ -72,8 +73,10 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
                         break;
                     case "银行贷款":
                         if("finish".equals(s)){
+                            ToastUtil.ShortToast("功能维护中，请期待后续更新");
                             //it.setClass(context, QRgatheringActivity.class);
                             //context.startActivity(it);
+
                         }else{
                             it.setClass(context, FunctionTipActivity.class);
                             it.putExtra("Title",name);
@@ -82,8 +85,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
                         break;
                     case "商城缴费":
                         if("finish".equals(s)){
-                            it.setClass(context, QRgatheringActivity.class);
-                            context.startActivity(it);
+                            ToastUtil.ShortToast("功能维护中，请期待后续更新");
                         }else{
                             it.setClass(context, FunctionTipActivity.class);
                             it.putExtra("Title",name);

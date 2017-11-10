@@ -1,5 +1,6 @@
 package com.clpays.tianfugou.Network.Intercepter;
 
+import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Utils.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -9,6 +10,8 @@ import java.io.IOException;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Utils.LogUtil;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
+import com.clpays.tianfugou.Utils.tools.isJsonObj;
+
 import okhttp3.Interceptor;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -29,14 +32,17 @@ public class StatusInterceptor implements Interceptor {
         LogUtil.d("Code="+code);
         switch (code){
             case 202:
+                LogUtil.d("202");
                 String url="";
 
                 ResponseBody value = originalResponse.body();
                 if(value!=null){
-                    value.string();
+
                     byte[] resp = value.bytes();
                     String json = new String(resp, "UTF-8");
-                    url= isGetStringFromJson.handleData("url",json);
+                    String data= isJsonObj.handleData("data",json);
+                    url= isGetStringFromJson.handleData("url",data);
+                    app.md5=isGetStringFromJson.handleData("md5",data);
                     EventBus.getDefault().post(new EventUtil("强制升级",url));
                     // 注意。由于前面value.bytes()把响应流读完并关闭了，所以这里需要重新生成一个response，否则数据就无法正常解析了
                     originalResponse = originalResponse.newBuilder()
