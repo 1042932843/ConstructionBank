@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Design.Dialog.DialogLoading;
@@ -193,7 +194,18 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
     ImageView back;
     @OnClick(R.id.back)
     public void back(){
-        finish();
+        String s= PreferenceUtil.getStringPRIVATE("token", UserState.NA);
+        if(s.isEmpty()||UserState.NA.equals(s)){
+            if (System.currentTimeMillis() - exitTime > 2000) {
+                Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                app.getInstance().Exit();
+
+            }
+        }else{
+            finish();
+        }
     }
 
     @OnClick(R.id.forget)
@@ -431,5 +443,29 @@ public class LRpageActivity extends BaseActivity implements KeyEditText.KeyPreIm
         phone.clearFocus();
         identifying_code.clearFocus();
         my_password.clearFocus();
+    }
+
+    private long exitTime=0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            String s= PreferenceUtil.getStringPRIVATE("token", UserState.NA);
+            //LogUtil.d(s);
+            if(s.isEmpty()||UserState.NA.equals(s)){
+                if (System.currentTimeMillis() - exitTime > 2000) {
+                    Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
+                    exitTime = System.currentTimeMillis();
+                } else {
+                    app.getInstance().Exit();
+                }
+                return true;
+            }else{
+                finish();
+            }
+
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }
