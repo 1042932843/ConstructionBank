@@ -257,13 +257,14 @@ public class app extends Application implements DuskyObserver, Application.Activ
 
     }
     Dialog dialog;
+    Activity current;
     private void showDialog(String title,String message){
         /* @setIcon 设置对话框图标
          * @setTitle 设置对话框标题
          * @setMessage 设置对话框消息提示
          * setXXX方法返回Dialog对象，因此可以链式设置属性
          */
-
+        current=contextActivity;
         if(dialog!=null&&dialog.isShowing()){
             dialog.dismiss();
         }
@@ -275,7 +276,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
         if (contextActivity == null || contextActivity.isFinishing()) {
             return;
         }
-            final AlertDialog.Builder normalDialog = new AlertDialog.Builder(contextActivity);
+            final AlertDialog.Builder normalDialog = new AlertDialog.Builder(current);
             //normalDialog.setIcon(R.mipmap.launcher);
             normalDialog.setTitle(title);
             normalDialog.setMessage(message);
@@ -336,9 +337,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
             contextActivity = activity.getParent();
         }else
             contextActivity = activity;
-        if(contextActivity instanceof LRpageActivity||contextActivity instanceof HomePageActivity){
-            update();
-        }
+
 
     }
 
@@ -377,6 +376,15 @@ public class app extends Application implements DuskyObserver, Application.Activ
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        //处理内存泄漏
+        activities.remove(activity);
+        //处理内存泄漏
+        if(current==activity){//dialog显示的上下文如果和销毁的Activity是一个，那么销毁dialog
+            if(dialog!=null&&dialog.isShowing()){
+                dialog.dismiss();
+                dialog=null;
+            }
+        }
 
     }
     public void addObserver(DuskyObserver observer) {

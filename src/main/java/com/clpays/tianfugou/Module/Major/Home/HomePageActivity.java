@@ -75,8 +75,6 @@ public class HomePageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
-        initPermission();
-
 
     }
 
@@ -106,16 +104,18 @@ public class HomePageActivity extends BaseActivity {
     @Override
     public void onStart(){
         super.onStart();
+
         SharedPreferences sp = getSharedPreferences("data", MODE_PRIVATE);
         boolean isFirst = sp.getBoolean("isFirst", true);
         if (isFirst == true) {
-            SharedPreferences.Editor edit = sp.edit();
+            /*SharedPreferences.Editor edit = sp.edit();
             edit.putBoolean("isFirst", false);
-            edit.apply();
+            edit.apply();*/
             //应用首次启动
             Intent it=new Intent(HomePageActivity.this,ViewPagerActivity.class);
             startActivity(it);
         } else {
+            initPermission();
             //应用非首次启动
             if(!CommonUtil.isNetworkAvailable(this)){
                 CommonUtil.showNoNetWorkDlg(this);
@@ -340,21 +340,30 @@ public class HomePageActivity extends BaseActivity {
         rxPermissions.requestEach(
                 Manifest.permission.INTERNET,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.ACCESS_WIFI_STATE
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_SETTINGS,
+                Manifest.permission.WAKE_LOCK,
+                Manifest.permission.VIBRATE,
+                Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS
 
         )
                 .subscribe(permission -> {
                     if (permission.granted) {
                         // 用户已经同意该权限
                         Log.d(TAG, permission.name + " is granted.");
+
                     } else if (permission.shouldShowRequestPermissionRationale) {
                         // 用户拒绝了该权限，没有选中『不再询问』（Never ask again）,那么下次再次启动时，还会提示请求权限的对话框
                         Log.d(TAG, permission.name + " is denied. More info should be provided.");
+
                     } else {
                         // 用户拒绝了该权限，并且选中『不再询问』
                         Log.d(TAG, permission.name + " is denied.");
+
                     }
                 });
     }

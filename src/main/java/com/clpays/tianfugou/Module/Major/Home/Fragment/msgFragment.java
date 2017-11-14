@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
+import com.clpays.tianfugou.Module.Message.MessageActivity;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
@@ -36,6 +37,12 @@ public class msgFragment extends BaseFragment {
         yidu.setBackgroundResource(R.drawable.shape_corner_right_blue);
         weidu.setTextColor(ContextCompat.getColor(getContext(),R.color.black_alpha_45));
         weidu.setBackgroundResource(R.drawable.shape_corner_left_gray);
+    }
+
+    @OnClick(R.id.go_mymessage)
+    public void gomymessage(){
+        Intent it=new Intent(getActivity(), MessageActivity.class);
+        startActivity(it);
     }
 
     @BindView(R.id.weidu)

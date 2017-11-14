@@ -24,6 +24,18 @@
                 android:text="@string/app_msg"
                 android:textSize="@dimen/textsize18sp"
                 android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/go_mymessage"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/my_message"
+                android:textSize="@dimen/textsize16sp"
+                android:layout_alignParentRight="true"
+                android:paddingRight="@dimen/_16dp"
+                android:paddingLeft="@dimen/_16dp"
+                android:textColor="@color/gray_light"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

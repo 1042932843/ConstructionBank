@@ -3,5 +3,5 @@
     <item android:drawable="@drawable/yixuan" android:state_checked="true"></item>
     <item android:drawable="@drawable/yixuan" android:state_selected="true"></item>
     <item android:drawable="@drawable/yixuan" android:state_pressed="true"></item>
-    <item android:drawable="@drawable/jinyong"></item>
+    <item android:drawable="@drawable/nochose"></item>
 </selector>
