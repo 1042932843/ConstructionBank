@@ -3,6 +3,8 @@ package com.clpays.tianfugou.Adapter.PackagesAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -167,8 +169,8 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                             new AlertDialog.Builder(mcontext);
                     normalDialog.setIcon(R.mipmap.launcher);
                     normalDialog.setTitle("提示");
-                    normalDialog.setMessage("只有开立对公收款账户，才可获得无抵押信用贷款资格（最高200万元）。确定取消开立对公收款账户？");
-                    normalDialog.setPositiveButton("确定",
+                    normalDialog.setMessage("只有开立对公收款账户，才可获得无抵押信用贷款资格（最高200万元）。请您再次确认是否申请开立该账户？");
+                    normalDialog.setPositiveButton("申请开立",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -183,7 +185,7 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                                     //...To-do
                                 }
                             });
-                    normalDialog.setNegativeButton("考虑一下",
+                    normalDialog.setNegativeButton("不申请",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -192,16 +194,23 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
 
                                     String r=dataTitleGroups.get(groupPosition).getRelated();
                                     if(!r.isEmpty()){
+                                       /*
+                                        这段代码当时为了处理服务的关联关系而存在。如今它已经老了。
                                         int size=dataTitleGroups.size();
                                         int a=Integer.parseInt(dataTitleGroups.get(groupPosition).getRelated());
-                                        dataTitleGroups.get(a-1).setChoice(!isChecked);
-                                        notifyDataSetChanged();
+                                        dataTitleGroups.get(a-1).setChoice(isChecked);
+                                        notifyDataSetChanged();*/
                                     }
                                 }
                             });
 
+                    AlertDialog dialog=normalDialog.create();
+                    //show必须在getButton之前，否则get为空
+                    dialog.show();
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(mcontext,R.color.colorPrimary));
+                    dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(mcontext,R.color.gray_light));
                     // 显示
-                    normalDialog.show();
+
                 }else if(dataTitleGroups.get(groupPosition).getId().equals("2")&&isChecked) {
                     final AlertDialog.Builder normalDialog =
                             new AlertDialog.Builder(mcontext);
@@ -217,10 +226,12 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                                     dataTitleGroups.get(groupPosition).setChoice(isChecked);
                                     String r=dataTitleGroups.get(groupPosition).getRelated();
                                     if(!r.isEmpty()){
+                                        /*
+                                        这段代码当时为了处理服务的关联关系而存在。如今它已经老了。
                                         int size=dataTitleGroups.size();
                                         int a=Integer.parseInt(dataTitleGroups.get(groupPosition).getRelated());
                                         dataTitleGroups.get(a-1).setChoice(isChecked);
-                                        notifyDataSetChanged();
+                                        notifyDataSetChanged();*/
 
                                     }
                                 }
@@ -235,10 +246,12 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                                     dataTitleGroups.get(groupPosition).setChoice(isChecked);
                                     String r=dataTitleGroups.get(groupPosition).getRelated();
                                     if(!r.isEmpty()){
+                                        /*
+                                        这段代码当时为了处理服务的关联关系而存在。如今它已经老了。
                                         int size=dataTitleGroups.size();
                                         int a=Integer.parseInt(dataTitleGroups.get(groupPosition).getRelated());
                                         dataTitleGroups.get(a-1).setChoice(isChecked);
-                                        notifyDataSetChanged();
+                                        notifyDataSetChanged();*/
 
                                     }
                                 }
@@ -251,10 +264,12 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
 
                         String r=dataTitleGroups.get(groupPosition).getRelated();
                         if(!r.isEmpty()){
-                            int size=dataTitleGroups.size();
-                            int a=Integer.parseInt(dataTitleGroups.get(groupPosition).getRelated());
-                            dataTitleGroups.get(a-1).setChoice(isChecked);
-                            notifyDataSetChanged();
+                            /*
+                             这段代码当时为了处理服务的关联关系而存在。如今它已经老了。
+                                        int size=dataTitleGroups.size();
+                                        int a=Integer.parseInt(dataTitleGroups.get(groupPosition).getRelated());
+                                        dataTitleGroups.get(a-1).setChoice(isChecked);
+                                        notifyDataSetChanged();*/
 
                         }
                     }

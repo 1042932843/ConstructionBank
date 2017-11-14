@@ -18,6 +18,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.ShapeBadgeItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
+import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Design.Dialog.DialogLoading;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
 import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
@@ -374,8 +375,7 @@ public class HomePageActivity extends BaseActivity {
                 Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
-                finish();
-                System.exit(0);
+                app.getInstance().Exit();
             }
             return true;
         }

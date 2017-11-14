@@ -74,6 +74,7 @@ import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_
 
 public class app extends Application implements DuskyObserver, Application.ActivityLifecycleCallbacks{
     public static app mInstance;
+    private ArrayList<Activity> activities=new ArrayList<>();
     public static RequestOptions optionsRoundedCorners,optionsRoundedCircle,optionsNormal,optionsNormalCrop;
     public static app getInstance() {
         return mInstance;
@@ -330,6 +331,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        activities.add(activity);
         if(activity.getParent()!=null){
             contextActivity = activity.getParent();
         }else
@@ -453,5 +455,15 @@ public class app extends Application implements DuskyObserver, Application.Activ
         tagAliasBean.action = action;
         tagAliasBean.isAliasAction = true;
         TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(),1,tagAliasBean);
+    }
+
+    //想了半天搞出的遍历关闭app的方式。
+    public void Exit(){
+        int size=activities.size();
+        for(int i=0;i<size;i++){
+            if(activities.get(i)!=null){
+                activities.get(i).finish();
+            }
+        }
     }
 }

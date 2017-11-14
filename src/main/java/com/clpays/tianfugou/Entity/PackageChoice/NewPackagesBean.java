@@ -35,7 +35,7 @@ public class NewPackagesBean {
         this.related = related;
     }
 
-    String related;
+    String related;//废弃的字段
 
     public String getTitle() {
         return title;

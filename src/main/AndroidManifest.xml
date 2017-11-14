@@ -103,6 +103,10 @@
             android:name="com.clpays.tianfugou.Module.Major.Home.FunctionTipActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.clpays.tianfugou.Module.Major.Credit.CreditActivity"
+            android:screenOrientation="portrait" />
+
         <activity android:name="com.clpays.tianfugou.Module.LoginRegister.LRpageActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTop">

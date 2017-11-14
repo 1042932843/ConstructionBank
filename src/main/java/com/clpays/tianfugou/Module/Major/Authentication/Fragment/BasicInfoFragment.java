@@ -295,8 +295,7 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
 
     //提交数据
     public void submit(String realname,String shopname,String phonenum,String address1,String address2,String shangguanyuan){
-        dialogLoading.setMessage("资料提交中");
-        dialogLoading.show(getFragmentManager(),DialogLoading.TAG);
+
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         obj.addProperty("realname",realname);
         obj.addProperty("shopname",shopname);
@@ -305,7 +304,12 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
         obj.addProperty("address2",address2);
         if(!shangguanyuan.isEmpty()){
             obj.addProperty("shopop",shangguanyuan);
+        }else{
+            ToastUtil.ShortToast("商管员ID不能为空");
+            return;
         }
+        dialogLoading.setMessage("资料提交中");
+        dialogLoading.show(getFragmentManager(),DialogLoading.TAG);
         RetrofitHelper.getAuthenticationAPI()
                 .pushprofile(obj)
                 .compose(this.bindToLifecycle())

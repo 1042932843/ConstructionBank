@@ -7,9 +7,10 @@
     <string name="type_pay">付款</string>
     <string name="credit_inm">立即贷款</string>
     <string name="my_credit">我的贷款</string>
+    <string name="credit">银行贷款</string>
     <string name="my_message">通知</string>
     <string name="retrieve_password">找回密码</string>
-    <string name="packages">套餐选择</string>
+    <string name="packages">服务选择</string>
     <string name="user_login">用户登录</string>
     <string name="authentication">资料认证</string>
     <string name="unselected">未选择</string>
@@ -45,7 +46,7 @@
     <string name="hint2">请输入您的商铺名称</string>
     <string name="hint3">请输入您的手机号码</string>
     <string name="hint4">请输入您的单位名称</string>
-    <string name="hint5">推广必填</string>
+    <string name="hint5">必填</string>
     <string name="hint6">(该营业执照没有在银行开立过账户)</string>
     <string name="hint7">请输入详细地址</string>
     <string name="xiugai">请修改后提交！</string>
