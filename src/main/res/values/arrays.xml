@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="area">
-        <item >A</item>
-        <item >B</item>
-        <item >C</item>
-        <item >D</item>
-        <item >E</item>
+        <item >一区</item>
+        <item >二区</item>
+        <item >三区</item>
+        <item >四区</item>
+        <item >五区</item>
+        <item >六区</item>
     </string-array>
 </resources>

@@ -143,7 +143,7 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                 normalDialog.show();
             }
         });
-        if(dataTitleGroups.get(groupPosition).getId().equals("2")){
+        if(dataTitleGroups.get(groupPosition).getId().equals("3")){
             if(isnewbank){
                 tip.setHint("（初次开户）");
             }else {
@@ -153,7 +153,7 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
 
         boolean isc=dataTitleGroups.get(groupPosition).isChoice();
         checkBox.setChecked(isc);
-        if(dataTitleGroups.get(groupPosition).getId().equals("1")){
+        if(dataTitleGroups.get(groupPosition).getRequired().equals("1")){
             checkBox.setChecked(true);
             checkBox.setEnabled(false);
         }
@@ -164,7 +164,7 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
 
                 //对列表本身进行操作
                 if(!buttonView.isPressed())return;  //加这一条，否则当我setChecked()时会触发此listener
-                if(dataTitleGroups.get(groupPosition).getId().equals("2")&&!isChecked){
+                if(dataTitleGroups.get(groupPosition).getId().equals("3")&&!isChecked){
                     final AlertDialog.Builder normalDialog =
                             new AlertDialog.Builder(mcontext);
                     normalDialog.setIcon(R.mipmap.launcher);
@@ -174,14 +174,15 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    dataTitleGroups.get(groupPosition).setChoice(isChecked);
+                                    dataTitleGroups.get(groupPosition).setChoice(!isChecked);
                                     String r=dataTitleGroups.get(groupPosition).getRelated();
-                                    if(!r.isEmpty()){
+                                    /*if(!r.isEmpty()){
                                         int size=dataTitleGroups.size();
                                         int a=Integer.parseInt(dataTitleGroups.get(groupPosition).getRelated());
                                         dataTitleGroups.get(a-1).setChoice(isChecked);
-                                        notifyDataSetChanged();
-                                    }
+
+                                    }*/
+                                    notifyDataSetChanged();
                                     //...To-do
                                 }
                             });
@@ -190,7 +191,7 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     //...To-do
-                                    dataTitleGroups.get(groupPosition).setChoice(!isChecked);
+                                    dataTitleGroups.get(groupPosition).setChoice(isChecked);
 
                                     String r=dataTitleGroups.get(groupPosition).getRelated();
                                     if(!r.isEmpty()){
@@ -199,8 +200,9 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                                         int size=dataTitleGroups.size();
                                         int a=Integer.parseInt(dataTitleGroups.get(groupPosition).getRelated());
                                         dataTitleGroups.get(a-1).setChoice(isChecked);
-                                        notifyDataSetChanged();*/
+                                        */
                                     }
+                                    notifyDataSetChanged();
                                 }
                             });
 
@@ -303,12 +305,14 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                 String html=dataTitleGroups.get(groupPosition).getBeenList().get(childPosition).getTitle();
                 content.setText(Html.fromHtml(html, new MImageGetter(content, mcontext), null));
             }*/
-        LayoutInflater inflater = LayoutInflater.from(mcontext);
-        convertView = inflater.inflate(R.layout.package_item_layout, null);
-        convertView.setTag(R.layout.package_item_layout, groupPosition);
-        TextView content = (TextView) convertView.findViewById(R.id.content);
         String html=dataTitleGroups.get(groupPosition).getBeenList().get(childPosition).getTitle();
-        content.setText(Html.fromHtml(html, new MImageGetter(content, mcontext), null));
+        if(!html.isEmpty()){
+            LayoutInflater inflater = LayoutInflater.from(mcontext);
+            convertView = inflater.inflate(R.layout.package_item_layout, null);
+            convertView.setTag(R.layout.package_item_layout, groupPosition);
+            TextView content = (TextView) convertView.findViewById(R.id.content);
+            content.setText(Html.fromHtml(html, new MImageGetter(content, mcontext), null));
+        }
         return convertView;
     }
 

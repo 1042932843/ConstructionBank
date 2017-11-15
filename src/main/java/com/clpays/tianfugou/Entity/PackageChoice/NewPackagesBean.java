@@ -17,6 +17,16 @@ public class NewPackagesBean {
     String title;
     boolean isChoice;
 
+    public String getRequired() {
+        return required;
+    }
+
+    public void setRequired(String required) {
+        this.required = required;
+    }
+
+    String required;
+
     public String getId() {
         return id;
     }

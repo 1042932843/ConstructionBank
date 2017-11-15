@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/_12dp"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    >
 
 
     <RelativeLayout
@@ -283,6 +287,114 @@
         android:layout_height="0.5dp"
         android:background="@color/gray_20" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/daily_contacts"
+        android:layout_marginTop="@dimen/_12dp"
+        android:layout_marginBottom="@dimen/_12dp"/>
+
+    <RelativeLayout
+        android:id="@+id/lianxilayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_36dp"
+        android:focusableInTouchMode="true"
+        android:layout_marginLeft="@dimen/_6dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/title6"
+            android:gravity="center"
+            android:id="@+id/lianxiname"
+            android:layout_marginRight="@dimen/_4dp"
+            android:focusableInTouchMode="true"
+            />
+
+        <com.clpays.tianfugou.Design.keyEditText.KeyEditText
+            android:id="@+id/lianxiname_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/padding_half"
+            android:hint="@string/hint8"
+            android:textColorHint="@color/gray_20"
+            android:textColor="@color/colorPrimary"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/padding_half"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"
+            android:layout_toRightOf="@+id/lianxiname"
+            android:layout_toEndOf="@+id/lianxiname"
+            android:layout_marginLeft="@dimen/_4dp"
+            android:background="@null"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lianxiname_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:text="@string/xiugai"
+        android:visibility="gone"
+        />
+
+
+    <RelativeLayout
+        android:id="@+id/lianxilayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_36dp"
+        android:focusableInTouchMode="true"
+        android:layout_marginLeft="@dimen/_6dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/title7"
+            android:gravity="center"
+            android:id="@+id/lianxiphone"
+            android:layout_marginRight="@dimen/_4dp"
+            android:focusableInTouchMode="true"
+            />
+
+        <com.clpays.tianfugou.Design.keyEditText.KeyEditText
+            android:id="@+id/lianxiphone_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/padding_half"
+            android:hint="@string/hint8"
+            android:textColorHint="@color/gray_20"
+            android:textColor="@color/colorPrimary"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/padding_half"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"
+            android:layout_toRightOf="@+id/lianxiphone"
+            android:layout_toEndOf="@+id/lianxiphone"
+            android:layout_marginLeft="@dimen/_4dp"
+            android:background="@null"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lianxiphone_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:text="@string/xiugai"
+        android:visibility="gone"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_20"
+        />
+
     <com.bilibili.magicasakura.widgets.TintButton
         android:id="@+id/next_step"
         android:layout_width="match_parent"
@@ -295,3 +407,4 @@
         android:textColor="@color/white"
         android:textSize="@dimen/textsize_large" />
 </LinearLayout>
+</ScrollView>

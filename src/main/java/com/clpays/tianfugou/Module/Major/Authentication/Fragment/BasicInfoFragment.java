@@ -54,6 +54,11 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     @BindView(R.id.shangguanyuan_e)
     TextView shangguanyuan_e;
 
+    @BindView(R.id.lianxiname_e)
+    TextView lianxiname_e;
+    @BindView(R.id.lianxiphone_e)
+    TextView lianxiphone_e;
+
 
 
     @BindView(R.id.name_edit)
@@ -67,6 +72,11 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
 
     @BindView(R.id.ad)
     KeyEditText ad_text;
+
+    @BindView(R.id.lianxiname_edit)
+    KeyEditText lianxiname_edit;
+    @BindView(R.id.lianxiphone_edit)
+    KeyEditText lianxiphone_edit;
 
     @BindView(R.id.shangpudizhi)
     RelativeLayout shangpudizhi;
@@ -89,7 +99,9 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
         String ID=ID_edit.getText().toString();
         String phonenum=phonenum_edit.getText().toString();
         String shangguanyuan=shangguanyuan_edit.getText().toString();
-        submit(name,ID,phonenum,address,address2,shangguanyuan);
+        String lianxiname=lianxiname_edit.getText().toString();
+        String lianxiphone=lianxiphone_edit.getText().toString();
+        submit(name,ID,phonenum,address,address2,shangguanyuan,lianxiname,lianxiphone);
     }
 
     public static BasicInfoFragment newInstance() {
@@ -147,11 +159,14 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
         shangguanyuan_edit.setKeyPreImeListener(this);
         phonenum_edit.setKeyPreImeListener(this);
         ad_text.setKeyPreImeListener(this);
+        lianxiname_edit.setKeyPreImeListener(this);
+        lianxiphone_edit.setKeyPreImeListener(this);
         ad_text.addTextChangedListener(textWatcher);
         name_edit.addTextChangedListener(textWatcher);
         ID_edit.addTextChangedListener(textWatcher);
         shangguanyuan_edit.addTextChangedListener(textWatcher);
         phonenum_edit.addTextChangedListener(textWatcher);
+        //shangguanyuan_edit.setText("000001");
         load=false;
         if(!load){
             lazyLoad();
@@ -186,10 +201,14 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     boolean addressE;
     boolean address2E;
     boolean shopopE;
+    boolean contactnameE;
+    boolean contactnumE;
     String realname;
     String idcard;
     String phonenum;
     String shopop;
+    String contactname;
+    String contactnum;
 
     String Erealname;
     String Eidcard;
@@ -197,6 +216,8 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     String Eaddress;
     String Eaddress2;
     String Eshopop;
+    String Econtactname;
+    String Econtactnum;
     //加载数据
     public void fetch(){
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
@@ -207,15 +228,22 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bean -> {
                     String a=bean.string();
+                    //{"success":true,"message":"","data":{"realname":"dsy","shopname":"ty","phonenum":"1872566327","contactname":"","contactnum":"","address1":"A","address2":"dfhh","shopop":1,"addresslist":{"\u4e00\u533a":["\u4e00\u697c","\u4e8c\u697c","\u4e09\u697c","\u56db\u697c"],"\u4e8c\u533a":["\u4e00\u697c","\u4e8c\u697c","\u4e09\u697c","\u56db\u697c"],"\u4e09\u533a":["\u4e00\u697c","\u4e8c\u697c","\u4e09\u697c","\u56db\u697c"],"\u56db\u533a":["\u4e00\u697c","\u4e8c\u697c","\u4e09\u697c","\u56db\u697c"],"\u519c\u4ea7\u54c1\u5e02\u573a(\u4e94\u533a)":["\u4e00\u697c"],"\u4e2d\u836f\u6750\u5e02\u573a(\u516d\u533a)":["\u4e00\u697c","\u4e8c\u697c"],"\u9676\u74f7\u5e02\u573a":["\u4e00\u697c"],"\u7f1d\u7eab\u673a\u5e02\u573a":["\u4e00\u697c"],"\u5176\u4ed6":["\u4e34\u65f6","\u5176\u4ed6"]}}}
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
-                         realname=isGetStringFromJson.handleData("realname", isJsonObj.handleData("data",a));
-                         idcard=isGetStringFromJson.handleData("shopname",isJsonObj.handleData("data",a));
-                        phonenum=isGetStringFromJson.handleData("phonenum",isJsonObj.handleData("data",a));
-                        address=isGetStringFromJson.handleData("address1",isJsonObj.handleData("data",a));
-                        address2=isGetStringFromJson.handleData("address2",isJsonObj.handleData("data",a));
-                         shopop=isGetStringFromJson.handleData("shopop",isJsonObj.handleData("data",a));
+                        String data=isJsonObj.handleData("data",a);
+                         realname=isGetStringFromJson.handleData("realname", data);
+                         idcard=isGetStringFromJson.handleData("shopname",data);
+                        phonenum=isGetStringFromJson.handleData("phonenum",data);
+                        address=isGetStringFromJson.handleData("address1",data);
+                        address2=isGetStringFromJson.handleData("address2",data);
+                         shopop=isGetStringFromJson.handleData("shopop",data);
+                        contactname=isGetStringFromJson.handleData("contactname",data);
+                        contactnum=isGetStringFromJson.handleData("contactnum",data);
 
-                        String error=isJsonObj.handleData("error",isJsonObj.handleData("data",a));
+                        //{"一区":["一楼","二楼","三楼","四楼"],"二区":["一楼","二楼","三楼","四楼"],"三区":["一楼","二楼","三楼","四楼"],"四区":["一楼","二楼","三楼","四楼"],"农产品市场(五区)":["一楼"],"中药材市场(六区)":["一楼","二楼"],"陶瓷市场":["一楼"],"缝纫机市场":["一楼"],"其他":["临时","其他"]}
+                        String addresslist=isJsonObj.handleData("addresslist",data);
+
+                        String error=isJsonObj.handleData("error",data);
 
                         if(!error.isEmpty()){
                             Erealname =isGetStringFromJson.handleData("realname", error);
@@ -241,6 +269,14 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                             Eshopop =isGetStringFromJson.handleData("shopop",error);
                             if(!Eshopop.isEmpty()){
                                 shopopE=true;
+                            }
+                            Econtactname=isGetStringFromJson.handleData("contactname",error);
+                            if(!Econtactname.isEmpty()){
+                                contactnameE=true;
+                            }
+                            Econtactnum=isGetStringFromJson.handleData("contactnum",error);
+                            if(!Econtactnum.isEmpty()){
+                                contactnumE=true;
                             }
 
                         }
@@ -284,6 +320,22 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                             shangguanyuan_edit.setText(shopop);
                         }
 
+                        if(!contactname.isEmpty()){
+
+                            if(contactnameE){
+                                lianxiname_e.setText(Econtactname);
+                                lianxiname_e.setVisibility(View.VISIBLE);
+                            }
+                            lianxiname_edit.setText(contactname);
+                        }
+                        if(!contactnum.isEmpty()){
+                            if(contactnumE){
+                                lianxiphone_e.setText(Econtactnum);
+                                lianxiphone_e.setVisibility(View.VISIBLE);
+                            }
+                            lianxiphone_edit.setText(contactnum);
+                        }
+
                     }else{
                         //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }
@@ -294,7 +346,7 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     }
 
     //提交数据
-    public void submit(String realname,String shopname,String phonenum,String address1,String address2,String shangguanyuan){
+    public void submit(String realname,String shopname,String phonenum,String address1,String address2,String shangguanyuan,String lianxiname,String lianxiphone){
 
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         obj.addProperty("realname",realname);
@@ -307,6 +359,14 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
         }else{
             ToastUtil.ShortToast("商管员ID不能为空");
             return;
+        }
+
+        if(!lianxiname.isEmpty()){
+            obj.addProperty("contactname",lianxiname);
+
+        }
+        if(!lianxiphone.isEmpty()){
+            obj.addProperty("contactnum",lianxiphone);
         }
         dialogLoading.setMessage("资料提交中");
         dialogLoading.show(getFragmentManager(),DialogLoading.TAG);
@@ -381,5 +441,7 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
         shangguanyuan_edit.clearFocus();
         phonenum_edit.clearFocus();
         ad_text.clearFocus();
+        lianxiphone_edit.clearFocus();
+        lianxiphone_edit.clearFocus();
     }
 }

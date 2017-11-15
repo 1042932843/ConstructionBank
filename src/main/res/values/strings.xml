@@ -36,12 +36,15 @@
     <string name="my_credentials">认证信息</string>
     <string name="qr_tip_1">扫描二维码向我付款</string>
     <string name="qr_save">保存二维码图片</string>
+    <string name="daily_contacts">日常联系人</string>
 
     <string name="title1">商家姓名</string>
     <string name="title2">店铺名称</string>
     <string name="title3">手机号码</string>
     <string name="title4">商铺地址</string>
-    <string name="title5">商管员ID或其手机号</string>
+    <string name="title5">商管员ID</string>
+    <string name="title6">联系人姓名</string>
+    <string name="title7">联系人号码</string>
     <string name="hint1">请输入您的真实姓名</string>
     <string name="hint2">请输入您的商铺名称</string>
     <string name="hint3">请输入您的手机号码</string>
@@ -49,6 +52,7 @@
     <string name="hint5">必填</string>
     <string name="hint6">(该营业执照没有在银行开立过账户)</string>
     <string name="hint7">请输入详细地址</string>
+    <string name="hint8">非必填</string>
     <string name="xiugai">请修改后提交！</string>
 
 </resources>
