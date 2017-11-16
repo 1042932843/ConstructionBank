@@ -26,6 +26,16 @@
 
         />
 
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_marginTop="@dimen/_12dp"
+        android:id="@+id/spinner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/area"
+        android:spinnerMode="dialog"
+
+        />
+
     <com.clpays.tianfugou.Design.keyEditText.KeyEditText
         android:id="@+id/edit_where"
         android:textColorHint="@color/gray_20"

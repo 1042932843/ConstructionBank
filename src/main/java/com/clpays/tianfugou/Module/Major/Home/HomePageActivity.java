@@ -115,7 +115,7 @@ public class HomePageActivity extends BaseActivity {
             Intent it=new Intent(HomePageActivity.this,ViewPagerActivity.class);
             startActivity(it);
         } else {
-            initPermission();
+
             //应用非首次启动
             if(!CommonUtil.isNetworkAvailable(this)){
                 CommonUtil.showNoNetWorkDlg(this);
@@ -152,6 +152,7 @@ public class HomePageActivity extends BaseActivity {
            Intent it=new Intent(this, LRpageActivity.class);
            startActivity(it);
        }else{
+           initPermission();
            CheckStatus();
        }
     }

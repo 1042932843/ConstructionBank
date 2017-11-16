@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.clpays.tianfugou.Design.Dialog.DialogLoading;
 import com.clpays.tianfugou.Design.Dialog.DialogRegionalChoice;
 import com.clpays.tianfugou.Design.keyEditText.KeyEditText;
+import com.clpays.tianfugou.Entity.Auth.AddressBean;
 import com.clpays.tianfugou.Entity.RegionalChoice.EventUtil;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Network.RequestProperty;
@@ -23,6 +24,7 @@ import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.greenrobot.eventbus.EventBus;
@@ -35,6 +37,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import com.clpays.tianfugou.Utils.PreferenceUtil;
+import com.google.gson.JsonParser;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 
 public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPreImeListener {
@@ -83,11 +92,17 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     @OnClick(R.id.shangpudizhi)
     public void chose(){
         DialogRegionalChoice.ad=address;
+        Bundle args =new Bundle();
+        args.putSerializable("list",(Serializable)addressBeanList);
+        dialogRegionalChoice.setArguments(args);
         dialogRegionalChoice.show(getFragmentManager(),DialogRegionalChoice.TAG);
     }
     @OnClick (R.id.ad)
     public void chose2(){
         DialogRegionalChoice.ad=address;
+        Bundle args =new Bundle();
+        args.putSerializable("list",(Serializable)addressBeanList);
+        dialogRegionalChoice.setArguments(args);
         dialogRegionalChoice.show(getFragmentManager(),DialogRegionalChoice.TAG);
     }
 
@@ -218,8 +233,10 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     String Eshopop;
     String Econtactname;
     String Econtactnum;
+    static ArrayList<AddressBean> addressBeanList;
     //加载数据
     public void fetch(){
+        addressBeanList=new ArrayList<>();
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         RetrofitHelper.getAuthenticationAPI()
                 .fetchprofile(obj)
@@ -230,6 +247,7 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                     String a=bean.string();
                     //{"success":true,"message":"","data":{"realname":"dsy","shopname":"ty","phonenum":"1872566327","contactname":"","contactnum":"","address1":"A","address2":"dfhh","shopop":1,"addresslist":{"\u4e00\u533a":["\u4e00\u697c","\u4e8c\u697c","\u4e09\u697c","\u56db\u697c"],"\u4e8c\u533a":["\u4e00\u697c","\u4e8c\u697c","\u4e09\u697c","\u56db\u697c"],"\u4e09\u533a":["\u4e00\u697c","\u4e8c\u697c","\u4e09\u697c","\u56db\u697c"],"\u56db\u533a":["\u4e00\u697c","\u4e8c\u697c","\u4e09\u697c","\u56db\u697c"],"\u519c\u4ea7\u54c1\u5e02\u573a(\u4e94\u533a)":["\u4e00\u697c"],"\u4e2d\u836f\u6750\u5e02\u573a(\u516d\u533a)":["\u4e00\u697c","\u4e8c\u697c"],"\u9676\u74f7\u5e02\u573a":["\u4e00\u697c"],"\u7f1d\u7eab\u673a\u5e02\u573a":["\u4e00\u697c"],"\u5176\u4ed6":["\u4e34\u65f6","\u5176\u4ed6"]}}}
                     if("true".equals(isGetStringFromJson.handleData("success",a))){
+                        addressBeanList.clear();
                         String data=isJsonObj.handleData("data",a);
                          realname=isGetStringFromJson.handleData("realname", data);
                          idcard=isGetStringFromJson.handleData("shopname",data);
@@ -242,7 +260,25 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
 
                         //{"一区":["一楼","二楼","三楼","四楼"],"二区":["一楼","二楼","三楼","四楼"],"三区":["一楼","二楼","三楼","四楼"],"四区":["一楼","二楼","三楼","四楼"],"农产品市场(五区)":["一楼"],"中药材市场(六区)":["一楼","二楼"],"陶瓷市场":["一楼"],"缝纫机市场":["一楼"],"其他":["临时","其他"]}
                         String addresslist=isJsonObj.handleData("addresslist",data);
+                        JsonObject myJsondata = new JsonParser().parse(addresslist).getAsJsonObject();
 
+                        Iterator i$ = myJsondata.entrySet().iterator();
+                        while(i$.hasNext()) {
+                            Map.Entry entry = (Map.Entry)i$.next();
+                            AddressBean bean1=new AddressBean();
+                            bean1.setAddress(entry.getKey()+"");
+                            JsonArray array= new JsonParser().parse(entry.getValue()+"").getAsJsonArray();
+                            ArrayList<String> items=new ArrayList<String>();
+                            int arraysize=array.size();
+                            for(int i=0;i<arraysize;i++){
+                               String item= array.get(i).getAsString();
+                                items.add(item);
+                            }
+                            bean1.setItems(items);
+                            addressBeanList.add(bean1);
+                           // Log.v(TAG, entry.getKey()+"|"+entry.getValue());
+                        }
+                        addressBeanList.size();
                         String error=isJsonObj.handleData("error",data);
 
                         if(!error.isEmpty()){

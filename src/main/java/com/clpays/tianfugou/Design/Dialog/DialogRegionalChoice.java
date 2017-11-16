@@ -18,12 +18,18 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.clpays.tianfugou.Adapter.MyAdapter;
 import com.clpays.tianfugou.Design.keyEditText.KeyEditText;
+import com.clpays.tianfugou.Entity.Auth.AddressBean;
 import com.clpays.tianfugou.Entity.RegionalChoice.EventUtil;
 
 import com.clpays.tianfugou.Module.Major.Authentication.Fragment.BasicInfoFragment;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.LogUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -37,7 +43,7 @@ import com.clpays.tianfugou.Utils.LogUtil;
 public class DialogRegionalChoice extends DialogFragment implements KeyEditText.KeyPreImeListener{
     public static final String TAG = DialogRegionalChoice.class.getSimpleName();
     public static String ad="";
-
+    MyAdapter myAdapter;
     @BindView(R.id.makesure_btn)
     Button makesure_btn;
     @OnClick(R.id.makesure_btn)
@@ -100,11 +106,19 @@ public class DialogRegionalChoice extends DialogFragment implements KeyEditText.
         edit_where.addTextChangedListener(textWatcher);
         edit_where.setKeyPreImeListener(this);
         spinner1.setOnItemSelectedListener(onItemSelectedListener);
-        String[] titleArr = getResources().getStringArray(R.array.area);
-        if( null != titleArr ){
-
+        ArrayList<AddressBean> list=(ArrayList<AddressBean>)getArguments().getSerializable("list");
+       ArrayList<String> list1=new ArrayList<>();
+        int size1=list.size();
+        String[] titleArr=new String[size1];
+        for(int i=0;i<size1;i++){
+            String si=list.get(i).getAddress();
+            titleArr[i]= si;
+            list1.add(si);
+        }
+        myAdapter=new MyAdapter(list1,getContext());
+        spinner1.setAdapter(myAdapter);
+        if( titleArr != null ){
             int titleLength = titleArr.length;
-
             for( int index = 0; index < titleLength; index++ ){
                 if(titleArr[index].equals(ad)){
                     spinner1.setSelection(index);
