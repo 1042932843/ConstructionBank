@@ -5,6 +5,7 @@ import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ import java.util.List;
  * Date: 2017-11-16 17:43
  */
 
-public class MyAdapter implements SpinnerAdapter {
+public class MyAdapter extends BaseAdapter implements SpinnerAdapter {
     List<String> list;
     Context context;
 
@@ -62,12 +63,9 @@ public class MyAdapter implements SpinnerAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder=new ViewHolder();
-        if(convertView==null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.dialog_regionalchoice_item, null);
-        }
-        holder.content = (TextView)convertView.findViewById(R.id.content);
-        holder.content.setText(list.get(position));
-        return convertView;
+        TextView textView=new TextView(context);
+        textView.setText(list.get(position));
+        return textView;
     }
 
     @Override

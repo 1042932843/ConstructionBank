@@ -79,7 +79,7 @@ public class PackagesActivity extends BaseActivity{
 
     @OnClick(R.id.next_step)
     public void next(){
-        mDatas.get(0).setChoice(true);
+
         JsonArray jsonArray = new JsonArray();
         for(int i=0;i<mDatas.size();i++){
             if(mDatas.get(i).isChoice()){
@@ -409,7 +409,18 @@ public class PackagesActivity extends BaseActivity{
         });
         expandableListView.setAdapter(packagesExpandableListViewAdapter);
 
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 
+                if(mDatas.get(groupPosition).getBeenList().get(0).getTitle().isEmpty()){
+                    return true;//返回true,表示不可点击
+                }
+                else {
+                    return false;
+                }
+            }
+        });
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
             @Override

@@ -131,7 +131,7 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
             case "商铺地址":
                 address=event.getAddress();
                 address2=event.getAddress2();
-                ad_text.setText(address+"  "+address2);
+                ad_text.setText(address+","+address2);
                 ad_text.setTextColor(ContextCompat.getColor(getActivity(),R.color.colorPrimary));
                 break;
 

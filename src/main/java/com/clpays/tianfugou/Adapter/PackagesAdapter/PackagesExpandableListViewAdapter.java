@@ -306,13 +306,11 @@ public class PackagesExpandableListViewAdapter extends BaseExpandableListAdapter
                 content.setText(Html.fromHtml(html, new MImageGetter(content, mcontext), null));
             }*/
         String html=dataTitleGroups.get(groupPosition).getBeenList().get(childPosition).getTitle();
-        if(!html.isEmpty()){
             LayoutInflater inflater = LayoutInflater.from(mcontext);
             convertView = inflater.inflate(R.layout.package_item_layout, null);
             convertView.setTag(R.layout.package_item_layout, groupPosition);
             TextView content = (TextView) convertView.findViewById(R.id.content);
             content.setText(Html.fromHtml(html, new MImageGetter(content, mcontext), null));
-        }
         return convertView;
     }
 
