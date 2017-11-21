@@ -16,6 +16,7 @@ import java.util.List;
 
 import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Entity.HomePage.homeItem;
+import com.clpays.tianfugou.Module.Major.Credit.CreditActivity;
 import com.clpays.tianfugou.Module.Major.Home.FunctionTipActivity;
 import com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity;
 import com.clpays.tianfugou.R;
@@ -78,7 +79,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
                             //context.startActivity(it);
 
                         }else{
-                            it.setClass(context, FunctionTipActivity.class);
+                            it.setClass(context, CreditActivity.class);
                             it.putExtra("Title",name);
                             context.startActivity(it);
                         }

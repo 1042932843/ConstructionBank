@@ -9,6 +9,13 @@
         android:layout_height="match_parent"
         android:background="@drawable/welcome1" />
 
+    <ImageView
+        android:id="@+id/hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/hand"/>
     <TextView
         android:id="@+id/tvInNew"
         android:layout_width="wrap_content"

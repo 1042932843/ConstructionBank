@@ -11,4 +11,5 @@ package com.clpays.tianfugou.Entity.Credit;
 public class CreditType {
     String img;
     String title;
+    String content;
 }

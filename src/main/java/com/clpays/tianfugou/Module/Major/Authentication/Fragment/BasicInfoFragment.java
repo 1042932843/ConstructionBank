@@ -93,17 +93,24 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     public void chose(){
         DialogRegionalChoice.ad=address;
         Bundle args =new Bundle();
-        args.putSerializable("list",(Serializable)addressBeanList);
-        dialogRegionalChoice.setArguments(args);
-        dialogRegionalChoice.show(getFragmentManager(),DialogRegionalChoice.TAG);
+        if(addressBeanList.size()>0){
+            args.putSerializable("list",(Serializable)addressBeanList);
+            dialogRegionalChoice.setArguments(args);
+            dialogRegionalChoice.show(getFragmentManager(),DialogRegionalChoice.TAG);
+        }else{
+
+        }
+
     }
     @OnClick (R.id.ad)
     public void chose2(){
         DialogRegionalChoice.ad=address;
         Bundle args =new Bundle();
-        args.putSerializable("list",(Serializable)addressBeanList);
-        dialogRegionalChoice.setArguments(args);
-        dialogRegionalChoice.show(getFragmentManager(),DialogRegionalChoice.TAG);
+        if(addressBeanList.size()>0) {
+            args.putSerializable("list", (Serializable) addressBeanList);
+            dialogRegionalChoice.setArguments(args);
+            dialogRegionalChoice.show(getFragmentManager(), DialogRegionalChoice.TAG);
+        }
     }
 
     @BindView(R.id.next_step)
@@ -233,10 +240,9 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
     String Eshopop;
     String Econtactname;
     String Econtactnum;
-    static ArrayList<AddressBean> addressBeanList;
+    static ArrayList<AddressBean> addressBeanList=new ArrayList<>();
     //加载数据
     public void fetch(){
-        addressBeanList=new ArrayList<>();
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         RetrofitHelper.getAuthenticationAPI()
                 .fetchprofile(obj)
@@ -356,28 +362,24 @@ public class BasicInfoFragment extends BaseFragment implements KeyEditText.KeyPr
                             shangguanyuan_edit.setText(shopop);
                         }
 
-                        if(!contactname.isEmpty()){
-
-                            if(contactnameE){
-                                lianxiname_e.setText(Econtactname);
-                                lianxiname_e.setVisibility(View.VISIBLE);
-                            }
-                            lianxiname_edit.setText(contactname);
+                        if(contactnameE){
+                            lianxiname_e.setText(Econtactname);
+                            lianxiname_e.setVisibility(View.VISIBLE);
                         }
-                        if(!contactnum.isEmpty()){
-                            if(contactnumE){
+                        lianxiname_edit.setText(contactname);
+
+                         if(contactnumE){
                                 lianxiphone_e.setText(Econtactnum);
                                 lianxiphone_e.setVisibility(View.VISIBLE);
                             }
-                            lianxiphone_edit.setText(contactnum);
-                        }
+                          lianxiphone_edit.setText(contactnum);
 
                     }else{
                         //ToastUtil.ShortToast(isGetStringFromJson.handleData("message",a));
                     }
 
                 }, throwable -> {
-                    //ToastUtil.ShortToast("数据错误");
+                    ToastUtil.ShortToast("数据异常，请尝试重新进入本页面");
                 });
     }
 

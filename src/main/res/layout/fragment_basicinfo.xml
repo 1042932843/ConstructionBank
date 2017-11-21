@@ -3,12 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/_12dp"
+    android:paddingBottom="@dimen/_12dp"
+    android:overScrollMode="never"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/_12dp"
+
     android:orientation="vertical"
     >
 

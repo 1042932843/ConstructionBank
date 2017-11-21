@@ -10,6 +10,7 @@ import com.clpays.tianfugou.Network.Intercepter.StatusInterceptor;
 import com.clpays.tianfugou.Network.api.ApiConstants;
 import com.clpays.tianfugou.Network.api.AppService;
 import com.clpays.tianfugou.Network.api.AuthenticationService;
+import com.clpays.tianfugou.Network.api.CreditService;
 import com.clpays.tianfugou.Network.api.HomePageService;
 import com.clpays.tianfugou.Network.api.LoginRegisterService;
 import com.clpays.tianfugou.Network.api.MessageService;
@@ -75,6 +76,10 @@ public class RetrofitHelper {
 
   public static MessageService getMSGAPI(){
     return createApi(MessageService.class, ApiConstants.Base_URL);
+  }
+
+  public static CreditService getCreditAPI(){
+    return createApi(CreditService.class, ApiConstants.Base_URL);
   }
 
 
