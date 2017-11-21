@@ -73,16 +73,9 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
 
                         break;
                     case "银行贷款":
-                        if("finish".equals(s)){
-                            ToastUtil.ShortToast("功能维护中，请期待后续更新");
-                            //it.setClass(context, QRgatheringActivity.class);
-                            //context.startActivity(it);
-
-                        }else{
-                            it.setClass(context, CreditActivity.class);
-                            it.putExtra("Title",name);
-                            context.startActivity(it);
-                        }
+                        it.setClass(context, CreditActivity.class);
+                        it.putExtra("Title",name);
+                        context.startActivity(it);
                         break;
                     case "商城缴费":
                         if("finish".equals(s)){

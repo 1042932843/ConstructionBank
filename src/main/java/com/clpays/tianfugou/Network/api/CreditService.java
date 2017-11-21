@@ -29,4 +29,7 @@ public interface CreditService {
 
     @POST("user/fetchloan")
     Observable<ResponseBody> fetchloan(@Body JsonObject bean);
+
+    @POST("user/pushloan")
+    Observable<ResponseBody> pushloan(@Body JsonObject bean);
 }

@@ -6,6 +6,7 @@
     <string name="type_shou">收款</string>
     <string name="type_pay">付款</string>
     <string name="credit_inm">立即贷款</string>
+    <string name="getcredit">申请贷款</string>
     <string name="my_credit">我的贷款</string>
     <string name="credit">银行贷款</string>
     <string name="credit_info">产品信息</string>
