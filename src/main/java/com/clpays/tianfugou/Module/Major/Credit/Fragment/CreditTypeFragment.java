@@ -60,6 +60,12 @@ public class CreditTypeFragment extends BaseFragment {
         creditTypeList=new ArrayList<>();
 
     }
+
+    @OnClick(R.id.back)
+    public void back(){
+        getActivity().finish();
+    }
+
     @Override
     public void initRecyclerView(){
         adapter=new CreditAdapter(getContext(),creditTypeList,R.layout.credit_type_item);

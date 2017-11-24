@@ -74,8 +74,10 @@ public class CreditStatusFragment extends BaseFragment {
                     String a = bean.string();
                     if ("true".equals(isGetStringFromJson.handleData("success", a))) {
                         String data= isJsonObj.handleData("data",a);
-                        msg.setText("申请成功，请稍等1-2个工作日安排");
+
                     }
+                    String message= isGetStringFromJson.handleData("message",a);
+                    msg.setText(message);
                 }, throwable -> {
                     //ToastUtil.ShortToast("数据错误");
                 });

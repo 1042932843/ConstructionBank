@@ -51,6 +51,7 @@ public class CreditActivity extends BaseActivity {
     private int currentTabIndex;
     private int index;
     Bundle bundle = new Bundle();
+    CreditType CreditTypeevent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class CreditActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(CreditType event){
+        this.CreditTypeevent=event;
         String cmd = event.getCmd();
 
         switch (cmd){
@@ -185,7 +187,12 @@ public class CreditActivity extends BaseActivity {
             if(index==0){
                 finish();
             }else{
-                back();
+                if(CreditTypeevent.getContent().isEmpty()){
+                    CreditTypeevent.setCmd("0");
+                }else{
+                    CreditTypeevent.setCmd("back");
+                }
+                EventBus.getDefault().post(CreditTypeevent);
             }
             return true;
         }
@@ -204,7 +211,7 @@ public class CreditActivity extends BaseActivity {
                 new AlertDialog.Builder(this);
         normalDialog.setIcon(R.mipmap.launcher);
         normalDialog.setTitle("提示");
-        normalDialog.setMessage(event.getTitle()+"?");
+        normalDialog.setMessage(event.getTitle());
         normalDialog.setPositiveButton("立即申请",
                 new DialogInterface.OnClickListener() {
                     @Override

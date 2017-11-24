@@ -26,16 +26,24 @@ import com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.LogUtil;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
+import com.clpays.tianfugou.zxinglibrary.android.CaptureActivity;
+import com.clpays.tianfugou.zxinglibrary.common.Constant;
 import com.google.gson.JsonObject;
 
 
+import static android.app.Activity.RESULT_OK;
+
+
 public class homeFragment extends BaseFragment {
+    private int REQUEST_CODE_SCAN = 111;
+
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -68,9 +76,27 @@ public class homeFragment extends BaseFragment {
             it.setClass(getActivity(), QRgatheringActivity.class);
             startActivity(it);
         }else{
-            it.setClass(getActivity(), FunctionTipActivity.class);
+            Intent intent = new Intent(getActivity(), CaptureActivity.class);
+            //intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
+            startActivityForResult(intent, REQUEST_CODE_SCAN);
+            /*it.setClass(getActivity(), FunctionTipActivity.class);
             it.putExtra("Title","扫一扫");
-            startActivity(it);
+            startActivity(it);*/
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // 扫描二维码/条码回传
+        if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
+            if (data != null) {
+
+                String content = data.getStringExtra(Constant.CODED_CONTENT);
+                LogUtil.d("扫描结果为：" + content);
+
+            }
         }
     }
 

@@ -27,7 +27,7 @@ import com.clpays.tianfugou.Utils.tools.isJsonArray;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -51,7 +51,7 @@ import okhttp3.RequestBody;
 
 import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
-import com.clpays.tianfugou.Utils.LogUtil;
+
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity2;
 import com.zxy.tiny.Tiny;
 import com.zxy.tiny.callback.FileCallback;
@@ -90,7 +90,6 @@ public class CertificateInfoFragment extends BaseFragment implements ImagePicker
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             switch (position) {
                                 case 0: // 直接调起相机
-
                                     //打开选择,本次允许选择的数量
                                     ImagePicker.getInstance().setSelectLimit(maxImgCount2 - selImageList2.size());
                                     Intent intent = new Intent(getActivity(), ImageGridActivity.class);

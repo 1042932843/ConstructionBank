@@ -45,6 +45,8 @@
         android:layout_above="@+id/next_step"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="@dimen/_16dp"
+        android:paddingRight="@dimen/_16dp"
         android:overScrollMode="never">
     <TextView
         android:id="@+id/content"

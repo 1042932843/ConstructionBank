@@ -72,7 +72,7 @@ public class CreditSesameView extends View {
   //信用等级文本画笔
   private Paint mTextPaint;
 
-  //大刻度画笔
+  //com/clpays/tianfugou/Design/CreditSesame/CreditSesameView.java:75
   private Paint mCalibrationPaint;
 
   //小刻度画笔

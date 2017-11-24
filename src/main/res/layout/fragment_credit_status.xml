@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_centerInParent="true"
-                android:text="@string/credit_info"
+                android:text="申请状态"
                 android:textSize="@dimen/textsize18sp"
                 android:textColor="@color/black_80"/>
         </RelativeLayout>
@@ -48,8 +48,12 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
     <TextView
+        android:layout_margin="@dimen/_8dp"
         android:id="@+id/msg"
-        android:layout_below="@+id/img"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black_80"/>
 </RelativeLayout>
