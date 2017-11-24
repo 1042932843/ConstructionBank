@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.clpays.tianfugou.zxinglibrary.android;
+package com.clpays.tianfugou.zxing.android;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 
-import com.clpays.tianfugou.zxinglibrary.camera.CameraManager;
-import com.clpays.tianfugou.zxinglibrary.common.Constant;
-import com.clpays.tianfugou.zxinglibrary.decode.DecodeThread;
-import com.clpays.tianfugou.zxinglibrary.view.ViewfinderResultPointCallback;
+import com.clpays.tianfugou.zxing.camera.CameraManager;
+import com.clpays.tianfugou.zxing.common.Constant;
+import com.clpays.tianfugou.zxing.decode.DecodeThread;
+import com.clpays.tianfugou.zxing.view.ViewfinderResultPointCallback;
 import com.google.zxing.Result;
 
 /**
