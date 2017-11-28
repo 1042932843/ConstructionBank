@@ -37,6 +37,8 @@ public class ViewPagerActivity extends BaseActivity {
 	private Fragment2 mFragment2;
 	private Fragment3 mFragment3;
 	private Fragment4 mFragment4;
+	private Fragment5 mFragment5;
+	private Fragment6 mFragment6;
 	private List<Fragment> mListFragment = new ArrayList<Fragment>();
 	private PagerAdapter mPgAdapter;
 
@@ -61,11 +63,14 @@ public class ViewPagerActivity extends BaseActivity {
 		mFragment1 = new Fragment1();
 		mFragment2 = new Fragment2();
 		mFragment3 = new Fragment3();
-
-		mFragment4 = new Fragment4();
+		mFragment5 = new Fragment5();
+		mFragment6 = new Fragment6();
+ 		mFragment4 = new Fragment4();
 		mListFragment.add(mFragment1);
 		mListFragment.add(mFragment2);
 		mListFragment.add(mFragment3);
+		mListFragment.add(mFragment5);
+		mListFragment.add(mFragment6);
 		mListFragment.add(mFragment4);
 		mPgAdapter = new ViewPagerAdapter(getSupportFragmentManager(),
 				mListFragment);

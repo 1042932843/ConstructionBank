@@ -18,6 +18,7 @@ import com.clpays.tianfugou.Entity.Credit.CreditType;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
 import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
 import com.clpays.tianfugou.Module.Major.Authentication.StartAuthenticationActivity;
+import com.clpays.tianfugou.Module.Major.Credit.Fragment.CreditConditionFragment;
 import com.clpays.tianfugou.Module.Major.Credit.Fragment.CreditInfoFragment;
 import com.clpays.tianfugou.Module.Major.Credit.Fragment.CreditStatusFragment;
 import com.clpays.tianfugou.Module.Major.Credit.Fragment.CreditTypeFragment;
@@ -73,10 +74,15 @@ public class CreditActivity extends BaseActivity {
                 bundle.putSerializable("CreditType", event);
                 changeFragmentIndex(1,bundle);
                 break;
+
+            case "1.5":
+                bundle.putSerializable("CreditType", event);
+                changeFragmentIndex(2,bundle);
+                break;
             case "2":
                 if(!event.getContent().isEmpty()){
                     bundle.putSerializable("CreditType", event);
-                    changeFragmentIndex(2,bundle);
+                    changeFragmentIndex(3,bundle);
                 }else{
                     showExitDialog(event);
                 }
@@ -99,10 +105,12 @@ public class CreditActivity extends BaseActivity {
     public void initFragments(){
         CreditTypeFragment creditTypeFragment=CreditTypeFragment.newInstance();
         CreditInfoFragment creditInfoFragment=CreditInfoFragment.newInstance();
+        CreditConditionFragment creditConditionFragment=CreditConditionFragment.newInstance();
         CreditStatusFragment creditStatusFragment=CreditStatusFragment.newInstance();
         fragments = new Fragment[] {
                 creditTypeFragment,
                 creditInfoFragment,
+                creditConditionFragment,
                 creditStatusFragment
         };
         // 添加显示第一个fragment
@@ -211,14 +219,14 @@ public class CreditActivity extends BaseActivity {
                 new AlertDialog.Builder(this);
         normalDialog.setIcon(R.mipmap.launcher);
         normalDialog.setTitle("提示");
-        normalDialog.setMessage(event.getTitle());
+        normalDialog.setMessage(event.getTitle()+"需要专门联系咨询，是否申请？");
         normalDialog.setPositiveButton("立即申请",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //...To-do
                         bundle.putSerializable("CreditType", event);
-                        changeFragmentIndex(2,bundle);
+                        changeFragmentIndex(3,bundle);
                     }
                 });
         normalDialog.setNegativeButton("取消",

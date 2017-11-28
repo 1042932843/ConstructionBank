@@ -258,7 +258,7 @@ public class ImagePicker {
         if (takePictureIntent.resolveActivity(activity.getPackageManager()) != null) {
             if (Utils.existSDCard()) takeImageFile = new File(Environment.getExternalStorageDirectory(), "/DCIM/camera/");
             else takeImageFile = Environment.getDataDirectory();
-            takeImageFile = createFile(takeImageFile, "IMG_", ".jpg");
+            takeImageFile = createFile(takeImageFile, "IMG_", "welcome6.jpg");
             if (takeImageFile != null) {
                 // 默认情况下，即不需要指定intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 // 照相机有自己默认的存储路径，拍摄的照片将返回一个缩略图。如果想访问原始图片，

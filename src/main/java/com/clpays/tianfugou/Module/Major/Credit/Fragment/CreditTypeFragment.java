@@ -128,6 +128,11 @@ public class CreditTypeFragment extends BaseFragment {
                             creditType.setTitle(name);
                             String intro=isGetStringFromJson.handleData("intro",array.get(i).toString());
                             creditType.setContent(intro);
+                            String need=isGetStringFromJson.handleData("need",array.get(i).toString());
+                            creditType.setNeed(need);
+                            String pic=isGetStringFromJson.handleData("img",array.get(i).toString());
+                            creditType.setPic(pic);
+
                             if(!intro.isEmpty()){
                                 creditType.setCmd("1");
                             }else{

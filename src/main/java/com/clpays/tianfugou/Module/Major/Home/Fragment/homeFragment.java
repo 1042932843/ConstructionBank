@@ -2,7 +2,6 @@ package com.clpays.tianfugou.Module.Major.Home.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.RelativeLayout;
@@ -33,8 +32,8 @@ import com.clpays.tianfugou.Utils.ToastUtil;
 import com.clpays.tianfugou.Utils.UserState;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
-import com.clpays.tianfugou.zxinglibrary.android.CaptureActivity;
-import com.clpays.tianfugou.zxinglibrary.common.Constant;
+import com.clpays.tianfugou.zxing.android.CaptureActivity;
+import com.clpays.tianfugou.zxing.common.Constant;
 import com.google.gson.JsonObject;
 
 

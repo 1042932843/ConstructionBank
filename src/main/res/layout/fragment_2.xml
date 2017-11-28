@@ -7,5 +7,5 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/welcome2" />
+        android:background="@drawable/welcome6" />
 </RelativeLayout>

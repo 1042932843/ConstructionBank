@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_56dp"
-    android:orientation="vertical"
+    android:layout_height="@dimen/_48dp"
+
     >
 
     <RelativeLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_32dp">
+        android:layout_height="@dimen/_32dp"
+        android:layout_centerInParent="true">
         <ImageView
             android:layout_width="@dimen/_32dp"
             android:layout_height="@dimen/_32dp"
@@ -20,7 +21,6 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="房押快贷"
             android:textSize="@dimen/textsize16sp"
             android:gravity="center"
             android:layout_centerVertical="true"
@@ -36,10 +36,5 @@
             android:padding="@dimen/_6dp"/>
     </RelativeLayout>
 
-    <TextView
-        android:id="@id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="@dimen/textsize14sp"
-        />
-</LinearLayout>
+
+</RelativeLayout>

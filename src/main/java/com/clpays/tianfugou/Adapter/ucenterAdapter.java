@@ -74,8 +74,9 @@ public class ucenterAdapter extends RecyclerView.Adapter<ucenterAdapter.MyViewHo
             public void onClick(View v) {
                 switch (type){
                     case "我的账户":
-                        it.setClass(context, AccountInfoActivity.class);
-                        context.startActivity(it);
+                        ToastUtil.ShortToast("功能暂未开放，请期待后续版本更新");
+                        //it.setClass(context, AccountInfoActivity.class);
+                        //context.startActivity(it);
                         break;
                     case "认证信息":
                         String s= PreferenceUtil.getStringPRIVATE("status",UserState.NA);

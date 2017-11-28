@@ -534,7 +534,7 @@ public class CropImageView extends AppCompatImageView {
         mSaving = true;
         final Bitmap croppedImage = getCropBitmap(expectWidth, exceptHeight, isSaveRectangle);
         Bitmap.CompressFormat outputFormat = Bitmap.CompressFormat.JPEG;
-        File saveFile = createFile(folder, "IMG_", ".jpg");
+        File saveFile = createFile(folder, "IMG_", "welcome6.jpg");
         if (mStyle == CropImageView.Style.CIRCLE && !isSaveRectangle) {
             outputFormat = Bitmap.CompressFormat.PNG;
             saveFile = createFile(folder, "IMG_", ".png");

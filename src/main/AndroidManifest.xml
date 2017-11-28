@@ -83,7 +83,7 @@
             android:name="com.clpays.tianfugou.Module.Message.MessageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.clpays.tianfugou.zxinglibrary.android.CaptureActivity"
+            android:name="com.clpays.tianfugou.zxing.android.CaptureActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"

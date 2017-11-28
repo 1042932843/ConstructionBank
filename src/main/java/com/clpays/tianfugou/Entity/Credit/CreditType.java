@@ -48,6 +48,25 @@ public class CreditType implements Serializable {
     String title;
     String content;
 
+    public String getNeed() {
+        return need;
+    }
+
+    public void setNeed(String need) {
+        this.need = need;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    String need;
+    String pic;//介绍用
+
     public String getCmd() {
         return cmd;
     }

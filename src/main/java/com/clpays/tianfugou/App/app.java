@@ -241,7 +241,7 @@ public class app extends Application implements DuskyObserver, Application.Activ
                         url=isGetStringFromJson.handleData("url",data);
                         md5=isGetStringFromJson.handleData("md5",data);
                         JsonArray content= isJsonArray.handleData("info",data);
-                        String c="";
+                        String c="是否进行更新？\n";
                         for(int i=0;i<content.size();i++){
                           String u= content.get(i).getAsString();
                             c=c+u+"\n";
@@ -337,7 +337,9 @@ public class app extends Application implements DuskyObserver, Application.Activ
             contextActivity = activity.getParent();
         }else
             contextActivity = activity;
-
+        if(contextActivity instanceof HomePageActivity||contextActivity instanceof LRpageActivity){
+            update();
+        }
 
     }
 
