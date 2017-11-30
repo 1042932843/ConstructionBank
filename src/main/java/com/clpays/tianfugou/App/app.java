@@ -30,6 +30,7 @@ import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.CommonUtil;
+import com.clpays.tianfugou.Utils.Crash.CrashHandler;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper;
 import com.clpays.tianfugou.Utils.ToastUtil;
@@ -91,6 +92,8 @@ public class app extends Application implements DuskyObserver, Application.Activ
     @Override
     public void onCreate() {
         super.onCreate();
+        CrashHandler crashHandler= CrashHandler.getInstance();
+        crashHandler.init(this);
         Tiny.getInstance().init(this);
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);

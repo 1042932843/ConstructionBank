@@ -26,7 +26,7 @@ public class Fragment1 extends Fragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.fragment_1, container, false);
 		hand=(ImageView)view.findViewById(R.id.hand) ;
-		AnimationSet animationSet = new AnimationSet(true);
+		/*AnimationSet animationSet = new AnimationSet(true);
 		AlphaAnimation aa=new AlphaAnimation(1,0);
 		aa.setDuration(2000);
 		animationSet.addAnimation(aa);
@@ -42,7 +42,7 @@ public class Fragment1 extends Fragment {
 		//2秒完成动画
 		translateAnimation.setDuration(2000);
 		animationSet.addAnimation(translateAnimation);
-		animationSet.setRepeatMode(Animation.RESTART);
+		animationSet.setRepeatMode(Animation.RESTART);*/
 		//hand.startAnimation(animationSet);
 		hand.setVisibility(View.GONE);
 		view.findViewById(R.id.tvInNew).setOnClickListener(

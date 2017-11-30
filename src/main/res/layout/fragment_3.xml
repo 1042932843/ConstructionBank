@@ -4,5 +4,21 @@
     android:layout_height="match_parent"
     android:background="@drawable/welcome4"
     >
-
+    <TextView
+        android:id="@+id/tvInNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/_8dp"
+        android:paddingLeft="@dimen/_8dp"
+        android:paddingTop="@dimen/_2dp"
+        android:paddingBottom="@dimen/_2dp"
+        android:gravity="center"
+        android:text="跳过"
+        android:background="@drawable/text_background_rb"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/_16dp"/>
 </RelativeLayout>
