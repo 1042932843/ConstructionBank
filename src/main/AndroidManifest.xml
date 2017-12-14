@@ -16,6 +16,12 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
 
     <!-- Required -->
     <permission
@@ -124,7 +130,10 @@
 
         </activity>
 
-
+        <activity
+            android:name="com.clpays.tianfugou.Pay.weixin.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity

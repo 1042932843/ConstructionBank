@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
@@ -73,7 +74,7 @@ import static com.clpays.tianfugou.Utils.Receiver.TagAliasOperatorHelper.ACTION_
  * Date: 2017-09-09 15:01
  */
 
-public class app extends Application implements DuskyObserver, Application.ActivityLifecycleCallbacks{
+public class app extends MultiDexApplication implements DuskyObserver, Application.ActivityLifecycleCallbacks{
     public static app mInstance;
     private ArrayList<Activity> activities=new ArrayList<>();
     public static RequestOptions optionsRoundedCorners,optionsRoundedCircle,optionsNormal,optionsNormalCrop;

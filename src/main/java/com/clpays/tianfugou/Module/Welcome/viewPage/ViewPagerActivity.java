@@ -11,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.clpays.tianfugou.Adapter.ViewPagerAdapter;
 import com.clpays.tianfugou.App.app;
@@ -139,4 +141,20 @@ public class ViewPagerActivity extends BaseActivity {
 				});
 	}
 
+	private long exitTime=0;
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+			if (System.currentTimeMillis() - exitTime > 2000) {
+				Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				app.getInstance().Exit();
+			}
+			return true;
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
 }

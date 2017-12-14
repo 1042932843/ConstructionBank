@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.clpays.tianfugou"
         minSdkVersion 16
@@ -10,9 +10,7 @@ android {
         versionCode 1
         versionName '1.4'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        jackOptions {
-            enabled true
-        }
+        multiDexEnabled true
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86'
@@ -27,8 +25,8 @@ android {
     buildTypes {
         release {
             //是否优化zip
-            zipAlignEnabled false
-            minifyEnabled false
+            zipAlignEnabled true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -52,6 +50,7 @@ dependencies {
     configurations.all {
         resolutionStrategy.force 'com.android.support:support-annotations:25.3.1'//强制指定
     }
+    compile 'com.android.support:multidex:1.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
@@ -77,12 +76,13 @@ dependencies {
     compile 'com.bilibili:magicasakura:0.1.7@aar'
     compile project(path: ':imagepicker')
     compile 'cn.jiguang.sdk:jpush:3.0.9'
-    // 此处以JPush 3.0.9 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.7'
-    // 此处以JCore 1.1.7 版本为例。
     compile project(path: ':ultraviewpager')
     compile 'com.zxy.android:tiny:0.0.6'
     compile project(path: ':versionupdatelibrary')
     compile files('libs/core-3.3.0.jar')
     compileOnly 'com.android.support:support-vector-drawable:25.3.1'
+
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    compile files('libs/alipaySdk-20170922.jar')
 }
