@@ -2,8 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/welcome2"
     >
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        />
     <TextView
         android:id="@+id/tvInNew"
         android:layout_width="wrap_content"
@@ -20,5 +25,5 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="@dimen/_16dp"/>
-</RelativeLayout>
+    android:layout_margin="@dimen/_16dp"/>
+    </RelativeLayout>

@@ -34,20 +34,20 @@ import java.util.List;
  */
 public class ViewPagerActivity extends BaseActivity {
 	public static final String TAG = ViewPagerActivity.class.getSimpleName();
-	private ViewPager mVPActivity;
-	private Fragment1 mFragment1;
-	private Fragment2 mFragment2;
-	private Fragment3 mFragment3;
-	private Fragment4 mFragment4;
-	private Fragment5 mFragment5;
-	private Fragment6 mFragment6;
-	private List<Fragment> mListFragment = new ArrayList<Fragment>();
-	private PagerAdapter mPgAdapter;
+	protected Fragment1 mFragment1;
+	protected Fragment2 mFragment2;
+	protected Fragment3 mFragment3;
+	protected Fragment4 mFragment4;
+	protected Fragment5 mFragment5;
+	protected Fragment6 mFragment6;
+	protected List<Fragment> mListFragment = new ArrayList<Fragment>();
+	protected PagerAdapter mPgAdapter;
 
 	UltraViewPager ultraViewPager;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//SystemBarHelper.immersiveStatusBar(this);
 		initPermission();
 
 	}

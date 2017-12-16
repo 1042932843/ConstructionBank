@@ -5,9 +5,11 @@
      >
 
     <ImageView
+        android:id="@+id/pic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/welcome1" />
+        android:scaleType="fitXY"
+        />
 
     <ImageView
         android:id="@+id/hand"

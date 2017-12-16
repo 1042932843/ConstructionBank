@@ -12,6 +12,8 @@ import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.Animation.AnimationUtil;
 
@@ -19,13 +21,15 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class Fragment1 extends Fragment {
-	ImageView hand;
+	ImageView hand,pic;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.fragment_1, container, false);
 		hand=(ImageView)view.findViewById(R.id.hand) ;
+		pic=(ImageView)view.findViewById(R.id.pic) ;
+		Glide.with(this).load(R.drawable.welcome1).into(pic);
 		/*AnimationSet animationSet = new AnimationSet(true);
 		AlphaAnimation aa=new AlphaAnimation(1,0);
 		aa.setDuration(2000);
