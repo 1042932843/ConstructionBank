@@ -1,13 +1,10 @@
-package com.clpays.tianfugou.Module.QRGathering.Fragement;
+package com.clpays.tianfugou.Module.Major.QRGathering.Fragement;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
-import com.bumptech.glide.Glide;
-import com.clpays.tianfugou.App.app;
 
 import org.greenrobot.eventbus.EventBus;
 

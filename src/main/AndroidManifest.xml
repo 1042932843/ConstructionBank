@@ -70,7 +70,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity"
+            android:name=".Module.Major.QRGathering.QRgatheringActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.clpays.tianfugou.Module.Major.AccountInfo.AccountInfoActivity"
@@ -132,6 +132,11 @@
 
         <activity
             android:name="com.clpays.tianfugou.Pay.weixin.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+        <activity
+            android:name="com.clpays.tianfugou.Module.Major.Payment.PaymentActivity"
             android:exported="true"
             android:launchMode="singleTop"/>
 

@@ -18,7 +18,8 @@ import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Entity.HomePage.homeItem;
 import com.clpays.tianfugou.Module.Major.Credit.CreditActivity;
 import com.clpays.tianfugou.Module.Major.Home.FunctionTipActivity;
-import com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity;
+import com.clpays.tianfugou.Module.Major.Payment.PaymentActivity;
+import com.clpays.tianfugou.Module.Major.QRGathering.QRgatheringActivity;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.PreferenceUtil;
 import com.clpays.tianfugou.Utils.ToastUtil;
@@ -79,7 +80,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
                         break;
                     case "商城缴费":
                         if("finish".equals(s)){
-                            ToastUtil.ShortToast("功能维护中，请期待后续更新");
+                            it.setClass(context, PaymentActivity.class);
+                            context.startActivity(it);
                         }else{
                             it.setClass(context, FunctionTipActivity.class);
                             it.putExtra("Title",name);

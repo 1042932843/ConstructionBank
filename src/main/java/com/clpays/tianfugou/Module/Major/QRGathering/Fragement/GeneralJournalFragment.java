@@ -1,4 +1,4 @@
-package com.clpays.tianfugou.Module.QRGathering.Fragement;
+package com.clpays.tianfugou.Module.Major.QRGathering.Fragement;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;

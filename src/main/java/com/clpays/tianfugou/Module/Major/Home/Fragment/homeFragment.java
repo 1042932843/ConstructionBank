@@ -21,7 +21,7 @@ import com.clpays.tianfugou.Entity.HomePage.homeItem;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Module.LoginRegister.LRpageActivity;
 import com.clpays.tianfugou.Module.Major.Home.FunctionTipActivity;
-import com.clpays.tianfugou.Module.QRGathering.QRgatheringActivity;
+import com.clpays.tianfugou.Module.Major.QRGathering.QRgatheringActivity;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;

@@ -11,6 +11,7 @@
     <string name="credit">银行贷款</string>
     <string name="credit_info">产品信息</string>
     <string name="my_message">通知</string>
+    <string name="payment">商城缴费</string>
     <string name="retrieve_password">找回密码</string>
     <string name="packages">服务选择</string>
     <string name="user_login">用户登录</string>

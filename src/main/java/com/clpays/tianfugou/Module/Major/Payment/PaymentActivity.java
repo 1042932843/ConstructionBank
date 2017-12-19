@@ -1,4 +1,4 @@
-package com.clpays.tianfugou.Module.QRGathering;
+package com.clpays.tianfugou.Module.Major.Payment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
-import com.clpays.tianfugou.Module.QRGathering.Fragement.GeneralJournalFragment;
-import com.clpays.tianfugou.Module.QRGathering.Fragement.QrFragment;
+import com.clpays.tianfugou.Module.Major.QRGathering.Fragement.GeneralJournalFragment;
+import com.clpays.tianfugou.Module.Major.QRGathering.Fragement.QrFragment;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 
@@ -15,8 +15,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import butterknife.OnClick;
 
-public class QRgatheringActivity extends BaseActivity {
+
+public class PaymentActivity extends BaseActivity {
+
+    @OnClick(R.id.back)
+    public void back(){
+        finish();
+    }
 
     private Fragment[] fragments;
     private int currentTabIndex;
@@ -40,7 +47,7 @@ public class QRgatheringActivity extends BaseActivity {
     }
     @Override
     public int getLayoutId() {
-        return R.layout.activity_qrgathering;
+        return R.layout.activity_payment;
     }
 
     @Override
@@ -100,7 +107,7 @@ public class QRgatheringActivity extends BaseActivity {
     public void onEvent(EventUtil event){
         String Type = event.getType();
         switch (Type){
-            case "流水明细":
+            case "":
                 changeFragmentIndex(1);
                 break;
         }
