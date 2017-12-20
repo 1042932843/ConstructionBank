@@ -10,11 +10,13 @@ import com.clpays.tianfugou.Module.Major.QRGathering.Fragement.GeneralJournalFra
 import com.clpays.tianfugou.Module.Major.QRGathering.Fragement.QrFragment;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
+import com.tmall.ultraviewpager.UltraViewPager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 
@@ -25,6 +27,9 @@ public class PaymentActivity extends BaseActivity {
         finish();
     }
 
+    @BindView(R.id.ultra_viewpager)
+    UltraViewPager ultraViewPager;
+
     private Fragment[] fragments;
     private int currentTabIndex;
     private int index;
@@ -32,7 +37,7 @@ public class PaymentActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //设置StatusBar透明
-        SystemBarHelper.immersiveStatusBar(this);
+        //SystemBarHelper.immersiveStatusBar(this);
     }
     @Override
     protected void onStart() {
@@ -52,18 +57,7 @@ public class PaymentActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        GeneralJournalFragment generalJournalFragment=GeneralJournalFragment.newInstance();
-        QrFragment qrFragment=QrFragment.newInstance();
-        fragments = new Fragment[] {
-                qrFragment,
-                generalJournalFragment
-        };
-
-        // 添加显示第一个fragment
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.qrcontainer, qrFragment)
-                .show(qrFragment).commit();
+        ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
 
     }
 
@@ -108,7 +102,7 @@ public class PaymentActivity extends BaseActivity {
         String Type = event.getType();
         switch (Type){
             case "":
-                changeFragmentIndex(1);
+
                 break;
         }
     }

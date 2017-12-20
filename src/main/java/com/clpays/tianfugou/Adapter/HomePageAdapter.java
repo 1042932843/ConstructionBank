@@ -83,9 +83,11 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.MyView
                             it.setClass(context, PaymentActivity.class);
                             context.startActivity(it);
                         }else{
-                            it.setClass(context, FunctionTipActivity.class);
-                            it.putExtra("Title",name);
+                            it.setClass(context, PaymentActivity.class);
                             context.startActivity(it);
+                            /*it.setClass(context, FunctionTipActivity.class);
+                            it.putExtra("Title",name);
+                            context.startActivity(it);*/
                         }
                         break;
             }
