@@ -1,5 +1,6 @@
 package com.clpays.tianfugou.Module.Major.QRGathering.Fragement;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,12 +15,21 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
+import com.bumptech.glide.Glide;
+import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Design.PayCustomView.PayCustomView;
 import com.clpays.tianfugou.Module.Base.BaseFragment;
 import com.clpays.tianfugou.Entity.Common.EventUtil;
+import com.clpays.tianfugou.Network.RequestProperty;
+import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
+import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
+import com.clpays.tianfugou.Utils.tools.isJsonObj;
+import com.clpays.tianfugou.zxing.encode.CodeCreator;
+import com.google.gson.JsonObject;
 
 
 public class QrFragment extends BaseFragment {
@@ -64,16 +74,35 @@ public class QrFragment extends BaseFragment {
     @Override
     public void finishCreateView(Bundle state) {
         SystemBarHelper.setHeightAndPadding(getContext(), toolbar);
+        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+        RetrofitHelper.getQRAPI()
+                .getQRContent(obj)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    String a = bean.string();
+                    if ("true".equals(isGetStringFromJson.handleData("success", a))) {
+                        String data= isJsonObj.handleData("data",a);
+                        String qrcode= isGetStringFromJson.handleData("qrcode",data);
+                        Bitmap bitmap=CodeCreator.createQRCode(qrcode,800,800,null);
+                        qr.setImageBitmap(bitmap);
+                        //Glide.with(getContext()).load(bitmap).into(qr);
+                    }
+                    String message= isGetStringFromJson.handleData("message",a);
+                }, throwable -> {
+                    //ToastUtil.ShortToast("数据错误");
+                });
        // Glide.with(getContext()).load(R.drawable.qr_g_dsy).apply(app.optionsNormal).into(qr);
-        paycustomView.loadLoading();
-        Observable.timer(5000, TimeUnit.MILLISECONDS)
+        //paycustomView.loadLoading();
+       /* Observable.timer(5000, TimeUnit.MILLISECONDS)
                 .compose(bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aLong -> {
                     qr_layout.setVisibility(View.GONE);
                     paycustomView_layout.setVisibility(View.VISIBLE);
                     payOK();
-                });
+                });*/
     }
 
     private void payOK(){

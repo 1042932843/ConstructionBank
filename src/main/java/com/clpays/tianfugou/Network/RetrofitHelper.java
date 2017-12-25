@@ -15,6 +15,8 @@ import com.clpays.tianfugou.Network.api.HomePageService;
 import com.clpays.tianfugou.Network.api.LoginRegisterService;
 import com.clpays.tianfugou.Network.api.MessageService;
 import com.clpays.tianfugou.Network.api.PackageService;
+import com.clpays.tianfugou.Network.api.QRService;
+import com.clpays.tianfugou.Network.api.UcenterService;
 import com.clpays.tianfugou.Network.api.UpdateService;
 import com.clpays.tianfugou.Network.api.UploadService;
 import com.clpays.tianfugou.Utils.CommonUtil;
@@ -80,6 +82,14 @@ public class RetrofitHelper {
 
   public static CreditService getCreditAPI(){
     return createApi(CreditService.class, ApiConstants.Base_URL);
+  }
+
+  public static QRService getQRAPI(){
+    return createApi(QRService.class, ApiConstants.Base_URL);
+  }
+
+  public static UcenterService getUcenterAPI(){
+    return createApi(UcenterService.class, ApiConstants.Base_URL);
   }
 
 

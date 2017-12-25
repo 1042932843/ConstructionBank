@@ -136,9 +136,27 @@
             android:launchMode="singleTop"/>
 
         <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
+
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
+
+        <activity
             android:name="com.clpays.tianfugou.Module.Major.Payment.PaymentActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.clpays.tianfugou.Module.Major.Payment.PayListActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity

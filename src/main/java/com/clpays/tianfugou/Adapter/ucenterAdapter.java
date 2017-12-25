@@ -88,9 +88,8 @@ public class ucenterAdapter extends RecyclerView.Adapter<ucenterAdapter.MyViewHo
                                 context.startActivity(it);
                                 break;
                             default:
-                                ToastUtil.ShortToast("功能研发中，请期待后续版本更新");
-                                //it.setClass(context, AuthenticationInfoActivity.class);
-                                //context.startActivity(it);
+                                it.setClass(context, AuthenticationInfoActivity.class);
+                                context.startActivity(it);
                                 break;
                         }
 

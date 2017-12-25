@@ -1,5 +1,6 @@
 package com.clpays.tianfugou.Module.Major.Authentication;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,12 +14,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 import com.clpays.tianfugou.Adapter.CredentialsAdapter;
 import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Entity.Credentials.CredentialsItem;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
+import com.clpays.tianfugou.Network.RequestProperty;
+import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
+import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
+import com.google.gson.JsonObject;
 
 public class AuthenticationInfoActivity extends BaseActivity {
 
@@ -38,12 +46,14 @@ public class AuthenticationInfoActivity extends BaseActivity {
     }
 
 
+    List<CredentialsItem> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
+        items=new ArrayList<>();
     }
 
     @Override
@@ -59,7 +69,23 @@ public class AuthenticationInfoActivity extends BaseActivity {
                 .apply(app.optionsRoundedCircle)
                 .into(head);
 
-        List<CredentialsItem> items=new ArrayList<>();
+        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+        RetrofitHelper.getUcenterAPI()
+                .getCardinfo(obj)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    String a = bean.string();
+                    if ("true".equals(isGetStringFromJson.handleData("success", a))) {
+
+                    }
+                    String message= isGetStringFromJson.handleData("message",a);
+                }, throwable -> {
+                    //ToastUtil.ShortToast("数据错误");
+                });
+
+      /*  List<CredentialsItem>
         CredentialsItem item=new CredentialsItem();
         item.setName("手机号码");
         item.setValue("18725663275");
@@ -75,7 +101,7 @@ public class AuthenticationInfoActivity extends BaseActivity {
         items.add(item);
         items.add(item2);
         items.add(item3);
-        items.add(item4);
+        items.add(item4);*/
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         CredentialsAdapter adapter=new CredentialsAdapter(this,items);

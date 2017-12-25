@@ -59,8 +59,8 @@ public class homeFragment extends BaseFragment {
             it.setClass(getActivity(), QRgatheringActivity.class);
             startActivity(it);
         }else{
-            it.setClass(getActivity(), FunctionTipActivity.class);
-            it.putExtra("Title","收款");
+           it.setClass(getActivity(), FunctionTipActivity.class);
+           it.putExtra("Title","收款");
             startActivity(it);
         }
     }
@@ -72,15 +72,13 @@ public class homeFragment extends BaseFragment {
         String s= PreferenceUtil.getStringPRIVATE("status", UserState.NA);
         Intent it=new Intent();
         if("finish".equals(s)){
-            it.setClass(getActivity(), QRgatheringActivity.class);
-            startActivity(it);
-        }else{
             Intent intent = new Intent(getActivity(), CaptureActivity.class);
             //intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
             startActivityForResult(intent, REQUEST_CODE_SCAN);
-            /*it.setClass(getActivity(), FunctionTipActivity.class);
+        }else{
+            it.setClass(getActivity(), FunctionTipActivity.class);
             it.putExtra("Title","扫一扫");
-            startActivity(it);*/
+            startActivity(it);
         }
     }
 

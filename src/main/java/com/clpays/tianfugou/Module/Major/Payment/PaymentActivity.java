@@ -1,8 +1,10 @@
 package com.clpays.tianfugou.Module.Major.Payment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.RelativeLayout;
 
 import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
@@ -25,6 +27,13 @@ public class PaymentActivity extends BaseActivity {
     @OnClick(R.id.back)
     public void back(){
         finish();
+    }
+
+    @OnClick(R.id.fangzu)
+    public void go(){
+        Intent intent=new Intent(PaymentActivity.this,PayListActivity.class);
+        intent.putExtra("type","房租");
+        startActivity(intent);
     }
 
     @BindView(R.id.ultra_viewpager)
@@ -71,6 +80,7 @@ public class PaymentActivity extends BaseActivity {
     public void initToolBar() {
 
     }
+
 
     /**
      * 切换Fragment的下标

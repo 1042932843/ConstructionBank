@@ -50,6 +50,313 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">android:layout_margin="@dimen/_12dp"</LinearLayout>
+        android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_96dp"
+        android:background="@drawable/bg_shouye">
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:id="@+id/fangzu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/img"
+                        android:layout_width="@dimen/_56dp"
+                        android:layout_height="@dimen/_56dp"
+                        android:layout_centerHorizontal="true"
+                        android:padding="@dimen/_4dp"
+                        app:srcCompat="@drawable/fangzu_pay" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/img"
+                        android:layout_centerHorizontal="true"
+                        android:text="房租"
+                        android:textSize="@dimen/textsize14sp" />
+
+                    <TextView
+                        android:id="@+id/content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title"
+                        android:layout_centerHorizontal="true"
+                        android:hint="当月已缴纳"
+                        android:textSize="@dimen/textsize12sp" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/gray_20">
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/shuidian"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:layout_width="@dimen/_56dp"
+                        android:layout_height="@dimen/_56dp"
+                        android:layout_centerHorizontal="true"
+                        android:padding="@dimen/_4dp"
+                        app:srcCompat="@drawable/shuidian_pay" />
+
+                    <TextView
+                        android:id="@+id/title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/img1"
+                        android:layout_centerHorizontal="true"
+                        android:text="水电"
+                        android:textSize="@dimen/textsize14sp" />
+
+                    <TextView
+                        android:id="@+id/content1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title1"
+                        android:layout_centerHorizontal="true"
+                        android:hint="当月已缴纳"
+                        android:textSize="@dimen/textsize12sp" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray_20">
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:id="@+id/guanlifei"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/img2"
+                        android:layout_width="@dimen/_56dp"
+                        android:layout_height="@dimen/_56dp"
+                        android:layout_centerHorizontal="true"
+                        android:padding="@dimen/_4dp"
+                        app:srcCompat="@drawable/guanlifei_pay" />
+
+                    <TextView
+                        android:id="@+id/title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/img2"
+                        android:layout_centerHorizontal="true"
+                        android:text="管理费"
+                        android:textSize="@dimen/textsize14sp" />
+
+                    <TextView
+                        android:id="@+id/content2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title2"
+                        android:layout_centerHorizontal="true"
+                        android:hint="当月已缴纳"
+                        android:textSize="@dimen/textsize12sp" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/gray_20">
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/wangfei"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/img3"
+                        android:layout_width="@dimen/_56dp"
+                        android:layout_height="@dimen/_56dp"
+                        android:layout_centerHorizontal="true"
+                        android:padding="@dimen/_4dp"
+                        app:srcCompat="@drawable/wangfei_pay" />
+
+                    <TextView
+                        android:id="@+id/title3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/img3"
+                        android:layout_centerHorizontal="true"
+                        android:text="网费"
+                        android:textSize="@dimen/textsize14sp" />
+
+                    <TextView
+                        android:id="@+id/content3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title3"
+                        android:layout_centerHorizontal="true"
+                        android:hint="当月已缴纳"
+                        android:textSize="@dimen/textsize12sp" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <com.tmall.ultraviewpager.UltraViewPager
+            android:id="@+id/ultra_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_108dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:id="@+id/yijianjiaofei"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/img4"
+                        android:layout_width="@dimen/_56dp"
+                        android:layout_height="@dimen/_56dp"
+                        android:layout_centerHorizontal="true"
+                        android:padding="@dimen/_4dp"
+                        app:srcCompat="@drawable/yijianjiaofei_pay" />
+
+                    <TextView
+                        android:id="@+id/title4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/img4"
+                        android:layout_centerHorizontal="true"
+                        android:text="一键缴费"
+                        android:textSize="@dimen/textsize14sp" />
+
+                    <TextView
+                        android:id="@+id/content4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title4"
+                        android:layout_centerHorizontal="true"
+                        android:hint="当月已缴纳"
+                        android:textSize="@dimen/textsize12sp" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/gray_20">
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/huandai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/img5"
+                        android:layout_width="@dimen/_56dp"
+                        android:layout_height="@dimen/_56dp"
+                        android:layout_centerHorizontal="true"
+                        android:padding="@dimen/_4dp"
+                        app:srcCompat="@drawable/daikuan_pay" />
+
+                    <TextView
+                        android:id="@+id/title5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/img5"
+                        android:layout_centerHorizontal="true"
+                        android:text="还贷款"
+                        android:textSize="@dimen/textsize14sp" />
+
+                    <TextView
+                        android:id="@+id/content5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title5"
+                        android:layout_centerHorizontal="true"
+                        android:hint="当月已缴纳"
+                        android:textSize="@dimen/textsize12sp" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    </LinearLayout>
     </ScrollView>
 </LinearLayout>
