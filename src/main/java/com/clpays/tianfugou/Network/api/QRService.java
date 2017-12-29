@@ -16,6 +16,6 @@ import retrofit2.http.POST;
  */
 
 public interface QRService {
-    @POST("user/test")
+    @POST("user/fetchqrcode")
     Observable<ResponseBody> getQRContent(@Body JsonObject bean);
 }

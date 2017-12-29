@@ -24,14 +24,13 @@ import com.clpays.tianfugou.R;
  */
 
 public class CredentialsAdapter extends RecyclerView.Adapter<CredentialsAdapter.MyViewHolder> {
-    List<CredentialsItem> mDatas=new ArrayList<>();
+    List<CredentialsItem> mDatas;
     Context context;
     Intent it=new Intent();
 
     public CredentialsAdapter(Context context, List<CredentialsItem> list) {
         this.context=context;
-        this.mDatas.clear();
-        this.mDatas.addAll(list);
+        this.mDatas=list;
     }
 
     @Override

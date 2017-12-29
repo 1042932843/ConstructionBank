@@ -25,11 +25,13 @@ import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
+import com.clpays.tianfugou.Utils.tools.isGetBooleanFromJson;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
+import com.clpays.tianfugou.Utils.tools.isJsonObj;
 import com.google.gson.JsonObject;
 
 public class AuthenticationInfoActivity extends BaseActivity {
-
+    CredentialsAdapter adapter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -53,7 +55,7 @@ public class AuthenticationInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, toolbar);
-        items=new ArrayList<>();
+
     }
 
     @Override
@@ -65,9 +67,14 @@ public class AuthenticationInfoActivity extends BaseActivity {
     public void initViews(Bundle savedInstanceState) {
         Glide
                 .with(this)
-                .load(R.drawable.head)
+                .load(R.drawable.touxiang)
                 .apply(app.optionsRoundedCircle)
                 .into(head);
+        items=new ArrayList<>();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter=new CredentialsAdapter(this,items);
+        recyclerView.setAdapter(adapter);
+
 
         JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
         RetrofitHelper.getUcenterAPI()
@@ -78,7 +85,28 @@ public class AuthenticationInfoActivity extends BaseActivity {
                 .subscribe(bean -> {
                     String a = bean.string();
                     if ("true".equals(isGetStringFromJson.handleData("success", a))) {
+                        String cardpeoplename= isGetStringFromJson.handleData("cardpeoplename", isJsonObj.handleData("data",a));
+                        String cardnumber= isGetStringFromJson.handleData("cardnumber", isJsonObj.handleData("data",a));
+                        String openbank= isGetStringFromJson.handleData("openbank", isJsonObj.handleData("data",a));
+                        String cardcompanyname= isGetStringFromJson.handleData("cardcompanyname", isJsonObj.handleData("data",a));
 
+                        CredentialsItem itemcardpeoplename=new CredentialsItem();
+                        itemcardpeoplename.setName("账户名称");
+                        itemcardpeoplename.setValue(cardpeoplename);
+                        items.add(itemcardpeoplename);
+                        CredentialsItem itemopenbank=new CredentialsItem();
+                        itemopenbank.setName("开户行");
+                        itemopenbank.setValue(openbank);
+                        items.add(itemopenbank);
+                        CredentialsItem itemcardnumber=new CredentialsItem();
+                        itemcardnumber.setName("账户号码");
+                        itemcardnumber.setValue(cardnumber);
+                        items.add(itemcardnumber);
+                        CredentialsItem itemcardcompanyname=new CredentialsItem();
+                        itemcardcompanyname.setName("开户单位");
+                        itemcardcompanyname.setValue(cardcompanyname);
+                        items.add(itemcardcompanyname);
+                        adapter.notifyDataSetChanged();
                     }
                     String message= isGetStringFromJson.handleData("message",a);
                 }, throwable -> {
@@ -103,9 +131,7 @@ public class AuthenticationInfoActivity extends BaseActivity {
         items.add(item3);
         items.add(item4);*/
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        CredentialsAdapter adapter=new CredentialsAdapter(this,items);
-        recyclerView.setAdapter(adapter);
+
     }
 
     @Override

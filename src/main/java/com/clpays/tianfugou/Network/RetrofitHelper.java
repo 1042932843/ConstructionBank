@@ -15,6 +15,7 @@ import com.clpays.tianfugou.Network.api.HomePageService;
 import com.clpays.tianfugou.Network.api.LoginRegisterService;
 import com.clpays.tianfugou.Network.api.MessageService;
 import com.clpays.tianfugou.Network.api.PackageService;
+import com.clpays.tianfugou.Network.api.PayService;
 import com.clpays.tianfugou.Network.api.QRService;
 import com.clpays.tianfugou.Network.api.UcenterService;
 import com.clpays.tianfugou.Network.api.UpdateService;
@@ -90,6 +91,10 @@ public class RetrofitHelper {
 
   public static UcenterService getUcenterAPI(){
     return createApi(UcenterService.class, ApiConstants.Base_URL);
+  }
+
+  public static PayService getPayAPI(){
+    return createApi(PayService.class, ApiConstants.Base_URL);
   }
 
 

@@ -120,7 +120,8 @@ public class ViewPagerActivity extends BaseActivity {
 				Manifest.permission.WRITE_SETTINGS,
 				Manifest.permission.WAKE_LOCK,
 				Manifest.permission.VIBRATE,
-				Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS
+				Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+				Manifest.permission.MODIFY_AUDIO_SETTINGS
 
 		)
 				.subscribe(permission -> {

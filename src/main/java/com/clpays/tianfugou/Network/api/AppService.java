@@ -18,4 +18,7 @@ import retrofit2.http.POST;
 public interface AppService {
     @POST("user/index")
     Observable<ResponseBody> checkStatus(@Body JsonObject bean);
+
+    @POST("user/test")
+    Observable<ResponseBody> test(@Body JsonObject bean);
 }

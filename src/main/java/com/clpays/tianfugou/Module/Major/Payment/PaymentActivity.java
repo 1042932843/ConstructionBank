@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.clpays.tianfugou.Entity.Common.EventUtil;
@@ -30,9 +31,42 @@ public class PaymentActivity extends BaseActivity {
     }
 
     @OnClick(R.id.fangzu)
-    public void go(){
+    public void fangzu(){
+        go("房租费");
+    }
+    @OnClick(R.id.shui)
+    public void shuidian(){
+        go("水费");
+    }
+    @OnClick(R.id.guanlifei)
+    public void guanlifei(){
+        go("物业费");
+    }
+
+    @OnClick(R.id.dianfei)
+    public void dianfei(){
+        go("电费");
+    }
+    @OnClick(R.id.qifei)
+    public void qifei(){
+        go("气费");
+    }
+    @OnClick(R.id.wangfei)
+    public void wangfei(){
+        go("网费");
+    }
+    @OnClick(R.id.yijianjiaofei)
+    public void yijianjiaofei(){
+        go("一键缴费");
+    }
+    @OnClick(R.id.qita)
+    public void qita(){
+        go("其他费用");
+    }
+
+    public void go(String v){
         Intent intent=new Intent(PaymentActivity.this,PayListActivity.class);
-        intent.putExtra("type","房租");
+        intent.putExtra("type",v);
         startActivity(intent);
     }
 
@@ -67,6 +101,7 @@ public class PaymentActivity extends BaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
         ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
+        ultraViewPager.setVisibility(View.GONE);
 
     }
 

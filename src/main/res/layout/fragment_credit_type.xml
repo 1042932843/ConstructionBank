@@ -36,7 +36,7 @@
                 android:layout_centerInParent="true"
                 android:text="@string/credit"
                 android:textSize="@dimen/textsize18sp"
-                android:textColor="@color/black_80"/>
+                android:textColor="@color/colorPrimary"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

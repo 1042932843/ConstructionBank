@@ -57,7 +57,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp"
                 android:gravity="center"
-                android:text="2017年"
+                android:text="-年"
                 android:textColor="@color/black_80"
                 android:textSize="@dimen/textsize14sp" />
 
@@ -70,7 +70,7 @@
                 android:layout_below="@+id/textView2"
                 android:layout_margin="@dimen/_4dp"
                 android:gravity="bottom"
-                android:text="09"
+                android:text="-"
                 android:textColor="@color/black_80"
                 android:textSize="24sp" />
 
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:textColor="@color/colorPrimary"
-                android:text="23400.00"
+                android:text="-"
                 android:layout_margin="@dimen/_4dp"
                 android:layout_below="@+id/shouru"
                 android:layout_alignLeft="@+id/shouru"

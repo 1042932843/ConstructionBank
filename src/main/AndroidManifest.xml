@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
@@ -131,9 +132,21 @@
         </activity>
 
         <activity
-            android:name="com.clpays.tianfugou.Pay.weixin.WXPayEntryActivity"
+            android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wx11c3ddcba7dbc71b"/>
+            </intent-filter>
+
+            作者：Crocutax
+            链接：https://www.jianshu.com/p/38bb30f67f69
+            來源：简书
+            著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        </activity>
 
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"

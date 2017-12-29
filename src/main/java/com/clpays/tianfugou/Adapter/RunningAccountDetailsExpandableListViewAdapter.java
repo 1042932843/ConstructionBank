@@ -36,7 +36,7 @@ public class RunningAccountDetailsExpandableListViewAdapter extends BaseExpandab
     @Override
     public int getGroupCount() {
         if (dataDayGroups == null||dataDayGroups.size()<=0) {
-            ToastUtil.ShortToast("木有数据");
+
             return 0;
         }
         return dataDayGroups.size();//父项的数量

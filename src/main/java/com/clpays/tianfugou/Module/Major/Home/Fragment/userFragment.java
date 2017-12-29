@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 
 import com.clpays.tianfugou.Adapter.ucenterAdapter;
@@ -48,6 +49,9 @@ public class userFragment extends BaseFragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.isfinish)
+    TextView renzheng;
 
     @OnClick(R.id.set)
     public void set(){
@@ -160,6 +164,7 @@ public class userFragment extends BaseFragment {
         LogUtil.d(s);
         switch (s){
             case "finish":
+                renzheng.setText("已认证");
             case "N/A":
                 break;
             case"profile":
@@ -183,7 +188,6 @@ public class userFragment extends BaseFragment {
             case "checked":
                 showExitDialog("审核认证成功","是否前往相关页面查看?(所有流程完成后才可使用应用功能)");
             case "prepared":
-
                 break;
         }
     }

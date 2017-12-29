@@ -25,6 +25,7 @@ import com.clpays.tianfugou.Entity.Common.EventUtil;
 import com.clpays.tianfugou.Network.RequestProperty;
 import com.clpays.tianfugou.Network.RetrofitHelper;
 import com.clpays.tianfugou.R;
+import com.clpays.tianfugou.Utils.BitmapUtils;
 import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.clpays.tianfugou.Utils.tools.isGetStringFromJson;
 import com.clpays.tianfugou.Utils.tools.isJsonObj;
@@ -33,6 +34,8 @@ import com.google.gson.JsonObject;
 
 
 public class QrFragment extends BaseFragment {
+    Bitmap bitmap;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -41,6 +44,11 @@ public class QrFragment extends BaseFragment {
 
     @BindView(R.id.paycustomView)
     PayCustomView paycustomView;
+
+    @OnClick(R.id.save_pic)
+    public void save(){
+        BitmapUtils.saveBitmap(bitmap);
+    }
 
     @BindView(R.id.paycustomView_layout)
     RelativeLayout paycustomView_layout;
@@ -85,7 +93,7 @@ public class QrFragment extends BaseFragment {
                     if ("true".equals(isGetStringFromJson.handleData("success", a))) {
                         String data= isJsonObj.handleData("data",a);
                         String qrcode= isGetStringFromJson.handleData("qrcode",data);
-                        Bitmap bitmap=CodeCreator.createQRCode(qrcode,800,800,null);
+                        bitmap=CodeCreator.createQRCode(qrcode,800,800,null);
                         qr.setImageBitmap(bitmap);
                         //Glide.with(getContext()).load(bitmap).into(qr);
                     }
