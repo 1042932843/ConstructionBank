@@ -50,7 +50,20 @@
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:overScrollMode="never"
         />
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <com.bilibili.magicasakura.widgets.TintButton
+        android:id="@+id/jiaofei"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_login"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:text="一键缴费"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_large"
+        android:layout_margin="@dimen/_12dp"/>
 </RelativeLayout>

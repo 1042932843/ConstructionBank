@@ -54,7 +54,7 @@ public class RvItemAdapter extends RecyclerView.Adapter<RvItemAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.setIsRecyclable(false);//强制关闭复用
         payItem item = mDataList.get(position);
-        holder.fee.setText(item.getFee());
+        holder.fee.setText(item.getFee()+"元");
         holder.comment.setText(item.getComment());
         holder.month.setText(item.getMonth());
         if(item.isPaid()){

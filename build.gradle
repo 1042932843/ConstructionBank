@@ -40,7 +40,7 @@ android {
 }
 repositories {
     maven { url = 'https://dl.bintray.com/yuancloud/maven/' }
-
+    maven { url 'https://jitpack.io' }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -84,4 +84,5 @@ dependencies {
     compileOnly 'com.android.support:support-vector-drawable:25.3.1'
     compileOnly files('libs/alipaySdk-20170922.jar')
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    compile 'com.github.JesseWuuu:SuperAdapter:0.2.0'
 }

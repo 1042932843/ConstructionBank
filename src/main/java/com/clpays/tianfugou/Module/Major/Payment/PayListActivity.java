@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
+import com.bilibili.magicasakura.widgets.TintButton;
 import com.clpays.tianfugou.Adapter.RvItemAdapter;
 import com.clpays.tianfugou.Adapter.helper.OnItemListener;
 import com.clpays.tianfugou.Design.Dialog.DialogLoading;
@@ -81,6 +82,14 @@ public class PayListActivity extends BaseActivity {
     RvItemAdapter mRvItemAdapter;
     @BindView(R.id.title)
     TextView textView;
+
+    @BindView(R.id.jiaofei)
+    TintButton jiaofei;
+
+    @OnClick(R.id.jiaofei)
+    public void jiaofei(){
+        showC(-1);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +104,8 @@ public class PayListActivity extends BaseActivity {
         mSwipeRefreshLayout.post(() -> {
             mSwipeRefreshLayout.setRefreshing(true);
             if(type.equals("一键缴费")){
-
+                jiaofei.setVisibility(View.VISIBLE);
+                inityijian();
             }else {
                 initData(type);
             }
@@ -103,7 +113,7 @@ public class PayListActivity extends BaseActivity {
         });
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
             if(type.equals("一键缴费")){
-
+                inityijian();
             }else {
                 initData(type);
             }
@@ -144,9 +154,13 @@ public class PayListActivity extends BaseActivity {
                         mDataList.clear();
                         mDataList.addAll(list);
                         mRvItemAdapter.notifyDataSetChanged();
+
                     }else{
+                        mDataList.clear();
+                        mRvItemAdapter.notifyDataSetChanged();
                         ToastUtil.ShortToast(message);
                     }
+
 
                 }, throwable -> {
                     //ToastUtil.ShortToast("数据错误");
@@ -156,6 +170,47 @@ public class PayListActivity extends BaseActivity {
                 });
     }
 
+    public void inityijian(){
+        JsonObject obj= RequestProperty.CreateTokenJsonObjectBody();//带了Token的
+        RetrofitHelper.getPayAPI()
+                .fetchunfinishedbill(obj)
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bean -> {
+                    if (mSwipeRefreshLayout.isRefreshing()) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                    String a = bean.string();
+                    String message= isGetStringFromJson.handleData("message",a);
+                    if ("true".equals(isGetStringFromJson.handleData("success", a))) {
+                        Gson gson = new Gson();
+                        JsonArray array= isJsonArray.handleData("data",a);
+                        List<payItem> list=gson.fromJson(array,
+                                new TypeToken<List<payItem>>() {
+                                }.getType());
+
+                        mDataList.clear();
+                        mDataList.addAll(list);
+                        mRvItemAdapter.notifyDataSetChanged();
+                    }else{
+                        mDataList.clear();
+                        mRvItemAdapter.notifyDataSetChanged();
+                        ToastUtil.ShortToast(message);
+                    }
+                    if(mDataList.size()>0){
+                        jiaofei.setEnabled(true);
+                    }else{
+                        jiaofei.setEnabled(false);
+                    }
+
+                }, throwable -> {
+                    //ToastUtil.ShortToast("数据错误");
+                    if (mSwipeRefreshLayout.isRefreshing()) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+    }
 
 
     @Override
@@ -242,7 +297,11 @@ public class PayListActivity extends BaseActivity {
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         Toast.makeText(PayListActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-                        initData(type);
+                        if(type.equals("一键缴费")){
+                            inityijian();
+                        }else {
+                            initData(type);
+                        }
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         Toast.makeText(PayListActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
@@ -310,9 +369,15 @@ public class PayListActivity extends BaseActivity {
                         idarray.add(mDataList.get(p).getId());
                     }
                 }else{
-                    idarray.add(cid);
-                }
+                    if(cid>0){
+                        idarray.add(cid);
+                    }else{
+                        for(int i=0;i<mDataList.size();i++){
+                            idarray.add(mDataList.get(i).getId());
+                        }
+                    }
 
+                }
                 obj.add("billids",idarray);
                 RetrofitHelper.getPayAPI()
                         .paybill(obj)
@@ -349,8 +414,8 @@ public class PayListActivity extends BaseActivity {
                                             return;
                                         }
                                        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
-
-                                       weixinPay(jsonObject);
+                                        ToastUtil.ShortToast("微信接口申请中，请等待后续更新。");
+                                       //weixinPay(jsonObject);
 
                                         break;
                                     default:

@@ -18,4 +18,10 @@ import retrofit2.http.POST;
 public interface QRService {
     @POST("user/fetchqrcode")
     Observable<ResponseBody> getQRContent(@Body JsonObject bean);
+
+    @POST("user/fetchtodayorder")
+    Observable<ResponseBody> fetchtodayorder(@Body JsonObject bean);
+
+    @POST("user/fetchallorder")
+    Observable<ResponseBody> fetchallorder(@Body JsonObject bean);
 }

@@ -25,21 +25,18 @@
             <TextView
                 android:id="@+id/num"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_28dp"
+                android:layout_height="match_parent"
                 android:gravity="center|left"
                 android:textStyle="bold"
-                android:text="1500"/>
-            <TextView
-                android:id="@+id/userid"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_28dp"
-                android:gravity="center|left"
-                android:text="@string/app_name"/>
+                android:textSize="@dimen/textsize18sp"
+                android:text=""/>
+
+
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="@dimen/_100dp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_56dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/_12dp"
@@ -52,10 +49,18 @@
                 android:text="@string/type_shou"/>
             <TextView
                 android:id="@+id/time"
-                android:layout_width="match_parent"
-                android:gravity="center|right"
-                android:text="00:19"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:text=""
+                android:textSize="@dimen/textsize12sp"
                 android:layout_height="@dimen/_28dp" />
         </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_20"
+        android:layout_alignParentBottom="true">
+
     </RelativeLayout>
 </RelativeLayout>

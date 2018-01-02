@@ -36,7 +36,7 @@
                 android:textColor="@color/colorPrimary"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
-
+<!--
     <LinearLayout
         android:id="@+id/total"
         android:layout_width="match_parent"
@@ -122,8 +122,8 @@
 
         </RelativeLayout>
     </LinearLayout>
-
-    <ExpandableListView
+-->
+   <!-- <ExpandableListView
         android:id="@+id/expandableListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -132,5 +132,14 @@
         android:groupIndicator="@null"
         >
 
-    </ExpandableListView>
+    </ExpandableListView>-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:layout_below="@+id/toolbar"
+            />
+
 </RelativeLayout>

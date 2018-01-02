@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/textsize14sp"
-                        android:text="段师傅"
+                        android:text=""
                         android:layout_below="@+id/head"
                         android:gravity="center"/>
 
@@ -88,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/textsize14sp"
-                        android:text="重庆大酒店"
+                        android:text=""
                         android:layout_below="@+id/name"
                         android:layout_marginTop="@dimen/_4dp"
                         android:gravity="center"/>
@@ -97,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/textsize14sp"
-                        android:text="500**********773X"
+                        android:text=""
                         android:layout_below="@+id/name_shangpu"
                         android:layout_marginTop="@dimen/_4dp"
                         android:gravity="center"/>
