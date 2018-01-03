@@ -13,4 +13,5 @@ public class appConfig {
     public static String versionName="";
     public static int versioncode;
     public static String rid;
+    public static String flavor;
 }

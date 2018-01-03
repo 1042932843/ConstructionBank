@@ -19,6 +19,7 @@ public class RequestProperty {
         JsonObject object=new JsonObject();
         object.addProperty("ver", appConfig.versionName);
         object.addProperty("platform", appConfig.platform);
+        object.addProperty("platform", appConfig.flavor);
         return object;
     }
 

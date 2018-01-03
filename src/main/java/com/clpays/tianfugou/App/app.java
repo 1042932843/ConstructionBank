@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -15,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -47,9 +49,13 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import androidkun.com.versionupdatelibrary.entity.VersionUpdateConfig;
 import cn.jpush.android.api.BasicPushNotificationBuilder;
@@ -116,6 +122,74 @@ public class app extends MultiDexApplication implements DuskyObserver, Applicati
         registerReceiver(netReceiver, intentFilter);
     }
 
+
+    private static String channel = null;
+
+    /**
+     * 获取渠道名
+     * @param ctx 此处习惯性的设置为activity，实际上context就可以
+     * @return 如果没有获取成功，那么返回值为空
+     */
+    public static String getChannelName(Activity ctx) {
+        if (ctx == null) {
+            return null;
+        }
+        String channelName = null;
+        try {
+            PackageManager packageManager = ctx.getPackageManager();
+            if (packageManager != null) {
+                //注意此处为ApplicationInfo 而不是 ActivityInfo,因为友盟设置的meta-data是在application标签中，而不是某activity标签中，所以用ApplicationInfo
+                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
+                if (applicationInfo != null) {
+                    if (applicationInfo.metaData != null) {
+                        channelName = applicationInfo.metaData.getString("");
+                    }
+                }
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return channelName;
+    }
+
+    public static String getChannel(Context context) {
+        if (channel != null) {
+            return channel;
+        }
+
+        final String start_flag = "META-INF/channel_";
+        ApplicationInfo appinfo = context.getApplicationInfo();
+        String sourceDir = appinfo.sourceDir;
+        ZipFile zipfile = null;
+        try {
+            zipfile = new ZipFile(sourceDir);
+            Enumeration<?> entries = zipfile.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = ((ZipEntry) entries.nextElement());
+                String entryName = entry.getName();
+                if (entryName.contains(start_flag)) {
+                    channel = entryName.replace(start_flag, "");
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (zipfile != null) {
+                try {
+                    zipfile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        if (channel == null || channel.length() <= 0) {
+            channel = "guanwang";//读不到渠道号就默认是官方渠道
+        }
+        return channel;
+    }
 
     @Override
     public void onTerminate() {
@@ -205,6 +279,8 @@ public class app extends MultiDexApplication implements DuskyObserver, Applicati
 
         }
     }
+
+
 
     /**
      * 返回当前程序版本名
