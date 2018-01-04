@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
 import android.app.Notification;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -107,6 +109,7 @@ public class app extends MultiDexApplication implements DuskyObserver, Applicati
         addObserver(this);
         mInstance = this;
         getAppVersionName(this);
+        getChannelName(this);
         getRegistrationID();
         init();
         initLeakCanary();
@@ -127,69 +130,27 @@ public class app extends MultiDexApplication implements DuskyObserver, Applicati
 
     /**
      * 获取渠道名
-     * @param ctx 此处习惯性的设置为activity，实际上context就可以
+     * @param context
      * @return 如果没有获取成功，那么返回值为空
      */
-    public static String getChannelName(Activity ctx) {
-        if (ctx == null) {
-            return null;
-        }
-        String channelName = null;
-        try {
-            PackageManager packageManager = ctx.getPackageManager();
-            if (packageManager != null) {
-                //注意此处为ApplicationInfo 而不是 ActivityInfo,因为友盟设置的meta-data是在application标签中，而不是某activity标签中，所以用ApplicationInfo
-                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
-                if (applicationInfo != null) {
-                    if (applicationInfo.metaData != null) {
-                        channelName = applicationInfo.metaData.getString("");
-                    }
-                }
 
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+    public static String getChannelName(Context context) {
+        String Channel = null;
+        try {
+            ComponentName cn = new ComponentName(context, HomePageActivity.class);
+            ActivityInfo info = context.getPackageManager()
+                    .getActivityInfo(cn, PackageManager.GET_META_DATA);
+            Channel = info.metaData.getString("tfg");
+            appConfig.flavor=Channel;
+            Log.i("vvc","Channel:"+Channel);
+        } catch (Exception e) {
+//
         }
-        return channelName;
+//
+        return Channel;
     }
 
-    public static String getChannel(Context context) {
-        if (channel != null) {
-            return channel;
-        }
 
-        final String start_flag = "META-INF/channel_";
-        ApplicationInfo appinfo = context.getApplicationInfo();
-        String sourceDir = appinfo.sourceDir;
-        ZipFile zipfile = null;
-        try {
-            zipfile = new ZipFile(sourceDir);
-            Enumeration<?> entries = zipfile.entries();
-            while (entries.hasMoreElements()) {
-                ZipEntry entry = ((ZipEntry) entries.nextElement());
-                String entryName = entry.getName();
-                if (entryName.contains(start_flag)) {
-                    channel = entryName.replace(start_flag, "");
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (zipfile != null) {
-                try {
-                    zipfile.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        if (channel == null || channel.length() <= 0) {
-            channel = "guanwang";//读不到渠道号就默认是官方渠道
-        }
-        return channel;
-    }
 
     @Override
     public void onTerminate() {
@@ -280,6 +241,32 @@ public class app extends MultiDexApplication implements DuskyObserver, Applicati
         }
     }
 
+    /**
+     * 获取application中指定的meta-data。本例中，调用方法时key就是UMENG_CHANNEL
+     * @return 如果没有获取成功(没有对应值，或者异常)，则返回值为空
+     */
+    public static String getAppMetaData(Context ctx, String key) {
+        if (ctx == null || TextUtils.isEmpty(key)) {
+            return null;
+        }
+        String resultData = null;
+        try {
+            PackageManager packageManager = ctx.getPackageManager();
+            if (packageManager != null) {
+                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
+                if (applicationInfo != null) {
+                    if (applicationInfo.metaData != null) {
+                        resultData = applicationInfo.metaData.getString(key);
+                    }
+                }
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return resultData;
+    }
 
 
     /**

@@ -65,6 +65,9 @@
         <activity
             android:name="com.clpays.tianfugou.Module.Major.Home.HomePageActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="tfg"
+                android:value="${PHMOBILE_CHANNEL_VALUE}" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -142,10 +145,7 @@
                 <data android:scheme="wx11c3ddcba7dbc71b"/>
             </intent-filter>
 
-            作者：Crocutax
-            链接：https://www.jianshu.com/p/38bb30f67f69
-            來源：简书
-            著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
         </activity>
 
         <activity
@@ -268,6 +268,7 @@
         <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <meta-data android:name="JPUSH_APPKEY" android:value="e92b4d1e8f1ecc3905856ab7" /> <!--  </>值来自开发者平台取得的AppKeye92b4d1e8f1ecc3905856ab7-->
+
 
     </application>
 
