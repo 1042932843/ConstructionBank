@@ -94,26 +94,29 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
                 android:id="@+id/sao"
-                android:layout_height="match_parent">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
                 <RelativeLayout
-                    android:layout_centerInParent="true"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
                     <ImageView
                         android:id="@+id/saoyisaoimg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/saoyisao"/>
+                        android:src="@drawable/saoyisao" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/saoyisaoimg"
+                        android:layout_centerHorizontal="true"
                         android:text="扫一扫"
-                        android:textColor="@color/white"
-                        android:layout_centerHorizontal="true"/>
+                        android:textColor="@color/white" />
                 </RelativeLayout>
             </RelativeLayout>
 

@@ -8,7 +8,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
-        versionName '1.6'
+        versionName '1.7'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         flavorDimensions "versionCode"
@@ -43,7 +43,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
         }
         huawei {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "huawei", UMENG_CHANNEL_VALUE: "huawei"]
@@ -51,7 +51,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1,5'
+            versionName '1.7'
         }
         m360 {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "m360", UMENG_CHANNEL_VALUE: "m360"]
@@ -59,7 +59,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
         }
         unicom {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "unicom", UMENG_CHANNEL_VALUE: "unicom"]
@@ -67,7 +67,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
         }
         liqu {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "liqu", UMENG_CHANNEL_VALUE: "liqu"]
@@ -75,7 +75,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
         }
         wandoujia {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "wandoujia", UMENG_CHANNEL_VALUE: "wandoujia"]
@@ -83,7 +83,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
         }
         vivo {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "vivo", UMENG_CHANNEL_VALUE: "vivo"]
@@ -91,7 +91,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
         }
         tencent {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "tencent", UMENG_CHANNEL_VALUE: "tencent"]
@@ -99,7 +99,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
         }
         xiaomi {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "xiaomi", UMENG_CHANNEL_VALUE: "xiaomi"]
@@ -107,7 +107,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
         }
         m91 {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "m91", UMENG_CHANNEL_VALUE: "m91"]
@@ -115,7 +115,7 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
         }
         uc {
             manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "uc", UMENG_CHANNEL_VALUE: "uc"]
@@ -123,7 +123,15 @@ android {
             applicationId 'com.clpays.tianfugou'
             targetSdkVersion 25
             versionCode 1
-            versionName '1.5'
+            versionName '1.7'
+        }
+        defaultCfg {
+            manifestPlaceholders = [PHMOBILE_CHANNEL_VALUE: "default", UMENG_CHANNEL_VALUE: "default"]
+            minSdkVersion 18
+            applicationId 'com.clpays.tianfugou'
+            targetSdkVersion 25
+            versionCode 1
+            versionName '1.7'
         }
     }
 }

@@ -1,13 +1,10 @@
 package com.clpays.tianfugou.Module.Welcome.viewPage;
 
 import android.Manifest;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -18,7 +15,6 @@ import com.clpays.tianfugou.Adapter.ViewPagerAdapter;
 import com.clpays.tianfugou.App.app;
 import com.clpays.tianfugou.Module.Base.BaseActivity;
 import com.clpays.tianfugou.R;
-import com.clpays.tianfugou.Utils.SystemBarHelper;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tmall.ultraviewpager.UltraViewPager;
 
